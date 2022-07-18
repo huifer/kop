@@ -48,7 +48,10 @@ public class CodeGenerator {
 
     public static void main(String[] args) {
         FastAutoGenerator.create(url, username, password)
-                .globalConfig((scanner, builder) -> builder.author(author).fileOverride())
+                .globalConfig(
+                        (scanner, builder) -> builder.author(author).fileOverride()
+                                .outputDir(out_put_file)
+                )
                 .packageConfig((scanner, builder) -> builder.parent(packageName)
                         .pathInfo(Collections.singletonMap(OutputFile.xml, out_put_file)))
 
