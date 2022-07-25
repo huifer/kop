@@ -57,7 +57,9 @@ public class CodeGenerator {
 
                 .strategyConfig((scanner, builder) -> builder.addInclude(getTables(table))
                         .controllerBuilder().enableRestStyle().enableHyphenStyle()
-                        .entityBuilder().enableLombok().addTableFills(
+                        .entityBuilder().enableLombok()
+                        .enableTableFieldAnnotation()
+                        .addTableFills(
                                 new Column("create_time", FieldFill.INSERT),
                                 new Column("create_user_id", FieldFill.INSERT),
                                 new Column("update_time", FieldFill.INSERT_UPDATE),
