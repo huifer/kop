@@ -30,7 +30,3 @@ dispatch.db
 rebel.xml
 *.iml
 .idea/
-
-contract/rel
-contract/org
-contract/node_modules
