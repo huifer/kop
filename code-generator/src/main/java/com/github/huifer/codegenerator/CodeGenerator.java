@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Properties;
 
 public class CodeGenerator {
-    public static final String MYSQL_INFO = "mysql.properties";
+    public static final String MYSQL_INFO = "code-gen.properties";
 
     static String url;
     static String username;
@@ -53,7 +53,7 @@ public class CodeGenerator {
                                 .outputDir(out_put_file)
                 )
                 .packageConfig((scanner, builder) -> builder.parent(packageName)
-                        .pathInfo(Collections.singletonMap(OutputFile.xml, out_put_file)))
+                        .pathInfo(Collections.singletonMap(OutputFile.xml, out_put_file))) // mapper xml 文件生产地址
 
                 .strategyConfig((scanner, builder) -> builder.addInclude(getTables(table))
                         .controllerBuilder().enableRestStyle().enableHyphenStyle()
