@@ -30,3 +30,4 @@ dispatch.db
 rebel.xml
 *.iml
 .idea/
+*.log
