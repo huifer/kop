@@ -1,6 +1,6 @@
 package com.github.kop.rbac.api;
 
-import com.github.kop.rbac.module.NoceException;
+import com.github.kop.rbac.module.ex.NoceException;
 import com.github.kop.rbac.module.res.RespVO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.ExceptionHandler;

@@ -1,4 +1,4 @@
-package com.github.kop.rbac.module;
+package com.github.kop.rbac.module.ex;
 
 import com.github.kop.rbac.module.enums.AppHttpCodeEnum;
 
