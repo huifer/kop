@@ -1,9 +1,7 @@
 # KOP
 
 ## 项目实践
-1. RBAC
-2. 博客
-3. 短链
-4. 支付平台
-5. 短信平台
-6. timeline feed
+1. 权限系统
+    1. [权限系统概述](rbac/docs/ch01.md)
+    2. [权限系统代码生成器](rbac/docs/ch02.md)
+    3. [权限系统项目初始化](rbac/docs/ch03.md)
