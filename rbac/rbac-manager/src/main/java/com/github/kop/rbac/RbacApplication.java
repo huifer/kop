@@ -1,6 +1,9 @@
 package com.github.kop.rbac;
 
 import javax.sql.DataSource;
+
+import org.apache.ibatis.session.Configuration;
+import org.apache.ibatis.session.SqlSession;
 import org.mybatis.spring.annotation.MapperScan;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

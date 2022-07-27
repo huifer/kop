@@ -5,10 +5,12 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.Version;
-import java.io.Serializable;
-import java.time.LocalDateTime;
+import com.github.kop.plugin.otp.IdInterface;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.io.Serializable;
+import java.time.LocalDateTime;
 
 /**
  * 企业表
@@ -19,15 +21,19 @@ import lombok.Setter;
 @Getter
 @Setter
 @TableName("rbac_company")
-public class RbacCompany implements Serializable {
+public class RbacCompany implements Serializable, IdInterface<Long> {
 
   private static final long serialVersionUID = 1L;
 
-  /** 主键 */
+  /**
+   * 主键
+   */
   @TableId("id")
   private Long id;
 
-  /** 创建时间 */
+  /**
+   * 创建时间
+   */
   @TableField(value = "create_time", fill = FieldFill.INSERT)
   private LocalDateTime createTime;
 
