@@ -6,6 +6,8 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+
+import com.baomidou.mybatisplus.annotation.Version;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -48,6 +50,7 @@ public class RbacDept implements Serializable {
 
   /** 乐观锁 */
   @TableField("version")
+  @Version
   private Long version;
 
   /** 部门名称 */
