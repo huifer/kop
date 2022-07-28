@@ -16,9 +16,11 @@ public class UpdateDeptReq {
     private String desc;
 
     @ApiModelProperty(value = "排序号")
-    private Integer sort;
+    private Integer sort = 0;
 
     @ApiModelProperty(value = "父级id")
     private Long pid;
+
+
 
 }

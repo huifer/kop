@@ -13,4 +13,9 @@ public class QueryDeptReq {
     @ApiModelProperty(value = "部门介绍")
     private String desc;
 
+
+    @ApiModelProperty(value = "企业名称")
+    private String companyName;
+
+
 }

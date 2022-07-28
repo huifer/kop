@@ -1,4 +1,4 @@
-package com.github.kop.rbac.module.res.dept;
+package com.github.kop.rbac.module.res.user;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -8,7 +8,7 @@ import java.util.List;
 
 @Data
 @ApiModel(value = "部门查询响应参数")
-public class DeptQueryRes {
+public class UserQueryRes {
     @ApiModelProperty(value = "主键")
     private Long id;
     @ApiModelProperty(value = "部门名称")
@@ -26,6 +26,6 @@ public class DeptQueryRes {
     private String pName;
 
     @ApiModelProperty(value = "子部门列表")
-    private List<DeptQueryRes> child;
+    private List<UserQueryRes> child;
 
 }

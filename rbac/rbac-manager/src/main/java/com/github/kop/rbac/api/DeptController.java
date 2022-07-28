@@ -1,13 +1,10 @@
 package com.github.kop.rbac.api;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.github.kop.rbac.module.req.company.QueryCompanyReq;
-import com.github.kop.rbac.module.req.company.UpdateCompanyReq;
 import com.github.kop.rbac.module.req.dept.CreateDeptReq;
 import com.github.kop.rbac.module.req.dept.QueryDeptReq;
 import com.github.kop.rbac.module.req.dept.UpdateDeptReq;
 import com.github.kop.rbac.module.res.RespVO;
-import com.github.kop.rbac.module.res.company.DeptQueryRes;
 import com.github.kop.rbac.module.res.dept.DeptQueryRes;
 import com.github.kop.rbac.service.DeptService;
 import io.swagger.annotations.Api;
@@ -20,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -44,7 +42,6 @@ public class DeptController {
     @PutMapping("/{id}")
     public RespVO<Boolean> update(
             @PathVariable(value = "id") Long id, @RequestBody UpdateDeptReq req) {
-
         req.setId(id);
         return RespVO.success(deptService.update(req) > 0);
     }
@@ -81,8 +78,12 @@ public class DeptController {
 
     @ApiOperation(value = "部门树结构")
     @GetMapping("/tree")
-    public RespVO<List<DeptQueryRes>> tree(@RequestBody QueryDeptReq req) {
+    public RespVO<List<DeptQueryRes>> tree(
+            @RequestParam("company_id") Long companyId,
+            @RequestParam("dept_id") Long deptId
 
-        return RespVO.success(deptService.tree(req));
+    ) {
+
+        return RespVO.success(deptService.tree(companyId, deptId));
     }
 }

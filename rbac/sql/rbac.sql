@@ -40,19 +40,20 @@ CREATE TABLE `rbac_company` (
 -- ----------------------------
 DROP TABLE IF EXISTS `rbac_dept`;
 CREATE TABLE `rbac_dept` (
-  `id` bigint(20) NOT NULL COMMENT '主键',
-  `create_time` datetime DEFAULT NULL COMMENT '创建时间',
-  `create_user_id` bigint(20) DEFAULT NULL COMMENT '创建用户',
-  `update_time` datetime DEFAULT NULL COMMENT '更新时间',
-  `update_user_id` bigint(20) DEFAULT NULL COMMENT '更新用户',
-  `deleted` tinyint(4) DEFAULT 0 COMMENT '逻辑删除标记位',
-  `version` bigint(20) DEFAULT 0 COMMENT '乐观锁',
-  `name` varchar(255) DEFAULT NULL COMMENT '部门名称',
-  `desc` varchar(255) DEFAULT NULL COMMENT '部门介绍',
-  `sort` int(11) DEFAULT NULL COMMENT '排序号',
-  `pid` bigint(20) DEFAULT NULL COMMENT '父级id',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='部门表';
+                             `id` bigint NOT NULL COMMENT '主键',
+                             `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+                             `create_user_id` bigint DEFAULT NULL COMMENT '创建用户',
+                             `update_time` datetime DEFAULT NULL COMMENT '更新时间',
+                             `update_user_id` bigint DEFAULT NULL COMMENT '更新用户',
+                             `deleted` tinyint DEFAULT '0' COMMENT '逻辑删除标记位',
+                             `version` bigint DEFAULT '0' COMMENT '乐观锁',
+                             `name` varchar(255) DEFAULT NULL COMMENT '部门名称',
+                             `desc` varchar(255) DEFAULT NULL COMMENT '部门介绍',
+                             `sort` int DEFAULT NULL COMMENT '排序号',
+                             `pid` bigint DEFAULT NULL COMMENT '父级id',
+                             `company_id` bigint DEFAULT NULL COMMENT '企业id',
+                             PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='部门表';
 
 -- ----------------------------
 -- Table structure for rbac_post

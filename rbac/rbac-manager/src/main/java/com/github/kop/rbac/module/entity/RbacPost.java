@@ -57,4 +57,9 @@ public class RbacPost implements Serializable {
   /** 部门id */
   @TableField("dept_id")
   private Long deptId;
+  /**
+   * 企业id
+   */
+  @TableField("company_id")
+  private Long companyId;
 }
