@@ -68,7 +68,7 @@ export default {
 
 ```
 
-接下来在template标签中补充一段element的组件代码`<el-button type="primary">hello</el-button>`，然后既然怒项目路执行`npm run server`命令讲项目启动。启动后会在控制台看到如下内容
+接下来在template标签中补充一段element的组件代码`<el-button type="primary">hello</el-button>`，然后进入项目路执行`npm run server`命令讲项目启动。启动后会在控制台看到如下内容
 ```shell
 
   App running at:
