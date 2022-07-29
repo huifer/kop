@@ -4,6 +4,5 @@ import lombok.Data;
 
 @Data
 public class UpdateUserReq {
-    private Long id;
-
+  private Long id;
 }

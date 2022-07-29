@@ -1,8 +1,6 @@
 package com.github.kop.rbac.utils;
 
-/**
- * 用户相关线程对象
- */
+/** 用户相关线程对象 */
 public class UserInfoThread {
   private static final ThreadLocal<Long> threadUserId = new InheritableThreadLocal<>();
   private static final ThreadLocal<Long> threadCompanyId = new InheritableThreadLocal<>();
@@ -15,7 +13,6 @@ public class UserInfoThread {
     threadCompanyId.remove();
     threadCompanyId.set(userId);
   }
-
 
   public static Long getUserId() {
     return threadUserId.get();

@@ -4,5 +4,5 @@ import lombok.Data;
 
 @Data
 public class UpdatePostReq {
-    private Long id;
+  private Long id;
 }

@@ -11,12 +11,11 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class OperationTablePlugin {
 
-    @Bean
-    public CrudTemplate crudTemplate(
-            @Autowired SqlSession sqlSession
-    ) {
-        CrudTemplate crudTemplate = new CrudTemplate("insert", "updateById", "selectById", "deleteById", sqlSession);
-        crudTemplate.put(RbacCompany.class, RbacCompanyMapper.class);
-        return crudTemplate;
-    }
+  @Bean
+  public CrudTemplate crudTemplate(@Autowired SqlSession sqlSession) {
+    CrudTemplate crudTemplate =
+        new CrudTemplate("insert", "updateById", "selectById", "deleteById", sqlSession);
+    crudTemplate.put(RbacCompany.class, RbacCompanyMapper.class);
+    return crudTemplate;
+  }
 }

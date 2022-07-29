@@ -1,9 +1,5 @@
 package com.github.kop.rbac;
 
-import javax.sql.DataSource;
-
-import org.apache.ibatis.session.Configuration;
-import org.apache.ibatis.session.SqlSession;
 import org.mybatis.spring.annotation.MapperScan;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,7 +16,6 @@ public class RbacApplication {
 
   public static void main(String[] args) {
     ConfigurableApplicationContext run = SpringApplication.run(RbacApplication.class, args);
-    DataSource bean = run.getBean(DataSource.class);
     logger.info("rbac项目启动成功");
   }
 }

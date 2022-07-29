@@ -3,6 +3,4 @@ package com.github.kop.rbac.module.req.user;
 import lombok.Data;
 
 @Data
-public class CreateUserReq {
-
-}
+public class CreateUserReq {}

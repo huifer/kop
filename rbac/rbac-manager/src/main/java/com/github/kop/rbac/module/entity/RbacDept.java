@@ -5,11 +5,10 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.Version;
-import lombok.Getter;
-import lombok.Setter;
-
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * 部门表
@@ -61,20 +60,14 @@ public class RbacDept implements Serializable {
   @TableField("desc")
   private String desc;
 
-  /**
-   * 排序号
-   */
+  /** 排序号 */
   @TableField("sort")
   private Integer sort;
 
-  /**
-   * 父级id
-   */
+  /** 父级id */
   @TableField("pid")
   private Long pid;
-  /**
-   * 企业id
-   */
+  /** 企业id */
   @TableField("company_id")
   private Long companyId;
 }

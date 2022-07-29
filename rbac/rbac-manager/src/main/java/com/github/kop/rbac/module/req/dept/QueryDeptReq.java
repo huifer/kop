@@ -7,15 +7,12 @@ import lombok.Data;
 @Data
 @ApiModel(value = "部门查询请求参数")
 public class QueryDeptReq {
-    @ApiModelProperty(value = "部门名称")
-    private String name;
+  @ApiModelProperty(value = "部门名称")
+  private String name;
 
-    @ApiModelProperty(value = "部门介绍")
-    private String desc;
+  @ApiModelProperty(value = "部门介绍")
+  private String desc;
 
-
-    @ApiModelProperty(value = "企业名称")
-    private String companyName;
-
-
+  @ApiModelProperty(value = "企业名称")
+  private String companyName;
 }
