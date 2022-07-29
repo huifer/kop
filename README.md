@@ -8,7 +8,7 @@
     4. [企业管理模块开发](rbac/docs/企业管理模块.md)
     5. [单表操作插件引入](rbac/docs/单表数据操作插件引入.md)
     6. [部门管理模块开发](rbac/docs/部门管理模块开发.md)
-   - 权限系统前端-vue
-     - [权限管理系统VUE项目初始化](rbac/docs/vue/权限管理系统VUE项目初始化.md)
+- 权限系统前端-vue
+  - [权限管理系统VUE项目初始化](rbac/docs/vue/权限管理系统VUE项目初始化.md)
 2. 插件
    1.   [单表数据操作插件](plugin/operation-table-plugin/docs/单表数据操作插件.md)
