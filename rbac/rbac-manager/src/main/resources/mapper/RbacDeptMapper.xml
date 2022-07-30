@@ -2,4 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.github.kop.rbac.repo.mapper.RbacDeptMapper">
 
+  <select id="findByName" resultType="java.lang.Long">
+    select id from rbac_dept where name like concat('%' , ${deptName} , '%')
+  </select>
 </mapper>

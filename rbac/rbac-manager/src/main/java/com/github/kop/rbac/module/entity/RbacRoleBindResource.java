@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.Version;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import lombok.Getter;
@@ -55,5 +56,6 @@ public class RbacRoleBindResource implements Serializable {
 
   /** 乐观锁 */
   @TableField("version")
+  @Version
   private Long version;
 }

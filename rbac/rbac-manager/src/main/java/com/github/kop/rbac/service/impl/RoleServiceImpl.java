@@ -1,6 +1,7 @@
 package com.github.kop.rbac.service.impl;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.github.kop.rbac.module.entity.RbacRole;
 import com.github.kop.rbac.module.ex.ValidateException;
 import com.github.kop.rbac.module.req.role.CreateRoleReq;
 import com.github.kop.rbac.module.req.role.QueryRoleReq;
@@ -11,13 +12,19 @@ import com.github.kop.rbac.service.RoleService;
 import com.github.kop.rbac.utils.CreateValidate;
 import com.github.kop.rbac.utils.UpdateValidate;
 import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
 @Service
 public class RoleServiceImpl implements RoleService {
+
   protected final RoleCreateAndUpdateValidate roleCreateAndUpdateValidate =
       new RoleCreateAndUpdateValidate();
+  private final RoleRepository roleRepository;
+
+  public RoleServiceImpl(RoleRepository roleRepository) {
+    this.roleRepository = roleRepository;
+  }
 
   @Override
   public List<RoleQueryRes> list(QueryRoleReq req) {
@@ -36,6 +43,18 @@ public class RoleServiceImpl implements RoleService {
 
   @Override
   public RoleQueryRes byId(Long id) {
+    RbacRole rbacRole = this.roleRepository.byId(id);
+    if (rbacRole != null) {
+
+      RoleQueryRes roleQueryRes = new RoleQueryRes();
+      roleQueryRes.setCode(rbacRole.getCode());
+      roleQueryRes.setName(rbacRole.getName());
+      roleQueryRes.setDesc(rbacRole.getDesc());
+      roleQueryRes.setId(rbacRole.getId());
+
+
+      return roleQueryRes;
+    }
     return null;
   }
 
@@ -49,14 +68,32 @@ public class RoleServiceImpl implements RoleService {
     return null;
   }
 
-  @Autowired private RoleRepository roleRepository;
-
   protected class RoleCreateAndUpdateValidate
       implements CreateValidate<CreateRoleReq>, UpdateValidate<UpdateRoleReq> {
-    @Override
-    public void createValidate(CreateRoleReq createRoleReq) throws ValidateException {}
+
 
     @Override
-    public void updateValidate(UpdateRoleReq updateRoleReq) throws ValidateException {}
+    public void createValidate(CreateRoleReq createRoleReq) throws ValidateException {
+      String code = createRoleReq.getCode();
+      if (code != null) {
+        boolean b = roleRepository.exists(code);
+        if (b) {
+          throw new ValidateException("当前角色编码已存在");
+        }
+      }
+      String name = createRoleReq.getName();
+      if (StringUtils.isNotBlank(name)) {
+        throw new ValidateException("角色名称必填");
+      }
+    }
+
+    @Override
+    public void updateValidate(UpdateRoleReq updateRoleReq) throws ValidateException {
+      idValidate(updateRoleReq.getId());
+      String name = updateRoleReq.getName();
+      if (StringUtils.isNotBlank(name)) {
+        throw new ValidateException("角色名称必填");
+      }
+    }
   }
 }

@@ -1,14 +1,17 @@
 package com.github.kop.rbac.api;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.github.kop.rbac.module.enums.ResourceTypeEnum;
 import com.github.kop.rbac.module.req.resource.CreateResourceReq;
 import com.github.kop.rbac.module.req.resource.QueryResourceReq;
 import com.github.kop.rbac.module.req.resource.UpdateResourceReq;
+import com.github.kop.rbac.module.res.EnumsResp;
 import com.github.kop.rbac.module.res.RespVO;
 import com.github.kop.rbac.module.res.resource.ResourceQueryRes;
 import com.github.kop.rbac.service.ResourceService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -24,7 +27,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/resources")
 public class ResourceController {
-  @Autowired private ResourceService resourceService;
+
+  @Autowired
+  private ResourceService resourceService;
 
   @ApiOperation(value = "创建资源")
   @PostMapping("/")
@@ -68,5 +73,15 @@ public class ResourceController {
   public RespVO<List<ResourceQueryRes>> list(@RequestBody QueryResourceReq req) {
 
     return RespVO.success(resourceService.list(req));
+  }
+
+  @ApiOperation(value = "枚举项")
+  @GetMapping("/enums")
+  public RespVO<List<EnumsResp>> enums() {
+    List<EnumsResp> res = new ArrayList<>();
+    for (ResourceTypeEnum value : ResourceTypeEnum.values()) {
+      res.add(EnumsResp.builder().code(value.getCode()).msg(value.getName()).build());
+    }
+    return RespVO.success(res);
   }
 }

@@ -51,6 +51,12 @@ public class ResourceRepositoryImpl implements ResourceRepository {
 
     @Override
     public List<RbacResource> list(QueryResourceReq req) {
+        QueryWrapper<RbacResource> queryWrapper = new QueryWrapper<>();
+        queryWrapper.lambda()
+                .like(StringUtils.isNotBlank(req.getCode()), RbacResource::getCode, req.getCode())
+                .like(StringUtils.isNotBlank(req.getName()), RbacResource::getName, req.getName())
+                .eq(StringUtils.isNotBlank(req.getType()), RbacResource::getType, req.getType())
+        ;
         return null;
     }
 }

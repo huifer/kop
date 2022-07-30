@@ -5,7 +5,6 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.Version;
-import com.github.kop.plugin.otp.IdInterface;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import lombok.Getter;
@@ -20,7 +19,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @TableName("rbac_company")
-public class RbacCompany implements Serializable, IdInterface<Long> {
+public class RbacCompany implements Serializable {
 
   private static final long serialVersionUID = 1L;
 

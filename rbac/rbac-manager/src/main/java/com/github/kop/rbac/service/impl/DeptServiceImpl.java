@@ -13,14 +13,15 @@ import com.github.kop.rbac.service.DeptService;
 import com.github.kop.rbac.utils.CreateValidate;
 import com.github.kop.rbac.utils.UpdateValidate;
 import com.github.kop.rbac.utils.UserInfoThread;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 public class DeptServiceImpl implements DeptService {
@@ -32,6 +33,7 @@ public class DeptServiceImpl implements DeptService {
     if (companyId != null && deptId != null) {
       throw new ValidateException("树结构查询只允许部门id或者企业id查询，不允许同时查询");
     }
+    // todo: 树结构是否正确
     if (companyId != null) {
       List<RbacDept> rbacDepts = deptRepository.findByCompanyId(companyId);
       return tree(rbacDepts);

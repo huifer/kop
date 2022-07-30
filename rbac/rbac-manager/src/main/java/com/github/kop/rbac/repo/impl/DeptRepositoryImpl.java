@@ -14,7 +14,11 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public class DeptRepositoryImpl implements DeptRepository {
-  @Autowired private RbacDeptMapper deptMapper;
+  private final RbacDeptMapper deptMapper;
+
+  public DeptRepositoryImpl(RbacDeptMapper deptMapper) {
+    this.deptMapper = deptMapper;
+  }
 
   @Override
   public RbacDept byId(Long id) {
@@ -69,4 +73,10 @@ public class DeptRepositoryImpl implements DeptRepository {
         .like(StringUtils.isNotBlank(req.getDesc()), RbacDept::getDesc, req.getDesc());
     return this.deptMapper.selectList(queryWrapper);
   }
+
+  @Override
+  public List<Long> findByName(String deptName) {
+    return this.deptMapper.findByName(deptName);
+  }
+
 }

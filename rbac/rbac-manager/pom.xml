@@ -35,19 +35,10 @@
                 <artifactId>springfox-boot-starter</artifactId>
                 <version>${springfox-boot-starter-version}</version>
             </dependency>
-            <dependency>
-                <groupId>com.github.kop</groupId>
-                <artifactId>operation-table-plugin</artifactId>
-                <version>1.0-SNAPSHOT</version>
-            </dependency>
 
         </dependencies>
     </dependencyManagement>
     <dependencies>
-        <dependency>
-            <groupId>com.github.kop</groupId>
-            <artifactId>operation-table-plugin</artifactId>
-        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
@@ -88,6 +79,11 @@
                     <artifactId>hamcrest-core</artifactId>
                 </exclusion>
             </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>commons-collections</groupId>
+            <artifactId>commons-collections</artifactId>
+            <version>3.2.2</version>
         </dependency>
 
     </dependencies>

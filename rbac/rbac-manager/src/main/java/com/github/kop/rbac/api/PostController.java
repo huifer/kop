@@ -24,7 +24,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/post")
 public class PostController {
-  @Autowired private PostService postService;
+  private final PostService postService;
+
+  public PostController(PostService postService) {
+    this.postService = postService;
+  }
 
   @ApiOperation(value = "创建岗位")
   @PostMapping("/")
