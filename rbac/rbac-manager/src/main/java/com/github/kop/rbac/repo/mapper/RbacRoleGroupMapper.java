@@ -2,6 +2,7 @@ package com.github.kop.rbac.repo.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.github.kop.rbac.module.entity.RbacRoleGroup;
+import org.apache.ibatis.annotations.Mapper;
 
 /**
  * 角色组表 Mapper 接口
@@ -9,4 +10,7 @@ import com.github.kop.rbac.module.entity.RbacRoleGroup;
  * @author root
  * @since 2022-07-25
  */
-public interface RbacRoleGroupMapper extends BaseMapper<RbacRoleGroup> {}
+@Mapper
+public interface RbacRoleGroupMapper extends BaseMapper<RbacRoleGroup> {
+
+}

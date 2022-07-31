@@ -11,6 +11,7 @@ import com.github.kop.rbac.repo.RoleRepository;
 import com.github.kop.rbac.service.RoleService;
 import com.github.kop.rbac.utils.CreateValidate;
 import com.github.kop.rbac.utils.UpdateValidate;
+import java.util.ArrayList;
 import java.util.List;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
@@ -26,19 +27,52 @@ public class RoleServiceImpl implements RoleService {
     this.roleRepository = roleRepository;
   }
 
+  private RoleQueryRes conv(RbacRole rbacRole) {
+    RoleQueryRes roleQueryRes = new RoleQueryRes();
+    roleQueryRes.setCode(rbacRole.getCode());
+    roleQueryRes.setName(rbacRole.getName());
+    roleQueryRes.setDesc(rbacRole.getDesc());
+    roleQueryRes.setId(rbacRole.getId());
+    return roleQueryRes;
+  }
+
   @Override
   public List<RoleQueryRes> list(QueryRoleReq req) {
-    return null;
+    List<RbacRole> list = this.roleRepository.list(req);
+    List<RoleQueryRes> res = new ArrayList<>();
+    for (RbacRole rbacRole : list) {
+      res.add(conv(rbacRole));
+    }
+    return res;
   }
 
   @Override
   public int create(CreateRoleReq req) {
-    return 0;
+    roleCreateAndUpdateValidate.createValidate(req);
+
+    RbacRole rbacRole = new RbacRole();
+    rbacRole.setCode(req.getCode());
+    rbacRole.setName(req.getName());
+    rbacRole.setDesc(req.getDesc());
+    return this.roleRepository.create(rbacRole);
   }
 
   @Override
   public int update(UpdateRoleReq req) {
-    return 0;
+    roleCreateAndUpdateValidate.updateValidate(req);
+    RbacRole rbacRole = this.roleRepository.byId(req.getId());
+    if (rbacRole != null) {
+
+      if (StringUtils.isNotBlank(req.getName())) {
+        rbacRole.setName(req.getName());
+      }
+      if (StringUtils.isNotBlank(req.getDesc())) {
+        rbacRole.setDesc(req.getDesc());
+      }
+      return this.roleRepository.update(rbacRole);
+    }
+
+    return -1;
   }
 
   @Override
@@ -46,12 +80,7 @@ public class RoleServiceImpl implements RoleService {
     RbacRole rbacRole = this.roleRepository.byId(id);
     if (rbacRole != null) {
 
-      RoleQueryRes roleQueryRes = new RoleQueryRes();
-      roleQueryRes.setCode(rbacRole.getCode());
-      roleQueryRes.setName(rbacRole.getName());
-      roleQueryRes.setDesc(rbacRole.getDesc());
-      roleQueryRes.setId(rbacRole.getId());
-
+      RoleQueryRes roleQueryRes = conv(rbacRole);
 
       return roleQueryRes;
     }
@@ -60,12 +89,13 @@ public class RoleServiceImpl implements RoleService {
 
   @Override
   public int deleteById(Long id) {
-    return 0;
+    return this.roleRepository.delete(id);
   }
 
   @Override
   public IPage<RoleQueryRes> page(Long page, Long size, QueryRoleReq req) {
-    return null;
+    IPage<RbacRole> iPage = this.roleRepository.page(page, size, req);
+    return iPage.convert(this::conv);
   }
 
   protected class RoleCreateAndUpdateValidate
