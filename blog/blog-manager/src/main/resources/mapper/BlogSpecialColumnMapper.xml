@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.github.kop.blob.repo.mapper.BlogSpecialColumnMapper">
+  <resultMap id="BaseResultMap" type="com.github.kop.blob.module.entity.BlogSpecialColumn">
+    <!--@mbg.generated-->
+    <!--@Table blog_special_column-->
+    <id column="special_column_id" jdbcType="BIGINT" property="specialColumnId" />
+    <result column="special_column_title" jdbcType="VARCHAR" property="specialColumnTitle" />
+    <result column="special_column_desc" jdbcType="VARCHAR" property="specialColumnDesc" />
+    <result column="parent_id" jdbcType="BIGINT" property="parentId" />
+    <result column="level_path" jdbcType="VARCHAR" property="levelPath" />
+    <result column="img" jdbcType="VARCHAR" property="img" />
+    <result column="comments_count" jdbcType="BIGINT" property="commentsCount" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="create_user_id" jdbcType="BIGINT" property="createUserId" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="update_user_id" jdbcType="BIGINT" property="updateUserId" />
+    <result column="deleted" jdbcType="TINYINT" property="deleted" />
+    <result column="version" jdbcType="BIGINT" property="version" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    special_column_id, special_column_title, special_column_desc, parent_id, level_path, 
+    img, comments_count, create_time, create_user_id, update_time, update_user_id, deleted, 
+    version
+  </sql>
+  <update id="updateBatchSelective" parameterType="java.util.List">
+    <!--@mbg.generated-->
+    update blog_special_column
+    <trim prefix="set" suffixOverrides=",">
+      <trim prefix="special_column_title = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.specialColumnTitle != null">
+            when special_column_id = #{item.specialColumnId,jdbcType=BIGINT} then #{item.specialColumnTitle,jdbcType=VARCHAR}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="special_column_desc = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.specialColumnDesc != null">
+            when special_column_id = #{item.specialColumnId,jdbcType=BIGINT} then #{item.specialColumnDesc,jdbcType=VARCHAR}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="parent_id = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.parentId != null">
+            when special_column_id = #{item.specialColumnId,jdbcType=BIGINT} then #{item.parentId,jdbcType=BIGINT}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="level_path = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.levelPath != null">
+            when special_column_id = #{item.specialColumnId,jdbcType=BIGINT} then #{item.levelPath,jdbcType=VARCHAR}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="img = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.img != null">
+            when special_column_id = #{item.specialColumnId,jdbcType=BIGINT} then #{item.img,jdbcType=VARCHAR}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="comments_count = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.commentsCount != null">
+            when special_column_id = #{item.specialColumnId,jdbcType=BIGINT} then #{item.commentsCount,jdbcType=BIGINT}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="create_time = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.createTime != null">
+            when special_column_id = #{item.specialColumnId,jdbcType=BIGINT} then #{item.createTime,jdbcType=TIMESTAMP}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="create_user_id = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.createUserId != null">
+            when special_column_id = #{item.specialColumnId,jdbcType=BIGINT} then #{item.createUserId,jdbcType=BIGINT}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="update_time = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.updateTime != null">
+            when special_column_id = #{item.specialColumnId,jdbcType=BIGINT} then #{item.updateTime,jdbcType=TIMESTAMP}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="update_user_id = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.updateUserId != null">
+            when special_column_id = #{item.specialColumnId,jdbcType=BIGINT} then #{item.updateUserId,jdbcType=BIGINT}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="deleted = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.deleted != null">
+            when special_column_id = #{item.specialColumnId,jdbcType=BIGINT} then #{item.deleted,jdbcType=TINYINT}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="version = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.version != null">
+            when special_column_id = #{item.specialColumnId,jdbcType=BIGINT} then #{item.version,jdbcType=BIGINT}
+          </if>
+        </foreach>
+      </trim>
+    </trim>
+    where special_column_id in
+    <foreach close=")" collection="list" item="item" open="(" separator=", ">
+      #{item.specialColumnId,jdbcType=BIGINT}
+    </foreach>
+  </update>
+  <insert id="batchInsert" keyColumn="special_column_id" keyProperty="specialColumnId" parameterType="map" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into blog_special_column
+    (special_column_title, special_column_desc, parent_id, level_path, img, comments_count, 
+      create_time, create_user_id, update_time, update_user_id, deleted, version)
+    values
+    <foreach collection="list" item="item" separator=",">
+      (#{item.specialColumnTitle,jdbcType=VARCHAR}, #{item.specialColumnDesc,jdbcType=VARCHAR}, 
+        #{item.parentId,jdbcType=BIGINT}, #{item.levelPath,jdbcType=VARCHAR}, #{item.img,jdbcType=VARCHAR}, 
+        #{item.commentsCount,jdbcType=BIGINT}, #{item.createTime,jdbcType=TIMESTAMP}, #{item.createUserId,jdbcType=BIGINT}, 
+        #{item.updateTime,jdbcType=TIMESTAMP}, #{item.updateUserId,jdbcType=BIGINT}, #{item.deleted,jdbcType=TINYINT}, 
+        #{item.version,jdbcType=BIGINT})
+    </foreach>
+  </insert>
+</mapper>

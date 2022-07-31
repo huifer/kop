@@ -36,7 +36,7 @@ public class RoleGroupServiceImpl implements RoleGroupService {
   @Override
   public int update(UpdateRoleGroupReq req) {
     roleGroupCreateAndUpdateValidate.updateValidate(req);
-    RbacRoleGroup rbacRoleGroup = this.roleGroupRepository.byId(id);
+    RbacRoleGroup rbacRoleGroup = this.roleGroupRepository.byId(req.getId());
     if (rbacRoleGroup != null) {
       if (StringUtils.isNotBlank(req.getName())) {
         rbacRoleGroup.setName(req.getName());

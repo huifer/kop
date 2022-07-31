@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.github.kop.blob.repo.mapper.BlogArticleHistoryMapper">
+  <resultMap id="BaseResultMap" type="com.github.kop.blob.module.entity.BlogArticleHistory">
+    <!--@mbg.generated-->
+    <!--@Table blog_article_history-->
+    <id column="history_id" jdbcType="BIGINT" property="historyId" />
+    <result column="article_id" jdbcType="BIGINT" property="articleId" />
+    <result column="article_title" jdbcType="VARCHAR" property="articleTitle" />
+    <result column="article_content" jdbcType="LONGVARCHAR" property="articleContent" />
+    <result column="comments_status" jdbcType="TINYINT" property="commentsStatus" />
+    <result column="visible_status" jdbcType="TINYINT" property="visibleStatus" />
+    <result column="history_create_time" jdbcType="TIMESTAMP" property="historyCreateTime" />
+    <result column="history_create_user_id" jdbcType="BIGINT" property="historyCreateUserId" />
+    <result column="history_update_time" jdbcType="TIMESTAMP" property="historyUpdateTime" />
+    <result column="history_update_user_id" jdbcType="BIGINT" property="historyUpdateUserId" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="create_user_id" jdbcType="BIGINT" property="createUserId" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="update_user_id" jdbcType="BIGINT" property="updateUserId" />
+    <result column="deleted" jdbcType="TINYINT" property="deleted" />
+    <result column="version" jdbcType="BIGINT" property="version" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    history_id, article_id, article_title, article_content, comments_status, visible_status, 
+    history_create_time, history_create_user_id, history_update_time, history_update_user_id, 
+    create_time, create_user_id, update_time, update_user_id, deleted, version
+  </sql>
+  <update id="updateBatchSelective" parameterType="java.util.List">
+    <!--@mbg.generated-->
+    update blog_article_history
+    <trim prefix="set" suffixOverrides=",">
+      <trim prefix="article_id = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.articleId != null">
+            when history_id = #{item.historyId,jdbcType=BIGINT} then #{item.articleId,jdbcType=BIGINT}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="article_title = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.articleTitle != null">
+            when history_id = #{item.historyId,jdbcType=BIGINT} then #{item.articleTitle,jdbcType=VARCHAR}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="article_content = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.articleContent != null">
+            when history_id = #{item.historyId,jdbcType=BIGINT} then #{item.articleContent,jdbcType=LONGVARCHAR}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="comments_status = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.commentsStatus != null">
+            when history_id = #{item.historyId,jdbcType=BIGINT} then #{item.commentsStatus,jdbcType=TINYINT}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="visible_status = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.visibleStatus != null">
+            when history_id = #{item.historyId,jdbcType=BIGINT} then #{item.visibleStatus,jdbcType=TINYINT}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="history_create_time = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.historyCreateTime != null">
+            when history_id = #{item.historyId,jdbcType=BIGINT} then #{item.historyCreateTime,jdbcType=TIMESTAMP}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="history_create_user_id = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.historyCreateUserId != null">
+            when history_id = #{item.historyId,jdbcType=BIGINT} then #{item.historyCreateUserId,jdbcType=BIGINT}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="history_update_time = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.historyUpdateTime != null">
+            when history_id = #{item.historyId,jdbcType=BIGINT} then #{item.historyUpdateTime,jdbcType=TIMESTAMP}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="history_update_user_id = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.historyUpdateUserId != null">
+            when history_id = #{item.historyId,jdbcType=BIGINT} then #{item.historyUpdateUserId,jdbcType=BIGINT}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="create_time = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.createTime != null">
+            when history_id = #{item.historyId,jdbcType=BIGINT} then #{item.createTime,jdbcType=TIMESTAMP}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="create_user_id = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.createUserId != null">
+            when history_id = #{item.historyId,jdbcType=BIGINT} then #{item.createUserId,jdbcType=BIGINT}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="update_time = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.updateTime != null">
+            when history_id = #{item.historyId,jdbcType=BIGINT} then #{item.updateTime,jdbcType=TIMESTAMP}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="update_user_id = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.updateUserId != null">
+            when history_id = #{item.historyId,jdbcType=BIGINT} then #{item.updateUserId,jdbcType=BIGINT}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="deleted = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.deleted != null">
+            when history_id = #{item.historyId,jdbcType=BIGINT} then #{item.deleted,jdbcType=TINYINT}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="version = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.version != null">
+            when history_id = #{item.historyId,jdbcType=BIGINT} then #{item.version,jdbcType=BIGINT}
+          </if>
+        </foreach>
+      </trim>
+    </trim>
+    where history_id in
+    <foreach close=")" collection="list" item="item" open="(" separator=", ">
+      #{item.historyId,jdbcType=BIGINT}
+    </foreach>
+  </update>
+  <insert id="batchInsert" keyColumn="history_id" keyProperty="historyId" parameterType="map" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into blog_article_history
+    (article_id, article_title, article_content, comments_status, visible_status, history_create_time, 
+      history_create_user_id, history_update_time, history_update_user_id, create_time, 
+      create_user_id, update_time, update_user_id, deleted, version)
+    values
+    <foreach collection="list" item="item" separator=",">
+      (#{item.articleId,jdbcType=BIGINT}, #{item.articleTitle,jdbcType=VARCHAR}, #{item.articleContent,jdbcType=LONGVARCHAR}, 
+        #{item.commentsStatus,jdbcType=TINYINT}, #{item.visibleStatus,jdbcType=TINYINT}, 
+        #{item.historyCreateTime,jdbcType=TIMESTAMP}, #{item.historyCreateUserId,jdbcType=BIGINT}, 
+        #{item.historyUpdateTime,jdbcType=TIMESTAMP}, #{item.historyUpdateUserId,jdbcType=BIGINT}, 
+        #{item.createTime,jdbcType=TIMESTAMP}, #{item.createUserId,jdbcType=BIGINT}, #{item.updateTime,jdbcType=TIMESTAMP}, 
+        #{item.updateUserId,jdbcType=BIGINT}, #{item.deleted,jdbcType=TINYINT}, #{item.version,jdbcType=BIGINT}
+        )
+    </foreach>
+  </insert>
+</mapper>
