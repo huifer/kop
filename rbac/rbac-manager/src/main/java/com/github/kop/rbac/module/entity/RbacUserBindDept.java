@@ -34,7 +34,9 @@ public class RbacUserBindDept implements Serializable {
   /** 部门id */
   @TableField("dept_Id")
   private Long deptId;
-
+  /** 企业id */
+  @TableField("company_id")
+  private Long companyId;
   /** 创建时间 */
   @TableField(value = "create_time", fill = FieldFill.INSERT)
   private LocalDateTime createTime;

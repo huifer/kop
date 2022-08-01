@@ -35,6 +35,14 @@ public class RbacUserBindPost implements Serializable {
   @TableField("post_id")
   private Long postId;
 
+  /** 企业id */
+  @TableField("company_id")
+  private Long companyId;
+
+  /** 主职 */
+  @TableField("main")
+  private Integer main;
+
   /** 创建时间 */
   @TableField(value = "create_time", fill = FieldFill.INSERT)
   private LocalDateTime createTime;

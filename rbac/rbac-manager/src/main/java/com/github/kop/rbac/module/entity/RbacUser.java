@@ -51,4 +51,18 @@ public class RbacUser implements Serializable {
   @TableField("version")
   @Version
   private Long version;
+  /** 姓名 */
+  @TableField("name")
+  private String name;
+
+  /** 联系方式 */
+  @TableField("phone")
+  private String phone;
+
+  /** 性别 */
+  @TableField("grade")
+  private Integer grade;
+  /** 企业id */
+  @TableField("company_id")
+  private Long companyId;
 }
