@@ -8,7 +8,7 @@ public class QueryPostReq {
 
   @ApiModelProperty(value = "岗位名称")
   private String postName;
+
   @ApiModelProperty(value = "名称")
   private String deptName;
-
 }

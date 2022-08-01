@@ -1,14 +1,14 @@
-//package com.github.kop.rbac.config;
+// package com.github.kop.rbac.config;
 //
-//import com.github.kop.plugin.otp.CrudTemplate;
-//import com.github.kop.rbac.RbacApplication;
-//import com.github.kop.rbac.module.entity.RbacCompany;
-//import org.junit.jupiter.api.Test;
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.boot.test.context.SpringBootTest;
+// import com.github.kop.plugin.otp.CrudTemplate;
+// import com.github.kop.rbac.RbacApplication;
+// import com.github.kop.rbac.module.entity.RbacCompany;
+// import org.junit.jupiter.api.Test;
+// import org.springframework.beans.factory.annotation.Autowired;
+// import org.springframework.boot.test.context.SpringBootTest;
 //
-//@SpringBootTest(classes = {RbacApplication.class})
-//class OperationTablePluginTest {
+// @SpringBootTest(classes = {RbacApplication.class})
+// class OperationTablePluginTest {
 //
 //  @Autowired private CrudTemplate crudTemplate;
 //
@@ -24,4 +24,4 @@
 //    crudTemplate.update(company);
 //    crudTemplate.delete(company.getId(), RbacCompany.class);
 //  }
-//}
+// }

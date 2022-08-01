@@ -16,5 +16,4 @@ public class RoleQueryRes {
   private String desc;
 
   private Long id;
-
 }

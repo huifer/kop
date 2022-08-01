@@ -28,12 +28,9 @@ public class PostServiceImpl implements PostService {
 
   protected static final PostCreateAndUpdateValidate VALIDATE = new PostCreateAndUpdateValidate();
 
-  @Autowired
-  private PostRepository postRepository;
-  @Autowired
-  private DeptService deptService;
-  @Autowired
-  private CompanyService companyService;
+  @Autowired private PostRepository postRepository;
+  @Autowired private DeptService deptService;
+  @Autowired private CompanyService companyService;
 
   @Override
   public int create(CreatePostReq req) {
@@ -59,17 +56,14 @@ public class PostServiceImpl implements PostService {
 
       if (req.getDeptId() != null) {
         rbacPost.setDeptId(req.getDeptId());
-
       }
       if (req.getCompanyId() != null) {
         rbacPost.setCompanyId(req.getCompanyId());
-
       }
 
       return postRepository.update(rbacPost);
     }
     return -1;
-
   }
 
   @Override
@@ -77,7 +71,6 @@ public class PostServiceImpl implements PostService {
     RbacPost rbacPost = this.postRepository.byId(id);
     if (rbacPost != null) {
       return conv(rbacPost);
-
     }
 
     return null;
@@ -124,8 +117,7 @@ public class PostServiceImpl implements PostService {
   protected static final class PostCreateAndUpdateValidate
       implements CreateValidate<CreatePostReq>, UpdateValidate<UpdatePostReq> {
 
-    private static void commonValidate(String name, Long companyId,
-        Long deptId) {
+    private static void commonValidate(String name, Long companyId, Long deptId) {
       if (StringUtils.isEmpty(name)) {
         throw new ValidateException("岗位名称必填");
       }
@@ -146,16 +138,16 @@ public class PostServiceImpl implements PostService {
     @Override
     public void createValidate(CreatePostReq createPostReq) throws ValidateException {
 
-      commonValidate(createPostReq.getName(), createPostReq.getCompanyId(),
-          createPostReq.getDeptId());
+      commonValidate(
+          createPostReq.getName(), createPostReq.getCompanyId(), createPostReq.getDeptId());
       // TODO: 2022/7/30 是否拥有当前部门操作权限
     }
 
     @Override
     public void updateValidate(UpdatePostReq updatePostReq) throws ValidateException {
       idValidate(updatePostReq.getId());
-      commonValidate(updatePostReq.getName(), updatePostReq.getCompanyId(),
-          updatePostReq.getDeptId());
+      commonValidate(
+          updatePostReq.getName(), updatePostReq.getCompanyId(), updatePostReq.getDeptId());
       // TODO: 2022/7/30 是否拥有当前部门操作权限
 
     }

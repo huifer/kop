@@ -28,8 +28,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/resources")
 public class ResourceController {
 
-  @Autowired
-  private ResourceService resourceService;
+  @Autowired private ResourceService resourceService;
 
   @ApiOperation(value = "创建资源")
   @PostMapping("/")

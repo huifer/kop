@@ -11,6 +11,4 @@ import org.apache.ibatis.annotations.Mapper;
  * @since 2022-07-25
  */
 @Mapper
-public interface RbacResourceMapper extends BaseMapper<RbacResource> {
-
-}
+public interface RbacResourceMapper extends BaseMapper<RbacResource> {}

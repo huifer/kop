@@ -8,6 +8,5 @@ public class UpdateRoleGroupReq {
   @ApiModelProperty(value = "角色组名称")
   private String name;
 
-
   private Long id;
 }

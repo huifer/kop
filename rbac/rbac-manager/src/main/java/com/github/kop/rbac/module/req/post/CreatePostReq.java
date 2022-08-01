@@ -14,6 +14,4 @@ public class CreatePostReq {
 
   @ApiModelProperty(value = "企业id")
   private Long companyId;
-
-
 }

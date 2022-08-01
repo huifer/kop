@@ -22,8 +22,7 @@ public class RoleGroupServiceImpl implements RoleGroupService {
 
   protected final RoleGroupCreateAndUpdateValidate roleGroupCreateAndUpdateValidate =
       new RoleGroupCreateAndUpdateValidate();
-  @Autowired
-  private RoleGroupRepository roleGroupRepository;
+  @Autowired private RoleGroupRepository roleGroupRepository;
 
   @Override
   public int create(CreateRoleGroupReq req) {
@@ -53,11 +52,9 @@ public class RoleGroupServiceImpl implements RoleGroupService {
     if (rbacRoleGroup != null) {
 
       return conv(rbacRoleGroup);
-
     }
     return null;
   }
-
 
   private RoleGroupQueryRes conv(RbacRoleGroup rbacRoleGroup) {
     RoleGroupQueryRes roleGroupQueryRes = new RoleGroupQueryRes();

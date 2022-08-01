@@ -5,8 +5,6 @@ import lombok.Data;
 
 @Data
 public class CreateRoleGroupReq {
- @ApiModelProperty(value = "角色组名称")
+  @ApiModelProperty(value = "角色组名称")
   private String name;
-
-
 }

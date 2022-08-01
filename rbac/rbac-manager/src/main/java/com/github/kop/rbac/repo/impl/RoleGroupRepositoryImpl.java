@@ -16,14 +16,12 @@ import org.springframework.transaction.annotation.Transactional;
 @Repository
 public class RoleGroupRepositoryImpl implements RoleGroupRepository {
 
-  @Autowired
-  private RbacRoleGroupMapper rbacRoleGroupMapper;
+  @Autowired private RbacRoleGroupMapper rbacRoleGroupMapper;
 
   @Override
   public boolean exists(String name) {
     QueryWrapper<RbacRoleGroup> queryWrapper = new QueryWrapper<>();
-    queryWrapper.lambda()
-        .eq(RbacRoleGroup::getName, name);
+    queryWrapper.lambda().eq(RbacRoleGroup::getName, name);
     return rbacRoleGroupMapper.exists(queryWrapper);
   }
 
@@ -50,11 +48,11 @@ public class RoleGroupRepositoryImpl implements RoleGroupRepository {
     return this.rbacRoleGroupMapper.deleteById(id);
   }
 
-
   @Override
   public IPage<RbacRoleGroup> page(Long page, Long size, QueryRoleGroupReq req) {
     QueryWrapper<RbacRoleGroup> queryWrapper = new QueryWrapper<>();
-    queryWrapper.lambda()
+    queryWrapper
+        .lambda()
         .like(StringUtils.isNotBlank(req.getName()), RbacRoleGroup::getName, req.getName());
     return this.rbacRoleGroupMapper.selectPage(new Page<>(page, size), queryWrapper);
   }
@@ -62,9 +60,9 @@ public class RoleGroupRepositoryImpl implements RoleGroupRepository {
   @Override
   public List<RbacRoleGroup> list(QueryRoleGroupReq req) {
     QueryWrapper<RbacRoleGroup> queryWrapper = new QueryWrapper<>();
-    queryWrapper.lambda()
+    queryWrapper
+        .lambda()
         .like(StringUtils.isNotBlank(req.getName()), RbacRoleGroup::getName, req.getName());
     return this.rbacRoleGroupMapper.selectList(queryWrapper);
   }
-
 }

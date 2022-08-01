@@ -18,10 +18,8 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class PostRepositoryImpl implements PostRepository {
 
-  @Autowired
-  private RbacPostMapper postMapper;
-  @Autowired
-  private DeptRepository deptRepository;
+  @Autowired private RbacPostMapper postMapper;
+  @Autowired private DeptRepository deptRepository;
 
   @Transactional(rollbackFor = {Exception.class})
   @Override
@@ -34,23 +32,22 @@ public class PostRepositoryImpl implements PostRepository {
 
     List<Long> deptIds = deptRepository.findByName(req.getDeptName());
     QueryWrapper<RbacPost> queryWrapper = new QueryWrapper<>();
-    queryWrapper.lambda()
+    queryWrapper
+        .lambda()
         .eq(RbacPost::getCompanyId, UserInfoThread.getCompanyId())
-        .in(CollectionUtils.isNotEmpty(deptIds), RbacPost::getDeptId, deptIds)
-    ;
+        .in(CollectionUtils.isNotEmpty(deptIds), RbacPost::getDeptId, deptIds);
 
-    return this.postMapper.selectPage(new Page<>(page, size),
-        queryWrapper);
+    return this.postMapper.selectPage(new Page<>(page, size), queryWrapper);
   }
 
   @Override
   public List<RbacPost> list(QueryPostReq req) {
     List<Long> deptIds = deptRepository.findByName(req.getDeptName());
     QueryWrapper<RbacPost> queryWrapper = new QueryWrapper<>();
-    queryWrapper.lambda()
+    queryWrapper
+        .lambda()
         .eq(RbacPost::getCompanyId, UserInfoThread.getCompanyId())
-        .in(CollectionUtils.isNotEmpty(deptIds), RbacPost::getDeptId, deptIds)
-    ;
+        .in(CollectionUtils.isNotEmpty(deptIds), RbacPost::getDeptId, deptIds);
     return postMapper.selectList(queryWrapper);
   }
 

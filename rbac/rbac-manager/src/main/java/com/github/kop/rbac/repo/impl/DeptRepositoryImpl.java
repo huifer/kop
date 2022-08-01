@@ -9,7 +9,6 @@ import com.github.kop.rbac.repo.DeptRepository;
 import com.github.kop.rbac.repo.mapper.RbacDeptMapper;
 import java.util.List;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -78,5 +77,4 @@ public class DeptRepositoryImpl implements DeptRepository {
   public List<Long> findByName(String deptName) {
     return this.deptMapper.findByName(deptName);
   }
-
 }

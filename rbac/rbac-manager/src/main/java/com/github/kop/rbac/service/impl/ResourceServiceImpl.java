@@ -11,19 +11,17 @@ import com.github.kop.rbac.repo.ResourceRepository;
 import com.github.kop.rbac.service.ResourceService;
 import com.github.kop.rbac.utils.CreateValidate;
 import com.github.kop.rbac.utils.UpdateValidate;
+import java.util.ArrayList;
+import java.util.List;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @Service
 public class ResourceServiceImpl implements ResourceService {
   protected final ResourceCreateAndUpdateValidate resourceCreateAndUpdateValidate =
-          new ResourceCreateAndUpdateValidate();
-  @Autowired
-  private ResourceRepository resourceRepository;
+      new ResourceCreateAndUpdateValidate();
+  @Autowired private ResourceRepository resourceRepository;
 
   @Override
   public int create(CreateResourceReq req) {
@@ -94,13 +92,11 @@ public class ResourceServiceImpl implements ResourceService {
   }
 
   protected class ResourceCreateAndUpdateValidate
-          implements CreateValidate<CreateResourceReq>, UpdateValidate<UpdateResourceReq> {
+      implements CreateValidate<CreateResourceReq>, UpdateValidate<UpdateResourceReq> {
     @Override
-    public void createValidate(CreateResourceReq createResourceReq) throws ValidateException {
-    }
+    public void createValidate(CreateResourceReq createResourceReq) throws ValidateException {}
 
     @Override
-    public void updateValidate(UpdateResourceReq updateResourceReq) throws ValidateException {
-    }
+    public void updateValidate(UpdateResourceReq updateResourceReq) throws ValidateException {}
   }
 }

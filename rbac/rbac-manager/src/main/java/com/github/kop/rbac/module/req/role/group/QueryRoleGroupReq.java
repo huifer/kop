@@ -7,6 +7,4 @@ import lombok.Data;
 public class QueryRoleGroupReq {
   @ApiModelProperty(value = "角色组名称")
   private String name;
-
-
 }

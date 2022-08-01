@@ -101,7 +101,6 @@ public class RoleServiceImpl implements RoleService {
   protected class RoleCreateAndUpdateValidate
       implements CreateValidate<CreateRoleReq>, UpdateValidate<UpdateRoleReq> {
 
-
     @Override
     public void createValidate(CreateRoleReq createRoleReq) throws ValidateException {
       String code = createRoleReq.getCode();

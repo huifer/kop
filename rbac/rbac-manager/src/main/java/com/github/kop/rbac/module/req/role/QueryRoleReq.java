@@ -13,5 +13,4 @@ public class QueryRoleReq {
 
   @ApiModelProperty(value = "角色描述")
   private String desc;
-
 }

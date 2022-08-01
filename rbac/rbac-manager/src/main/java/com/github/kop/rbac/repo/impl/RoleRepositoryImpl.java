@@ -16,8 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Repository
 public class RoleRepositoryImpl implements RoleRepository {
 
-  @Autowired
-  private RbacRoleMapper rbacRoleMapper;
+  @Autowired private RbacRoleMapper rbacRoleMapper;
 
   @Override
   public boolean exists(String code) {
@@ -52,22 +51,22 @@ public class RoleRepositoryImpl implements RoleRepository {
   @Override
   public List<RbacRole> list(QueryRoleReq req) {
     QueryWrapper<RbacRole> queryWrapper = new QueryWrapper<>();
-    queryWrapper.lambda()
+    queryWrapper
+        .lambda()
         .like(StringUtils.isNotBlank(req.getName()), RbacRole::getName, req.getName())
         .like(StringUtils.isNotBlank(req.getDesc()), RbacRole::getDesc, req.getDesc())
-        .like(StringUtils.isNotBlank(req.getCode()), RbacRole::getCode, req.getCode())
-    ;
+        .like(StringUtils.isNotBlank(req.getCode()), RbacRole::getCode, req.getCode());
     return this.rbacRoleMapper.selectList(queryWrapper);
   }
 
   @Override
   public IPage<RbacRole> page(Long page, Long size, QueryRoleReq req) {
     QueryWrapper<RbacRole> queryWrapper = new QueryWrapper<>();
-    queryWrapper.lambda()
+    queryWrapper
+        .lambda()
         .like(StringUtils.isNotBlank(req.getName()), RbacRole::getName, req.getName())
         .like(StringUtils.isNotBlank(req.getDesc()), RbacRole::getDesc, req.getDesc())
-        .like(StringUtils.isNotBlank(req.getCode()), RbacRole::getCode, req.getCode())
-    ;
+        .like(StringUtils.isNotBlank(req.getCode()), RbacRole::getCode, req.getCode());
     return this.rbacRoleMapper.selectPage(new Page<>(page, size), queryWrapper);
   }
 }

@@ -7,7 +7,6 @@ import lombok.Data;
 public class UpdateRoleReq {
   private Long id;
 
-
   @ApiModelProperty(value = "角色名称")
   private String name;
 

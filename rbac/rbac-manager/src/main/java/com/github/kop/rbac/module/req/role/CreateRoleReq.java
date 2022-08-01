@@ -14,6 +14,4 @@ public class CreateRoleReq {
 
   @ApiModelProperty(value = "角色描述")
   private String desc;
-
-
 }

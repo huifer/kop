@@ -6,6 +6,7 @@ import lombok.Data;
 @Data
 public class UpdateResourceReq {
   private Long id;
+
   @ApiModelProperty(value = "资源编码")
   private String code;
 

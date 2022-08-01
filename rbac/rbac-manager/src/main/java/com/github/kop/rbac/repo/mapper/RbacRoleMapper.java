@@ -11,6 +11,4 @@ import org.apache.ibatis.annotations.Mapper;
  * @since 2022-07-25
  */
 @Mapper
-public interface RbacRoleMapper extends BaseMapper<RbacRole> {
-
-}
+public interface RbacRoleMapper extends BaseMapper<RbacRole> {}

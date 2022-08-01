@@ -6,16 +6,12 @@ import lombok.Data;
 @Data
 public class QueryResourceReq {
 
-    @ApiModelProperty(value = "编码")
-    private String code;
+  @ApiModelProperty(value = "编码")
+  private String code;
 
+  @ApiModelProperty(value = "名称")
+  private String name;
 
-    @ApiModelProperty(value = "名称")
-    private String name;
-
-
-    @ApiModelProperty(value = "类型")
-    private String type;
-
-
+  @ApiModelProperty(value = "类型")
+  private String type;
 }
