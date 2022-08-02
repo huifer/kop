@@ -7,9 +7,11 @@ import com.github.kop.rbac.module.entity.RbacDept;
 import com.github.kop.rbac.module.req.dept.QueryDeptReq;
 import com.github.kop.rbac.repo.DeptRepository;
 import com.github.kop.rbac.repo.mapper.RbacDeptMapper;
-import java.util.List;
+import com.github.kop.rbac.utils.UserInfoThread;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Repository
 public class DeptRepositoryImpl implements DeptRepository {
@@ -44,7 +46,12 @@ public class DeptRepositoryImpl implements DeptRepository {
   @Override
   public List<RbacDept> findByDeptIdForChild(Long deptId) {
     QueryWrapper<RbacDept> queryWrapper = new QueryWrapper<>();
-    queryWrapper.lambda().eq(RbacDept::getId, deptId).or().eq(RbacDept::getPid, deptId);
+    queryWrapper.lambda()
+            .eq(RbacDept::getCompanyId, UserInfoThread.getCompanyId())
+            .eq(RbacDept::getId, deptId).or().eq(RbacDept::getPid, deptId)
+    ;
+
+
     return this.deptMapper.selectList(queryWrapper);
   }
 
