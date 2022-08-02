@@ -3,6 +3,7 @@ package com.github.kop.rbac.module.entity;
 import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.Version;
 import java.io.Serializable;
@@ -14,7 +15,7 @@ import lombok.Setter;
  * 用户部门绑定表
  *
  * @author root
- * @since 2022-07-25
+ * @since 2022-08-02
  */
 @Getter
 @Setter
@@ -34,9 +35,7 @@ public class RbacUserBindDept implements Serializable {
   /** 部门id */
   @TableField("dept_Id")
   private Long deptId;
-  /** 企业id */
-  @TableField("company_id")
-  private Long companyId;
+
   /** 创建时间 */
   @TableField(value = "create_time", fill = FieldFill.INSERT)
   private LocalDateTime createTime;
@@ -55,10 +54,15 @@ public class RbacUserBindDept implements Serializable {
 
   /** 逻辑删除标记位 */
   @TableField("deleted")
+  @TableLogic
   private Integer deleted;
 
   /** 乐观锁 */
   @TableField("version")
   @Version
   private Long version;
+
+  /** 企业id */
+  @TableField("company_id")
+  private Long companyId;
 }

@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.Version;
 import java.io.Serializable;
@@ -15,7 +16,7 @@ import lombok.Setter;
  * 用户和角色表，区别于角色组关系表，这里是不满足的情况下进行使用
  *
  * @author root
- * @since 2022-07-25
+ * @since 2022-08-02
  */
 @Getter
 @Setter
@@ -57,10 +58,15 @@ public class RbacUserBindRole implements Serializable {
 
   /** 逻辑删除标记位 */
   @TableField("deleted")
+  @TableLogic
   private Integer deleted;
 
   /** 乐观锁 */
   @TableField("version")
   @Version
   private Long version;
+
+  /** 企业id */
+  @TableField("company_id")
+  private Long companyId;
 }

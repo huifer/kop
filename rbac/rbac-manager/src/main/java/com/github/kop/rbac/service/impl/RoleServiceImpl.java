@@ -11,10 +11,12 @@ import com.github.kop.rbac.repo.RoleRepository;
 import com.github.kop.rbac.service.RoleService;
 import com.github.kop.rbac.utils.CreateValidate;
 import com.github.kop.rbac.utils.UpdateValidate;
-import java.util.ArrayList;
-import java.util.List;
+import com.github.kop.rbac.utils.UserInfoThread;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class RoleServiceImpl implements RoleService {
@@ -54,6 +56,7 @@ public class RoleServiceImpl implements RoleService {
     rbacRole.setCode(req.getCode());
     rbacRole.setName(req.getName());
     rbacRole.setDesc(req.getDesc());
+    rbacRole.setCompanyId(UserInfoThread.getCompanyId());
     return this.roleRepository.create(rbacRole);
   }
 
@@ -69,6 +72,7 @@ public class RoleServiceImpl implements RoleService {
       if (StringUtils.isNotBlank(req.getDesc())) {
         rbacRole.setDesc(req.getDesc());
       }
+      rbacRole.setCompanyId(UserInfoThread.getCompanyId());
       return this.roleRepository.update(rbacRole);
     }
 

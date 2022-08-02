@@ -7,11 +7,13 @@ import com.github.kop.rbac.module.entity.RbacRole;
 import com.github.kop.rbac.module.req.role.QueryRoleReq;
 import com.github.kop.rbac.repo.RoleRepository;
 import com.github.kop.rbac.repo.mapper.RbacRoleMapper;
-import java.util.List;
+import com.github.kop.rbac.utils.UserInfoThread;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Repository
 public class RoleRepositoryImpl implements RoleRepository {
@@ -52,8 +54,9 @@ public class RoleRepositoryImpl implements RoleRepository {
   public List<RbacRole> list(QueryRoleReq req) {
     QueryWrapper<RbacRole> queryWrapper = new QueryWrapper<>();
     queryWrapper
-        .lambda()
-        .like(StringUtils.isNotBlank(req.getName()), RbacRole::getName, req.getName())
+            .lambda()
+            .eq(RbacRole::getCompanyId, UserInfoThread.getCompanyId())
+            .like(StringUtils.isNotBlank(req.getName()), RbacRole::getName, req.getName())
         .like(StringUtils.isNotBlank(req.getDesc()), RbacRole::getDesc, req.getDesc())
         .like(StringUtils.isNotBlank(req.getCode()), RbacRole::getCode, req.getCode());
     return this.rbacRoleMapper.selectList(queryWrapper);
@@ -63,10 +66,12 @@ public class RoleRepositoryImpl implements RoleRepository {
   public IPage<RbacRole> page(Long page, Long size, QueryRoleReq req) {
     QueryWrapper<RbacRole> queryWrapper = new QueryWrapper<>();
     queryWrapper
-        .lambda()
-        .like(StringUtils.isNotBlank(req.getName()), RbacRole::getName, req.getName())
-        .like(StringUtils.isNotBlank(req.getDesc()), RbacRole::getDesc, req.getDesc())
-        .like(StringUtils.isNotBlank(req.getCode()), RbacRole::getCode, req.getCode());
+            .lambda()
+            .eq(RbacRole::getCompanyId, UserInfoThread.getCompanyId())
+            .like(StringUtils.isNotBlank(req.getName()), RbacRole::getName, req.getName())
+            .like(StringUtils.isNotBlank(req.getDesc()), RbacRole::getDesc, req.getDesc())
+            .like(StringUtils.isNotBlank(req.getCode()), RbacRole::getCode, req.getCode())
+    ;
     return this.rbacRoleMapper.selectPage(new Page<>(page, size), queryWrapper);
   }
 }

@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.Version;
 import java.io.Serializable;
@@ -15,7 +16,7 @@ import lombok.Setter;
  * 用户与角色组关联表
  *
  * @author root
- * @since 2022-07-25
+ * @since 2022-08-02
  */
 @Getter
 @Setter
@@ -53,6 +54,7 @@ public class RbacUserBindRoleGroup implements Serializable {
 
   /** 逻辑删除标记位 */
   @TableField("deleted")
+  @TableLogic
   private Integer deleted;
 
   /** 乐观锁 */

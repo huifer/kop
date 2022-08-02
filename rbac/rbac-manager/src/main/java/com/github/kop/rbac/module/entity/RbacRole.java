@@ -3,6 +3,7 @@ package com.github.kop.rbac.module.entity;
 import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.Version;
 import java.io.Serializable;
@@ -14,7 +15,7 @@ import lombok.Setter;
  * 角色
  *
  * @author root
- * @since 2022-07-25
+ * @since 2022-08-02
  */
 @Getter
 @Setter
@@ -57,10 +58,15 @@ public class RbacRole implements Serializable {
 
   /** 逻辑删除标记位 */
   @TableField("deleted")
+  @TableLogic
   private Integer deleted;
 
   /** 乐观锁 */
   @TableField("version")
   @Version
   private Long version;
+
+  /** 企业id */
+  @TableField("company_id")
+  private Long companyId;
 }

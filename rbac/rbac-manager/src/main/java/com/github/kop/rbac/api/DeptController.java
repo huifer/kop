@@ -10,6 +10,7 @@ import com.github.kop.rbac.service.DeptService;
 import com.github.kop.rbac.utils.UserInfoThread;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,8 +21,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
 
 @Api(value = "部门接口")
 @RestController
@@ -76,8 +75,7 @@ public class DeptController {
 
   @ApiOperation(value = "部门树结构")
   @GetMapping("/tree")
-  public RespVO<List<DeptQueryRes>> tree(
-          @RequestParam("dept_id") Long deptId) {
+  public RespVO<List<DeptQueryRes>> tree(@RequestParam("dept_id") Long deptId) {
 
     return RespVO.success(deptService.tree(UserInfoThread.getCompanyId(), deptId));
   }
