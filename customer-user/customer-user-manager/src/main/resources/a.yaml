@@ -1,0 +1,32 @@
+sharding:
+  jdbc:
+    config:
+      sharding:
+        tables:
+          t_order:
+            table-strategy:
+              inline:
+                algorithm-expression: t_order$->{order_id % 2}
+                sharding-column: order_id
+            key-generator-column-name: order_id
+            actual-data-nodes: ds$->{0..1}.t_order$->{0..1}
+        default-database-strategy:
+          inline:
+            algorithm-expression: ds$->{user_id % 2}
+            sharding-column: user_id
+        broadcast-tables: t_config
+        binding-tables: t_order,t_order_item
+    datasource:
+      ds1:
+        url: jdbc:mysql://localhost:3306/ds1
+        driver-class-name: com.mysql.jdbc.Driver
+        type: org.apache.commons.dbcp.BasicDataSource
+        username: root
+        password: ''
+      names: ds0,ds1
+      ds0:
+        driver-class-name: com.mysql.jdbc.Driver
+        username: root
+        type: org.apache.commons.dbcp.BasicDataSource
+        url: jdbc:mysql://localhost:3306/ds0
+        password: ''
