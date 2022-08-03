@@ -19,17 +19,45 @@ spring:
         username: root
       names: ds
     sharding:
-      binding-tables: customer_user
+      binding-tables: customer_user,customer_user_dynamic
       tables:
+#        按照主键分表
         customer_user:
           actual-data-nodes: ds.customer_user_$->{0..2}
           key-generator:
             column: id
-#            props:
-#              worker:
-#                id: 123
             type: SNOWFLAKE
           table-strategy:
             inline:
               algorithm-expression: customer_user_$->{id % 3}
               sharding-column: id
+#              按照用户id分表，表量和用户表一样多
+        customer_user_black:
+          actual-data-nodes: ds.customer_user_black_$->{0..2}
+          key-generator:
+            column: id
+            type: SNOWFLAKE
+          table-strategy:
+            inline:
+              algorithm-expression: customer_user_black_$->{user_id % 3}
+              sharding-column: user_id
+#              按照用户id分表，表量和用户表一样多
+        customer_user_white:
+          actual-data-nodes: ds.customer_user_white_$->{0..2}
+          key-generator:
+            column: id
+            type: SNOWFLAKE
+          table-strategy:
+            inline:
+              algorithm-expression: customer_user_white_$->{user_id % 3}
+              sharding-column: user_id
+#              按照创建时间分表
+        customer_user_dynamic:
+          actual-data-nodes: ds.customer_user_dynamic
+          key-generator:
+            column: id
+            type: SNOWFLAKE
+          table-strategy:
+            standard:
+              sharding-column: create_time
+              preciseAlgorithmClassName: com.github.kop.customer.sharding.DateShardingAlgorithm

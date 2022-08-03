@@ -1,6 +1,5 @@
 package com.github.kop.template.utils;
 
-
 import com.github.kop.template.module.enums.AppHttpCodeEnum;
 import com.github.kop.template.module.ex.ValidateException;
 

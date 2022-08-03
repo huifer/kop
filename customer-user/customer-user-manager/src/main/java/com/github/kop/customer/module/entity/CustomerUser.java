@@ -1,6 +1,5 @@
 package com.github.kop.customer.module.entity;
 
-import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
@@ -11,11 +10,11 @@ import lombok.Setter;
 
 /**
  * <p>
- * 
+ * 用户信息表
  * </p>
  *
  * @author root
- * @since 2022-08-02
+ * @since 2022-08-03
  */
 @Getter
 @Setter
@@ -29,30 +28,6 @@ public class CustomerUser implements Serializable {
      */
     @TableId("id")
     private Long id;
-
-    /**
-     * 创建时间
-     */
-    @TableField(value = "create_time", fill = FieldFill.INSERT)
-    private LocalDateTime createTime;
-
-    /**
-     * 创建用户
-     */
-    @TableField(value = "create_user_id", fill = FieldFill.INSERT)
-    private Long createUserId;
-
-    /**
-     * 更新时间
-     */
-    @TableField(value = "update_time", fill = FieldFill.INSERT_UPDATE)
-    private LocalDateTime updateTime;
-
-    /**
-     * 更新用户
-     */
-    @TableField(value = "update_user_id", fill = FieldFill.INSERT_UPDATE)
-    private Long updateUserId;
 
     /**
      * 逻辑删除标记位
@@ -83,6 +58,18 @@ public class CustomerUser implements Serializable {
      */
     @TableField("grade")
     private Integer grade;
+
+    /**
+     * 密码
+     */
+    @TableField("password")
+    private String password;
+
+    /**
+     * 注册时间
+     */
+    @TableField("register_time")
+    private LocalDateTime registerTime;
 
 
 }

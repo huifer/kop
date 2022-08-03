@@ -12,18 +12,18 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @RestController
 public class ExceptionCatch {
 
-    public static final String ERROR_MSG = "error_msg";
+  public static final String ERROR_MSG = "error_msg";
 
-    @ExceptionHandler(Exception.class)
-    public RespVO<String> exception(Exception e) {
-        log.error(e.getMessage());
-        e.printStackTrace();
-        return RespVO.error(e.getMessage());
-    }
+  @ExceptionHandler(Exception.class)
+  public RespVO<String> exception(Exception e) {
+    log.error(e.getMessage());
+    e.printStackTrace();
+    return RespVO.error(e.getMessage());
+  }
 
-    @ExceptionHandler(NoceException.class)
-    public RespVO<String> leadExceptionHandler(NoceException nsException) {
-        nsException.printStackTrace();
-        return RespVO.error(nsException.getCode(), nsException.getMessage());
-    }
+  @ExceptionHandler(NoceException.class)
+  public RespVO<String> leadExceptionHandler(NoceException nsException) {
+    nsException.printStackTrace();
+    return RespVO.error(nsException.getCode(), nsException.getMessage());
+  }
 }
