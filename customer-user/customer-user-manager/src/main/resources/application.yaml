@@ -11,20 +11,25 @@ spring:
       sql:
         show: true
     datasource:
-      names: ds0
-      ds0:
-        password: 'root123@'
+      ds:
         driver-class-name: com.mysql.jdbc.Driver
-        username: root
+        jdbc-url: jdbc:mysql://localhost:3306/customer_user?serverTimezone=UTC&useSSL=false&useUnicode=true&characterEncoding=UTF-8
+        password: 'root123@'
         type: com.zaxxer.hikari.HikariDataSource
-        jdbc-url: jdbc:mysql://localhost:3306/customer_user
-    rules:
-      sharding:
-        tables:
-          customer_user:
-            table-strategy:
-              inline:
-                algorithm-expression: customer_user$->{id % 2}
-                sharding-column: id
-            key-generator-column-name: id
-            actual-data-nodes: ds{0}.customer_user$->{0..2}
+        username: root
+      names: ds
+    sharding:
+      binding-tables: customer_user
+      tables:
+        customer_user:
+          actual-data-nodes: ds.customer_user_$->{0..2}
+          key-generator:
+            column: id
+#            props:
+#              worker:
+#                id: 123
+            type: SNOWFLAKE
+          table-strategy:
+            inline:
+              algorithm-expression: customer_user_$->{id % 3}
+              sharding-column: id
