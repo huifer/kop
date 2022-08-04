@@ -7,6 +7,8 @@ import com.github.kop.customer.repo.mapper.CustomerUserWhiteMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UserWhiteRepositoryImpl implements UserWhiteRepository {
     @Autowired
@@ -28,4 +30,10 @@ public class UserWhiteRepositoryImpl implements UserWhiteRepository {
                 .eq(CustomerUserWhite::getWhiteUserId, opUserId);
         return this.userWhiteMapper.delete(queryWrapper);
     }
+
+    @Override
+    public List<Long> whiteIds(long userId) {
+        return userWhiteMapper.whiteIds(userId);
+    }
+
 }

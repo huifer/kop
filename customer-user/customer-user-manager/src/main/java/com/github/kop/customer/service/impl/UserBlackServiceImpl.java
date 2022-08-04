@@ -5,6 +5,8 @@ import com.github.kop.customer.service.UserBlackService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UserBlackServiceImpl implements UserBlackService {
     @Autowired
@@ -18,6 +20,11 @@ public class UserBlackServiceImpl implements UserBlackService {
     @Override
     public boolean remove(long selfUserId, long opUserId) {
         return userBlackRepository.delete(selfUserId, opUserId) > 0;
-
     }
+
+    @Override
+    public List<Long> blackIds(long userId) {
+        return this.userBlackRepository.blackIds(userId);
+    }
+
 }

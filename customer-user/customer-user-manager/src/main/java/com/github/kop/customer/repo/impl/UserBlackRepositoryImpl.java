@@ -7,6 +7,8 @@ import com.github.kop.customer.repo.mapper.CustomerUserBlackMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UserBlackRepositoryImpl implements UserBlackRepository {
     @Autowired
@@ -25,5 +27,10 @@ public class UserBlackRepositoryImpl implements UserBlackRepository {
         QueryWrapper<CustomerUserBlack> queryWrapper = new QueryWrapper<>();
         queryWrapper.lambda().eq(CustomerUserBlack::getUserId, selfUserId).eq(CustomerUserBlack::getBlackUserId, opUserId);
         return userBlackMapper.delete(queryWrapper);
+    }
+
+    @Override
+    public List<Long> blackIds(long userId) {
+        return this.userBlackMapper.blackIds(userId);
     }
 }

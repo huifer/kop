@@ -1,5 +1,7 @@
 package com.github.kop.customer.service;
 
+import java.util.List;
+
 public interface UserWhiteService {
     /**
      * 添加关注
@@ -13,4 +15,10 @@ public interface UserWhiteService {
      * @param opUserId 操作目标
      */
     boolean remove(long selfUserId, long opUserId);
+
+    /**
+     * 根据用户id查询关注名单用户id
+     */
+    List<Long> whiteIds(long userId);
+
 }

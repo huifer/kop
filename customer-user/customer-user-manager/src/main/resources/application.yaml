@@ -61,3 +61,14 @@ spring:
             standard:
               sharding-column: create_time
               preciseAlgorithmClassName: com.github.kop.customer.sharding.DateShardingAlgorithm
+
+
+        customer_user_dynamic_comment:
+          actual-data-nodes: ds.customer_user_dynamic_comment_$->{0..2}
+          key-generator:
+            column: id
+            type: SNOWFLAKE
+          table-strategy:
+            inline:
+              algorithm-expression: customer_user_dynamic_comment_$->{dynamic_id % 3}
+              sharding-column: dynamic_id
