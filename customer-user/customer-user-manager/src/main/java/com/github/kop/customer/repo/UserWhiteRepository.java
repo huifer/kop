@@ -8,4 +8,6 @@ public interface UserWhiteRepository {
     int delete(long selfUserId, long opUserId);
 
     List<Long> whiteIds(long userId);
+
+    boolean exists(long curUserId, Long targetUserId);
 }

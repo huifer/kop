@@ -62,7 +62,7 @@ spring:
               sharding-column: create_time
               preciseAlgorithmClassName: com.github.kop.customer.sharding.DateShardingAlgorithm
 
-
+#        按照动态id分表
         customer_user_dynamic_comment:
           actual-data-nodes: ds.customer_user_dynamic_comment_$->{0..2}
           key-generator:
@@ -72,3 +72,12 @@ spring:
             inline:
               algorithm-expression: customer_user_dynamic_comment_$->{dynamic_id % 3}
               sharding-column: dynamic_id
+server:
+  port: 9999
+
+mybatis-plus:
+  global-config:
+    db-config:
+      logic-delete-field: deleted
+      logic-delete-value: 1
+      logic-not-delete-value: 0

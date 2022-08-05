@@ -9,4 +9,5 @@ public interface UserBlackRepository {
 
     List<Long> blackIds(long userId);
 
+    boolean exists(long curUserId, Long targetUserId);
 }

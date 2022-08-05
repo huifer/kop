@@ -3,8 +3,8 @@ package com.github.kop.customer.module.res;
 import lombok.Data;
 
 @Data
-public class RegisterUserRes {
-
+public class UserInfoRes {
+    private Long userId;
 
     /**
      * 姓名
@@ -21,5 +21,13 @@ public class RegisterUserRes {
      */
     private Integer grade;
 
+    /**
+     * 是否关注
+     */
+    private boolean follow;
+    /**
+     * 是否拉黑
+      */
+    private boolean black;
 
 }

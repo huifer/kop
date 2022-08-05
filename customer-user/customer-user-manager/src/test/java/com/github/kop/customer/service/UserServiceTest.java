@@ -2,7 +2,7 @@ package com.github.kop.customer.service;
 
 import com.github.kop.customer.UserApp;
 import com.github.kop.customer.module.req.RegisterUserReq;
-import com.github.kop.customer.module.res.RegisterUserRes;
+import com.github.kop.customer.module.res.UserInfoRes;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -27,7 +27,7 @@ class UserServiceTest {
 
     }@Test
     void userInfo(){
-        RegisterUserRes registerUserRes = this.userService.userInfo(1554755298906869761L);
+        UserInfoRes registerUserRes = this.userService.userInfo(1554755298906869761L);
         System.out.println();
     }
 }

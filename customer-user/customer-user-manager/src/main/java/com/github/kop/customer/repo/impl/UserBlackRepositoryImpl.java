@@ -33,4 +33,12 @@ public class UserBlackRepositoryImpl implements UserBlackRepository {
     public List<Long> blackIds(long userId) {
         return this.userBlackMapper.blackIds(userId);
     }
+
+    @Override
+    public boolean exists(long curUserId, Long targetUserId) {
+        QueryWrapper<CustomerUserBlack> queryWrapper = new QueryWrapper<>();
+        queryWrapper.lambda()
+                .eq(CustomerUserBlack::getUserId, curUserId).eq(CustomerUserBlack::getBlackUserId, targetUserId);
+        return this.userBlackMapper.exists(queryWrapper);
+    }
 }

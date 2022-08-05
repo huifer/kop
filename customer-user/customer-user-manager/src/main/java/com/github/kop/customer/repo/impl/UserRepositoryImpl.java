@@ -1,5 +1,8 @@
 package com.github.kop.customer.repo.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.github.kop.customer.module.entity.CustomerUser;
 import com.github.kop.customer.repo.UserRepository;
 import com.github.kop.customer.repo.mapper.CustomerUserMapper;
@@ -23,4 +26,9 @@ public class UserRepositoryImpl implements UserRepository {
         return this.userMapper.selectById(userId);
     }
 
+    @Override
+    public IPage<CustomerUser> page(long cur, long size) {
+        QueryWrapper<CustomerUser> queryWrapper = new QueryWrapper<>();
+        return userMapper.selectPage(new Page<>(cur, size), queryWrapper);
+    }
 }

@@ -36,4 +36,12 @@ public class UserWhiteRepositoryImpl implements UserWhiteRepository {
         return userWhiteMapper.whiteIds(userId);
     }
 
+    @Override
+    public boolean exists(long curUserId, Long targetUserId) {
+        QueryWrapper<CustomerUserWhite> queryWrapper = new QueryWrapper<>();
+        queryWrapper.lambda()
+                .eq(CustomerUserWhite::getUserId, curUserId)
+                .eq(CustomerUserWhite::getWhiteUserId, targetUserId);
+        return this.userWhiteMapper.exists(queryWrapper);
+    }
 }

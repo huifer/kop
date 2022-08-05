@@ -21,4 +21,14 @@ public interface UserWhiteService {
      */
     List<Long> whiteIds(long userId);
 
+
+    /**
+     * 是否关注
+     *
+     * @param curUserId    当前人
+     * @param targetUserId 勘测目标人
+     */
+    boolean isFollow(long curUserId, Long targetUserId);
+
+
 }

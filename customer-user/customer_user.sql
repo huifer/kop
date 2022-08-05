@@ -11,7 +11,7 @@
  Target Server Version : 80028
  File Encoding         : 65001
 
- Date: 03/08/2022 17:14:34
+ Date: 04/08/2022 08:34:11
 */
 
 SET NAMES utf8mb4;
@@ -137,6 +137,66 @@ CREATE TABLE `customer_user_dynamic` (
   `content` varchar(255) DEFAULT NULL COMMENT '动态内容',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='用户动态表';
+
+-- ----------------------------
+-- Table structure for customer_user_dynamic_comment
+-- ----------------------------
+DROP TABLE IF EXISTS `customer_user_dynamic_comment`;
+CREATE TABLE `customer_user_dynamic_comment` (
+  `id` bigint NOT NULL COMMENT '主键',
+  `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+  `deleted` tinyint DEFAULT '0' COMMENT '逻辑删除标记位',
+  `dynamic_id` bigint DEFAULT NULL COMMENT '动态id',
+  `user_id` bigint DEFAULT NULL COMMENT '评论人id',
+  `pid` bigint DEFAULT NULL COMMENT '上级id',
+  `content` varchar(255) DEFAULT NULL COMMENT '评论内容',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- ----------------------------
+-- Table structure for customer_user_dynamic_comment_0
+-- ----------------------------
+DROP TABLE IF EXISTS `customer_user_dynamic_comment_0`;
+CREATE TABLE `customer_user_dynamic_comment_0` (
+  `id` bigint NOT NULL COMMENT '主键',
+  `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+  `deleted` tinyint DEFAULT '0' COMMENT '逻辑删除标记位',
+  `dynamic_id` bigint DEFAULT NULL COMMENT '动态id',
+  `user_id` bigint DEFAULT NULL COMMENT '评论人id',
+  `pid` bigint DEFAULT NULL COMMENT '上级id',
+  `content` varchar(255) DEFAULT NULL COMMENT '评论内容',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- ----------------------------
+-- Table structure for customer_user_dynamic_comment_1
+-- ----------------------------
+DROP TABLE IF EXISTS `customer_user_dynamic_comment_1`;
+CREATE TABLE `customer_user_dynamic_comment_1` (
+  `id` bigint NOT NULL COMMENT '主键',
+  `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+  `deleted` tinyint DEFAULT '0' COMMENT '逻辑删除标记位',
+  `dynamic_id` bigint DEFAULT NULL COMMENT '动态id',
+  `user_id` bigint DEFAULT NULL COMMENT '评论人id',
+  `pid` bigint DEFAULT NULL COMMENT '上级id',
+  `content` varchar(255) DEFAULT NULL COMMENT '评论内容',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- ----------------------------
+-- Table structure for customer_user_dynamic_comment_2
+-- ----------------------------
+DROP TABLE IF EXISTS `customer_user_dynamic_comment_2`;
+CREATE TABLE `customer_user_dynamic_comment_2` (
+  `id` bigint NOT NULL COMMENT '主键',
+  `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+  `deleted` tinyint DEFAULT '0' COMMENT '逻辑删除标记位',
+  `dynamic_id` bigint DEFAULT NULL COMMENT '动态id',
+  `user_id` bigint DEFAULT NULL COMMENT '评论人id',
+  `pid` bigint DEFAULT NULL COMMENT '上级id',
+  `content` varchar(255) DEFAULT NULL COMMENT '评论内容',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- ----------------------------
 -- Table structure for customer_user_message

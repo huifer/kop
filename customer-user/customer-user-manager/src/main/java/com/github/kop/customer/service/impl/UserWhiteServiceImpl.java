@@ -27,4 +27,8 @@ public class UserWhiteServiceImpl implements UserWhiteService {
         return userWhiteRepository.whiteIds(userId);
     }
 
+    @Override
+    public boolean isFollow(long curUserId, Long targetUserId) {
+     return    this.userWhiteRepository.exists(curUserId,targetUserId);
+    }
 }
