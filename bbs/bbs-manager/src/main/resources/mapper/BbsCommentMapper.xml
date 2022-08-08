@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.github.kop.bbs.repo.mapper.BbsCommentMapper">
+  <resultMap id="BaseResultMap" type="com.github.kop.bbs.module.entity.BbsComment">
+    <!--@mbg.generated-->
+    <!--@Table bbs_comment-->
+    <id column="comment_id" jdbcType="BIGINT" property="commentId" />
+    <result column="comment_type" jdbcType="TINYINT" property="commentType" />
+    <result column="event_id" jdbcType="BIGINT" property="eventId" />
+    <result column="event_level_path" jdbcType="BIGINT" property="eventLevelPath" />
+    <result column="thumbs_cont" jdbcType="BIGINT" property="thumbsCont" />
+    <result column="ip" jdbcType="VARCHAR" property="ip" />
+    <result column="ip_loc" jdbcType="VARCHAR" property="ipLoc" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="create_user_id" jdbcType="BIGINT" property="createUserId" />
+    <result column="deleted" jdbcType="TINYINT" property="deleted" />
+    <result column="version" jdbcType="BIGINT" property="version" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    comment_id, comment_type, event_id, event_level_path, thumbs_cont, ip, ip_loc, create_time, 
+    create_user_id, deleted, version
+  </sql>
+  <update id="updateBatchSelective" parameterType="java.util.List">
+    <!--@mbg.generated-->
+    update bbs_comment
+    <trim prefix="set" suffixOverrides=",">
+      <trim prefix="comment_type = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.commentType != null">
+            when comment_id = #{item.commentId,jdbcType=BIGINT} then #{item.commentType,jdbcType=TINYINT}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="event_id = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.eventId != null">
+            when comment_id = #{item.commentId,jdbcType=BIGINT} then #{item.eventId,jdbcType=BIGINT}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="event_level_path = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.eventLevelPath != null">
+            when comment_id = #{item.commentId,jdbcType=BIGINT} then #{item.eventLevelPath,jdbcType=BIGINT}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="thumbs_cont = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.thumbsCont != null">
+            when comment_id = #{item.commentId,jdbcType=BIGINT} then #{item.thumbsCont,jdbcType=BIGINT}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="ip = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.ip != null">
+            when comment_id = #{item.commentId,jdbcType=BIGINT} then #{item.ip,jdbcType=VARCHAR}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="ip_loc = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.ipLoc != null">
+            when comment_id = #{item.commentId,jdbcType=BIGINT} then #{item.ipLoc,jdbcType=VARCHAR}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="create_time = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.createTime != null">
+            when comment_id = #{item.commentId,jdbcType=BIGINT} then #{item.createTime,jdbcType=TIMESTAMP}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="create_user_id = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.createUserId != null">
+            when comment_id = #{item.commentId,jdbcType=BIGINT} then #{item.createUserId,jdbcType=BIGINT}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="deleted = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.deleted != null">
+            when comment_id = #{item.commentId,jdbcType=BIGINT} then #{item.deleted,jdbcType=TINYINT}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="version = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.version != null">
+            when comment_id = #{item.commentId,jdbcType=BIGINT} then #{item.version,jdbcType=BIGINT}
+          </if>
+        </foreach>
+      </trim>
+    </trim>
+    where comment_id in
+    <foreach close=")" collection="list" item="item" open="(" separator=", ">
+      #{item.commentId,jdbcType=BIGINT}
+    </foreach>
+  </update>
+  <insert id="batchInsert" keyColumn="comment_id" keyProperty="commentId" parameterType="map" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into bbs_comment
+    (comment_type, event_id, event_level_path, thumbs_cont, ip, ip_loc, create_time, 
+      create_user_id, deleted, version)
+    values
+    <foreach collection="list" item="item" separator=",">
+      (#{item.commentType,jdbcType=TINYINT}, #{item.eventId,jdbcType=BIGINT}, #{item.eventLevelPath,jdbcType=BIGINT}, 
+        #{item.thumbsCont,jdbcType=BIGINT}, #{item.ip,jdbcType=VARCHAR}, #{item.ipLoc,jdbcType=VARCHAR}, 
+        #{item.createTime,jdbcType=TIMESTAMP}, #{item.createUserId,jdbcType=BIGINT}, #{item.deleted,jdbcType=TINYINT}, 
+        #{item.version,jdbcType=BIGINT})
+    </foreach>
+  </insert>
+</mapper>
