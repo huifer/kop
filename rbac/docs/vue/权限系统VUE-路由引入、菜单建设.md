@@ -13,9 +13,7 @@ yarn add vue-router@4
 上述命令执行完成后可以在`package.json`文件中的 dependencies 节点看到如下内容则表示安装成果。
 
 ```js
-"vue-router"
-:
-"4"
+"vue-router" : "4"
 ```
 
 ## 编码
@@ -80,12 +78,20 @@ const routes = [
 了解了这些内容后接下来将 MyTest.vue 编写到 routes 中，编写后内容如下
 
 ```js
+import {createRouter, createWebHashHistory} from 'vue-router'
+
 const routes = [
    {
       path: '/demo1',
       component: () => import ('../components/MyTest.vue'),
       name: '测试页面1',
-      children: []
+      children: [
+         {
+            path: '/demo3',
+            component: () => import ('../components/MyTest.vue'),
+            name: '测试页面3',
+         }
+      ]
    },
    {
       path: '/demo2',
@@ -95,6 +101,14 @@ const routes = [
    }
 
 ]
+
+const router = createRouter({
+   history: createWebHashHistory(),
+   routes
+})
+
+export default router;
+
 
 ```
 
@@ -162,3 +176,69 @@ export default {
 此时在浏览器上显示内容如如图所示
 
 ![image-20220805154852594](images/image-20220805154852594.png)
+
+在图中可以发现相关显示内容已经显示，但是它只显示了第一层，并没有显示多层数据，下面将对多层数据展示进行改造。需要注意一般多层数据在菜单层面两层即可，过多层级不利于操作定位。修改后vue代码内容如下
+
+```vue
+<el-menu
+   class="el-menu-vertical-demo"
+   default-active="2"
+   router
+>
+
+ <el-sub-menu v-for="(it , index) in routes" :key="index" :index="it.path">
+   <template #title>
+     <span>{{ it.name }}</span>
+   </template>
+   <!-- 二级菜单 -->
+   <el-menu-item
+       v-for="item2 in it.children"
+       :key="item2.id"
+       :index="item2.path"
+   >{{ item2.name }}
+   </el-menu-item>
+ </el-sub-menu>
+</el-menu>
+      
+```
+
+注意： 此项修改后一级菜单无法点击进入，仅二级菜单可以点击进入详情页。因为一级菜单无法点击进入因此可以将`router/index.js`文件中的一级菜单的component属性删除，删除后内容如下。
+```js
+const routes = [
+    {
+        path: '/demo1',
+        name: '测试页面1',
+        children: [
+            {
+                path: '/demo3',
+                component: () => import ('../components/MyTest.vue'),
+                name: '测试页面3',
+            }
+        ]
+    },
+    {
+        path: '/demo2',
+        name: '测试页面2',
+        children: []
+    }
+
+]
+
+```
+经过修改后此时菜单信息如图所示。
+
+![image-20220808083737540](images/image-20220808083737540.png)
+
+
+此时进入  http://localhost:8080/ 地址可以发现菜单内容已经正常显示，现在还需要优化第一次进入后的首屏展示内容，首先在el-menu标签中修改 `default-active="2"` 数据，将等号后面的2修改为具体的路由地址，即`router/index.js`文件中的path数据，本例数据为 `            default-active="/demo3"` ，此时访问 http://localhost:8080/ 可以发现右侧主体显示内容中没有显示相关内容，这是因为路由没有跳转，解决这个问题需要在`router/index.js`文件中添加如下代码。
+
+```js
+{
+     path: "/",
+     redirect: {
+         name: '测试页面3' // 填写具体跳转的名称，数据值必须在routers变量中
+     }
+ }
+```
+
+经过上述修改后此时再进入 http://localhost:8080/ 即可正常显示左侧菜单的默认选中，以及右侧主体内容的展示。

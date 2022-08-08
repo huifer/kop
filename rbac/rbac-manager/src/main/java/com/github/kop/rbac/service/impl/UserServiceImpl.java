@@ -7,19 +7,24 @@ import com.github.kop.rbac.module.req.user.CreateUserReq;
 import com.github.kop.rbac.module.req.user.QueryUserReq;
 import com.github.kop.rbac.module.req.user.UpdateUserReq;
 import com.github.kop.rbac.module.res.company.CompanyQueryRes;
+import com.github.kop.rbac.module.res.user.UserLoginRes;
 import com.github.kop.rbac.module.res.user.UserQueryRes;
 import com.github.kop.rbac.repo.UserRepository;
 import com.github.kop.rbac.service.CompanyService;
 import com.github.kop.rbac.service.UserBindService;
 import com.github.kop.rbac.service.UserService;
 import com.github.kop.rbac.utils.CreateValidate;
+import com.github.kop.rbac.utils.JwtTokenUtil;
 import com.github.kop.rbac.utils.UpdateValidate;
 import com.github.kop.rbac.utils.UserInfoThread;
+
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.DigestUtils;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -36,6 +41,7 @@ public class UserServiceImpl implements UserService {
     rbacUser.setName(req.getName());
     rbacUser.setPhone(req.getPhone());
     rbacUser.setGrade(req.getGrade());
+    rbacUser.setPassword(DigestUtils.md5DigestAsHex(req.getPassword().getBytes(StandardCharsets.UTF_8)));
     rbacUser.setCompanyId(UserInfoThread.getCompanyId());
 
     return this.userRepository.create(rbacUser);
@@ -115,7 +121,25 @@ public class UserServiceImpl implements UserService {
     return res;
   }
 
-  protected static class UserCreateAndUpdateValidate
+  @Autowired
+  private JwtTokenUtil jwtTokenUtil;
+  @Override
+  public UserLoginRes login(String username, String password) {
+    RbacUser user = this.userRepository.findByUsernameAndPassword(username, DigestUtils.md5DigestAsHex(password.getBytes(StandardCharsets.UTF_8)));
+    if (user != null) {
+      UserLoginRes userLoginRes = new UserLoginRes();
+      userLoginRes.setPhone(user.getPhone());
+      userLoginRes.setName(user.getName());
+      userLoginRes.setGrade(user.getGrade());
+      userLoginRes.setCompanyId(user.getCompanyId());
+
+
+      return userLoginRes;
+    }
+    return null;
+  }
+
+  protected  class UserCreateAndUpdateValidate
       implements CreateValidate<CreateUserReq>, UpdateValidate<UpdateUserReq> {
     @Override
     public void createValidate(CreateUserReq createUserReq) throws ValidateException {
@@ -123,10 +147,21 @@ public class UserServiceImpl implements UserService {
       if (!StringUtils.isEmpty(name)) {
         throw new ValidateException("用户名必填");
       }
+      boolean existsName = userRepository.existsName(name);
+      if (existsName) {
+        throw new ValidateException("用户名已存在");
+      }
       String phone = createUserReq.getPhone();
       if (!StringUtils.isEmpty(phone)) {
         throw new ValidateException("联系方式必填");
       }
+
+      boolean existsPhone = userRepository.existsPhone(phone);
+      if (existsPhone) {
+        throw new ValidateException("联系方式已存在");
+      }
+
+
     }
 
     @Override

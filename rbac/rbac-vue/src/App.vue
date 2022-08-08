@@ -6,13 +6,22 @@
       <el-aside width="200px">
         <el-menu
             class="el-menu-vertical-demo"
-            default-active="2"
-            router
+            default-active="/demo3"
+            router="true"
         >
-          <el-menu-item v-for="(it ,index ) in routes" :key="index" :index="it.path"
-                        :route="it.path">
-            <span>{{it.name}}</span>
-          </el-menu-item>
+
+          <el-sub-menu v-for="(it , index) in routes" :key="index" :index="it.path">
+            <template #title>
+              <span>{{ it.name }}</span>
+            </template>
+            <!-- 二级菜单 -->
+            <el-menu-item
+                v-for="item2 in it.children"
+                :key="item2.id"
+                :index="item2.path"
+            >{{ item2.name }}
+            </el-menu-item>
+          </el-sub-menu>
         </el-menu>
       </el-aside>
       <el-main>

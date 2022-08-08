@@ -16,4 +16,8 @@ public class CreateUserReq {
   /** 性别 */
   @ApiModelProperty(value = "性别")
   private Integer grade;
+
+  /** 密码 */
+  @ApiModelProperty(value = "密码")
+  private String password;
 }

@@ -8,7 +8,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-@SpringBootApplication(scanBasePackages = {"com.github.kop.rbac"})
+@SpringBootApplication(scanBasePackages = {"com.github.kop.rbac.*"})
 @EnableTransactionManagement
 @MapperScan(basePackages = {"com.github.kop.rbac.repo.mapper"})
 public class RbacApplication {
