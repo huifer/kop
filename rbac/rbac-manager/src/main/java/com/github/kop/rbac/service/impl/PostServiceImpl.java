@@ -124,7 +124,7 @@ public class PostServiceImpl implements PostService {
       if (companyId == null) {
         throw new ValidateException("企业id必填");
       }
-      // 当前操作的企业id
+      // 当登陆作的企业id
       Long loginCompanyId = UserInfoThread.getCompanyId();
       if (!loginCompanyId.equals(companyId)) {
         throw new ValidateException("当前登录企业id和操作企业id不匹配");

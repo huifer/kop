@@ -5,21 +5,20 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.github.kop.rbac.module.entity.RbacPost;
 import com.github.kop.rbac.module.req.post.QueryPostReq;
-import com.github.kop.rbac.repo.DeptRepository;
 import com.github.kop.rbac.repo.PostRepository;
 import com.github.kop.rbac.repo.mapper.RbacPostMapper;
 import com.github.kop.rbac.utils.UserInfoThread;
-import java.util.List;
-import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 public class PostRepositoryImpl implements PostRepository {
 
-  @Autowired private RbacPostMapper postMapper;
-  @Autowired private DeptRepository deptRepository;
+  @Autowired
+  private RbacPostMapper postMapper;
 
   @Transactional(rollbackFor = {Exception.class})
   @Override
@@ -30,24 +29,22 @@ public class PostRepositoryImpl implements PostRepository {
   @Override
   public IPage<RbacPost> page(Long page, Long size, QueryPostReq req) {
 
-    List<Long> deptIds = deptRepository.findByName(req.getDeptName());
     QueryWrapper<RbacPost> queryWrapper = new QueryWrapper<>();
     queryWrapper
-        .lambda()
-        .eq(RbacPost::getCompanyId, UserInfoThread.getCompanyId())
-        .in(CollectionUtils.isNotEmpty(deptIds), RbacPost::getDeptId, deptIds);
+            .lambda()
+            .eq(RbacPost::getCompanyId, UserInfoThread.getCompanyId())
+            .eq(req.getDeptId() != null, RbacPost::getDeptId, req.getDeptId());
 
     return this.postMapper.selectPage(new Page<>(page, size), queryWrapper);
   }
 
   @Override
   public List<RbacPost> list(QueryPostReq req) {
-    List<Long> deptIds = deptRepository.findByName(req.getDeptName());
     QueryWrapper<RbacPost> queryWrapper = new QueryWrapper<>();
     queryWrapper
-        .lambda()
-        .eq(RbacPost::getCompanyId, UserInfoThread.getCompanyId())
-        .in(CollectionUtils.isNotEmpty(deptIds), RbacPost::getDeptId, deptIds);
+            .lambda()
+            .eq(RbacPost::getCompanyId, UserInfoThread.getCompanyId())
+            .eq(RbacPost::getDeptId, req.getDeptId());
     return postMapper.selectList(queryWrapper);
   }
 
