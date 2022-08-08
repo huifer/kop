@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @Api(value = "角色组接口")
 @RestController
-@RequestMapping("/roule_group")
+@RequestMapping("/role_group")
 public class RoleGroupController {
   @Autowired private RoleGroupService roleGroupService;
 
