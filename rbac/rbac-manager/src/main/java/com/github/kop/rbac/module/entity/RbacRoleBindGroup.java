@@ -62,7 +62,4 @@ public class RbacRoleBindGroup implements Serializable {
   @Version
   private Long version;
 
-  /** 企业id */
-  @TableField("company_id")
-  private Long companyId;
 }

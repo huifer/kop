@@ -4,9 +4,8 @@ import lombok.Data;
 
 @Data
 public class DynamicCommentReq {
-    private Long userId;
-    private String msg;
-    private Long dynamicId;
-    private Long pid;
-
+  private Long userId;
+  private String msg;
+  private Long dynamicId;
+  private Long pid;
 }

@@ -11,5 +11,4 @@ import org.apache.ibatis.annotations.Mapper;
  * @since 2022-08-03
  */
 @Mapper
-public interface CustomerUserMapper extends BaseMapper<CustomerUser> {
-}
+public interface CustomerUserMapper extends BaseMapper<CustomerUser> {}

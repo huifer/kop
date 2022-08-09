@@ -17,22 +17,25 @@ import com.github.kop.rbac.utils.CreateValidate;
 import com.github.kop.rbac.utils.JwtTokenUtil;
 import com.github.kop.rbac.utils.UpdateValidate;
 import com.github.kop.rbac.utils.UserInfoThread;
-
-import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.List;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
 
+import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class UserServiceImpl implements UserService {
   protected final UserCreateAndUpdateValidate userCreateAndUpdateValidate =
-      new UserCreateAndUpdateValidate();
-  @Autowired private UserRepository userRepository;
-  @Autowired private UserBindService userBindService;
-  @Autowired private CompanyService companyService;
+          new UserCreateAndUpdateValidate();
+  @Autowired
+  private UserRepository userRepository;
+  @Autowired
+  private UserBindService userBindService;
+  @Autowired
+  private CompanyService companyService;
 
   @Override
   public int create(CreateUserReq req) {
@@ -123,8 +126,10 @@ public class UserServiceImpl implements UserService {
 
   @Autowired
   private JwtTokenUtil jwtTokenUtil;
+
+
   @Override
-  public UserLoginRes login(String username, String password) {
+  public UserLoginRes login(String username, String password, Long companyId) {
     RbacUser user = this.userRepository.findByUsernameAndPassword(username, DigestUtils.md5DigestAsHex(password.getBytes(StandardCharsets.UTF_8)));
     if (user != null) {
       UserLoginRes userLoginRes = new UserLoginRes();
@@ -133,11 +138,19 @@ public class UserServiceImpl implements UserService {
       userLoginRes.setGrade(user.getGrade());
       userLoginRes.setCompanyId(user.getCompanyId());
 
+      userLoginRes.setToken(jwtTokenUtil.generateToken(user.getId()));
+      // 初始化用户关联信息
+      String bindDeptName = this.userBindService.getBindDeptName(user.getId(), companyId);
+      userLoginRes.setDeptName(bindDeptName);
+      String bindMainPostName = this.userBindService.getBindMainPostName(user.getId(), companyId);
+      userLoginRes.setMainPostName(bindMainPostName);
+      // 权限信息初始化
 
       return userLoginRes;
     }
     return null;
   }
+
 
   protected  class UserCreateAndUpdateValidate
       implements CreateValidate<CreateUserReq>, UpdateValidate<UpdateUserReq> {

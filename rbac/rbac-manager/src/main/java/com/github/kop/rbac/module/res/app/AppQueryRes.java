@@ -13,4 +13,5 @@ public class AppQueryRes {
     @ApiModelProperty(value = "应用编码")
     private String code;
 
+
 }

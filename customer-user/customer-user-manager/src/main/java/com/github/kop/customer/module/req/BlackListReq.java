@@ -4,6 +4,6 @@ import lombok.Data;
 
 @Data
 public class BlackListReq {
-    private Long userId;
-    private Long opUserId;
+  private Long userId;
+  private Long opUserId;
 }

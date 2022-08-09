@@ -66,7 +66,4 @@ public class RbacRoleBindView implements Serializable {
   @TableField("resource_id")
   private Long resourceId;
 
-  /** 企业id */
-  @TableField("company_id")
-  private Long companyId;
 }

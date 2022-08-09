@@ -17,24 +17,20 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/user")
 public class UserController {
 
-    @Autowired
-    private UserService userService;
+  @Autowired private UserService userService;
 
-    @PostMapping("/register")
-    public RespVO<Boolean> register(
-            @RequestBody RegisterUserReq userReq
-    ) {
-        boolean register = userService.register(userReq);
-        return RespVO.success(register);
-    }
+  @PostMapping("/register")
+  public RespVO<Boolean> register(@RequestBody RegisterUserReq userReq) {
+    boolean register = userService.register(userReq);
+    return RespVO.success(register);
+  }
 
-    @GetMapping("/page/{cur}/{size}/{cur_user_id}")
-    public RespVO<IPage<UserInfoRes>> page(
-            @PathVariable(value = "cur") long cur,
-            @PathVariable(value = "size") long size,
-            @PathVariable(value = "cur_user_id") long curUserId
+  @GetMapping("/page/{cur}/{size}/{cur_user_id}")
+  public RespVO<IPage<UserInfoRes>> page(
+      @PathVariable(value = "cur") long cur,
+      @PathVariable(value = "size") long size,
+      @PathVariable(value = "cur_user_id") long curUserId) {
 
-    ) {
-        return RespVO.success(this.userService.page(cur, size, curUserId));
-    }
+    return RespVO.success(this.userService.page(cur, size, curUserId));
+  }
 }

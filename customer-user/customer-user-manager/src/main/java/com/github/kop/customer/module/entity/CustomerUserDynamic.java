@@ -10,9 +10,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * <p>
  * 用户动态表
- * </p>
  *
  * @author root
  * @since 2022-08-03
@@ -22,37 +20,25 @@ import lombok.Setter;
 @TableName("customer_user_dynamic")
 public class CustomerUserDynamic implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 1L;
 
-    /**
-     * 主键
-     */
-    @TableId("id")
-    private Long id;
+  /** 主键 */
+  @TableId("id")
+  private Long id;
 
-    /**
-     * 创建时间
-     */
-    @TableField(value = "create_time", fill = FieldFill.INSERT)
-    private LocalDateTime createTime;
+  /** 创建时间 */
+  @TableField(value = "create_time", fill = FieldFill.INSERT)
+  private LocalDateTime createTime;
 
-    /**
-     * 逻辑删除标记位
-     */
-    @TableField("deleted")
-    private Integer deleted;
+  /** 逻辑删除标记位 */
+  @TableField("deleted")
+  private Integer deleted;
 
-    /**
-     * 用户id
-     */
-    @TableField("user_id")
-    private Long userId;
+  /** 用户id */
+  @TableField("user_id")
+  private Long userId;
 
-    /**
-     * 动态内容
-     */
-    @TableField("content")
-    private String content;
-
-
+  /** 动态内容 */
+  @TableField("content")
+  private String content;
 }

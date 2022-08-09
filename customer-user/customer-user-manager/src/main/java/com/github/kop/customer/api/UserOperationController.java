@@ -19,51 +19,38 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/user/operation")
 public class UserOperationController {
 
-    @Autowired
-    private UserBlackService userBlackService;
-    @Autowired
-    private UserWhiteService userWhiteService;
+  @Autowired private UserBlackService userBlackService;
+  @Autowired private UserWhiteService userWhiteService;
 
-    @PostMapping("/black")
-    public RespVO<Boolean> blackAdd(
-            @RequestBody BlackListReq blackListReq
-    ) {
-        boolean add = userBlackService.add(blackListReq.getUserId(), blackListReq.getOpUserId());
-        return RespVO.success(add);
-    }
+  @PostMapping("/black")
+  public RespVO<Boolean> blackAdd(@RequestBody BlackListReq blackListReq) {
+    boolean add = userBlackService.add(blackListReq.getUserId(), blackListReq.getOpUserId());
+    return RespVO.success(add);
+  }
 
-    @PostMapping("/black/remove")
-    public RespVO<Boolean> blackRemove(
-            @RequestBody BlackListReq blackListReq
-    ) {
-        boolean add = userBlackService.remove(blackListReq.getUserId(), blackListReq.getOpUserId());
-        return RespVO.success(add);
-    }
+  @PostMapping("/black/remove")
+  public RespVO<Boolean> blackRemove(@RequestBody BlackListReq blackListReq) {
+    boolean add = userBlackService.remove(blackListReq.getUserId(), blackListReq.getOpUserId());
+    return RespVO.success(add);
+  }
 
-    @GetMapping("/black/list/{cur}/{size}/{user_id}")
-    public RespVO<IPage<UserInfoRes>> blackList(
-            @PathVariable(value = "cur") long cur,
-            @PathVariable(value = "size") long size,
-            @PathVariable(value = "user_id") long userId
-    ){
-        return RespVO.success(this.userBlackService.blackList(userId,cur, size));
-    }
+  @GetMapping("/black/list/{cur}/{size}/{user_id}")
+  public RespVO<IPage<UserInfoRes>> blackList(
+      @PathVariable(value = "cur") long cur,
+      @PathVariable(value = "size") long size,
+      @PathVariable(value = "user_id") long userId) {
+    return RespVO.success(this.userBlackService.blackList(userId, cur, size));
+  }
 
+  @PostMapping("/white")
+  public RespVO<Boolean> whiteAdd(@RequestBody WhiteListReq whiteListReq) {
+    boolean add = userWhiteService.add(whiteListReq.getUserId(), whiteListReq.getOpUserId());
+    return RespVO.success(add);
+  }
 
-    @PostMapping("/white")
-    public RespVO<Boolean> whiteAdd(
-            @RequestBody WhiteListReq whiteListReq
-    ) {
-        boolean add = userWhiteService.add(whiteListReq.getUserId(), whiteListReq.getOpUserId());
-        return RespVO.success(add);
-    }
-
-    @PostMapping("/white/remove")
-    public RespVO<Boolean> whiteRemove(
-            @RequestBody WhiteListReq whiteListReq
-    ) {
-        boolean add = userWhiteService.remove(whiteListReq.getUserId(), whiteListReq.getOpUserId());
-        return RespVO.success(add);
-    }
-
+  @PostMapping("/white/remove")
+  public RespVO<Boolean> whiteRemove(@RequestBody WhiteListReq whiteListReq) {
+    boolean add = userWhiteService.remove(whiteListReq.getUserId(), whiteListReq.getOpUserId());
+    return RespVO.success(add);
+  }
 }

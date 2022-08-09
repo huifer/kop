@@ -17,4 +17,8 @@ public class ResourceQueryRes {
 
   @ApiModelProperty(value = "资源类型")
   private String type;
+
+  @ApiModelProperty(value = "应用id")
+  private Long appId;
+
 }

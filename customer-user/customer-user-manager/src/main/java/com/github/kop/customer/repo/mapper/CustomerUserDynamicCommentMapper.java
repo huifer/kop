@@ -4,13 +4,9 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.github.kop.customer.module.entity.CustomerUserDynamicComment;
 
 /**
- * <p>
- *  Mapper 接口
- * </p>
+ * Mapper 接口
  *
  * @author root
  * @since 2022-08-04
  */
-public interface CustomerUserDynamicCommentMapper extends BaseMapper<CustomerUserDynamicComment> {
-
-}
+public interface CustomerUserDynamicCommentMapper extends BaseMapper<CustomerUserDynamicComment> {}

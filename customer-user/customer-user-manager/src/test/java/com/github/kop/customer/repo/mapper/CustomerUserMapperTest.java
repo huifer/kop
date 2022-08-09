@@ -4,20 +4,16 @@ import com.github.kop.customer.UserApp;
 import com.github.kop.customer.module.entity.CustomerUser;
 import com.github.kop.customer.module.entity.CustomerUserBlack;
 import com.github.kop.customer.module.entity.CustomerUserDynamic;
+import java.time.LocalDateTime;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.time.LocalDateTime;
-
 @SpringBootTest(classes = {UserApp.class})
 class CustomerUserMapperTest {
-  @Autowired
-  private CustomerUserMapper userMapper;
-  @Autowired
-  private CustomerUserDynamicMapper customerUserDynamicMapper;
-  @Autowired
-  private CustomerUserBlackMapper userBlackMapper;
+  @Autowired private CustomerUserMapper userMapper;
+  @Autowired private CustomerUserDynamicMapper customerUserDynamicMapper;
+  @Autowired private CustomerUserBlackMapper userBlackMapper;
 
   @Test
   void d() {
@@ -29,7 +25,6 @@ class CustomerUserMapperTest {
 
       userBlackMapper.insert(entity);
     }
-
   }
 
   @Test

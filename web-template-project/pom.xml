@@ -134,6 +134,38 @@
             </configuration>
         </plugin>
 
+        <plugin>
+            <artifactId>maven-surefire-plugin</artifactId>
+            <groupId>org.apache.maven.plugins</groupId>
+            <version>2.22.2</version>
+        </plugin>
+        <plugin>
+            <groupId>org.jacoco</groupId>
+            <artifactId>jacoco-maven-plugin</artifactId>
+            <version>0.8.6</version>
+            <configuration>
+            </configuration>
+            <executions>
+                <execution>
+                    <id>prepare-agent</id>
+                    <goals>
+                        <goal>prepare-agent</goal>
+                    </goals>
+                </execution>
+                <execution>
+                    <id>report</id>
+                    <phase>test</phase>
+                    <goals>
+                        <goal>report</goal>
+                    </goals>
+                    <configuration>
+                        <dataFile>target/jacoco.exec</dataFile>
+                        <outputDirectory>target/jacoco-ut</outputDirectory>
+                    </configuration>
+                </execution>
+            </executions>
+        </plugin>
+
 
     </plugins>
     <finalName>${artifactId}</finalName>

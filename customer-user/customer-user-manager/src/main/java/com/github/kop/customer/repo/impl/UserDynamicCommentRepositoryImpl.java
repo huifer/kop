@@ -8,11 +8,10 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class UserDynamicCommentRepositoryImpl implements UserDynamicCommentRepository {
-    @Autowired
-    private CustomerUserDynamicCommentMapper dynamicCommentMapper;
+  @Autowired private CustomerUserDynamicCommentMapper dynamicCommentMapper;
 
-    @Override
-    public int create(CustomerUserDynamicComment customerUserDynamicComment) {
-        return dynamicCommentMapper.insert(customerUserDynamicComment);
-    }
+  @Override
+  public int create(CustomerUserDynamicComment customerUserDynamicComment) {
+    return dynamicCommentMapper.insert(customerUserDynamicComment);
+  }
 }

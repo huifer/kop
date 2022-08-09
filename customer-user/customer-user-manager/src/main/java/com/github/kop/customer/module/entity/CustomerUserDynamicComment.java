@@ -10,10 +10,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * <p>
- * 
- * </p>
- *
  * @author root
  * @since 2022-08-04
  */
@@ -22,49 +18,33 @@ import lombok.Setter;
 @TableName("customer_user_dynamic_comment")
 public class CustomerUserDynamicComment implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 1L;
 
-    /**
-     * 主键
-     */
-    @TableId("id")
-    private Long id;
+  /** 主键 */
+  @TableId("id")
+  private Long id;
 
-    /**
-     * 创建时间
-     */
-    @TableField(value = "create_time", fill = FieldFill.INSERT)
-    private LocalDateTime createTime;
+  /** 创建时间 */
+  @TableField(value = "create_time", fill = FieldFill.INSERT)
+  private LocalDateTime createTime;
 
-    /**
-     * 逻辑删除标记位
-     */
-    @TableField("deleted")
-    private Integer deleted;
+  /** 逻辑删除标记位 */
+  @TableField("deleted")
+  private Integer deleted;
 
-    /**
-     * 动态id
-     */
-    @TableField("dynamic_id")
-    private Long dynamicId;
+  /** 动态id */
+  @TableField("dynamic_id")
+  private Long dynamicId;
 
-    /**
-     * 评论人id
-     */
-    @TableField("user_id")
-    private Long userId;
+  /** 评论人id */
+  @TableField("user_id")
+  private Long userId;
 
-    /**
-     * 上级id
-     */
-    @TableField("pid")
-    private Long pid;
+  /** 上级id */
+  @TableField("pid")
+  private Long pid;
 
-    /**
-     * 评论内容
-     */
-    @TableField("content")
-    private String content;
-
-
+  /** 评论内容 */
+  @TableField("content")
+  private String content;
 }

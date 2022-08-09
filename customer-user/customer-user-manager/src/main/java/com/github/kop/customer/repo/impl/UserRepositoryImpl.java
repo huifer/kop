@@ -12,23 +12,22 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class UserRepositoryImpl implements UserRepository {
-    @Autowired
-    private CustomerUserMapper userMapper;
+  @Autowired private CustomerUserMapper userMapper;
 
-    @Transactional(rollbackFor = {Exception.class})
-    @Override
-    public int create(CustomerUser customerUser) {
-        return userMapper.insert(customerUser);
-    }
+  @Transactional(rollbackFor = {Exception.class})
+  @Override
+  public int create(CustomerUser customerUser) {
+    return userMapper.insert(customerUser);
+  }
 
-    @Override
-    public CustomerUser byId(long userId) {
-        return this.userMapper.selectById(userId);
-    }
+  @Override
+  public CustomerUser byId(long userId) {
+    return this.userMapper.selectById(userId);
+  }
 
-    @Override
-    public IPage<CustomerUser> page(long cur, long size) {
-        QueryWrapper<CustomerUser> queryWrapper = new QueryWrapper<>();
-        return userMapper.selectPage(new Page<>(cur, size), queryWrapper);
-    }
+  @Override
+  public IPage<CustomerUser> page(long cur, long size) {
+    QueryWrapper<CustomerUser> queryWrapper = new QueryWrapper<>();
+    return userMapper.selectPage(new Page<>(cur, size), queryWrapper);
+  }
 }

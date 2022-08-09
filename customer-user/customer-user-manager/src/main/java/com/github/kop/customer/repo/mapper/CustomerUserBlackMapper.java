@@ -2,10 +2,9 @@ package com.github.kop.customer.repo.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.github.kop.customer.module.entity.CustomerUserBlack;
+import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
-
-import java.util.List;
 
 /**
  * 用户拉黑表 Mapper 接口
@@ -15,6 +14,6 @@ import java.util.List;
  */
 @Mapper
 public interface CustomerUserBlackMapper extends BaseMapper<CustomerUserBlack> {
-    @Select("select black_user_id from customer_user_black where user_id = #{userId}")
-    List<Long> blackIds(long userId);
+  @Select("select black_user_id from customer_user_black where user_id = #{userId}")
+  List<Long> blackIds(long userId);
 }

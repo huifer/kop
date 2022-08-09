@@ -18,30 +18,30 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/user/dynamic")
 public class UserDynamicController {
-    @Autowired
-    private UserDynamicService userDynamicService;
-    @Autowired
-    private UserDynamicCommentService userDynamicCommentService;
+  @Autowired private UserDynamicService userDynamicService;
+  @Autowired private UserDynamicCommentService userDynamicCommentService;
 
-    @PostMapping("/push")
-    public RespVO<Boolean> push(@RequestBody DynamicAddReq req) {
-        return RespVO.success(userDynamicService.create(req.getUserId(), req.getMsg()));
-    }
+  @PostMapping("/push")
+  public RespVO<Boolean> push(@RequestBody DynamicAddReq req) {
+    return RespVO.success(userDynamicService.create(req.getUserId(), req.getMsg()));
+  }
 
-    @GetMapping("/page/{cur}/{size}/{user_id}")
-    public RespVO<IPage<DynamicListRes>> page(
-            @PathVariable(value = "cur") long cur,
-            @PathVariable(value = "size") long size,
-            @PathVariable(value = "user_id") long userId
-    ) {
-        return RespVO.success(userDynamicService.page(cur, size, userId));
-    }
+  @GetMapping("/page/{cur}/{size}/{user_id}")
+  public RespVO<IPage<DynamicListRes>> page(
+      @PathVariable(value = "cur") long cur,
+      @PathVariable(value = "size") long size,
+      @PathVariable(value = "user_id") long userId) {
+    return RespVO.success(userDynamicService.page(cur, size, userId));
+  }
 
-    @PostMapping("/comment")
-    public RespVO<Boolean> comment(
-            @RequestBody DynamicCommentReq dynamicCommentReq
-    ) {
-        boolean b = userDynamicCommentService.create(dynamicCommentReq.getUserId(), dynamicCommentReq.getMsg(), dynamicCommentReq.getDynamicId(), dynamicCommentReq.getPid());
-        return RespVO.success(b);
-    }
+  @PostMapping("/comment")
+  public RespVO<Boolean> comment(@RequestBody DynamicCommentReq dynamicCommentReq) {
+    boolean b =
+        userDynamicCommentService.create(
+            dynamicCommentReq.getUserId(),
+            dynamicCommentReq.getMsg(),
+            dynamicCommentReq.getDynamicId(),
+            dynamicCommentReq.getPid());
+    return RespVO.success(b);
+  }
 }

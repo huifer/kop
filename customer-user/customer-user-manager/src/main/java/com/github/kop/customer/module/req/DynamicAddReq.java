@@ -4,6 +4,6 @@ import lombok.Data;
 
 @Data
 public class DynamicAddReq {
-    private Long userId;
-    private String msg;
+  private Long userId;
+  private String msg;
 }

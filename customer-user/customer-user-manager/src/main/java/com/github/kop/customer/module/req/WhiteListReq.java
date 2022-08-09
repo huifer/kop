@@ -4,7 +4,6 @@ import lombok.Data;
 
 @Data
 public class WhiteListReq {
-    private Long userId;
-    private Long opUserId;
+  private Long userId;
+  private Long opUserId;
 }
-

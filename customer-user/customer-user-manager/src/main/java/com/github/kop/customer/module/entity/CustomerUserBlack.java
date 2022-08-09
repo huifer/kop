@@ -8,9 +8,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * <p>
  * 用户拉黑表
- * </p>
  *
  * @author root
  * @since 2022-08-03
@@ -20,25 +18,17 @@ import lombok.Setter;
 @TableName("customer_user_black")
 public class CustomerUserBlack implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 1L;
 
-    /**
-     * 主键
-     */
-    @TableId("id")
-    private Long id;
+  /** 主键 */
+  @TableId("id")
+  private Long id;
 
-    /**
-     * 用户id
-     */
-    @TableField("user_id")
-    private Long userId;
+  /** 用户id */
+  @TableField("user_id")
+  private Long userId;
 
-    /**
-     * 被拉黑的用户id
-     */
-    @TableField("black_user_id")
-    private Long blackUserId;
-
-
+  /** 被拉黑的用户id */
+  @TableField("black_user_id")
+  private Long blackUserId;
 }

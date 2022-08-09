@@ -13,4 +13,7 @@ public class UserLoginRes {
     private Long companyId;
 
     private String token;
+
+    private String deptName;
+    private String mainPostName;
 }

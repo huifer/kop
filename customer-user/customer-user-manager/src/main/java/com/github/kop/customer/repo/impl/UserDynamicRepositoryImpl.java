@@ -13,27 +13,24 @@ import org.springframework.transaction.annotation.Transactional;
 @Repository
 @Transactional(rollbackFor = {Exception.class})
 public class UserDynamicRepositoryImpl implements UserDynamicRepository {
-    @Autowired
-    private CustomerUserDynamicMapper userDynamicMapper;
+  @Autowired private CustomerUserDynamicMapper userDynamicMapper;
 
-    @Transactional(rollbackFor = {Exception.class})
-    @Override
-    public int create(CustomerUserDynamic customerUserDynamic) {
-        return userDynamicMapper.insert(customerUserDynamic);
-    }
+  @Transactional(rollbackFor = {Exception.class})
+  @Override
+  public int create(CustomerUserDynamic customerUserDynamic) {
+    return userDynamicMapper.insert(customerUserDynamic);
+  }
 
-    @Transactional(rollbackFor = {Exception.class})
-    @Override
-    public int delete(long id) {
-        return userDynamicMapper.deleteById(id);
-    }
+  @Transactional(rollbackFor = {Exception.class})
+  @Override
+  public int delete(long id) {
+    return userDynamicMapper.deleteById(id);
+  }
 
-    @Override
-    public IPage<CustomerUserDynamic> page(long cur, long size, long userId) {
-        QueryWrapper<CustomerUserDynamic> queryWrapper = new QueryWrapper<>();
-        queryWrapper.lambda()
-                .eq(CustomerUserDynamic::getUserId, userId);
-        return this.userDynamicMapper.selectPage(new Page<>(cur, size), queryWrapper);
-    }
+  @Override
+  public IPage<CustomerUserDynamic> page(long cur, long size, long userId) {
+    QueryWrapper<CustomerUserDynamic> queryWrapper = new QueryWrapper<>();
+    queryWrapper.lambda().eq(CustomerUserDynamic::getUserId, userId);
+    return this.userDynamicMapper.selectPage(new Page<>(cur, size), queryWrapper);
+  }
 }
-

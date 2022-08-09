@@ -8,9 +8,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * <p>
  * 用户关注表
- * </p>
  *
  * @author root
  * @since 2022-08-03
@@ -20,25 +18,17 @@ import lombok.Setter;
 @TableName("customer_user_white")
 public class CustomerUserWhite implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 1L;
 
-    /**
-     * 主键
-     */
-    @TableId("id")
-    private Long id;
+  /** 主键 */
+  @TableId("id")
+  private Long id;
 
-    /**
-     * 用户id
-     */
-    @TableField("user_id")
-    private Long userId;
+  /** 用户id */
+  @TableField("user_id")
+  private Long userId;
 
-    /**
-     * 关注的用户id
-     */
-    @TableField("white_user_id")
-    private Long whiteUserId;
-
-
+  /** 关注的用户id */
+  @TableField("white_user_id")
+  private Long whiteUserId;
 }

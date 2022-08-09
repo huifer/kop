@@ -1,13 +1,12 @@
 package com.github.kop.customer.module.res;
 
-import lombok.Data;
-
 import java.time.LocalDateTime;
+import lombok.Data;
 
 @Data
 public class DynamicListRes {
-    private Long userId;
-    private String  userName;
-    private String msg;
-    private LocalDateTime pushTime;
+  private Long userId;
+  private String userName;
+  private String msg;
+  private LocalDateTime pushTime;
 }

@@ -2,6 +2,7 @@ package com.github.kop.rbac.service.impl;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.github.kop.rbac.module.entity.RbacPost;
+import com.github.kop.rbac.module.entity.RbacPostBindRoleGroup;
 import com.github.kop.rbac.module.ex.ValidateException;
 import com.github.kop.rbac.module.req.post.CreatePostReq;
 import com.github.kop.rbac.module.req.post.QueryPostReq;
@@ -9,6 +10,7 @@ import com.github.kop.rbac.module.req.post.UpdatePostReq;
 import com.github.kop.rbac.module.res.company.CompanyQueryRes;
 import com.github.kop.rbac.module.res.dept.DeptQueryRes;
 import com.github.kop.rbac.module.res.post.PostQueryRes;
+import com.github.kop.rbac.repo.PostBindRoleGroupRepository;
 import com.github.kop.rbac.repo.PostRepository;
 import com.github.kop.rbac.service.CompanyService;
 import com.github.kop.rbac.service.DeptService;
@@ -16,12 +18,13 @@ import com.github.kop.rbac.service.PostService;
 import com.github.kop.rbac.utils.CreateValidate;
 import com.github.kop.rbac.utils.UpdateValidate;
 import com.github.kop.rbac.utils.UserInfoThread;
-import java.util.ArrayList;
-import java.util.List;
 import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class PostServiceImpl implements PostService {
@@ -114,8 +117,45 @@ public class PostServiceImpl implements PostService {
     return res;
   }
 
+  @Autowired
+  private PostBindRoleGroupRepository postBindRoleGroupRepository;
+
+  @Override
+  public boolean bindRoleGroup(Long postId, Long roleGroupId) {
+    RbacPostBindRoleGroup rbacPostBindRoleGroup = new RbacPostBindRoleGroup();
+    rbacPostBindRoleGroup.setPostId(postId);
+    rbacPostBindRoleGroup.setRoleGroupId(roleGroupId);
+
+    return postBindRoleGroupRepository.create(rbacPostBindRoleGroup) > 0;
+  }
+
+  @Override
+  public boolean bindRoleGroups(Long postId, List<Long> roleGroupIds) {
+    List<RbacPostBindRoleGroup> ins = new ArrayList<>(roleGroupIds.size());
+    for (Long aLong : roleGroupIds) {
+      RbacPostBindRoleGroup rbacPostBindRoleGroup = new RbacPostBindRoleGroup();
+      rbacPostBindRoleGroup.setPostId(postId);
+      rbacPostBindRoleGroup.setRoleGroupId(aLong);
+      ins.add(rbacPostBindRoleGroup);
+    }
+    return postBindRoleGroupRepository.create(ins);
+  }
+
+  @Override
+  public boolean unBindRoleGroup(Long postId, Long roleGroupId) {
+    RbacPostBindRoleGroup rbacPostBindRoleGroup = new RbacPostBindRoleGroup();
+    rbacPostBindRoleGroup.setPostId(postId);
+    rbacPostBindRoleGroup.setRoleGroupId(roleGroupId);
+    return postBindRoleGroupRepository.delete(rbacPostBindRoleGroup) > 0;
+  }
+
+  @Override
+  public List<Long> findRoleGroupIds(Long postId) {
+    return this.postBindRoleGroupRepository.findRoleGroupIds(postId);
+  }
+
   protected static final class PostCreateAndUpdateValidate
-      implements CreateValidate<CreatePostReq>, UpdateValidate<UpdatePostReq> {
+          implements CreateValidate<CreatePostReq>, UpdateValidate<UpdatePostReq> {
 
     private static void commonValidate(String name, Long companyId, Long deptId) {
       if (StringUtils.isEmpty(name)) {

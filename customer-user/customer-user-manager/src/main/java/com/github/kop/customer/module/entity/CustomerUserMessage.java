@@ -8,9 +8,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * <p>
  * 用户私信表
- * </p>
  *
  * @author root
  * @since 2022-08-03
@@ -20,31 +18,21 @@ import lombok.Setter;
 @TableName("customer_user_message")
 public class CustomerUserMessage implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 1L;
 
-    /**
-     * 主键
-     */
-    @TableId("id")
-    private Long id;
+  /** 主键 */
+  @TableId("id")
+  private Long id;
 
-    /**
-     * 发送人id
-     */
-    @TableField("from_user_id")
-    private Long fromUserId;
+  /** 发送人id */
+  @TableField("from_user_id")
+  private Long fromUserId;
 
-    /**
-     * 动态内容
-     */
-    @TableField("content")
-    private String content;
+  /** 动态内容 */
+  @TableField("content")
+  private String content;
 
-    /**
-     * 接收人id
-     */
-    @TableField("to_user_id")
-    private Long toUserId;
-
-
+  /** 接收人id */
+  @TableField("to_user_id")
+  private Long toUserId;
 }
