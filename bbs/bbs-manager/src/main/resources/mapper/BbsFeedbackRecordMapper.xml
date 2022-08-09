@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.github.kop.bbs.repo.mapper.BbsFeedbackRecordMapper">
+  <resultMap id="BaseResultMap" type="com.github.kop.bbs.module.entity.BbsFeedbackRecord">
+    <!--@mbg.generated-->
+    <!--@Table bbs_feedback_record-->
+    <id column="feedback_record_id" jdbcType="BIGINT" property="feedbackRecordId" />
+    <result column="feedback_text" jdbcType="LONGVARCHAR" property="feedbackText" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="create_user_id" jdbcType="BIGINT" property="createUserId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    feedback_record_id, feedback_text, create_time, create_user_id
+  </sql>
+  <update id="updateBatchSelective" parameterType="java.util.List">
+    <!--@mbg.generated-->
+    update bbs_feedback_record
+    <trim prefix="set" suffixOverrides=",">
+      <trim prefix="feedback_text = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.feedbackText != null">
+            when feedback_record_id = #{item.feedbackRecordId,jdbcType=BIGINT} then #{item.feedbackText,jdbcType=LONGVARCHAR}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="create_time = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.createTime != null">
+            when feedback_record_id = #{item.feedbackRecordId,jdbcType=BIGINT} then #{item.createTime,jdbcType=TIMESTAMP}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="create_user_id = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.createUserId != null">
+            when feedback_record_id = #{item.feedbackRecordId,jdbcType=BIGINT} then #{item.createUserId,jdbcType=BIGINT}
+          </if>
+        </foreach>
+      </trim>
+    </trim>
+    where feedback_record_id in
+    <foreach close=")" collection="list" item="item" open="(" separator=", ">
+      #{item.feedbackRecordId,jdbcType=BIGINT}
+    </foreach>
+  </update>
+  <insert id="batchInsert" keyColumn="feedback_record_id" keyProperty="feedbackRecordId" parameterType="map" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into bbs_feedback_record
+    (feedback_text, create_time, create_user_id)
+    values
+    <foreach collection="list" item="item" separator=",">
+      (#{item.feedbackText,jdbcType=LONGVARCHAR}, #{item.createTime,jdbcType=TIMESTAMP}, 
+        #{item.createUserId,jdbcType=BIGINT})
+    </foreach>
+  </insert>
+</mapper>

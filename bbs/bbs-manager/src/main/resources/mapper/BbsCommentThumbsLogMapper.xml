@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.github.kop.bbs.repo.mapper.BbsCommentThumbsLogMapper">
+  <resultMap id="BaseResultMap" type="com.github.kop.bbs.module.entity.BbsCommentThumbsLog">
+    <!--@mbg.generated-->
+    <!--@Table bbs_comment_thumbs_log-->
+    <id column="thumbs_log_id" jdbcType="BIGINT" property="thumbsLogId" />
+    <result column="comment_id" jdbcType="BIGINT" property="commentId" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="create_user_id" jdbcType="BIGINT" property="createUserId" />
+    <result column="deleted" jdbcType="TINYINT" property="deleted" />
+    <result column="version" jdbcType="BIGINT" property="version" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    thumbs_log_id, comment_id, create_time, create_user_id, deleted, version
+  </sql>
+  <update id="updateBatchSelective" parameterType="java.util.List">
+    <!--@mbg.generated-->
+    update bbs_comment_thumbs_log
+    <trim prefix="set" suffixOverrides=",">
+      <trim prefix="comment_id = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.commentId != null">
+            when thumbs_log_id = #{item.thumbsLogId,jdbcType=BIGINT} then #{item.commentId,jdbcType=BIGINT}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="create_time = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.createTime != null">
+            when thumbs_log_id = #{item.thumbsLogId,jdbcType=BIGINT} then #{item.createTime,jdbcType=TIMESTAMP}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="create_user_id = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.createUserId != null">
+            when thumbs_log_id = #{item.thumbsLogId,jdbcType=BIGINT} then #{item.createUserId,jdbcType=BIGINT}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="deleted = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.deleted != null">
+            when thumbs_log_id = #{item.thumbsLogId,jdbcType=BIGINT} then #{item.deleted,jdbcType=TINYINT}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="version = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.version != null">
+            when thumbs_log_id = #{item.thumbsLogId,jdbcType=BIGINT} then #{item.version,jdbcType=BIGINT}
+          </if>
+        </foreach>
+      </trim>
+    </trim>
+    where thumbs_log_id in
+    <foreach close=")" collection="list" item="item" open="(" separator=", ">
+      #{item.thumbsLogId,jdbcType=BIGINT}
+    </foreach>
+  </update>
+  <insert id="batchInsert" keyColumn="thumbs_log_id" keyProperty="thumbsLogId" parameterType="map" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into bbs_comment_thumbs_log
+    (comment_id, create_time, create_user_id, deleted, version)
+    values
+    <foreach collection="list" item="item" separator=",">
+      (#{item.commentId,jdbcType=BIGINT}, #{item.createTime,jdbcType=TIMESTAMP}, #{item.createUserId,jdbcType=BIGINT}, 
+        #{item.deleted,jdbcType=TINYINT}, #{item.version,jdbcType=BIGINT})
+    </foreach>
+  </insert>
+</mapper>
