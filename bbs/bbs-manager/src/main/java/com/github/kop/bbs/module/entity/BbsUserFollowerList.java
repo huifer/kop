@@ -14,28 +14,28 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * 用户反馈
+ * 用户关注名单
  */
-@ApiModel(value = "用户反馈")
+@ApiModel(value = "用户关注名单")
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@TableName(value = "bbs_feedback_record")
-public class BbsFeedbackRecord implements Serializable {
+@TableName(value = "bbs_user_follower_list")
+public class BbsUserFollowerList implements Serializable {
     /**
-     * 用户反馈主键
+     * 关注主键
      */
-    @TableId(value = "feedback_record_id", type = IdType.AUTO)
-    @ApiModelProperty(value = "用户反馈主键")
-    private Long feedbackRecordId;
+    @TableId(value = "follower_list_id", type = IdType.AUTO)
+    @ApiModelProperty(value = "关注主键")
+    private Long followerListId;
 
     /**
-     * 反馈内容
+     * 拉黑的人
      */
-    @TableField(value = "feedback_text")
-    @ApiModelProperty(value = "反馈内容")
-    private String feedbackText;
+    @TableField(value = "follower_user_id")
+    @ApiModelProperty(value = "拉黑的人")
+    private Long followerUserId;
 
     /**
      * 创建时间

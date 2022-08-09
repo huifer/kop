@@ -14,28 +14,42 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * 论坛的点赞日志
+ * 用户积分
  */
-@ApiModel(value = "论坛的点赞日志")
+@ApiModel(value = "用户积分")
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@TableName(value = "bbs_thumbs_log")
-public class BbsThumbsLog implements Serializable {
+@TableName(value = "bbs_user_score")
+public class BbsUserScore implements Serializable {
     /**
-     * 点赞日志主键
+     * 用户总分主键
      */
-    @TableId(value = "thumbs_log_id", type = IdType.AUTO)
-    @ApiModelProperty(value = "点赞日志主键")
-    private Long thumbsLogId;
+    @TableId(value = "score_id", type = IdType.AUTO)
+    @ApiModelProperty(value = "用户总分主键")
+    private Long scoreId;
 
     /**
-     * 帖子主键
+     * 总分
      */
-    @TableField(value = "invitation_id")
-    @ApiModelProperty(value = "帖子主键")
-    private Long invitationId;
+    @TableField(value = "sum_score")
+    @ApiModelProperty(value = "总分")
+    private Long sumScore;
+
+    /**
+     * 当前的分数
+     */
+    @TableField(value = "current_score")
+    @ApiModelProperty(value = "当前的分数")
+    private Long currentScore;
+
+    /**
+     * 用户id
+     */
+    @TableField(value = "user_id")
+    @ApiModelProperty(value = "用户id")
+    private Long userId;
 
     /**
      * 创建时间
@@ -52,18 +66,18 @@ public class BbsThumbsLog implements Serializable {
     private Long createUserId;
 
     /**
-     * 逻辑删除标记位
+     * 更新时间
      */
-    @TableField(value = "deleted")
-    @ApiModelProperty(value = "逻辑删除标记位")
-    private Integer deleted;
+    @TableField(value = "update_time")
+    @ApiModelProperty(value = "更新时间")
+    private Date updateTime;
 
     /**
-     * 乐观锁
+     * 更新用户
      */
-    @TableField(value = "version")
-    @ApiModelProperty(value = "乐观锁")
-    private Long version;
+    @TableField(value = "update_user_id")
+    @ApiModelProperty(value = "更新用户")
+    private Long updateUserId;
 
     private static final long serialVersionUID = 1L;
 }

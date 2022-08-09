@@ -311,11 +311,29 @@ CREATE TABLE `bbs_user_black_list`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `bbs_user_follower_list`;
 CREATE TABLE `bbs_user_follower_list`  (
-                                           `follower_list_id` bigint NOT NULL AUTO_INCREMENT COMMENT '黑名单主键',
+                                           `follower_list_id` bigint NOT NULL AUTO_INCREMENT COMMENT '关注主键',
                                            `follower_user_id` bigint NOT NULL COMMENT '拉黑的人',
                                            `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
                                            `create_user_id` bigint NULL DEFAULT NULL COMMENT '创建用户',
                                            PRIMARY KEY (`follower_list_id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4  COMMENT = '用户关注名单' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for bbs_user_score
+-- ----------------------------
+DROP TABLE IF EXISTS `bbs_user_score`;
+CREATE TABLE `bbs_user_score`  (
+                                           `score_id` bigint NOT NULL AUTO_INCREMENT COMMENT '用户总分主键',
+                                           `sum_score` bigint unsigned NOT NULL COMMENT '总分',
+                                           `current_score` bigint unsigned NOT NULL COMMENT '当前的分数',
+                                           `user_id` bigint  NOT NULL COMMENT '用户id',
+                                           `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
+                                           `create_user_id` bigint NULL DEFAULT NULL COMMENT '创建用户',
+                                           `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
+                                           `update_user_id` bigint NULL DEFAULT NULL COMMENT '更新用户',
+                                           PRIMARY KEY (`score_id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4  COMMENT = '用户积分' ROW_FORMAT = Dynamic;
+
+
 
 SET FOREIGN_KEY_CHECKS = 1;
