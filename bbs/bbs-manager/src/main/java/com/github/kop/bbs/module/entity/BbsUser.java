@@ -14,9 +14,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
-    * 用户表
-    */
-@ApiModel(value="用户表")
+ * 用户表
+ */
+@ApiModel(value = "用户表")
 @Data
 @Builder
 @AllArgsConstructor
@@ -24,49 +24,49 @@ import lombok.NoArgsConstructor;
 @TableName(value = "bbs_user")
 public class BbsUser implements Serializable {
     @TableId(value = "id", type = IdType.AUTO)
-    @ApiModelProperty(value="")
+    @ApiModelProperty(value = "")
     private Long id;
 
     /**
      * 用户名
      */
     @TableField(value = "username")
-    @ApiModelProperty(value="用户名")
+    @ApiModelProperty(value = "用户名")
     private String username;
 
     /**
      * 密码
      */
     @TableField(value = "`password`")
-    @ApiModelProperty(value="密码")
+    @ApiModelProperty(value = "密码")
     private String password;
 
     /**
      * salt
      */
     @TableField(value = "salt")
-    @ApiModelProperty(value="salt")
+    @ApiModelProperty(value = "salt")
     private String salt;
 
     /**
      * 用户头像
      */
     @TableField(value = "avatar")
-    @ApiModelProperty(value="用户头像")
+    @ApiModelProperty(value = "用户头像")
     private String avatar;
 
     /**
      * 昵称
      */
     @TableField(value = "nickname")
-    @ApiModelProperty(value="昵称")
+    @ApiModelProperty(value = "昵称")
     private String nickname;
 
     /**
      * 注册时间
      */
     @TableField(value = "register_time")
-    @ApiModelProperty(value="注册时间")
+    @ApiModelProperty(value = "注册时间")
     private Date registerTime;
 
     private static final long serialVersionUID = 1L;

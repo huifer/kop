@@ -3,7 +3,8 @@ package com.github.kop.bbs.service;
 import java.util.List;
 import com.github.kop.bbs.module.entity.BbsInvitationThumbsLog;
 import com.baomidou.mybatisplus.extension.service.IService;
-public interface BbsInvitationThumbsLogService extends IService<BbsInvitationThumbsLog>{
+
+public interface BbsInvitationThumbsLogService extends IService<BbsInvitationThumbsLog> {
 
 
     int updateBatchSelective(List<BbsInvitationThumbsLog> list);
@@ -11,3 +12,5 @@ public interface BbsInvitationThumbsLogService extends IService<BbsInvitationThu
     int batchInsert(List<BbsInvitationThumbsLog> list);
 
 }
+
+
