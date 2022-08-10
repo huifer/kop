@@ -3,8 +3,7 @@ package com.github.kop.bbs.utils;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
+import io.jsonwebtoken.security.Keys;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -51,14 +50,15 @@ public class JwtTokenUtil {
   }
 
   private String doGenerateToken(Map<String, Object> claims, String subject) {
-
     return Jwts.builder()
-        .setClaims(claims)
-        .setSubject(subject)
-        .setIssuedAt(new Date(System.currentTimeMillis()))
-        .setExpiration(new Date(System.currentTimeMillis() + jwtTokenValidity * 1000))
-        .signWith(SignatureAlgorithm.HS512, secret)
-        .compact();
+            .setClaims(claims)
+            .setSubject(subject)
+            .setIssuedAt(new Date(System.currentTimeMillis()))
+            .setExpiration(new Date(System.currentTimeMillis() + jwtTokenValidity * 1000))
+// 自定义的secret长度不够,暂时注释
+            .signWith(Keys.hmacShaKeyFor(secret.getBytes()), SignatureAlgorithm.HS512)
+//            .signWith(Keys.secretKeyFor(SignatureAlgorithm.HS512))
+            .compact();
   }
 
   public Boolean validateToken(String token) {

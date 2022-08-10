@@ -2,8 +2,10 @@ package com.github.kop.bbs.api;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.github.kop.bbs.module.req.user.CreateUserReq;
+import com.github.kop.bbs.module.req.user.LoginUserReq;
 import com.github.kop.bbs.module.req.user.UpdateUserReq;
 import com.github.kop.bbs.module.res.RespVO;
+import com.github.kop.bbs.module.res.user.UserLoginRes;
 import com.github.kop.bbs.service.BbsUserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -27,7 +29,7 @@ public class UserController {
     private BbsUserService bbsUserService;
 
     @ApiOperation(value = "添加用户")
-    @PostMapping("/create")
+    @PostMapping("/open/create")
     public RespVO<Boolean> create(@RequestBody CreateUserReq req) {
         return RespVO.success(bbsUserService.create(req));
     }
@@ -41,10 +43,9 @@ public class UserController {
     }
 
     @ApiOperation(value = "用户登录")
-    @PostMapping("/login")
-    public RespVO<?> byId() {
-        System.out.println(LocalDate.now());
-        return RespVO.success();
+    @PostMapping("/open/login")
+    public RespVO<UserLoginRes> byId(@RequestBody LoginUserReq req) {
+        return RespVO.success(bbsUserService.login(req));
     }
 
 

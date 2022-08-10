@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration debug="true">
 	<springProperty name="LOG_PATH" source="log.logPath" defaultValue="./"/>
-	<springProperty name="PROJECT_NAME" source="spring.application.name" defaultValue="blog-manager"/>
+	<springProperty name="PROJECT_NAME" source="spring.application.name" defaultValue="bbs-manager"/>
 
 	<!-- 控制台输出 -->
 	<appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">

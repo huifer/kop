@@ -4,7 +4,9 @@ import com.github.kop.bbs.Interceptor.TokenVerifyInterceptor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.PathMatchConfigurer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.util.pattern.PathPatternParser;
 
 import javax.annotation.Resource;
 
@@ -26,6 +28,12 @@ public class BbsWebConfig implements WebMvcConfigurer {
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(tokenVerifyInterceptor)
                 .addPathPatterns("/**")
-                .excludePathPatterns("/user/login","/user/create");
+                // 开放的请求路径
+                .excludePathPatterns("/open/**","/**/open/**")
+                // swagger的
+                .excludePathPatterns("/swagger-resources/**")
+                .excludePathPatterns("/swagger-ui/**")
+//                .excludePathPatterns("/webjars/**")
+                .excludePathPatterns("/v3/**");
     }
 }
