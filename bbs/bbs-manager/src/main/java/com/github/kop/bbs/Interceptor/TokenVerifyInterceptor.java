@@ -34,7 +34,7 @@ public class TokenVerifyInterceptor implements HandlerInterceptor {
             throw new NoceException("token无效");
         }
         // token 过期
-        if(jwtTokenUtil.validateToken(token)){
+        if(!jwtTokenUtil.validateToken(token)){
             throw new NoceException("token无效");
         }
         String userId = jwtTokenUtil.getUsernameFromToken(token);
