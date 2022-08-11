@@ -1,12 +1,10 @@
 package com.github.kop.bbs.module.entity;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.*;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.Date;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -27,7 +25,7 @@ public class BbsCategory implements Serializable {
      * 论坛主键
      */
     @TableId(value = "category_id", type = IdType.AUTO)
-    @ApiModelProperty(value = "论坛主键")
+    @ApiModelProperty(value = "版块主键")
     private Long categoryId;
 
     /**
@@ -61,28 +59,28 @@ public class BbsCategory implements Serializable {
     /**
      * 创建时间
      */
-    @TableField(value = "create_time")
+    @TableField(value = "create_time",fill = FieldFill.INSERT)
     @ApiModelProperty(value = "创建时间")
-    private Date createTime;
+    private LocalDateTime createTime;
 
     /**
      * 创建用户
      */
-    @TableField(value = "create_user_id")
+    @TableField(value = "create_user_id",fill = FieldFill.INSERT)
     @ApiModelProperty(value = "创建用户")
     private Long createUserId;
 
     /**
      * 更新时间
      */
-    @TableField(value = "update_time")
+    @TableField(value = "update_time",fill = FieldFill.INSERT_UPDATE)
     @ApiModelProperty(value = "更新时间")
-    private Date updateTime;
+    private LocalDateTime updateTime;
 
     /**
      * 更新用户
      */
-    @TableField(value = "update_user_id")
+    @TableField(value = "update_user_id",fill = FieldFill.INSERT_UPDATE)
     @ApiModelProperty(value = "更新用户")
     private Long updateUserId;
 

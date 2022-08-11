@@ -56,7 +56,6 @@ public class BbsUserServiceImpl extends ServiceImpl<BbsUserMapper, BbsUser> impl
                 .salt(salt)
                 .avatar(req.getAvatar())
                 .nickname(req.getNickname())
-                .registerTime(new Date())
                 .build()) > 0;
     }
 

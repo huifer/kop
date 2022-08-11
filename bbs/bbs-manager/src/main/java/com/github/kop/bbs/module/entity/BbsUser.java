@@ -1,12 +1,10 @@
 package com.github.kop.bbs.module.entity;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.*;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.Date;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -65,9 +63,9 @@ public class BbsUser implements Serializable {
     /**
      * 注册时间
      */
-    @TableField(value = "register_time")
+    @TableField(value = "register_time",fill = FieldFill.INSERT)
     @ApiModelProperty(value = "注册时间")
-    private Date registerTime;
+    private LocalDateTime registerTime;
 
     private static final long serialVersionUID = 1L;
 }

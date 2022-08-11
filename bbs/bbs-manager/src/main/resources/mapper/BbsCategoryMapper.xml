@@ -114,4 +114,12 @@
         #{item.deleted,jdbcType=TINYINT}, #{item.version,jdbcType=BIGINT})
     </foreach>
   </insert>
+
+  <select id="listWithPage" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List"/> from bbs_category
+    where deleted = 0
+    <if test="req.categoryName != null and req.categoryName != ''">
+      and category_name like concat('%',#{req.categoryName},'%')
+    </if>
+  </select>
 </mapper>

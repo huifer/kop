@@ -24,10 +24,10 @@ import lombok.NoArgsConstructor;
 @TableName(value = "bbs_collection_log")
 public class BbsCollectionLog implements Serializable {
     /**
-     * 积分收藏主键
+     * 论坛收藏主键
      */
     @TableId(value = "collection_log_id", type = IdType.AUTO)
-    @ApiModelProperty(value = "积分收藏主键")
+    @ApiModelProperty(value = "论坛收藏主键")
     private Long collectionLogId;
 
     /**
