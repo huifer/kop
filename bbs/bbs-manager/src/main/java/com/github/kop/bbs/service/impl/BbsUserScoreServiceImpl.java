@@ -9,14 +9,6 @@ import java.util.List;
 import com.github.kop.bbs.module.entity.BbsUserScore;
 import com.github.kop.bbs.service.BbsUserScoreService;
 @Service
-public class BbsUserScoreServiceImpl extends ServiceImpl<BbsUserScoreMapper, BbsUserScore> implements BbsUserScoreService{
+public class BbsUserScoreServiceImpl  implements BbsUserScoreService{
 
-    @Override
-    public int updateBatchSelective(List<BbsUserScore> list) {
-        return baseMapper.updateBatchSelective(list);
-    }
-    @Override
-    public int batchInsert(List<BbsUserScore> list) {
-        return baseMapper.batchInsert(list);
-    }
 }

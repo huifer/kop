@@ -7,12 +7,14 @@ import com.github.kop.bbs.module.req.user.CreateUserReq;
 import com.github.kop.bbs.module.req.user.LoginUserReq;
 import com.github.kop.bbs.module.req.user.UpdateUserReq;
 import com.github.kop.bbs.module.res.user.UserLoginRes;
+import com.github.kop.bbs.repo.UserRepository;
 import com.github.kop.bbs.utils.CreateValidate;
 import com.github.kop.bbs.utils.JwtTokenUtil;
 import com.github.kop.bbs.utils.UpdateValidate;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.nio.charset.StandardCharsets;
@@ -27,7 +29,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.DigestUtils;
 
 @Service
-public class BbsUserServiceImpl extends ServiceImpl<BbsUserMapper, BbsUser> implements BbsUserService {
+public class BbsUserServiceImpl  implements BbsUserService {
 
     protected final UserCreateAndUpdateValidate userCreateAndUpdateValidate =
             new UserCreateAndUpdateValidate();
@@ -35,22 +37,15 @@ public class BbsUserServiceImpl extends ServiceImpl<BbsUserMapper, BbsUser> impl
     @Resource
     private JwtTokenUtil jwtTokenUtil;
 
-    @Override
-    public int updateBatchSelective(List<BbsUser> list) {
-        return baseMapper.updateBatchSelective(list);
-    }
-
-    @Override
-    public int batchInsert(List<BbsUser> list) {
-        return baseMapper.batchInsert(list);
-    }
+    @Autowired
+    private UserRepository userRepository;
 
     @Override
     public Boolean create(CreateUserReq req) {
         userCreateAndUpdateValidate.createValidate(req);
         // 随机生成盐
         String salt = RandomStringUtils.randomAlphanumeric(10);
-        return baseMapper.insert(BbsUser.builder()
+        return userRepository.insert(BbsUser.builder()
                 .username(req.getUsername())
                 .password(DigestUtils.md5DigestAsHex((req.getPassword() + salt).getBytes(StandardCharsets.UTF_8)))
                 .salt(salt)
@@ -61,7 +56,7 @@ public class BbsUserServiceImpl extends ServiceImpl<BbsUserMapper, BbsUser> impl
 
     @Override
     public Boolean updateUser(UpdateUserReq req) {
-        BbsUser bbsUser = baseMapper.selectById(req.getId());
+        BbsUser bbsUser = userRepository.selectById(req.getId());
         if(ObjectUtils.isEmpty(bbsUser)){
             throw new NoceException("当前用户不存在");
         }
@@ -77,7 +72,7 @@ public class BbsUserServiceImpl extends ServiceImpl<BbsUserMapper, BbsUser> impl
         if (ObjectUtils.isNotEmpty(req.getAvatar())){
             bbsUser.setAvatar(req.getAvatar());
         }
-        return baseMapper.updateById(bbsUser) > 0;
+        return userRepository.updateById(bbsUser) > 0;
     }
 
     /**
@@ -87,10 +82,8 @@ public class BbsUserServiceImpl extends ServiceImpl<BbsUserMapper, BbsUser> impl
      */
     @Override
     public UserLoginRes login(LoginUserReq req) {
-        QueryWrapper<BbsUser> queryWrapper = new QueryWrapper<>();
-        queryWrapper.lambda()
-                .eq(BbsUser::getUsername, req.getUsername());
-        BbsUser bbsUser = baseMapper.selectOne(queryWrapper);
+
+        BbsUser bbsUser = userRepository.findByName(req.getUsername());
         if (ObjectUtils.isEmpty(bbsUser)){
             throw new NoceException("用户不存在!");
         }
@@ -114,10 +107,8 @@ public class BbsUserServiceImpl extends ServiceImpl<BbsUserMapper, BbsUser> impl
             if (StringUtils.isEmpty(name)) {
                 throw new ValidateException("用户名必填");
             }
-            QueryWrapper<BbsUser> queryWrapper = new QueryWrapper<>();
-            queryWrapper.lambda()
-                    .eq(BbsUser::getUsername, name);
-            boolean existsName = baseMapper.exists(queryWrapper);
+
+            boolean existsName = userRepository.existsUserName(name);
             if (existsName) {
                 throw new ValidateException("用户名已存在");
             }

@@ -10,12 +10,9 @@ import com.github.kop.bbs.module.req.category.QueryCategoryReq;
 import com.github.kop.bbs.module.req.category.UpdateCategoryReq;
 import com.github.kop.bbs.module.res.category.CategoryListRes;
 
-public interface BbsCategoryService extends IService<BbsCategory> {
+public interface BbsCategoryService  {
 
 
-    int updateBatchSelective(List<BbsCategory> list);
-
-    int batchInsert(List<BbsCategory> list);
 
     /**
      * 添加板块

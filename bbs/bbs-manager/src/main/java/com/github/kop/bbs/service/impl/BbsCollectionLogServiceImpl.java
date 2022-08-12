@@ -9,14 +9,6 @@ import java.util.List;
 import com.github.kop.bbs.repo.mapper.BbsCollectionLogMapper;
 import com.github.kop.bbs.service.BbsCollectionLogService;
 @Service
-public class BbsCollectionLogServiceImpl extends ServiceImpl<BbsCollectionLogMapper, BbsCollectionLog> implements BbsCollectionLogService{
+public class BbsCollectionLogServiceImpl  implements BbsCollectionLogService{
 
-    @Override
-    public int updateBatchSelective(List<BbsCollectionLog> list) {
-        return baseMapper.updateBatchSelective(list);
-    }
-    @Override
-    public int batchInsert(List<BbsCollectionLog> list) {
-        return baseMapper.batchInsert(list);
-    }
 }

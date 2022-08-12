@@ -8,12 +8,9 @@ import com.github.kop.bbs.module.req.user.LoginUserReq;
 import com.github.kop.bbs.module.req.user.UpdateUserReq;
 import com.github.kop.bbs.module.res.user.UserLoginRes;
 
-public interface BbsUserService extends IService<BbsUser> {
+public interface BbsUserService  {
 
 
-    int updateBatchSelective(List<BbsUser> list);
-
-    int batchInsert(List<BbsUser> list);
 
     /**
      * 添加用户

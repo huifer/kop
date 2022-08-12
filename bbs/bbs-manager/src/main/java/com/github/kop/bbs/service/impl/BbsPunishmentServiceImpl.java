@@ -9,14 +9,6 @@ import java.util.List;
 import com.github.kop.bbs.repo.mapper.BbsPunishmentMapper;
 import com.github.kop.bbs.service.BbsPunishmentService;
 @Service
-public class BbsPunishmentServiceImpl extends ServiceImpl<BbsPunishmentMapper, BbsPunishment> implements BbsPunishmentService{
+public class BbsPunishmentServiceImpl  implements BbsPunishmentService{
 
-    @Override
-    public int updateBatchSelective(List<BbsPunishment> list) {
-        return baseMapper.updateBatchSelective(list);
-    }
-    @Override
-    public int batchInsert(List<BbsPunishment> list) {
-        return baseMapper.batchInsert(list);
-    }
 }

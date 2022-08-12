@@ -9,14 +9,7 @@ import java.util.List;
 import com.github.kop.bbs.repo.mapper.BbsTagMapper;
 import com.github.kop.bbs.service.BbsTagService;
 @Service
-public class BbsTagServiceImpl extends ServiceImpl<BbsTagMapper, BbsTag> implements BbsTagService{
+public class BbsTagServiceImpl  implements BbsTagService{
 
-    @Override
-    public int updateBatchSelective(List<BbsTag> list) {
-        return baseMapper.updateBatchSelective(list);
-    }
-    @Override
-    public int batchInsert(List<BbsTag> list) {
-        return baseMapper.batchInsert(list);
-    }
+
 }

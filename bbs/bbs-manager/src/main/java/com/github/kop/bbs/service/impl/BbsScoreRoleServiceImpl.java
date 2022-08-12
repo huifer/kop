@@ -9,14 +9,6 @@ import java.util.List;
 import com.github.kop.bbs.repo.mapper.BbsScoreRoleMapper;
 import com.github.kop.bbs.service.BbsScoreRoleService;
 @Service
-public class BbsScoreRoleServiceImpl extends ServiceImpl<BbsScoreRoleMapper, BbsScoreRole> implements BbsScoreRoleService{
+public class BbsScoreRoleServiceImpl  implements BbsScoreRoleService{
 
-    @Override
-    public int updateBatchSelective(List<BbsScoreRole> list) {
-        return baseMapper.updateBatchSelective(list);
-    }
-    @Override
-    public int batchInsert(List<BbsScoreRole> list) {
-        return baseMapper.batchInsert(list);
-    }
 }

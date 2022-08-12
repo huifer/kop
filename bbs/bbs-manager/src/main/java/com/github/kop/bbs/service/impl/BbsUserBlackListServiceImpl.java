@@ -9,14 +9,6 @@ import java.util.List;
 import com.github.kop.bbs.module.entity.BbsUserBlackList;
 import com.github.kop.bbs.service.BbsUserBlackListService;
 @Service
-public class BbsUserBlackListServiceImpl extends ServiceImpl<BbsUserBlackListMapper, BbsUserBlackList> implements BbsUserBlackListService{
+public class BbsUserBlackListServiceImpl  implements BbsUserBlackListService{
 
-    @Override
-    public int updateBatchSelective(List<BbsUserBlackList> list) {
-        return baseMapper.updateBatchSelective(list);
-    }
-    @Override
-    public int batchInsert(List<BbsUserBlackList> list) {
-        return baseMapper.batchInsert(list);
-    }
 }

@@ -4,12 +4,10 @@ import java.util.List;
 import com.github.kop.bbs.module.entity.BbsFeedbackRecord;
 import com.baomidou.mybatisplus.extension.service.IService;
 
-public interface BbsFeedbackRecordService extends IService<BbsFeedbackRecord> {
+public interface BbsFeedbackRecordService  {
 
 
-    int updateBatchSelective(List<BbsFeedbackRecord> list);
 
-    int batchInsert(List<BbsFeedbackRecord> list);
 
 }
 
