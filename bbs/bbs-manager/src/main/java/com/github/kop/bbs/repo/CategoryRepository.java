@@ -1,17 +1,22 @@
 package com.github.kop.bbs.repo;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.github.kop.bbs.module.entity.BbsCategory;
+import com.github.kop.bbs.module.entity.Category;
 import com.github.kop.bbs.module.req.category.QueryCategoryReq;
-import org.springframework.stereotype.Repository;
 
 
 public interface CategoryRepository {
 
-  long  insert(BbsCategory insertEntity);
+  long  insert(Category insertEntity);
 
-  int  updateById(BbsCategory updateEntity);
+  int  updateById(Category updateEntity);
 
-  IPage<BbsCategory> page(Long page, Long size, QueryCategoryReq req);
+  IPage<Category> page(Long page, Long size, QueryCategoryReq req);
+
+  /**
+   * 根据分类名字校验名称是否存在
+   * @param categoryName
+   * @return
+   */
+  boolean existsCategoryName(String categoryName);
 }

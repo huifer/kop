@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.github.kop.bbs.repo.mapper.ScoreRecordMapper">
+  <resultMap id="BaseResultMap" type="com.github.kop.bbs.module.entity.ScoreRecord">
+    <!--@mbg.generated-->
+    <!--@Table bbs_score_record-->
+    <id column="score_record_id" jdbcType="BIGINT" property="scoreRecordId" />
+    <result column="role_id" jdbcType="BIGINT" property="roleId" />
+    <result column="score_count" jdbcType="INTEGER" property="scoreCount" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="create_user_id" jdbcType="BIGINT" property="createUserId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    score_record_id, role_id, score_count, create_time, create_user_id
+  </sql>
+  <update id="updateBatchSelective" parameterType="java.util.List">
+    <!--@mbg.generated-->
+    update bbs_score_record
+    <trim prefix="set" suffixOverrides=",">
+      <trim prefix="role_id = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.roleId != null">
+            when score_record_id = #{item.scoreRecordId,jdbcType=BIGINT} then #{item.roleId,jdbcType=BIGINT}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="score_count = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.scoreCount != null">
+            when score_record_id = #{item.scoreRecordId,jdbcType=BIGINT} then #{item.scoreCount,jdbcType=INTEGER}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="create_time = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.createTime != null">
+            when score_record_id = #{item.scoreRecordId,jdbcType=BIGINT} then #{item.createTime,jdbcType=TIMESTAMP}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="create_user_id = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.createUserId != null">
+            when score_record_id = #{item.scoreRecordId,jdbcType=BIGINT} then #{item.createUserId,jdbcType=BIGINT}
+          </if>
+        </foreach>
+      </trim>
+    </trim>
+    where score_record_id in
+    <foreach close=")" collection="list" item="item" open="(" separator=", ">
+      #{item.scoreRecordId,jdbcType=BIGINT}
+    </foreach>
+  </update>
+  <insert id="batchInsert" keyColumn="score_record_id" keyProperty="scoreRecordId" parameterType="map" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into bbs_score_record
+    (role_id, score_count, create_time, create_user_id)
+    values
+    <foreach collection="list" item="item" separator=",">
+      (#{item.roleId,jdbcType=BIGINT}, #{item.scoreCount,jdbcType=INTEGER}, #{item.createTime,jdbcType=TIMESTAMP}, 
+        #{item.createUserId,jdbcType=BIGINT})
+    </foreach>
+  </insert>
+</mapper>

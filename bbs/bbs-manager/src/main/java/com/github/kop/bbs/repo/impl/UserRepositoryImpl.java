@@ -1,23 +1,23 @@
 package com.github.kop.bbs.repo.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.github.kop.bbs.module.entity.BbsUser;
+import com.github.kop.bbs.module.entity.User;
 import com.github.kop.bbs.repo.UserRepository;
-import com.github.kop.bbs.repo.mapper.BbsUserMapper;
+import com.github.kop.bbs.repo.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 public class UserRepositoryImpl implements UserRepository {
 
   @Autowired
-  private BbsUserMapper userMapper;
+  private UserMapper userMapper;
 
   @Override
-  public long insert(BbsUser build) {
-    // todo: 写入前校验
+  @Transactional(rollbackFor = Exception.class)
+  public long insert(User build) {
     validateUserName(build);
-
     int insert = userMapper.insert(build);
     if (insert > 0) {
       return build.getId();
@@ -26,7 +26,7 @@ public class UserRepositoryImpl implements UserRepository {
   }
 
   @Override
-  public BbsUser selectById(Long id) {
+  public User selectById(Long id) {
     if (id == null) {
       throw new RuntimeException("用户id不存在");
     }
@@ -34,21 +34,22 @@ public class UserRepositoryImpl implements UserRepository {
   }
 
   @Override
-  public BbsUser findByName(String username) {
-    QueryWrapper<BbsUser> queryWrapper = new QueryWrapper<>();
+  public User findByName(String username) {
+    QueryWrapper<User> queryWrapper = new QueryWrapper<>();
     queryWrapper.lambda()
-        .eq(BbsUser::getUsername, username);
+        .eq(User::getUsername, username);
     return this.userMapper.selectOne(queryWrapper);
   }
 
   @Override
-  public int updateById(BbsUser bbsUser) {
-    validateUserName(bbsUser);
-    return this.userMapper.updateById(bbsUser);
+  @Transactional(rollbackFor = Exception.class)
+  public int updateById(User user) {
+    validateUserName(user);
+    return this.userMapper.updateById(user);
   }
 
-  private void validateUserName(BbsUser bbsUser) {
-    boolean b = existsUserName(bbsUser.getUsername());
+  private void validateUserName(User user) {
+    boolean b = existsUserName(user.getUsername());
     if (b) {
       throw new RuntimeException("用户名已存在");
     }
@@ -56,9 +57,9 @@ public class UserRepositoryImpl implements UserRepository {
 
   @Override
   public boolean existsUserName(String name) {
-    QueryWrapper<BbsUser> queryWrapper = new QueryWrapper<>();
+    QueryWrapper<User> queryWrapper = new QueryWrapper<>();
     queryWrapper.lambda()
-        .eq(BbsUser::getUsername, name);
+        .eq(User::getUsername, name);
     return this.userMapper.exists(queryWrapper);
   }
 }

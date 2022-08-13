@@ -3,6 +3,7 @@ package com.github.kop.bbs.api;
 import com.github.kop.bbs.module.ex.NoceException;
 import com.github.kop.bbs.module.ex.ValidateException;
 import com.github.kop.bbs.module.res.RespVO;
+import io.jsonwebtoken.ExpiredJwtException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -39,6 +40,11 @@ public class ExceptionHandlerController {
     @ExceptionHandler(ValidateException.class)
     public RespVO<String> handleValidateException(ValidateException e) {
         return RespVO.error("参数异常:"+e.getMsg());
+    }
+
+    @ExceptionHandler(ExpiredJwtException.class)
+    public RespVO<String> handleValidateException(ExpiredJwtException e) {
+        return RespVO.error("请重新登录!");
     }
 
 }

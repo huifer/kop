@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.github.kop.bbs.repo.mapper.InvitationMapper">
+  <resultMap id="BaseResultMap" type="com.github.kop.bbs.module.entity.Invitation">
+    <!--@mbg.generated-->
+    <!--@Table bbs_invitation-->
+    <id column="invitation_id" jdbcType="BIGINT" property="invitationId" />
+    <result column="text_type" jdbcType="TINYINT" property="textType" />
+    <result column="category_id" jdbcType="BIGINT" property="categoryId" />
+    <result column="type" jdbcType="TINYINT" property="type" />
+    <result column="text" jdbcType="LONGVARCHAR" property="text" />
+    <result column="article_status" jdbcType="TINYINT" property="articleStatus" />
+    <result column="is_top" jdbcType="TINYINT" property="isTop" />
+    <result column="is_essence" jdbcType="TINYINT" property="isEssence" />
+    <result column="is_lock" jdbcType="TINYINT" property="isLock" />
+    <result column="latest_replied_on" jdbcType="BIGINT" property="latestRepliedOn" />
+    <result column="tag_str" jdbcType="VARCHAR" property="tagStr" />
+    <result column="ip" jdbcType="VARCHAR" property="ip" />
+    <result column="ip_loc" jdbcType="VARCHAR" property="ipLoc" />
+    <result column="thumbs_cont" jdbcType="BIGINT" property="thumbsCont" />
+    <result column="collection_cont" jdbcType="BIGINT" property="collectionCont" />
+    <result column="views_count" jdbcType="BIGINT" property="viewsCount" />
+    <result column="comments_count" jdbcType="BIGINT" property="commentsCount" />
+    <result column="comments_status" jdbcType="TINYINT" property="commentsStatus" />
+    <result column="visible_status" jdbcType="TINYINT" property="visibleStatus" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="create_user_id" jdbcType="BIGINT" property="createUserId" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="update_user_id" jdbcType="BIGINT" property="updateUserId" />
+    <result column="deleted" jdbcType="TINYINT" property="deleted" />
+    <result column="version" jdbcType="BIGINT" property="version" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    invitation_id, text_type, category_id, `type`, `text`, article_status, is_top, is_essence, 
+    is_lock, latest_replied_on, tag_str, ip, ip_loc, thumbs_cont, collection_cont, views_count, 
+    comments_count, comments_status, visible_status, create_time, create_user_id, update_time, 
+    update_user_id, deleted, version
+  </sql>
+  <update id="updateBatchSelective" parameterType="java.util.List">
+    <!--@mbg.generated-->
+    update bbs_invitation
+    <trim prefix="set" suffixOverrides=",">
+      <trim prefix="text_type = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.textType != null">
+            when invitation_id = #{item.invitationId,jdbcType=BIGINT} then #{item.textType,jdbcType=TINYINT}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="category_id = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.categoryId != null">
+            when invitation_id = #{item.invitationId,jdbcType=BIGINT} then #{item.categoryId,jdbcType=BIGINT}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="`type` = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.type != null">
+            when invitation_id = #{item.invitationId,jdbcType=BIGINT} then #{item.type,jdbcType=TINYINT}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="`text` = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.text != null">
+            when invitation_id = #{item.invitationId,jdbcType=BIGINT} then #{item.text,jdbcType=LONGVARCHAR}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="article_status = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.articleStatus != null">
+            when invitation_id = #{item.invitationId,jdbcType=BIGINT} then #{item.articleStatus,jdbcType=TINYINT}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="is_top = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.isTop != null">
+            when invitation_id = #{item.invitationId,jdbcType=BIGINT} then #{item.isTop,jdbcType=TINYINT}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="is_essence = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.isEssence != null">
+            when invitation_id = #{item.invitationId,jdbcType=BIGINT} then #{item.isEssence,jdbcType=TINYINT}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="is_lock = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.isLock != null">
+            when invitation_id = #{item.invitationId,jdbcType=BIGINT} then #{item.isLock,jdbcType=TINYINT}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="latest_replied_on = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.latestRepliedOn != null">
+            when invitation_id = #{item.invitationId,jdbcType=BIGINT} then #{item.latestRepliedOn,jdbcType=BIGINT}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="tag_str = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.tagStr != null">
+            when invitation_id = #{item.invitationId,jdbcType=BIGINT} then #{item.tagStr,jdbcType=VARCHAR}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="ip = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.ip != null">
+            when invitation_id = #{item.invitationId,jdbcType=BIGINT} then #{item.ip,jdbcType=VARCHAR}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="ip_loc = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.ipLoc != null">
+            when invitation_id = #{item.invitationId,jdbcType=BIGINT} then #{item.ipLoc,jdbcType=VARCHAR}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="thumbs_cont = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.thumbsCont != null">
+            when invitation_id = #{item.invitationId,jdbcType=BIGINT} then #{item.thumbsCont,jdbcType=BIGINT}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="collection_cont = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.collectionCont != null">
+            when invitation_id = #{item.invitationId,jdbcType=BIGINT} then #{item.collectionCont,jdbcType=BIGINT}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="views_count = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.viewsCount != null">
+            when invitation_id = #{item.invitationId,jdbcType=BIGINT} then #{item.viewsCount,jdbcType=BIGINT}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="comments_count = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.commentsCount != null">
+            when invitation_id = #{item.invitationId,jdbcType=BIGINT} then #{item.commentsCount,jdbcType=BIGINT}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="comments_status = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.commentsStatus != null">
+            when invitation_id = #{item.invitationId,jdbcType=BIGINT} then #{item.commentsStatus,jdbcType=TINYINT}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="visible_status = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.visibleStatus != null">
+            when invitation_id = #{item.invitationId,jdbcType=BIGINT} then #{item.visibleStatus,jdbcType=TINYINT}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="create_time = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.createTime != null">
+            when invitation_id = #{item.invitationId,jdbcType=BIGINT} then #{item.createTime,jdbcType=TIMESTAMP}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="create_user_id = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.createUserId != null">
+            when invitation_id = #{item.invitationId,jdbcType=BIGINT} then #{item.createUserId,jdbcType=BIGINT}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="update_time = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.updateTime != null">
+            when invitation_id = #{item.invitationId,jdbcType=BIGINT} then #{item.updateTime,jdbcType=TIMESTAMP}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="update_user_id = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.updateUserId != null">
+            when invitation_id = #{item.invitationId,jdbcType=BIGINT} then #{item.updateUserId,jdbcType=BIGINT}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="deleted = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.deleted != null">
+            when invitation_id = #{item.invitationId,jdbcType=BIGINT} then #{item.deleted,jdbcType=TINYINT}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="version = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.version != null">
+            when invitation_id = #{item.invitationId,jdbcType=BIGINT} then #{item.version,jdbcType=BIGINT}
+          </if>
+        </foreach>
+      </trim>
+    </trim>
+    where invitation_id in
+    <foreach close=")" collection="list" item="item" open="(" separator=", ">
+      #{item.invitationId,jdbcType=BIGINT}
+    </foreach>
+  </update>
+  <insert id="batchInsert" keyColumn="invitation_id" keyProperty="invitationId" parameterType="map" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into bbs_invitation
+    (text_type, category_id, `type`, `text`, article_status, is_top, is_essence, is_lock, 
+      latest_replied_on, tag_str, ip, ip_loc, thumbs_cont, collection_cont, views_count, 
+      comments_count, comments_status, visible_status, create_time, create_user_id, update_time, 
+      update_user_id, deleted, version)
+    values
+    <foreach collection="list" item="item" separator=",">
+      (#{item.textType,jdbcType=TINYINT}, #{item.categoryId,jdbcType=BIGINT}, #{item.type,jdbcType=TINYINT}, 
+        #{item.text,jdbcType=LONGVARCHAR}, #{item.articleStatus,jdbcType=TINYINT}, #{item.isTop,jdbcType=TINYINT}, 
+        #{item.isEssence,jdbcType=TINYINT}, #{item.isLock,jdbcType=TINYINT}, #{item.latestRepliedOn,jdbcType=BIGINT}, 
+        #{item.tagStr,jdbcType=VARCHAR}, #{item.ip,jdbcType=VARCHAR}, #{item.ipLoc,jdbcType=VARCHAR}, 
+        #{item.thumbsCont,jdbcType=BIGINT}, #{item.collectionCont,jdbcType=BIGINT}, #{item.viewsCount,jdbcType=BIGINT}, 
+        #{item.commentsCount,jdbcType=BIGINT}, #{item.commentsStatus,jdbcType=TINYINT}, 
+        #{item.visibleStatus,jdbcType=TINYINT}, #{item.createTime,jdbcType=TIMESTAMP}, 
+        #{item.createUserId,jdbcType=BIGINT}, #{item.updateTime,jdbcType=TIMESTAMP}, #{item.updateUserId,jdbcType=BIGINT}, 
+        #{item.deleted,jdbcType=TINYINT}, #{item.version,jdbcType=BIGINT})
+    </foreach>
+  </insert>
+</mapper>

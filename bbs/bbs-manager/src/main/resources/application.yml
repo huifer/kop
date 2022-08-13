@@ -6,10 +6,21 @@ spring:
     pathmatch:
       matching-strategy: ANT_PATH_MATCHER
   datasource:
-    driver-class-name: com.mysql.jdbc.Driver
+    driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
     password: szw123456
     url: 'jdbc:mysql://42.193.114.160:53306/bbs?useSSL=false&serverTimezone=Asia/Shanghai&characterEncoding=utf-8'
+    hikari:
+      pool-name: selfHikariCP
+      connection-test-query: SELECT 1
+      connection-timeout: 10000
+      validation-timeout: 3000
+      idle-timeout: 30000
+      login-timeout: 5
+      max-lifetime: 60000
+      maximum-pool-size: 10
+      minimum-idle: 5
+      read-only: false
 mybatis-plus:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl

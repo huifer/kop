@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.github.kop.bbs.repo.mapper.TipsMapper">
+  <resultMap id="BaseResultMap" type="com.github.kop.bbs.module.entity.Tips">
+    <!--@mbg.generated-->
+    <!--@Table bbs_tips-->
+    <id column="tips_id" jdbcType="BIGINT" property="tipsId" />
+    <result column="tpis_type" jdbcType="TINYINT" property="tpisType" />
+    <result column="from_id" jdbcType="BIGINT" property="fromId" />
+    <result column="reply_id" jdbcType="BIGINT" property="replyId" />
+    <result column="tips_status" jdbcType="TINYINT" property="tipsStatus" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="deleted" jdbcType="TINYINT" property="deleted" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    tips_id, tpis_type, from_id, reply_id, tips_status, create_time, deleted
+  </sql>
+  <update id="updateBatchSelective" parameterType="java.util.List">
+    <!--@mbg.generated-->
+    update bbs_tips
+    <trim prefix="set" suffixOverrides=",">
+      <trim prefix="tpis_type = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.tpisType != null">
+            when tips_id = #{item.tipsId,jdbcType=BIGINT} then #{item.tpisType,jdbcType=TINYINT}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="from_id = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.fromId != null">
+            when tips_id = #{item.tipsId,jdbcType=BIGINT} then #{item.fromId,jdbcType=BIGINT}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="reply_id = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.replyId != null">
+            when tips_id = #{item.tipsId,jdbcType=BIGINT} then #{item.replyId,jdbcType=BIGINT}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="tips_status = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.tipsStatus != null">
+            when tips_id = #{item.tipsId,jdbcType=BIGINT} then #{item.tipsStatus,jdbcType=TINYINT}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="create_time = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.createTime != null">
+            when tips_id = #{item.tipsId,jdbcType=BIGINT} then #{item.createTime,jdbcType=TIMESTAMP}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="deleted = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.deleted != null">
+            when tips_id = #{item.tipsId,jdbcType=BIGINT} then #{item.deleted,jdbcType=TINYINT}
+          </if>
+        </foreach>
+      </trim>
+    </trim>
+    where tips_id in
+    <foreach close=")" collection="list" item="item" open="(" separator=", ">
+      #{item.tipsId,jdbcType=BIGINT}
+    </foreach>
+  </update>
+  <insert id="batchInsert" keyColumn="tips_id" keyProperty="tipsId" parameterType="map" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into bbs_tips
+    (tpis_type, from_id, reply_id, tips_status, create_time, deleted)
+    values
+    <foreach collection="list" item="item" separator=",">
+      (#{item.tpisType,jdbcType=TINYINT}, #{item.fromId,jdbcType=BIGINT}, #{item.replyId,jdbcType=BIGINT}, 
+        #{item.tipsStatus,jdbcType=TINYINT}, #{item.createTime,jdbcType=TIMESTAMP}, #{item.deleted,jdbcType=TINYINT}
+        )
+    </foreach>
+  </insert>
+</mapper>

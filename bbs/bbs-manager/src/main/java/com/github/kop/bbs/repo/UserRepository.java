@@ -1,16 +1,16 @@
 package com.github.kop.bbs.repo;
 
-import com.github.kop.bbs.module.entity.BbsUser;
+import com.github.kop.bbs.module.entity.User;
 
 public interface UserRepository {
 
-  long insert(BbsUser build);
+  long insert(User build);
 
-  BbsUser selectById(Long id);
+  User selectById(Long id);
 
-  BbsUser findByName(String username);
+  User findByName(String username);
 
-  int updateById(BbsUser bbsUser);
+  int updateById(User user);
 
   boolean existsUserName(String name);
 }

@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.github.kop.bbs.repo.mapper.PunishmentMapper">
+  <resultMap id="BaseResultMap" type="com.github.kop.bbs.module.entity.Punishment">
+    <!--@mbg.generated-->
+    <!--@Table bbs_punishment-->
+    <id column="punishment_id" jdbcType="BIGINT" property="punishmentId" />
+    <result column="user_id" jdbcType="BIGINT" property="userId" />
+    <result column="punishment_basis" jdbcType="LONGVARCHAR" property="punishmentBasis" />
+    <result column="score_count" jdbcType="INTEGER" property="scoreCount" />
+    <result column="punishment_status" jdbcType="TINYINT" property="punishmentStatus" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="create_user_id" jdbcType="BIGINT" property="createUserId" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="update_user_id" jdbcType="BIGINT" property="updateUserId" />
+    <result column="deleted" jdbcType="TINYINT" property="deleted" />
+    <result column="version" jdbcType="BIGINT" property="version" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    punishment_id, user_id, punishment_basis, score_count, punishment_status, create_time, 
+    create_user_id, update_time, update_user_id, deleted, version
+  </sql>
+  <update id="updateBatchSelective" parameterType="java.util.List">
+    <!--@mbg.generated-->
+    update bbs_punishment
+    <trim prefix="set" suffixOverrides=",">
+      <trim prefix="user_id = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.userId != null">
+            when punishment_id = #{item.punishmentId,jdbcType=BIGINT} then #{item.userId,jdbcType=BIGINT}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="punishment_basis = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.punishmentBasis != null">
+            when punishment_id = #{item.punishmentId,jdbcType=BIGINT} then #{item.punishmentBasis,jdbcType=LONGVARCHAR}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="score_count = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.scoreCount != null">
+            when punishment_id = #{item.punishmentId,jdbcType=BIGINT} then #{item.scoreCount,jdbcType=INTEGER}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="punishment_status = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.punishmentStatus != null">
+            when punishment_id = #{item.punishmentId,jdbcType=BIGINT} then #{item.punishmentStatus,jdbcType=TINYINT}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="create_time = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.createTime != null">
+            when punishment_id = #{item.punishmentId,jdbcType=BIGINT} then #{item.createTime,jdbcType=TIMESTAMP}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="create_user_id = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.createUserId != null">
+            when punishment_id = #{item.punishmentId,jdbcType=BIGINT} then #{item.createUserId,jdbcType=BIGINT}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="update_time = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.updateTime != null">
+            when punishment_id = #{item.punishmentId,jdbcType=BIGINT} then #{item.updateTime,jdbcType=TIMESTAMP}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="update_user_id = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.updateUserId != null">
+            when punishment_id = #{item.punishmentId,jdbcType=BIGINT} then #{item.updateUserId,jdbcType=BIGINT}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="deleted = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.deleted != null">
+            when punishment_id = #{item.punishmentId,jdbcType=BIGINT} then #{item.deleted,jdbcType=TINYINT}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="version = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.version != null">
+            when punishment_id = #{item.punishmentId,jdbcType=BIGINT} then #{item.version,jdbcType=BIGINT}
+          </if>
+        </foreach>
+      </trim>
+    </trim>
+    where punishment_id in
+    <foreach close=")" collection="list" item="item" open="(" separator=", ">
+      #{item.punishmentId,jdbcType=BIGINT}
+    </foreach>
+  </update>
+  <insert id="batchInsert" keyColumn="punishment_id" keyProperty="punishmentId" parameterType="map" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into bbs_punishment
+    (user_id, punishment_basis, score_count, punishment_status, create_time, create_user_id, 
+      update_time, update_user_id, deleted, version)
+    values
+    <foreach collection="list" item="item" separator=",">
+      (#{item.userId,jdbcType=BIGINT}, #{item.punishmentBasis,jdbcType=LONGVARCHAR}, #{item.scoreCount,jdbcType=INTEGER}, 
+        #{item.punishmentStatus,jdbcType=TINYINT}, #{item.createTime,jdbcType=TIMESTAMP}, 
+        #{item.createUserId,jdbcType=BIGINT}, #{item.updateTime,jdbcType=TIMESTAMP}, #{item.updateUserId,jdbcType=BIGINT}, 
+        #{item.deleted,jdbcType=TINYINT}, #{item.version,jdbcType=BIGINT})
+    </foreach>
+  </insert>
+</mapper>

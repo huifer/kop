@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.github.kop.bbs.repo.mapper.TagMapper">
+  <resultMap id="BaseResultMap" type="com.github.kop.bbs.module.entity.Tag">
+    <!--@mbg.generated-->
+    <!--@Table bbs_tag-->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="user_id" jdbcType="BIGINT" property="userId" />
+    <result column="tag" jdbcType="VARCHAR" property="tag" />
+    <result column="quote_num" jdbcType="BIGINT" property="quoteNum" />
+    <result column="create_time" jdbcType="BIGINT" property="createTime" />
+    <result column="update_time" jdbcType="BIGINT" property="updateTime" />
+    <result column="deleted_time" jdbcType="BIGINT" property="deletedTime" />
+    <result column="deleted" jdbcType="TINYINT" property="deleted" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, user_id, tag, quote_num, create_time, update_time, deleted_time, deleted
+  </sql>
+  <update id="updateBatchSelective" parameterType="java.util.List">
+    <!--@mbg.generated-->
+    update bbs_tag
+    <trim prefix="set" suffixOverrides=",">
+      <trim prefix="user_id = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.userId != null">
+            when id = #{item.id,jdbcType=BIGINT} then #{item.userId,jdbcType=BIGINT}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="tag = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.tag != null">
+            when id = #{item.id,jdbcType=BIGINT} then #{item.tag,jdbcType=VARCHAR}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="quote_num = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.quoteNum != null">
+            when id = #{item.id,jdbcType=BIGINT} then #{item.quoteNum,jdbcType=BIGINT}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="create_time = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.createTime != null">
+            when id = #{item.id,jdbcType=BIGINT} then #{item.createTime,jdbcType=BIGINT}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="update_time = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.updateTime != null">
+            when id = #{item.id,jdbcType=BIGINT} then #{item.updateTime,jdbcType=BIGINT}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="deleted_time = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.deletedTime != null">
+            when id = #{item.id,jdbcType=BIGINT} then #{item.deletedTime,jdbcType=BIGINT}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="deleted = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.deleted != null">
+            when id = #{item.id,jdbcType=BIGINT} then #{item.deleted,jdbcType=TINYINT}
+          </if>
+        </foreach>
+      </trim>
+    </trim>
+    where id in
+    <foreach close=")" collection="list" item="item" open="(" separator=", ">
+      #{item.id,jdbcType=BIGINT}
+    </foreach>
+  </update>
+  <insert id="batchInsert" keyColumn="id" keyProperty="id" parameterType="map" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into bbs_tag
+    (user_id, tag, quote_num, create_time, update_time, deleted_time, deleted)
+    values
+    <foreach collection="list" item="item" separator=",">
+      (#{item.userId,jdbcType=BIGINT}, #{item.tag,jdbcType=VARCHAR}, #{item.quoteNum,jdbcType=BIGINT}, 
+        #{item.createTime,jdbcType=BIGINT}, #{item.updateTime,jdbcType=BIGINT}, #{item.deletedTime,jdbcType=BIGINT}, 
+        #{item.deleted,jdbcType=TINYINT})
+    </foreach>
+  </insert>
+</mapper>

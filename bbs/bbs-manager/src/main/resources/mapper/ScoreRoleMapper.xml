@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.github.kop.bbs.repo.mapper.ScoreRoleMapper">
+  <resultMap id="BaseResultMap" type="com.github.kop.bbs.module.entity.ScoreRole">
+    <!--@mbg.generated-->
+    <!--@Table bbs_score_role-->
+    <id column="role_id" jdbcType="BIGINT" property="roleId" />
+    <result column="role_type" jdbcType="TINYINT" property="roleType" />
+    <result column="add_type" jdbcType="TINYINT" property="addType" />
+    <result column="score" jdbcType="INTEGER" property="score" />
+    <result column="score_cycle" jdbcType="TINYINT" property="scoreCycle" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="create_user_id" jdbcType="BIGINT" property="createUserId" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="update_user_id" jdbcType="BIGINT" property="updateUserId" />
+    <result column="deleted" jdbcType="TINYINT" property="deleted" />
+    <result column="version" jdbcType="BIGINT" property="version" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    role_id, role_type, add_type, score, score_cycle, create_time, create_user_id, update_time, 
+    update_user_id, deleted, version
+  </sql>
+  <update id="updateBatchSelective" parameterType="java.util.List">
+    <!--@mbg.generated-->
+    update bbs_score_role
+    <trim prefix="set" suffixOverrides=",">
+      <trim prefix="role_type = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.roleType != null">
+            when role_id = #{item.roleId,jdbcType=BIGINT} then #{item.roleType,jdbcType=TINYINT}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="add_type = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.addType != null">
+            when role_id = #{item.roleId,jdbcType=BIGINT} then #{item.addType,jdbcType=TINYINT}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="score = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.score != null">
+            when role_id = #{item.roleId,jdbcType=BIGINT} then #{item.score,jdbcType=INTEGER}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="score_cycle = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.scoreCycle != null">
+            when role_id = #{item.roleId,jdbcType=BIGINT} then #{item.scoreCycle,jdbcType=TINYINT}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="create_time = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.createTime != null">
+            when role_id = #{item.roleId,jdbcType=BIGINT} then #{item.createTime,jdbcType=TIMESTAMP}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="create_user_id = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.createUserId != null">
+            when role_id = #{item.roleId,jdbcType=BIGINT} then #{item.createUserId,jdbcType=BIGINT}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="update_time = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.updateTime != null">
+            when role_id = #{item.roleId,jdbcType=BIGINT} then #{item.updateTime,jdbcType=TIMESTAMP}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="update_user_id = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.updateUserId != null">
+            when role_id = #{item.roleId,jdbcType=BIGINT} then #{item.updateUserId,jdbcType=BIGINT}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="deleted = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.deleted != null">
+            when role_id = #{item.roleId,jdbcType=BIGINT} then #{item.deleted,jdbcType=TINYINT}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="version = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.version != null">
+            when role_id = #{item.roleId,jdbcType=BIGINT} then #{item.version,jdbcType=BIGINT}
+          </if>
+        </foreach>
+      </trim>
+    </trim>
+    where role_id in
+    <foreach close=")" collection="list" item="item" open="(" separator=", ">
+      #{item.roleId,jdbcType=BIGINT}
+    </foreach>
+  </update>
+  <insert id="batchInsert" keyColumn="role_id" keyProperty="roleId" parameterType="map" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into bbs_score_role
+    (role_type, add_type, score, score_cycle, create_time, create_user_id, update_time, 
+      update_user_id, deleted, version)
+    values
+    <foreach collection="list" item="item" separator=",">
+      (#{item.roleType,jdbcType=TINYINT}, #{item.addType,jdbcType=TINYINT}, #{item.score,jdbcType=INTEGER}, 
+        #{item.scoreCycle,jdbcType=TINYINT}, #{item.createTime,jdbcType=TIMESTAMP}, #{item.createUserId,jdbcType=BIGINT}, 
+        #{item.updateTime,jdbcType=TIMESTAMP}, #{item.updateUserId,jdbcType=BIGINT}, #{item.deleted,jdbcType=TINYINT}, 
+        #{item.version,jdbcType=BIGINT})
+    </foreach>
+  </insert>
+</mapper>
