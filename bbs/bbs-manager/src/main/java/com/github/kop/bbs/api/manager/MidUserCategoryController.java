@@ -1,4 +1,4 @@
-package com.github.kop.bbs.api;
+package com.github.kop.bbs.api.manager;
 
 import com.github.kop.bbs.module.req.midUserCategory.CreateMidUserCategoryReq;
 import com.github.kop.bbs.module.res.RespVO;

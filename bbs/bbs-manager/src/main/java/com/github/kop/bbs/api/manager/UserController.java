@@ -1,4 +1,4 @@
-package com.github.kop.bbs.api;
+package com.github.kop.bbs.api.manager;
 
 import com.github.kop.bbs.module.req.user.CreateUserReq;
 import com.github.kop.bbs.module.req.user.LoginUserReq;

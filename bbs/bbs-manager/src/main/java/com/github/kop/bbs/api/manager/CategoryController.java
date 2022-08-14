@@ -1,4 +1,4 @@
-package com.github.kop.bbs.api;
+package com.github.kop.bbs.api.manager;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.github.kop.bbs.module.req.category.CreateCategoryReq;
@@ -25,6 +25,9 @@ public class CategoryController {
 
     @Resource
     private CategoryService bbsCategoryService;
+
+
+
 
 
     @ApiOperation(value = "添加板块")

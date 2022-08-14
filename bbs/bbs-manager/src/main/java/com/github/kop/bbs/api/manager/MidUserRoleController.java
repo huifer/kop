@@ -1,4 +1,4 @@
-package com.github.kop.bbs.api;
+package com.github.kop.bbs.api.manager;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
