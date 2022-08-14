@@ -8,6 +8,7 @@ import com.github.kop.bbs.module.enums.DeletedEnum;
 import com.github.kop.bbs.module.req.midUserCategory.CreateMidUserCategoryReq;
 import com.github.kop.bbs.repo.MidUserCategoryRepository;
 import com.github.kop.bbs.repo.mapper.MidUserCategoryMapper;
+import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,7 +20,7 @@ import java.util.List;
  * @desc
  * @time 2022/8/13 16:03
  */
-@Service
+@Repository
 public class MidUserCategoryRepositoryImpl implements MidUserCategoryRepository {
 
     @Resource

@@ -1,6 +1,5 @@
 package com.github.kop.bbs.Interceptor;
 
-import com.github.kop.bbs.config.TokenBeans;
 import com.github.kop.bbs.module.ex.NoceException;
 import com.github.kop.bbs.utils.JwtTokenUtil;
 import com.github.kop.bbs.utils.UserInfoThread;
@@ -37,7 +36,7 @@ public class TokenVerifyInterceptor implements HandlerInterceptor {
         if(!jwtTokenUtil.validateToken(token)){
             throw new NoceException("token无效");
         }
-        String userId = jwtTokenUtil.getUsernameFromToken(token);
+        String userId = jwtTokenUtil.getUserId(token);
         if(ObjectUtils.isEmpty(userId)){
             throw new NoceException("token无效");
         }

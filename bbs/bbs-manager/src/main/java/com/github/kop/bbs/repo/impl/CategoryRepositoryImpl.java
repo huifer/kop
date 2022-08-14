@@ -9,9 +9,10 @@ import com.github.kop.bbs.module.req.category.QueryCategoryReq;
 import com.github.kop.bbs.repo.CategoryRepository;
 import com.github.kop.bbs.repo.mapper.CategoryMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
-@Service
+@Repository
 public class CategoryRepositoryImpl implements CategoryRepository {
 
   @Autowired

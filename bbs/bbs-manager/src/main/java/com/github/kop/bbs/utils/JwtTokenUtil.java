@@ -19,7 +19,7 @@ public class JwtTokenUtil {
     this.secret = secret;
   }
 
-  public String getUsernameFromToken(String token) {
+  public String getUserId(String token) {
     return getClaimFromToken(token, Claims::getSubject);
   }
 
