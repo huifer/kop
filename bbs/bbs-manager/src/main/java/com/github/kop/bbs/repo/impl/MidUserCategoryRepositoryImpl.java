@@ -3,13 +3,10 @@ package com.github.kop.bbs.repo.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.github.kop.bbs.module.entity.MidUserCategory;
-import com.github.kop.bbs.module.entity.User;
 import com.github.kop.bbs.module.enums.DeletedEnum;
-import com.github.kop.bbs.module.req.midUserCategory.CreateMidUserCategoryReq;
 import com.github.kop.bbs.repo.MidUserCategoryRepository;
 import com.github.kop.bbs.repo.mapper.MidUserCategoryMapper;
 import org.springframework.stereotype.Repository;
-import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
@@ -80,12 +77,10 @@ public class MidUserCategoryRepositoryImpl implements MidUserCategoryRepository 
     @Override
     @Transactional(rollbackFor = Exception.class)
     public int deleteById(Long id) {
-        UpdateWrapper<MidUserCategory> updateWrapper = new UpdateWrapper<>();
-        updateWrapper.lambda().eq(MidUserCategory::getId,id)
-                .set(MidUserCategory::getDeleted,DeletedEnum.TRUE.getCode());
-        return midUserCategoryMapper.update(MidUserCategory.builder()
+        return midUserCategoryMapper.updateById(MidUserCategory.builder()
+                .categoryId(id)
                 .deleted(DeletedEnum.TRUE.getCode())
-                .build(),updateWrapper);
+                .build());
     }
 
     /**

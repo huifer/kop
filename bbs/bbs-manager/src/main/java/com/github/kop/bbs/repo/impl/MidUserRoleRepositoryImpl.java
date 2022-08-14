@@ -6,6 +6,7 @@ import com.github.kop.bbs.module.enums.DeletedEnum;
 import com.github.kop.bbs.module.ex.NoceException;
 import com.github.kop.bbs.repo.MidUserRoleRepository;
 import com.github.kop.bbs.repo.mapper.MidUserRoleMapper;
+import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -15,7 +16,7 @@ import javax.annotation.Resource;
  * @desc
  * @time 2022/8/13 14:43
  */
-@Service
+@Repository
 public class MidUserRoleRepositoryImpl implements MidUserRoleRepository {
 
     @Resource

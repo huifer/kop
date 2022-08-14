@@ -6,7 +6,7 @@ import com.github.kop.bbs.module.ex.ValidateException;
 import com.github.kop.bbs.module.req.category.CreateCategoryReq;
 import com.github.kop.bbs.module.req.category.QueryCategoryReq;
 import com.github.kop.bbs.module.req.category.UpdateCategoryReq;
-import com.github.kop.bbs.module.req.category.ViewPermissionsEnum;
+import com.github.kop.bbs.module.enums.category.ViewPermissionsEnum;
 import com.github.kop.bbs.module.res.category.CategoryListRes;
 import com.github.kop.bbs.repo.CategoryRepository;
 import com.github.kop.bbs.service.CategoryService;

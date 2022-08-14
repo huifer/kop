@@ -39,6 +39,7 @@ public class ExceptionHandlerController {
 
     @ExceptionHandler(ValidateException.class)
     public RespVO<String> handleValidateException(ValidateException e) {
+        log.error("参数异常{}",e);
         return RespVO.error("参数异常:"+e.getMsg());
     }
 

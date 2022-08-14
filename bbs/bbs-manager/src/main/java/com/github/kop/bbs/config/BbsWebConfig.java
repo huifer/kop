@@ -33,7 +33,8 @@ public class BbsWebConfig implements WebMvcConfigurer {
                 // swagger的
                 .excludePathPatterns("/swagger-resources/**")
                 .excludePathPatterns("/swagger-ui/**")
-//                .excludePathPatterns("/webjars/**")
-                .excludePathPatterns("/v3/**");
+                .excludePathPatterns("/v2/**")
+                .excludePathPatterns("/webjars/**")
+                .excludePathPatterns("/doc.html");
     }
 }

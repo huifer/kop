@@ -1,4 +1,4 @@
-package com.github.kop.bbs.module.req.category;
+package com.github.kop.bbs.module.enums.category;
 
 import com.github.kop.bbs.module.ex.NoceException;
 import lombok.AllArgsConstructor;

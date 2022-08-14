@@ -17,7 +17,7 @@ import javax.annotation.Resource;
  * @desc 用户控制器
  * @time 2022/8/9 22:17
  */
-@Api(value = "用户接口")
+@Api(tags = "用户接口")
 @RestController
 @RequestMapping("/user")
 public class UserController {
@@ -25,11 +25,6 @@ public class UserController {
     @Resource
     private UserService userService;
 
-    @ApiOperation(value = "添加用户")
-    @PostMapping("/open/create")
-    public RespVO<Boolean> create(@RequestBody CreateUserReq req) {
-        return RespVO.success(userService.create(req));
-    }
 
     @ApiOperation(value = "修改用户")
     @PutMapping("/{id}")
@@ -38,13 +33,6 @@ public class UserController {
         req.setId(id);
         return RespVO.success(userService.updateUser(req));
     }
-
-    @ApiOperation(value = "用户登录")
-    @PostMapping("/open/login")
-    public RespVO<UserLoginRes> byId(@RequestBody LoginUserReq req) {
-        return RespVO.success(userService.login(req));
-    }
-
 
 
 }

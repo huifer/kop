@@ -1,5 +1,6 @@
 package com.github.kop.bbs.module.req.category;
 
+import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
@@ -8,6 +9,7 @@ import lombok.Data;
  * @desc
  * @time 2022/8/11 21:40
  */
+@ApiModel("更新版块的参数")
 @Data
 public class UpdateCategoryReq {
 

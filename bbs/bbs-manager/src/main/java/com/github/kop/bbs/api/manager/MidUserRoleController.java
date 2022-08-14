@@ -1,5 +1,6 @@
 package com.github.kop.bbs.api.manager;
 
+import io.swagger.annotations.Api;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author ahxiaoqi
  * @since 2022-08-13
  */
+@Api(tags="用户角色接口")
 @RestController
 @RequestMapping("/mid_user_role")
 public class MidUserRoleController {

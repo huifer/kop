@@ -1,5 +1,6 @@
 package com.github.kop.bbs.module.req.user;
 
+import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
@@ -8,6 +9,7 @@ import lombok.Data;
  * @desc 登录
  * @time 2022/8/10 23:02
  */
+@ApiModel("用户登录的参数")
 @Data
 public class LoginUserReq {
 

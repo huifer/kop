@@ -18,17 +18,13 @@ import javax.annotation.Resource;
  * @desc 版块控制器
  * @time 2022/8/11 21:36
  */
-@Api(value = "版块接口")
+@Api(tags = "版块接口")
 @RestController
 @RequestMapping("/category")
 public class CategoryController {
 
     @Resource
     private CategoryService bbsCategoryService;
-
-
-
-
 
     @ApiOperation(value = "添加板块")
     @PostMapping("/create")

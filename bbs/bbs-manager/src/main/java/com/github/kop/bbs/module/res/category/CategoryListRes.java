@@ -1,6 +1,8 @@
 package com.github.kop.bbs.module.res.category;
 
+import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import io.swagger.annotations.ApiResponse;
 import lombok.Data;
 
 /**
@@ -8,6 +10,7 @@ import lombok.Data;
  * @desc
  * @time 2022/8/11 22:32
  */
+@ApiModel("分类列表返回结果")
 @Data
 public class CategoryListRes {
 

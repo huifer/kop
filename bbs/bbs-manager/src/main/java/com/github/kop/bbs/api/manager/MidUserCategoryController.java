@@ -17,7 +17,7 @@ import javax.annotation.Resource;
  * @author ahxiaoqi
  * @since 2022-08-13
  */
-@Api("版主接口")
+@Api(tags="版主接口")
 @RestController
 @RequestMapping("/mid_user_category")
 public class MidUserCategoryController {
