@@ -20,14 +20,17 @@ public interface MidUserRoleService {
 
     /**
      * 验证角色
-     * @param midUserRole
-     * @return
      */
-    boolean existsUserRole(MidUserRole midUserRole);
+    boolean existsUserRole(Long userId, String roleCode);
 
     /**
      * 删除角色
-     * @param build
+     * @param userId 用户id
+     * @param roleId 角色id
+     * @return
      */
-    void deleteUserRole(MidUserRole build);
+    boolean deleteUserRole(
+        Long userId,
+        Long roleId
+    );
 }

@@ -12,7 +12,7 @@ public class CommentEvent extends PointEvent {
   }
 
   @Override
-  ScoreTypeEnums type() {
+  public ScoreTypeEnums type() {
     return ScoreTypeEnums.COMMENT;
   }
 }

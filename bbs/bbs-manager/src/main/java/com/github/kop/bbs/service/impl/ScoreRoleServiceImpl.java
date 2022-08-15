@@ -103,7 +103,7 @@ public class ScoreRoleServiceImpl implements ScoreRoleService {
         Long sumScore = scoreRecordService.sumScoreByRole(scoreRole.getRoleId(), userId, startTime,
             endTime);
 
-        Integer maxScore = scoreRole.getMaxScore();
+        Long maxScore = scoreRole.getMaxScore();
         if (maxScore == null || maxScore == 0) {
             return scoreRole;
         } else {

@@ -48,24 +48,28 @@ public class CodeGenerator {
 
     public static void main(String[] args) {
         FastAutoGenerator.create(url, username, password)
-                .globalConfig(
-                        (scanner, builder) -> builder.author(author).fileOverride()
-                                .outputDir(out_put_file)
-                )
-                .packageConfig((scanner, builder) -> builder.parent(packageName)
-                        .pathInfo(Collections.singletonMap(OutputFile.xml, out_put_file))) // mapper xml 文件生产地址
+            .globalConfig(
+                (scanner, builder) -> builder.author(author).fileOverride()
+                    .outputDir(out_put_file)
+            )
+            .packageConfig((scanner, builder) -> builder.parent(packageName)
+                .pathInfo(
+                    Collections.singletonMap(OutputFile.xml, out_put_file))) // mapper xml 文件生产地址
 
-                .strategyConfig((scanner, builder) -> builder.addInclude(getTables(table))
-                        .controllerBuilder().enableRestStyle().enableHyphenStyle()
-                        .entityBuilder().enableLombok()
-                        .enableTableFieldAnnotation()
-                        .addTableFills(
-                                new Column("create_time", FieldFill.INSERT),
-                                new Column("create_user_id", FieldFill.INSERT),
-                                new Column("update_time", FieldFill.INSERT_UPDATE),
-                                new Column("update_user_id", FieldFill.INSERT_UPDATE)
+            .strategyConfig((scanner, builder) ->
+                builder
+                    .addTablePrefix("bbs")
+                    .addInclude(getTables(table))
+                    .controllerBuilder().enableRestStyle().enableHyphenStyle()
+                    .entityBuilder().enableLombok()
+                    .enableTableFieldAnnotation()
+                    .addTableFills(
+                        new Column("create_time", FieldFill.INSERT),
+                        new Column("create_user_id", FieldFill.INSERT),
+                        new Column("update_time", FieldFill.INSERT_UPDATE),
+                        new Column("update_user_id", FieldFill.INSERT_UPDATE)
 
-                        ).build())
+                    ).build())
                 .execute();
 
 

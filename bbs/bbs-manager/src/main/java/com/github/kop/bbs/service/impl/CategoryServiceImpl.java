@@ -15,7 +15,11 @@ import com.github.kop.bbs.utils.UpdateValidate;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+/**
+ * 板块服务
+ */
 @Service
 public class CategoryServiceImpl implements CategoryService {
 
@@ -31,6 +35,7 @@ public class CategoryServiceImpl implements CategoryService {
      * @param req
      * @return
      */
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public Boolean create(CreateCategoryReq req) {
         categoryCreateAndUpdateValidate.createValidate(req);
@@ -48,6 +53,7 @@ public class CategoryServiceImpl implements CategoryService {
      * @param req
      * @return
      */
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public Boolean updateCategory(UpdateCategoryReq req) {
         categoryCreateAndUpdateValidate.updateValidate(req);

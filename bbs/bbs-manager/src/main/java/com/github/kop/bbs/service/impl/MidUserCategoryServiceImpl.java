@@ -2,6 +2,7 @@ package com.github.kop.bbs.service.impl;
 
 import com.github.kop.bbs.module.entity.MidUserCategory;
 import com.github.kop.bbs.module.entity.MidUserRole;
+import com.github.kop.bbs.module.entity.Role;
 import com.github.kop.bbs.module.enums.DeletedEnum;
 import com.github.kop.bbs.module.enums.role.RoleEnum;
 import com.github.kop.bbs.module.ex.NoceException;
@@ -13,9 +14,11 @@ import com.github.kop.bbs.repo.MidUserCategoryRepository;
 import com.github.kop.bbs.repo.MidUserRoleRepository;
 import com.github.kop.bbs.service.MidUserCategoryService;
 import com.github.kop.bbs.service.MidUserRoleService;
+import com.github.kop.bbs.service.RoleService;
 import com.github.kop.bbs.utils.CreateValidate;
 import com.github.kop.bbs.utils.UpdateValidate;
 import org.apache.commons.lang3.ObjectUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -66,7 +69,7 @@ public class MidUserCategoryServiceImpl implements MidUserCategoryService {
                 .roleCode(RoleEnum.WEBMASTER.getRoleCode())
                 .deleted(DeletedEnum.FALSE.getCode())
                 .build();
-        boolean roleExist = midUserRoleService.existsUserRole(role);
+        boolean roleExist = midUserRoleService.existsUserRole(req.getUserId(),RoleEnum.WEBMASTER.getRoleCode());
         // 没有版主角色去添加
         if(!roleExist){
             midUserRoleService.addUserRole(role);
@@ -92,16 +95,16 @@ public class MidUserCategoryServiceImpl implements MidUserCategoryService {
         int size = midUserCategoryRepository.selectCountByUserId(userId);
         // 已经没有版主信息,移除版主角色
         if (size == 0) {
+
+            Role role = roleService.byCode(RoleEnum.WEBMASTER.getRoleCode());
             // 再次查询
-            midUserRoleService.deleteUserRole(MidUserRole.builder()
-                    .userId(userId)
-                    .roleId(RoleEnum.WEBMASTER.getRoleId())
-                    .roleCode(RoleEnum.WEBMASTER.getRoleCode())
-                    .deleted(DeletedEnum.TRUE.getCode())
-                    .build());
+            return midUserRoleService.deleteUserRole(userId, role.getRoleId());
         }
         return true;
     }
+
+    @Autowired
+    private RoleService roleService;
 
     protected class MidUserCategoryCreateAndUpdateValidate
             implements CreateValidate<CreateMidUserCategoryReq> {

@@ -6,6 +6,7 @@ import com.github.kop.bbs.module.enums.DeletedEnum;
 import com.github.kop.bbs.module.ex.NoceException;
 import com.github.kop.bbs.repo.MidUserRoleRepository;
 import com.github.kop.bbs.repo.mapper.MidUserRoleMapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
@@ -29,33 +30,33 @@ public class MidUserRoleRepositoryImpl implements MidUserRoleRepository {
      */
     @Override
     public int insert(MidUserRole midUserRole) {
-        validateUserRole(midUserRole);
+        validateUserRole(midUserRole.getUserId(), midUserRole.getRoleCode());
         return bbsMidUserRoleMapper.insert(midUserRole);
     }
 
-    private void validateUserRole(MidUserRole midUserRole){
-        if (existsUserRole(midUserRole)) {
+    private void validateUserRole(Long userId, String roleCode) {
+        if (existsUserRole(userId, roleCode)) {
             throw new NoceException("当前用户角色已存在");
         }
     }
 
     /**
      * 验证角色
-     * @param midUserRole
-     * @return
      */
-    public boolean existsUserRole(MidUserRole midUserRole){
+    public boolean existsUserRole(Long userId, String roleCode) {
         QueryWrapper<MidUserRole> queryWrapper = new QueryWrapper<>();
         queryWrapper.lambda()
-                .eq(MidUserRole::getRoleCode, midUserRole.getRoleCode())
-                .eq(MidUserRole::getUserId, midUserRole.getUserId())
-                .eq(MidUserRole::getDeleted, DeletedEnum.FALSE.getCode());
-       return bbsMidUserRoleMapper.exists(queryWrapper);
+            .eq(MidUserRole::getRoleCode, roleCode)
+            .eq(MidUserRole::getUserId, userId);
+        return bbsMidUserRoleMapper.exists(queryWrapper);
     }
 
     @Override
-    public int deleteUserRole(MidUserRole midUserRole) {
-       return bbsMidUserRoleMapper.deleteUserRole(midUserRole);
+    public int deleteUserRole(
+        Long userId,
+        Long roleId) {
+        return bbsMidUserRoleMapper.deleteUserRole(userId,
+            roleId);
     }
 
 }

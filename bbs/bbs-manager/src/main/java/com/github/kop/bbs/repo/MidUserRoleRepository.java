@@ -18,10 +18,17 @@ public interface MidUserRoleRepository {
 
     /**
      * 验证角色
-     * @param midUserRole
-     * @return
+     *
      */
-    boolean existsUserRole(MidUserRole midUserRole);
+    boolean existsUserRole(Long userId , String  roleCode );
 
-    int deleteUserRole(MidUserRole midUserRole);
+    /**
+     * 删除用户和角色之间的绑定关系
+     *
+     * @param userId 用户id
+     * @param roleId 角色id
+     * @return 受影响行数
+     */
+    int deleteUserRole(Long userId,
+        Long roleId);
 }

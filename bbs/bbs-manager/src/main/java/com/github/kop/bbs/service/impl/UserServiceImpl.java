@@ -56,18 +56,19 @@ public class UserServiceImpl  implements UserService {
                 .nickname(req.getNickname())
                 .build();
         boolean b = userRepository.insert(user) > 0;
-        if(!b){
+        if (!b) {
             throw new NoceException("系统错误,请稍后重试");
         }
         // 添加普通角色
         MidUserRole role = MidUserRole.builder()
-                .userId(user.getId())
-                .roleId(RoleEnum.USER.getRoleId())
-                .roleCode(RoleEnum.USER.getRoleCode())
-                .deleted(DeletedEnum.FALSE.getCode())
-                .build();
-        boolean roleExist = midUserRoleService.existsUserRole(role);
-        if(!roleExist){
+            .userId(user.getId())
+            .roleId(RoleEnum.USER.getRoleId())
+            .roleCode(RoleEnum.USER.getRoleCode())
+            .deleted(DeletedEnum.FALSE.getCode())
+            .build();
+        boolean roleExist = midUserRoleService.existsUserRole(user.getId(),
+            RoleEnum.USER.getRoleCode());
+        if (!roleExist) {
             midUserRoleService.addUserRole(role);
         }
         return true;

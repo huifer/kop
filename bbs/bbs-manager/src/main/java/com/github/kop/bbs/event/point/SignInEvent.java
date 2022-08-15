@@ -12,7 +12,7 @@ public class SignInEvent extends PointEvent {
   }
 
   @Override
-  ScoreTypeEnums type() {
+public   ScoreTypeEnums type() {
     return ScoreTypeEnums.SIG_IN;
 
   }

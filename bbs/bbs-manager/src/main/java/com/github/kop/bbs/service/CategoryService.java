@@ -6,6 +6,9 @@ import com.github.kop.bbs.module.req.category.QueryCategoryReq;
 import com.github.kop.bbs.module.req.category.UpdateCategoryReq;
 import com.github.kop.bbs.module.res.category.CategoryListRes;
 
+/**
+ * 板块服务
+ */
 public interface CategoryService {
 
 

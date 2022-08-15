@@ -42,7 +42,7 @@ public class UpdateScoreRoleReq {
      */
     @TableField(value = "score")
     @ApiModelProperty(value = "积分数量 0 不限 ")
-    private Integer score;
+    private Long score;
 
     /**
      * 积分周期(周期内只能得一次分) 0 没有周期(即不限制得分)  1 天 2 周 3 月 4 年

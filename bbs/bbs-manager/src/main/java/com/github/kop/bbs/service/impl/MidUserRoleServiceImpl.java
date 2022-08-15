@@ -36,12 +36,10 @@ public class MidUserRoleServiceImpl implements MidUserRoleService {
     /**
      * 验证角色
      *
-     * @param midUserRole
-     * @return
      */
     @Override
-    public boolean existsUserRole(MidUserRole midUserRole) {
-        return midUserRoleRepository.existsUserRole(midUserRole);
+    public boolean existsUserRole(Long userId, String roleCode) {
+        return midUserRoleRepository.existsUserRole(userId, roleCode);
     }
 
     /**
@@ -50,7 +48,9 @@ public class MidUserRoleServiceImpl implements MidUserRoleService {
      * @param build
      */
     @Override
-    public void deleteUserRole(MidUserRole build) {
-        midUserRoleRepository.deleteUserRole(build);
+    public boolean deleteUserRole(
+        Long userId,
+        Long roleId) {
+        return midUserRoleRepository.deleteUserRole(userId, roleId) > 0;
     }
 }

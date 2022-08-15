@@ -6,6 +6,5 @@
     update bbs_mid_user_role set deleted = 1
     where user_id = #{userId}
     and role_id = #{roleId}
-    and role_code = #{roleCode}
     </update>
 </mapper>

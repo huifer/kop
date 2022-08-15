@@ -12,7 +12,7 @@ public class PushPostEvent extends PointEvent {
   }
 
   @Override
-  ScoreTypeEnums type() {
+public   ScoreTypeEnums type() {
     return ScoreTypeEnums.PUSH_POINT;
   }
 }
