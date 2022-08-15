@@ -3,6 +3,7 @@ package com.github.kop.bbs.module.entity;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -74,7 +75,7 @@ public class Tag implements Serializable {
     /**
      * 是否删除 0 为未删除、1 为已删除
      */
-    @TableField(value = "deleted")
+    @TableField(value = "deleted")@TableLogic
     @ApiModelProperty(value = "是否删除 0 为未删除、1 为已删除")
     private Integer deleted;
 

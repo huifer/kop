@@ -87,14 +87,14 @@ public class Category implements Serializable {
     /**
      * 逻辑删除标记位
      */
-    @TableField(value = "deleted")
+    @TableField(value = "deleted")@TableLogic
     @ApiModelProperty(value = "逻辑删除标记位")
     private Integer deleted;
 
     /**
      * 乐观锁
      */
-    @TableField(value = "version")
+    @TableField(value = "version")@Version
     @ApiModelProperty(value = "乐观锁")
     private Long version;
 

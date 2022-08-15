@@ -100,7 +100,7 @@ public class ScoreRole implements Serializable {
     /**
      * 逻辑删除标记位
      */
-    @TableField(value = "deleted")
+    @TableField(value = "deleted")@TableLogic
     @ApiModelProperty(value = "逻辑删除标记位")
     private Integer deleted;
 

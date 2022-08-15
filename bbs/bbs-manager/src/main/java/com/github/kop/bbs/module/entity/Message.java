@@ -3,6 +3,7 @@ package com.github.kop.bbs.module.entity;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -33,9 +34,9 @@ public class Message implements Serializable {
     /**
      * 通知类型，1动态，2评论，3回复，4私信，99系统通知
      */
-    @TableField(value = "tpis_type")
+    @TableField(value = "tips_type")
     @ApiModelProperty(value = " 通知类型，1动态，2评论，3回复，4私信，99系统通知")
-    private Integer tpisType;
+    private Integer tipsType;
 
     /**
      * 产生消息的对应内容的主键
@@ -89,7 +90,7 @@ public class Message implements Serializable {
     /**
      * 逻辑删除标记位
      */
-    @TableField(value = "deleted")
+    @TableField(value = "deleted")@TableLogic
     @ApiModelProperty(value = "逻辑删除标记位")
     private Integer deleted;
 

@@ -88,13 +88,13 @@ public class BlogSpecialColumn implements Serializable {
     /**
      * 逻辑删除标记位
      */
-    @TableField(value = "deleted")
+    @TableField(value = "deleted")@TableLogic
     private Integer deleted;
 
     /**
      * 乐观锁
      */
-    @TableField(value = "version")
+    @TableField(value = "version")@Version
     private Long version;
 
     private static final long serialVersionUID = 1L;
