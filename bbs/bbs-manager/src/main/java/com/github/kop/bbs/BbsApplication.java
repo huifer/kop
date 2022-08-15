@@ -23,7 +23,7 @@ public class BbsApplication {
   public static void main(String[] args) {
     ConfigurableApplicationContext run = SpringApplication.run(BbsApplication.class, args);
     logger.info("bbs项目启动成功");
-    logger.info("  _                   _      _          \n" +
+    logger.info("\n  _                   _      _          \n" +
             " | |                 | |    | |         \n" +
             " | | __ ___   _ __   | |__  | |__   ___ \n" +
             " | |/ // _ \\ | '_ \\  | '_ \\ | '_ \\ / __|\n" +

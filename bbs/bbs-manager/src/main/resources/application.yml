@@ -38,3 +38,8 @@ bbs:
   expireSec: 30000
   secret: eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjYwMTQ3MTk3LCJleHAiOjE2NjAxNzcxOTd9.tXA_mvUxjknRo18KfpfggFcnHyK2O95h8xBbrv_cLQ3ieEdPpQp5bcUUqCefLEYDxxjWEoR5nrBeqRfqZJB7Z
 
+  url:
+    white:
+      - /open/**
+        /**/open/**
+  env: dev
