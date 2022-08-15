@@ -17,6 +17,7 @@ import lombok.NoArgsConstructor;
 
 /**
  * 论坛的收藏日志
+ * fixme: 论坛为啥需要收藏
  */
 @ApiModel(value = "论坛的收藏日志")
 @Data

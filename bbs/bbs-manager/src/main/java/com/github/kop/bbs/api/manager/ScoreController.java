@@ -6,7 +6,7 @@ import com.github.kop.bbs.module.req.score.PageListScoreRoleReq;
 import com.github.kop.bbs.module.req.score.UpdateScoreRoleReq;
 import com.github.kop.bbs.module.res.RespVO;
 import com.github.kop.bbs.module.res.score.ScorePageListRes;
-import com.github.kop.bbs.service.ScoreRoleService;
+import com.github.kop.bbs.service.score.ScoreRoleService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;

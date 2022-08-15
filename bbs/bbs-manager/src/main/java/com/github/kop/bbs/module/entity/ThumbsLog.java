@@ -17,6 +17,7 @@ import lombok.NoArgsConstructor;
 
 /**
  * 论坛的点赞日志
+ * fixme: 论坛为啥需要点赞
  */
 @ApiModel(value = "论坛的点赞日志")
 @Data

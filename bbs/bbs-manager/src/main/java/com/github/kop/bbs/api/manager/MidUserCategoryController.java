@@ -2,7 +2,7 @@ package com.github.kop.bbs.api.manager;
 
 import com.github.kop.bbs.module.req.midUserCategory.CreateMidUserCategoryReq;
 import com.github.kop.bbs.module.res.RespVO;
-import com.github.kop.bbs.service.MidUserCategoryService;
+import com.github.kop.bbs.service.category.MidUserCategoryService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
@@ -17,7 +17,7 @@ import javax.annotation.Resource;
  * @author ahxiaoqi
  * @since 2022-08-13
  */
-@Api(tags="版主接口")
+@Api(tags = "版主接口")
 @RestController
 @RequestMapping("/mid_user_category")
 public class MidUserCategoryController {
@@ -33,9 +33,11 @@ public class MidUserCategoryController {
 
     @ApiOperation(value = "移除版主")
     @DeleteMapping("/{id}/{userId}")
-    public RespVO<Boolean> delete(@PathVariable("id") Long id,@PathVariable("userId")Long userId) {
-        return RespVO.success(midUserCategoryService.delete(id,userId));
+    public RespVO<Boolean> delete(@PathVariable("id") Long id,
+        @PathVariable("userId") Long userId) {
+        return RespVO.success(midUserCategoryService.delete(id, userId));
     }
+
 
 
 }

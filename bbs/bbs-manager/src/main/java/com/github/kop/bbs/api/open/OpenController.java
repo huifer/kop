@@ -4,7 +4,7 @@ import com.github.kop.bbs.module.req.user.CreateUserReq;
 import com.github.kop.bbs.module.req.user.LoginUserReq;
 import com.github.kop.bbs.module.res.RespVO;
 import com.github.kop.bbs.module.res.user.UserLoginRes;
-import com.github.kop.bbs.service.UserService;
+import com.github.kop.bbs.service.user.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.PostMapping;

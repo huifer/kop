@@ -13,13 +13,21 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/customer/category")
 public class CustomerCategoryApi {
+
   /**
    * 使用者申请板块
+   *
    * @return
    */
   @ApiOperation(value = "申请板块")
   @PostMapping("/apply")
-  public RespVO<Boolean> apply(){
+  public RespVO<Boolean> apply() {
+    return null;
+  }
+
+  @PostMapping("/apply/manager")
+  @ApiOperation(value = "申请版主")
+  public RespVO<Boolean> applyCategory() {
     return null;
   }
 }
