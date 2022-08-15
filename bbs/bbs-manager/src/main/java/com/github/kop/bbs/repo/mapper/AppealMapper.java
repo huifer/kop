@@ -8,7 +8,7 @@ import org.apache.ibatis.annotations.Param;
 
 @Mapper
 public interface AppealMapper extends BaseMapper<Appeal> {
-    int updateBatchSelective(List<Appeal> list);
+  int updateBatchSelective(List<Appeal> list);
 
-    int batchInsert(@Param("list") List<Appeal> list);
+  int batchInsert(@Param("list") List<Appeal> list);
 }

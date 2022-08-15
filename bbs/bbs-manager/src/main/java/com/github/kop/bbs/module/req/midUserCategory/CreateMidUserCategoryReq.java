@@ -2,7 +2,6 @@ package com.github.kop.bbs.module.req.midUserCategory;
 
 import com.baomidou.mybatisplus.annotation.TableField;
 import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 /**
@@ -14,15 +13,11 @@ import lombok.Data;
 @Data
 public class CreateMidUserCategoryReq {
 
-    /**
-     * 用户id
-     */
-    @TableField("user_id")
-    private Long userId;
+  /** 用户id */
+  @TableField("user_id")
+  private Long userId;
 
-    /**
-     * 版块id
-     */
-    @TableField("category_id")
-    private Long categoryId;
+  /** 版块id */
+  @TableField("category_id")
+  private Long categoryId;
 }

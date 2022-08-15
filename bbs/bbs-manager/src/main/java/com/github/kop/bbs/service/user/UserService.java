@@ -7,28 +7,27 @@ import com.github.kop.bbs.module.res.user.UserLoginRes;
 
 public interface UserService {
 
+  /**
+   * 添加用户
+   *
+   * @param req
+   * @return
+   */
+  Boolean create(CreateUserReq req);
 
+  /**
+   * 更新用户
+   *
+   * @param req
+   * @return
+   */
+  Boolean updateUser(UpdateUserReq req);
 
-    /**
-     * 添加用户
-     * @param req
-     * @return
-     */
-    Boolean create(CreateUserReq req);
-
-    /**
-     * 更新用户
-     * @param req
-     * @return
-     */
-    Boolean updateUser(UpdateUserReq req);
-
-    /**
-     * 登录
-     * @param req
-     * @return
-     */
-    UserLoginRes login(LoginUserReq req);
+  /**
+   * 登录
+   *
+   * @param req
+   * @return
+   */
+  UserLoginRes login(LoginUserReq req);
 }
-
-

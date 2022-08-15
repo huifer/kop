@@ -1,10 +1,3 @@
 package com.github.kop.bbs.service.punishment;
 
-public interface PunishmentService {
-
-
-
-
-}
-
-
+public interface PunishmentService {}

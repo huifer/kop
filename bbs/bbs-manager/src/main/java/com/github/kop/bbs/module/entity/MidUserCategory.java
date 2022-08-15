@@ -5,13 +5,10 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
-
 import lombok.*;
 
 /**
- * <p>
  * 版主与分类的中间表
- * </p>
  *
  * @author ahxiaoqi
  * @since 2022-08-13
@@ -23,31 +20,21 @@ import lombok.*;
 @TableName("bbs_mid_user_category")
 public class MidUserCategory implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 1L;
 
-    /**
-     * 主键
-     */
-    @TableId(value = "id", type = IdType.AUTO)
-    private Long id;
+  /** 主键 */
+  @TableId(value = "id", type = IdType.AUTO)
+  private Long id;
 
-    /**
-     * 用户id
-     */
-    @TableField("user_id")
-    private Long userId;
+  /** 用户id */
+  @TableField("user_id")
+  private Long userId;
 
-    /**
-     * 版块id
-     */
-    @TableField("category_id")
-    private Long categoryId;
+  /** 版块id */
+  @TableField("category_id")
+  private Long categoryId;
 
-    /**
-     * 是否删除 0 为未删除、1 为已删除
-     */
-    @TableField("deleted")
-    private Integer deleted;
-
-
+  /** 是否删除 0 为未删除、1 为已删除 */
+  @TableField("deleted")
+  private Integer deleted;
 }

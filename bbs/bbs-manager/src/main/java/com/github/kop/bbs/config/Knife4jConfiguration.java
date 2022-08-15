@@ -18,21 +18,17 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2WebMvc;
 @EnableSwagger2WebMvc
 public class Knife4jConfiguration {
 
-    @Bean(value = "bbsApi")
-    public Docket bbsApi() {
-        return new Docket(DocumentationType.SWAGGER_2)
-                .apiInfo(new ApiInfoBuilder()
-                        .title("kop论坛接口")
-                        .description("kop论坛接口")
-                        .version("1.0")
-                        .build())
-                //分组名称
-                .groupName("1.0版本")
-                .select()
-                //这里指定Controller扫描包路径
-                .apis(RequestHandlerSelectors.basePackage("com.github.kop.bbs.api"))
-                .paths(PathSelectors.any())
-                .build();
-    }
-
+  @Bean(value = "bbsApi")
+  public Docket bbsApi() {
+    return new Docket(DocumentationType.SWAGGER_2)
+        .apiInfo(
+            new ApiInfoBuilder().title("kop论坛接口").description("kop论坛接口").version("1.0").build())
+        // 分组名称
+        .groupName("1.0版本")
+        .select()
+        // 这里指定Controller扫描包路径
+        .apis(RequestHandlerSelectors.basePackage("com.github.kop.bbs.api"))
+        .paths(PathSelectors.any())
+        .build();
+  }
 }

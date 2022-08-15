@@ -11,5 +11,4 @@ public class QueryPostReq {
 
   @ApiModelProperty(value = "部门id")
   private Long deptId;
-
 }

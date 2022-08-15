@@ -6,11 +6,10 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.Version;
-import lombok.Getter;
-import lombok.Setter;
-
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * @author root
@@ -48,21 +47,15 @@ public class RbacApp implements Serializable {
   @TableLogic
   private Integer deleted;
 
-  /**
-   * 乐观锁
-   */
+  /** 乐观锁 */
   @TableField("version")
   @Version
   private Long version;
 
-  /**
-   * 应用名称
-   */
+  /** 应用名称 */
   @TableField("name")
   private String name;
-  /**
-   * 应用编码
-   */
+  /** 应用编码 */
   @TableField("code")
   private String code;
 }

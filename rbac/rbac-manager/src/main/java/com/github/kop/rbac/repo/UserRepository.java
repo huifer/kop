@@ -3,7 +3,6 @@ package com.github.kop.rbac.repo;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.github.kop.rbac.module.entity.RbacUser;
 import com.github.kop.rbac.module.req.user.QueryUserReq;
-
 import java.util.List;
 
 public interface UserRepository {

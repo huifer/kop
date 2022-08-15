@@ -61,5 +61,4 @@ public class RbacRoleBindGroup implements Serializable {
   @TableField("version")
   @Version
   private Long version;
-
 }

@@ -8,7 +8,7 @@ import org.apache.ibatis.annotations.Param;
 
 @Mapper
 public interface TipsMapper extends BaseMapper<Tips> {
-    int updateBatchSelective(List<Tips> list);
+  int updateBatchSelective(List<Tips> list);
 
-    int batchInsert(@Param("list") List<Tips> list);
+  int batchInsert(@Param("list") List<Tips> list);
 }

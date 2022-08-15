@@ -8,7 +8,7 @@ import org.apache.ibatis.annotations.Param;
 
 @Mapper
 public interface CommentThumbsLogMapper extends BaseMapper<CommentThumbsLog> {
-    int updateBatchSelective(List<CommentThumbsLog> list);
+  int updateBatchSelective(List<CommentThumbsLog> list);
 
-    int batchInsert(@Param("list") List<CommentThumbsLog> list);
+  int batchInsert(@Param("list") List<CommentThumbsLog> list);
 }

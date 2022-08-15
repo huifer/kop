@@ -14,5 +14,4 @@ public class QueryAppReq {
   private String code;
 
   private Long id;
-
 }

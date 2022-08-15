@@ -9,16 +9,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-/**
- * 公共的积分发放类
- */
+/** 公共的积分发放类 */
 @Service
 public class CommonSendScoreService implements SendScoreService {
 
-  @Autowired
-  private ScoreRoleService scoreRoleService;
-  @Autowired
-  private ScoreRecordService scoreRecordService;
+  @Autowired private ScoreRoleService scoreRoleService;
+  @Autowired private ScoreRecordService scoreRecordService;
 
   @Transactional
   @Override
@@ -27,12 +23,9 @@ public class CommonSendScoreService implements SendScoreService {
     ScoreRole scoreRole = scoreRoleService.exceededMax(event.type(), event.getUserId());
 
     if (scoreRole != null) {
-      return this.scoreRecordService.grant(event.getUserId(), scoreRole.getRoleId(),
-          scoreRole.getScore());
+      return this.scoreRecordService.grant(
+          event.getUserId(), scoreRole.getRoleId(), scoreRole.getScore());
     }
     return false;
   }
-
-
-
 }

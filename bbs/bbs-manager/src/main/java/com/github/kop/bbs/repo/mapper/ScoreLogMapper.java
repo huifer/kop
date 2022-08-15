@@ -8,7 +8,7 @@ import org.apache.ibatis.annotations.Param;
 
 @Mapper
 public interface ScoreLogMapper extends BaseMapper<ScoreLog> {
-    int updateBatchSelective(List<ScoreLog> list);
+  int updateBatchSelective(List<ScoreLog> list);
 
-    int batchInsert(@Param("list") List<ScoreLog> list);
+  int batchInsert(@Param("list") List<ScoreLog> list);
 }

@@ -1,7 +1,6 @@
 package com.github.kop.bbs.repo;
 
 import com.github.kop.bbs.module.entity.MidUserRole;
-import com.github.kop.bbs.module.req.midUserCategory.CreateMidUserCategoryReq;
 
 /**
  * @auth ahxiaoqi
@@ -10,25 +9,22 @@ import com.github.kop.bbs.module.req.midUserCategory.CreateMidUserCategoryReq;
  */
 public interface MidUserRoleRepository {
 
-    /**
-     * 添加角色
-     * @param build
-     */
-    int insert(MidUserRole midUserRole);
+  /**
+   * 添加角色
+   *
+   * @param build
+   */
+  int insert(MidUserRole midUserRole);
 
-    /**
-     * 验证角色
-     *
-     */
-    boolean existsUserRole(Long userId , String  roleCode );
+  /** 验证角色 */
+  boolean existsUserRole(Long userId, String roleCode);
 
-    /**
-     * 删除用户和角色之间的绑定关系
-     *
-     * @param userId 用户id
-     * @param roleId 角色id
-     * @return 受影响行数
-     */
-    int deleteUserRole(Long userId,
-        Long roleId);
+  /**
+   * 删除用户和角色之间的绑定关系
+   *
+   * @param userId 用户id
+   * @param roleId 角色id
+   * @return 受影响行数
+   */
+  int deleteUserRole(Long userId, Long roleId);
 }

@@ -8,7 +8,7 @@ import org.apache.ibatis.annotations.Param;
 
 @Mapper
 public interface UserScoreMapper extends BaseMapper<UserScore> {
-    int updateBatchSelective(List<UserScore> list);
+  int updateBatchSelective(List<UserScore> list);
 
-    int batchInsert(@Param("list") List<UserScore> list);
+  int batchInsert(@Param("list") List<UserScore> list);
 }

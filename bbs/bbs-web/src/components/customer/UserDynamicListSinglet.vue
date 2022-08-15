@@ -34,7 +34,7 @@
           </div>
           <div
               style=" text-align: center;align-items: center;justify-content: center;flex: 1 1 33.333%;position: relative">
-            <span style="">分析</span>
+            <span style="">分享</span>
           </div>
         </div>
       </div>

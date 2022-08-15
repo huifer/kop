@@ -8,7 +8,7 @@ import org.apache.ibatis.annotations.Param;
 
 @Mapper
 public interface ScoreRoleMapper extends BaseMapper<ScoreRole> {
-    int updateBatchSelective(List<ScoreRole> list);
+  int updateBatchSelective(List<ScoreRole> list);
 
-    int batchInsert(@Param("list") List<ScoreRole> list);
+  int batchInsert(@Param("list") List<ScoreRole> list);
 }

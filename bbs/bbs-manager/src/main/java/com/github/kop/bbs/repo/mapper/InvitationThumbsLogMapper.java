@@ -8,7 +8,7 @@ import org.apache.ibatis.annotations.Param;
 
 @Mapper
 public interface InvitationThumbsLogMapper extends BaseMapper<InvitationThumbsLog> {
-    int updateBatchSelective(List<InvitationThumbsLog> list);
+  int updateBatchSelective(List<InvitationThumbsLog> list);
 
-    int batchInsert(@Param("list") List<InvitationThumbsLog> list);
+  int batchInsert(@Param("list") List<InvitationThumbsLog> list);
 }

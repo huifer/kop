@@ -11,28 +11,21 @@ import lombok.Getter;
 @AllArgsConstructor
 @Getter
 public enum RoleEnum {
+  ROOT(1L, "超级管理员", "root"),
 
-    ROOT(1L,"超级管理员","root"),
+  ADMIN(2L, "管理员", "admin"),
 
-    ADMIN(2L,"管理员","admin"),
+  WEBMASTER(3L, "版主", "webmaster"),
 
-    WEBMASTER(3L,"版主","webmaster"),
+  USER(4L, "普通用户", "user"),
+  ;
 
-    USER(4L,"普通用户","user"),
-    ;
+  /** 角色id */
+  private final Long roleId;
 
-    /**
-     * 角色id
-     */
-    private final Long roleId;
+  /** 角色名称 */
+  private final String roleName;
 
-    /**
-     * 角色名称
-     */
-    private final String roleName;
-
-    /**
-     * 角色名称
-     */
-    private final String roleCode;
+  /** 角色名称 */
+  private final String roleCode;
 }

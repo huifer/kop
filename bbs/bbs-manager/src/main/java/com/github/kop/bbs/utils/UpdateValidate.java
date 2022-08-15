@@ -1,6 +1,5 @@
 package com.github.kop.bbs.utils;
 
-
 import com.github.kop.bbs.module.AppHttpCodeEnum;
 import com.github.kop.bbs.module.ex.ValidateException;
 

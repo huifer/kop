@@ -2,22 +2,21 @@ package com.github.kop.bbs.service.score.impl;
 
 import com.github.kop.bbs.module.entity.ScoreRecord;
 import com.github.kop.bbs.repo.ScoreRecordRepository;
+import com.github.kop.bbs.service.score.ScoreRecordService;
 import java.time.LocalDateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.github.kop.bbs.service.score.ScoreRecordService;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class ScoreRecordServiceImpl implements ScoreRecordService {
 
-  @Autowired
-  private ScoreRecordRepository scoreRecordRepository;
+  @Autowired private ScoreRecordRepository scoreRecordRepository;
 
   @Override
   public LocalDateTime firstGetScore(Long roleId, Long userId) {
-    ScoreRecord scoreRecord = this.scoreRecordRepository.findByRoleIdAndUserIdAndMinCreateAt(roleId,
-        userId);
+    ScoreRecord scoreRecord =
+        this.scoreRecordRepository.findByRoleIdAndUserIdAndMinCreateAt(roleId, userId);
     return scoreRecord.getCreateTime();
   }
 
@@ -35,8 +34,8 @@ public class ScoreRecordServiceImpl implements ScoreRecordService {
   }
 
   @Override
-  public Long sumScoreByRole(Long roleId, Long userId, LocalDateTime startTime,
-      LocalDateTime endTime) {
+  public Long sumScoreByRole(
+      Long roleId, Long userId, LocalDateTime startTime, LocalDateTime endTime) {
     return scoreRecordRepository.sumScoreByRole(roleId, userId, startTime, endTime);
   }
 }

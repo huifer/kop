@@ -10,13 +10,11 @@ import com.github.kop.bbs.repo.CategoryRepository;
 import com.github.kop.bbs.repo.mapper.CategoryMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.stereotype.Service;
 
 @Repository
 public class CategoryRepositoryImpl implements CategoryRepository {
 
-  @Autowired
-  private CategoryMapper bbsCategoryMapper;
+  @Autowired private CategoryMapper bbsCategoryMapper;
 
   @Override
   public long insert(Category insertEntity) {
@@ -34,9 +32,9 @@ public class CategoryRepositoryImpl implements CategoryRepository {
     return this.bbsCategoryMapper.updateById(updateEntity);
   }
 
-  private void validateCategoryName(String categoryName){
+  private void validateCategoryName(String categoryName) {
     boolean exists = existsCategoryName(categoryName);
-    if(exists){
+    if (exists) {
       throw new ValidateException("分类名称已经存在");
     }
   }
@@ -54,8 +52,7 @@ public class CategoryRepositoryImpl implements CategoryRepository {
   @Override
   public boolean existsCategoryName(String categoryName) {
     QueryWrapper<Category> queryWrapper = new QueryWrapper<>();
-    queryWrapper.lambda()
-            .eq(Category::getCategoryName, categoryName);
+    queryWrapper.lambda().eq(Category::getCategoryName, categoryName);
     return this.bbsCategoryMapper.exists(queryWrapper);
   }
 }

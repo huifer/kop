@@ -12,5 +12,4 @@ public class CreateAppReq {
 
   @ApiModelProperty(value = "应用编码")
   private String code;
-
 }

@@ -10,5 +10,4 @@ public interface ScoreRecordRepository {
   Long sumScoreByRole(Long roleId, Long userId, LocalDateTime startTime, LocalDateTime endTime);
 
   boolean create(ScoreRecord scoreRecord);
-
 }

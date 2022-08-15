@@ -17,25 +17,21 @@ import com.github.kop.rbac.utils.CreateValidate;
 import com.github.kop.rbac.utils.JwtTokenUtil;
 import com.github.kop.rbac.utils.UpdateValidate;
 import com.github.kop.rbac.utils.UserInfoThread;
+import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.List;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
 
-import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.List;
-
 @Service
 public class UserServiceImpl implements UserService {
   protected final UserCreateAndUpdateValidate userCreateAndUpdateValidate =
-          new UserCreateAndUpdateValidate();
-  @Autowired
-  private UserRepository userRepository;
-  @Autowired
-  private UserBindService userBindService;
-  @Autowired
-  private CompanyService companyService;
+      new UserCreateAndUpdateValidate();
+  @Autowired private UserRepository userRepository;
+  @Autowired private UserBindService userBindService;
+  @Autowired private CompanyService companyService;
 
   @Override
   public int create(CreateUserReq req) {
@@ -44,7 +40,8 @@ public class UserServiceImpl implements UserService {
     rbacUser.setName(req.getName());
     rbacUser.setPhone(req.getPhone());
     rbacUser.setGrade(req.getGrade());
-    rbacUser.setPassword(DigestUtils.md5DigestAsHex(req.getPassword().getBytes(StandardCharsets.UTF_8)));
+    rbacUser.setPassword(
+        DigestUtils.md5DigestAsHex(req.getPassword().getBytes(StandardCharsets.UTF_8)));
     rbacUser.setCompanyId(UserInfoThread.getCompanyId());
 
     return this.userRepository.create(rbacUser);
@@ -124,13 +121,13 @@ public class UserServiceImpl implements UserService {
     return res;
   }
 
-  @Autowired
-  private JwtTokenUtil jwtTokenUtil;
-
+  @Autowired private JwtTokenUtil jwtTokenUtil;
 
   @Override
   public UserLoginRes login(String username, String password, Long companyId) {
-    RbacUser user = this.userRepository.findByUsernameAndPassword(username, DigestUtils.md5DigestAsHex(password.getBytes(StandardCharsets.UTF_8)));
+    RbacUser user =
+        this.userRepository.findByUsernameAndPassword(
+            username, DigestUtils.md5DigestAsHex(password.getBytes(StandardCharsets.UTF_8)));
     if (user != null) {
       UserLoginRes userLoginRes = new UserLoginRes();
       userLoginRes.setPhone(user.getPhone());
@@ -151,8 +148,7 @@ public class UserServiceImpl implements UserService {
     return null;
   }
 
-
-  protected  class UserCreateAndUpdateValidate
+  protected class UserCreateAndUpdateValidate
       implements CreateValidate<CreateUserReq>, UpdateValidate<UpdateUserReq> {
     @Override
     public void createValidate(CreateUserReq createUserReq) throws ValidateException {
@@ -173,8 +169,6 @@ public class UserServiceImpl implements UserService {
       if (existsPhone) {
         throw new ValidateException("联系方式已存在");
       }
-
-
     }
 
     @Override

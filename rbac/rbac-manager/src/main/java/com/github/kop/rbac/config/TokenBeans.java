@@ -6,8 +6,8 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class TokenBeans {
-    @Bean
-    public JwtTokenUtil jwtTokenUtil() {
-        return new JwtTokenUtil(30000, "laksjfij91j23k");
-    }
+  @Bean
+  public JwtTokenUtil jwtTokenUtil() {
+    return new JwtTokenUtil(30000, "laksjfij91j23k");
+  }
 }

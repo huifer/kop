@@ -8,7 +8,7 @@ import org.apache.ibatis.annotations.Param;
 
 @Mapper
 public interface UserFollowerListMapper extends BaseMapper<UserFollowerList> {
-    int updateBatchSelective(List<UserFollowerList> list);
+  int updateBatchSelective(List<UserFollowerList> list);
 
-    int batchInsert(@Param("list") List<UserFollowerList> list);
+  int batchInsert(@Param("list") List<UserFollowerList> list);
 }

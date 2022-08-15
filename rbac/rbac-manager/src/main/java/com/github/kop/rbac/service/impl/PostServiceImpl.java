@@ -18,13 +18,12 @@ import com.github.kop.rbac.service.PostService;
 import com.github.kop.rbac.utils.CreateValidate;
 import com.github.kop.rbac.utils.UpdateValidate;
 import com.github.kop.rbac.utils.UserInfoThread;
+import java.util.ArrayList;
+import java.util.List;
 import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Service
 public class PostServiceImpl implements PostService {
@@ -117,8 +116,7 @@ public class PostServiceImpl implements PostService {
     return res;
   }
 
-  @Autowired
-  private PostBindRoleGroupRepository postBindRoleGroupRepository;
+  @Autowired private PostBindRoleGroupRepository postBindRoleGroupRepository;
 
   @Override
   public boolean bindRoleGroup(Long postId, Long roleGroupId) {
@@ -155,7 +153,7 @@ public class PostServiceImpl implements PostService {
   }
 
   protected static final class PostCreateAndUpdateValidate
-          implements CreateValidate<CreatePostReq>, UpdateValidate<UpdatePostReq> {
+      implements CreateValidate<CreatePostReq>, UpdateValidate<UpdatePostReq> {
 
     private static void commonValidate(String name, Long companyId, Long deptId) {
       if (StringUtils.isEmpty(name)) {

@@ -8,14 +8,14 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class TokenBeans {
 
-    @Value("${bbs.expireSec}")
-    private long expireSec;
+  @Value("${bbs.expireSec}")
+  private long expireSec;
 
-    @Value("${bbs.secret}")
-    private String secret;
+  @Value("${bbs.secret}")
+  private String secret;
 
-    @Bean
-    public JwtTokenUtil jwtTokenUtil() {
-        return new JwtTokenUtil(expireSec, secret);
-    }
+  @Bean
+  public JwtTokenUtil jwtTokenUtil() {
+    return new JwtTokenUtil(expireSec, secret);
+  }
 }

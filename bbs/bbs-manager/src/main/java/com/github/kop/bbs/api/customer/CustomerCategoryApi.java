@@ -1,13 +1,11 @@
 package com.github.kop.bbs.api.customer;
 
-
 import com.github.kop.bbs.module.res.RespVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 
 @Api(tags = "使用这申请版块接口")
 @RestController

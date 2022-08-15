@@ -1,10 +1,3 @@
 package com.github.kop.bbs.service.invitation;
 
-public interface InvitationService {
-
-
-
-
-}
-
-
+public interface InvitationService {}

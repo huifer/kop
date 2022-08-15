@@ -7,12 +7,11 @@ import com.github.kop.bbs.module.res.user.UserLoginRes;
 import com.github.kop.bbs.service.user.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import javax.annotation.Resource;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import javax.annotation.Resource;
 
 /**
  * @auth ahxiaoqi
@@ -24,21 +23,17 @@ import javax.annotation.Resource;
 @RequestMapping("/open")
 public class OpenController {
 
-    @Resource
-    private UserService userService;
+  @Resource private UserService userService;
 
-    @ApiOperation(value = "用户注册")
-    @PostMapping("/user/create")
-    public RespVO<Boolean> create(@RequestBody CreateUserReq req) {
-        return RespVO.success(userService.create(req));
-    }
+  @ApiOperation(value = "用户注册")
+  @PostMapping("/user/create")
+  public RespVO<Boolean> create(@RequestBody CreateUserReq req) {
+    return RespVO.success(userService.create(req));
+  }
 
-
-    @ApiOperation(value = "用户登录")
-    @PostMapping("/user/login")
-    public RespVO<UserLoginRes> byId(@RequestBody LoginUserReq req) {
-        return RespVO.success(userService.login(req));
-    }
-
-
+  @ApiOperation(value = "用户登录")
+  @PostMapping("/user/login")
+  public RespVO<UserLoginRes> byId(@RequestBody LoginUserReq req) {
+    return RespVO.success(userService.login(req));
+  }
 }

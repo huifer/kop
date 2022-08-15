@@ -5,14 +5,10 @@ import com.github.kop.rbac.module.entity.RbacApp;
 import org.apache.ibatis.annotations.Mapper;
 
 /**
- * <p>
- *  Mapper 接口
- * </p>
+ * Mapper 接口
  *
  * @author root
  * @since 2022-08-08
  */
 @Mapper
-public interface RbacAppMapper extends BaseMapper<RbacApp> {
-
-}
+public interface RbacAppMapper extends BaseMapper<RbacApp> {}

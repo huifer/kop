@@ -1,10 +1,3 @@
 package com.github.kop.bbs.service.message;
 
-public interface MessageService {
-
-
-
-
-}
-
-
+public interface MessageService {}

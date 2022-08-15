@@ -1,5 +1,3 @@
 package com.github.kop.bbs.service.user;
 
-public interface UserLockService {
-
-}
+public interface UserLockService {}

@@ -4,7 +4,6 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.github.kop.bbs.module.entity.ScoreRole;
 import com.github.kop.bbs.module.req.score.PageListScoreRoleReq;
-import com.github.kop.bbs.module.res.score.ScorePageListRes;
 
 /**
  * @auth ahxiaoqi
@@ -13,13 +12,13 @@ import com.github.kop.bbs.module.res.score.ScorePageListRes;
  */
 public interface ScoreRoleRepository {
 
-    int insert(ScoreRole build);
+  int insert(ScoreRole build);
 
-    int update(ScoreRole scoreCycle);
+  int update(ScoreRole scoreCycle);
 
-    int delete(Long id);
+  int delete(Long id);
 
-    IPage<ScoreRole> pageList(Page<ScoreRole> objectPage, PageListScoreRoleReq pageListScoreRoleReq);
+  IPage<ScoreRole> pageList(Page<ScoreRole> objectPage, PageListScoreRoleReq pageListScoreRoleReq);
 
-    ScoreRole findByType(int type);
+  ScoreRole findByType(int type);
 }

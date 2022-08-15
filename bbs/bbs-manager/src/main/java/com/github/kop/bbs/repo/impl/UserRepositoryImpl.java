@@ -11,8 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Repository
 public class UserRepositoryImpl implements UserRepository {
 
-  @Autowired
-  private UserMapper userMapper;
+  @Autowired private UserMapper userMapper;
 
   @Override
   @Transactional(rollbackFor = Exception.class)
@@ -36,8 +35,7 @@ public class UserRepositoryImpl implements UserRepository {
   @Override
   public User findByName(String username) {
     QueryWrapper<User> queryWrapper = new QueryWrapper<>();
-    queryWrapper.lambda()
-        .eq(User::getUsername, username);
+    queryWrapper.lambda().eq(User::getUsername, username);
     return this.userMapper.selectOne(queryWrapper);
   }
 
@@ -58,8 +56,7 @@ public class UserRepositoryImpl implements UserRepository {
   @Override
   public boolean existsUserName(String name) {
     QueryWrapper<User> queryWrapper = new QueryWrapper<>();
-    queryWrapper.lambda()
-        .eq(User::getUsername, name);
+    queryWrapper.lambda().eq(User::getUsername, name);
     return this.userMapper.exists(queryWrapper);
   }
 }

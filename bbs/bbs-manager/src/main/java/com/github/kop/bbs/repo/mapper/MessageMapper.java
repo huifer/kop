@@ -8,7 +8,7 @@ import org.apache.ibatis.annotations.Param;
 
 @Mapper
 public interface MessageMapper extends BaseMapper<Message> {
-    int updateBatchSelective(List<Message> list);
+  int updateBatchSelective(List<Message> list);
 
-    int batchInsert(@Param("list") List<Message> list);
+  int batchInsert(@Param("list") List<Message> list);
 }

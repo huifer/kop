@@ -13,23 +13,17 @@ import lombok.Data;
 @Data
 public class UpdateUserReq {
 
-    private Long id;
+  private Long id;
 
-    /**
-     * 密码
-     */
-    @ApiModelProperty(value = "密码")
-    private String password;
+  /** 密码 */
+  @ApiModelProperty(value = "密码")
+  private String password;
 
-    /**
-     * 用户头像
-     */
-    @ApiModelProperty(value = "用户头像")
-    private String avatar;
+  /** 用户头像 */
+  @ApiModelProperty(value = "用户头像")
+  private String avatar;
 
-    /**
-     * 昵称
-     */
-    @ApiModelProperty(value = "昵称")
-    private String nickname;
+  /** 昵称 */
+  @ApiModelProperty(value = "昵称")
+  private String nickname;
 }

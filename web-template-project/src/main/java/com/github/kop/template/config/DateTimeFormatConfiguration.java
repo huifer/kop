@@ -8,7 +8,6 @@ import com.fasterxml.jackson.datatype.jsr310.deser.LocalTimeDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalTimeSerializer;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -37,8 +36,8 @@ public class DateTimeFormatConfiguration extends WebMvcConfigurationSupport {
   @Bean
   @Override
   public FormattingConversionService mvcConversionService() {
-    DefaultFormattingConversionService conversionService = new DefaultFormattingConversionService(
-        false);
+    DefaultFormattingConversionService conversionService =
+        new DefaultFormattingConversionService(false);
 
     DateTimeFormatterRegistrar dateTimeRegistrar = new DateTimeFormatterRegistrar();
     dateTimeRegistrar.setDateFormatter(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
@@ -51,29 +50,32 @@ public class DateTimeFormatConfiguration extends WebMvcConfigurationSupport {
 
     return conversionService;
   }
-    private String localDateTimeFormat="yyyy-MM-dd HH:mm:ss";
-    private String localDateFormat="yyyy-MM-dd";
-    private String localTimeFormat="HH:mm:ss";
 
-    @Bean
-    public ObjectMapper objectMapper() {
-      ObjectMapper om = new ObjectMapper();
-        JavaTimeModule javaTimeModule = new JavaTimeModule();
-        //序列化
-        javaTimeModule.addSerializer(LocalDateTime.class,
-            new LocalDateTimeSerializer(DateTimeFormatter.ofPattern(localDateTimeFormat)));
-        javaTimeModule.addSerializer(LocalDate.class,
-            new LocalDateSerializer(DateTimeFormatter.ofPattern(localDateFormat)));
-        javaTimeModule.addSerializer(LocalTime.class,
-            new LocalTimeSerializer(DateTimeFormatter.ofPattern(localTimeFormat)));
-        //反序列化
-        javaTimeModule.addDeserializer(LocalDateTime.class,
-            new LocalDateTimeDeserializer(DateTimeFormatter.ofPattern(localDateTimeFormat)));
-        javaTimeModule.addDeserializer(LocalDate.class,
-            new LocalDateDeserializer(DateTimeFormatter.ofPattern(localDateFormat)));
-        javaTimeModule.addDeserializer(LocalTime.class,
-            new LocalTimeDeserializer(DateTimeFormatter.ofPattern(localTimeFormat)));
-        om.registerModule(javaTimeModule);
-        return om;
-    }
+  private String localDateTimeFormat = "yyyy-MM-dd HH:mm:ss";
+  private String localDateFormat = "yyyy-MM-dd";
+  private String localTimeFormat = "HH:mm:ss";
+
+  @Bean
+  public ObjectMapper objectMapper() {
+    ObjectMapper om = new ObjectMapper();
+    JavaTimeModule javaTimeModule = new JavaTimeModule();
+    // 序列化
+    javaTimeModule.addSerializer(
+        LocalDateTime.class,
+        new LocalDateTimeSerializer(DateTimeFormatter.ofPattern(localDateTimeFormat)));
+    javaTimeModule.addSerializer(
+        LocalDate.class, new LocalDateSerializer(DateTimeFormatter.ofPattern(localDateFormat)));
+    javaTimeModule.addSerializer(
+        LocalTime.class, new LocalTimeSerializer(DateTimeFormatter.ofPattern(localTimeFormat)));
+    // 反序列化
+    javaTimeModule.addDeserializer(
+        LocalDateTime.class,
+        new LocalDateTimeDeserializer(DateTimeFormatter.ofPattern(localDateTimeFormat)));
+    javaTimeModule.addDeserializer(
+        LocalDate.class, new LocalDateDeserializer(DateTimeFormatter.ofPattern(localDateFormat)));
+    javaTimeModule.addDeserializer(
+        LocalTime.class, new LocalTimeDeserializer(DateTimeFormatter.ofPattern(localTimeFormat)));
+    om.registerModule(javaTimeModule);
+    return om;
+  }
 }

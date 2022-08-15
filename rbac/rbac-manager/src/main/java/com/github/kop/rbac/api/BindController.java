@@ -5,6 +5,4 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/bind")
-public class BindController {
-
-}
+public class BindController {}

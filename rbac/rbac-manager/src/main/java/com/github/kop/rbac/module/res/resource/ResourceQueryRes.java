@@ -20,5 +20,4 @@ public class ResourceQueryRes {
 
   @ApiModelProperty(value = "应用id")
   private Long appId;
-
 }

@@ -12,25 +12,24 @@ import org.springframework.transaction.annotation.Transactional;
 @Repository
 public class ScoreRecordRepositoryImpl implements ScoreRecordRepository {
 
-  @Autowired
-  private ScoreRecordMapper scoreRecordMapper;
+  @Autowired private ScoreRecordMapper scoreRecordMapper;
 
   @Override
   public ScoreRecord findByRoleIdAndUserIdAndMinCreateAt(Long roleId, Long userId) {
     QueryWrapper<ScoreRecord> queryWrapper = new QueryWrapper<>();
-    queryWrapper.lambda()
+    queryWrapper
+        .lambda()
         .eq(ScoreRecord::getRoleId, roleId)
         .eq(ScoreRecord::getUserId, userId)
         .orderByAsc(ScoreRecord::getCreateTime)
-        .last("limit 1")
-    ;
+        .last("limit 1");
 
     return this.scoreRecordMapper.selectOne(queryWrapper);
   }
 
   @Override
-  public Long sumScoreByRole(Long roleId, Long userId, LocalDateTime startTime,
-      LocalDateTime endTime) {
+  public Long sumScoreByRole(
+      Long roleId, Long userId, LocalDateTime startTime, LocalDateTime endTime) {
     return scoreRecordMapper.sumScoreByRole(roleId, userId, startTime, endTime);
   }
 

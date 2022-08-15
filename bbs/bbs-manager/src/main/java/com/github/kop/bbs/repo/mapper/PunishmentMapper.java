@@ -8,7 +8,7 @@ import org.apache.ibatis.annotations.Param;
 
 @Mapper
 public interface PunishmentMapper extends BaseMapper<Punishment> {
-    int updateBatchSelective(List<Punishment> list);
+  int updateBatchSelective(List<Punishment> list);
 
-    int batchInsert(@Param("list") List<Punishment> list);
+  int batchInsert(@Param("list") List<Punishment> list);
 }

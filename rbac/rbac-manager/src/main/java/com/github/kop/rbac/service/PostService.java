@@ -5,7 +5,6 @@ import com.github.kop.rbac.module.req.post.CreatePostReq;
 import com.github.kop.rbac.module.req.post.QueryPostReq;
 import com.github.kop.rbac.module.req.post.UpdatePostReq;
 import com.github.kop.rbac.module.res.post.PostQueryRes;
-
 import java.util.List;
 
 public interface PostService {
@@ -22,9 +21,10 @@ public interface PostService {
   List<PostQueryRes> list(QueryPostReq req);
 
   boolean bindRoleGroup(Long postId, Long roleGroupId);
+
   boolean bindRoleGroups(Long postId, List<Long> roleGroupIds);
+
   boolean unBindRoleGroup(Long postId, Long roleGroupId);
 
   List<Long> findRoleGroupIds(Long postId);
-
 }

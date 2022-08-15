@@ -18,6 +18,4 @@ public interface RoleBindService {
   List<Long> findResourceIds(Long roleId);
 
   List<Long> findResourceIds(List<Long> roleIds);
-
-
 }

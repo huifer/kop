@@ -8,7 +8,7 @@ import org.apache.ibatis.annotations.Param;
 
 @Mapper
 public interface FeedbackRecordMapper extends BaseMapper<FeedbackRecord> {
-    int updateBatchSelective(List<FeedbackRecord> list);
+  int updateBatchSelective(List<FeedbackRecord> list);
 
-    int batchInsert(@Param("list") List<FeedbackRecord> list);
+  int batchInsert(@Param("list") List<FeedbackRecord> list);
 }

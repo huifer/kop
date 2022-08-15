@@ -8,7 +8,7 @@ import org.apache.ibatis.annotations.Param;
 
 @Mapper
 public interface UserBlackListMapper extends BaseMapper<UserBlackList> {
-    int updateBatchSelective(List<UserBlackList> list);
+  int updateBatchSelective(List<UserBlackList> list);
 
-    int batchInsert(@Param("list") List<UserBlackList> list);
+  int batchInsert(@Param("list") List<UserBlackList> list);
 }

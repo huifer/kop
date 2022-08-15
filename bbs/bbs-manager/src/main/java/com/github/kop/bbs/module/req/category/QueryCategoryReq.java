@@ -13,9 +13,7 @@ import lombok.Data;
 @Data
 public class QueryCategoryReq {
 
-    /**
-     * 分类名称
-     */
-    @ApiModelProperty("分类名称")
-    private String categoryName;
+  /** 分类名称 */
+  @ApiModelProperty("分类名称")
+  private String categoryName;
 }

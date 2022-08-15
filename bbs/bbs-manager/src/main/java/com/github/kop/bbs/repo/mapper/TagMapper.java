@@ -8,7 +8,7 @@ import org.apache.ibatis.annotations.Param;
 
 @Mapper
 public interface TagMapper extends BaseMapper<Tag> {
-    int updateBatchSelective(List<Tag> list);
+  int updateBatchSelective(List<Tag> list);
 
-    int batchInsert(@Param("list") List<Tag> list);
+  int batchInsert(@Param("list") List<Tag> list);
 }

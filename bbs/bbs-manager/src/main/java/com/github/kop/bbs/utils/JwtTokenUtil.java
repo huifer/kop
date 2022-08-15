@@ -2,14 +2,12 @@ package com.github.kop.bbs.utils;
 
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
-
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
 public class JwtTokenUtil {
-
 
   public final long jwtTokenValidity;
   private final String secret;
@@ -33,7 +31,8 @@ public class JwtTokenUtil {
   }
 
   private Claims getAllClaimsFromToken(String token) {
-    JwtParser build = Jwts.parserBuilder().setSigningKey(Keys.hmacShaKeyFor(secret.getBytes())).build();
+    JwtParser build =
+        Jwts.parserBuilder().setSigningKey(Keys.hmacShaKeyFor(secret.getBytes())).build();
     return build.parseClaimsJws(token).getBody();
   }
 
@@ -50,14 +49,14 @@ public class JwtTokenUtil {
 
   private String doGenerateToken(Map<String, Object> claims, String subject) {
     return Jwts.builder()
-            .setClaims(claims)
-            .setSubject(subject)
-            .setIssuedAt(new Date(System.currentTimeMillis()))
-            .setExpiration(new Date(System.currentTimeMillis() + jwtTokenValidity * 1000))
-// 自定义的secret长度不够,暂时注释
-            .signWith(Keys.hmacShaKeyFor(secret.getBytes()), SignatureAlgorithm.HS512)
-//            .signWith(Keys.secretKeyFor(SignatureAlgorithm.HS512))
-            .compact();
+        .setClaims(claims)
+        .setSubject(subject)
+        .setIssuedAt(new Date(System.currentTimeMillis()))
+        .setExpiration(new Date(System.currentTimeMillis() + jwtTokenValidity * 1000))
+        // 自定义的secret长度不够,暂时注释
+        .signWith(Keys.hmacShaKeyFor(secret.getBytes()), SignatureAlgorithm.HS512)
+        //            .signWith(Keys.secretKeyFor(SignatureAlgorithm.HS512))
+        .compact();
   }
 
   public Boolean validateToken(String token) {

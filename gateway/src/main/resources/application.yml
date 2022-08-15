@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: first-microservice
+server:
+  port: 8081
+
+  cloud:
+    gateway:
+      routes:
+        # 网关本身没有contextPath,通过自己转发自己，达到能处理contextPath
+        - id: self
+          uri: http://localhost:${server.port}
+          predicates:
+            - Path=/${spring.application.name}/**
+          filters:
+            - StripPrefix=1
+          order: -11000
+orm:
+  type: jdbc

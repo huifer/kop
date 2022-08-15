@@ -9,12 +9,10 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class RoleRepositoryImpl implements RoleRepository {
 
-  @Autowired
-  private RoleMapper roleMapper;
+  @Autowired private RoleMapper roleMapper;
 
   @Override
   public Role byCode(String roleCode) {
     return roleMapper.byCode(roleCode);
   }
-
 }

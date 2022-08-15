@@ -1,6 +1,5 @@
 package com.github.kop.bbs.module.ex;
 
-
 import com.github.kop.bbs.module.AppHttpCodeEnum;
 
 public class NoceException extends RuntimeException {

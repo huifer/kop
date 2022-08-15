@@ -4,16 +4,16 @@ import lombok.Data;
 
 @Data
 public class UserLoginRes {
-    private String phone;
+  private String phone;
 
-    private String name;
+  private String name;
 
-    private Integer grade;
+  private Integer grade;
 
-    private Long companyId;
+  private Long companyId;
 
-    private String token;
+  private String token;
 
-    private String deptName;
-    private String mainPostName;
+  private String deptName;
+  private String mainPostName;
 }

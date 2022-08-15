@@ -9,7 +9,6 @@ import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-
 /**
  * @auth ahxiaoqi
  * @desc
@@ -19,33 +18,31 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @Slf4j
 public class ExceptionHandlerController {
 
+  @ExceptionHandler(Exception.class)
+  public RespVO<String> handleException(Exception e) {
+    log.error("系统发生错误-------{}", e);
+    return RespVO.error("系统错误,请稍后重试");
+  }
 
-    @ExceptionHandler(Exception.class)
-    public RespVO<String> handleException(Exception e) {
-        log.error("系统发生错误-------{}",e);
-        return RespVO.error("系统错误,请稍后重试");
-    }
+  @ExceptionHandler(NoceException.class)
+  public RespVO<String> handleNoceException(NoceException e) {
+    return RespVO.error(e.getMsg());
+  }
 
+  @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
+  public RespVO<String> handleHttpRequestMethodNotSupportedException(
+      HttpRequestMethodNotSupportedException e) {
+    return RespVO.error("页面不存在");
+  }
 
-    @ExceptionHandler(NoceException.class)
-    public RespVO<String> handleNoceException(NoceException e) {
-        return RespVO.error(e.getMsg());
-    }
+  @ExceptionHandler(ValidateException.class)
+  public RespVO<String> handleValidateException(ValidateException e) {
+    log.error("参数异常{}", e);
+    return RespVO.error("参数异常:" + e.getMsg());
+  }
 
-    @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
-    public RespVO<String> handleHttpRequestMethodNotSupportedException(HttpRequestMethodNotSupportedException e) {
-        return RespVO.error("页面不存在");
-    }
-
-    @ExceptionHandler(ValidateException.class)
-    public RespVO<String> handleValidateException(ValidateException e) {
-        log.error("参数异常{}",e);
-        return RespVO.error("参数异常:"+e.getMsg());
-    }
-
-    @ExceptionHandler(ExpiredJwtException.class)
-    public RespVO<String> handleValidateException(ExpiredJwtException e) {
-        return RespVO.error("请重新登录!");
-    }
-
+  @ExceptionHandler(ExpiredJwtException.class)
+  public RespVO<String> handleValidateException(ExpiredJwtException e) {
+    return RespVO.error("请重新登录!");
+  }
 }

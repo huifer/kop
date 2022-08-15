@@ -11,21 +11,20 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public enum ScoreAddTypeEnum {
+  REDUCE(0, "减少"),
+  ADD(1, "增加"),
+  ;
+  private final Integer code;
 
-    REDUCE(0,"减少"),
-    ADD(1,"增加"),
-    ;
-    private final Integer code;
+  private final String desc;
 
-    private final String desc;
-
-    public static String getDescByCode(Integer code){
-        ScoreAddTypeEnum[] values = values();
-        for (ScoreAddTypeEnum value : values) {
-            if(value.code.equals(code)){
-                return value.desc;
-            }
-        }
-        return "";
+  public static String getDescByCode(Integer code) {
+    ScoreAddTypeEnum[] values = values();
+    for (ScoreAddTypeEnum value : values) {
+      if (value.code.equals(code)) {
+        return value.desc;
+      }
     }
+    return "";
+  }
 }

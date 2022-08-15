@@ -8,7 +8,7 @@ import org.apache.ibatis.annotations.Param;
 
 @Mapper
 public interface TopicMapper extends BaseMapper<Topic> {
-    int updateBatchSelective(List<Topic> list);
+  int updateBatchSelective(List<Topic> list);
 
-    int batchInsert(@Param("list") List<Topic> list);
+  int batchInsert(@Param("list") List<Topic> list);
 }

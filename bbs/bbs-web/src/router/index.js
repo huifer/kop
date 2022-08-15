@@ -29,7 +29,7 @@ const routes = [
 
   }, {
     path: '/UserInvitation',
-    name: '用户帖子',
+    name: '帖子详情',
     component: () => import ('../components/customer/UserInvitation'),
 
   }, {

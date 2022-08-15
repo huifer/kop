@@ -1,7 +1,3 @@
 package com.github.kop.bbs.service.user.relation;
 
-public interface UserFollowerListService {
-
-
-}
-
+public interface UserFollowerListService {}

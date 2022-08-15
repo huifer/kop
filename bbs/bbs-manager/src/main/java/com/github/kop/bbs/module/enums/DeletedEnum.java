@@ -11,13 +11,11 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public enum DeletedEnum {
+  TRUE(1, "删除"),
+  FALSE(0, "未删除"),
+  ;
 
-    TRUE(1,"删除"),
-    FALSE(0,"未删除"),
-    ;
+  private final Integer code;
 
-    private final Integer code;
-
-    private final String desc;
-
+  private final String desc;
 }

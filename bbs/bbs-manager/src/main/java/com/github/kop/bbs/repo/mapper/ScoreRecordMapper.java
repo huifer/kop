@@ -6,16 +6,17 @@ import java.time.LocalDateTime;
 import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
 
 @Mapper
 public interface ScoreRecordMapper extends BaseMapper<ScoreRecord> {
 
-    int updateBatchSelective(List<ScoreRecord> list);
+  int updateBatchSelective(List<ScoreRecord> list);
 
-    int batchInsert(@Param("list") List<ScoreRecord> list);
+  int batchInsert(@Param("list") List<ScoreRecord> list);
 
-    Long sumScoreByRole(
-        @Param("roleId") Long roleId, @Param("userId") Long userId,
-        @Param("startTime") LocalDateTime startTime, @Param("endTime") LocalDateTime endTime);
+  Long sumScoreByRole(
+      @Param("roleId") Long roleId,
+      @Param("userId") Long userId,
+      @Param("startTime") LocalDateTime startTime,
+      @Param("endTime") LocalDateTime endTime);
 }

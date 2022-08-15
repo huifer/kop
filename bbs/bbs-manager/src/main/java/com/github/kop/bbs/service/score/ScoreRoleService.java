@@ -10,23 +10,20 @@ import com.github.kop.bbs.module.res.score.ScorePageListRes;
 
 public interface ScoreRoleService {
 
+  Boolean create(CreateScoreRoleReq req);
 
-    Boolean create(CreateScoreRoleReq req);
+  Boolean update(UpdateScoreRoleReq req);
 
-    Boolean update(UpdateScoreRoleReq req);
+  Boolean delete(Long id);
 
-    Boolean delete(Long id);
+  IPage<ScorePageListRes> pageList(PageListScoreRoleReq pageListScoreRoleReq, Long page, Long size);
 
-    IPage<ScorePageListRes> pageList(PageListScoreRoleReq pageListScoreRoleReq, Long page, Long size);
-
-
-    /**
-     * 当前用户是否符合积分规则
-     * @param type 积分类型
-     * @param userId 用户id
-     * @return 符合返回对应积分规则
-     */
-    ScoreRole exceededMax(ScoreTypeEnums type, Long userId);
+  /**
+   * 当前用户是否符合积分规则
+   *
+   * @param type 积分类型
+   * @param userId 用户id
+   * @return 符合返回对应积分规则
+   */
+  ScoreRole exceededMax(ScoreTypeEnums type, Long userId);
 }
-
-
