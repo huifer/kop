@@ -8,6 +8,7 @@
     <result column="text_type" jdbcType="TINYINT" property="textType" />
     <result column="category_id" jdbcType="BIGINT" property="categoryId" />
     <result column="type" jdbcType="TINYINT" property="type" />
+    <result column="topic_id" jdbcType="TINYINT" property="topicId" />
     <result column="text" jdbcType="LONGVARCHAR" property="text" />
     <result column="article_status" jdbcType="TINYINT" property="articleStatus" />
     <result column="is_top" jdbcType="TINYINT" property="isTop" />
@@ -17,8 +18,6 @@
     <result column="tag_str" jdbcType="VARCHAR" property="tagStr" />
     <result column="ip" jdbcType="VARCHAR" property="ip" />
     <result column="ip_loc" jdbcType="VARCHAR" property="ipLoc" />
-    <result column="thumbs_cont" jdbcType="BIGINT" property="thumbsCont" />
-    <result column="collection_cont" jdbcType="BIGINT" property="collectionCont" />
     <result column="views_count" jdbcType="BIGINT" property="viewsCount" />
     <result column="comments_count" jdbcType="BIGINT" property="commentsCount" />
     <result column="comments_status" jdbcType="TINYINT" property="commentsStatus" />
@@ -32,8 +31,8 @@
   </resultMap>
   <sql id="Base_Column_List">
     <!--@mbg.generated-->
-    invitation_id, text_type, category_id, `type`, `text`, article_status, is_top, is_essence, 
-    is_lock, latest_replied_on, tag_str, ip, ip_loc, thumbs_cont, collection_cont, views_count, 
+    invitation_id, text_type, category_id, `type`, `topic_id`,`text`, article_status, is_top, is_essence,
+    is_lock, latest_replied_on, tag_str, ip, ip_loc, views_count,
     comments_count, comments_status, visible_status, create_time, create_user_id, update_time, 
     update_user_id, deleted, version
   </sql>
@@ -59,6 +58,13 @@
         <foreach collection="list" index="index" item="item">
           <if test="item.type != null">
             when invitation_id = #{item.invitationId,jdbcType=BIGINT} then #{item.type,jdbcType=TINYINT}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="`topic_id` = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.topicId != null">
+            when invitation_id = #{item.invitationId,jdbcType=BIGINT} then #{item.topicId,jdbcType=TINYINT}
           </if>
         </foreach>
       </trim>
@@ -122,20 +128,6 @@
         <foreach collection="list" index="index" item="item">
           <if test="item.ipLoc != null">
             when invitation_id = #{item.invitationId,jdbcType=BIGINT} then #{item.ipLoc,jdbcType=VARCHAR}
-          </if>
-        </foreach>
-      </trim>
-      <trim prefix="thumbs_cont = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          <if test="item.thumbsCont != null">
-            when invitation_id = #{item.invitationId,jdbcType=BIGINT} then #{item.thumbsCont,jdbcType=BIGINT}
-          </if>
-        </foreach>
-      </trim>
-      <trim prefix="collection_cont = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          <if test="item.collectionCont != null">
-            when invitation_id = #{item.invitationId,jdbcType=BIGINT} then #{item.collectionCont,jdbcType=BIGINT}
           </if>
         </foreach>
       </trim>
@@ -218,17 +210,17 @@
   <insert id="batchInsert" keyColumn="invitation_id" keyProperty="invitationId" parameterType="map" useGeneratedKeys="true">
     <!--@mbg.generated-->
     insert into bbs_invitation
-    (text_type, category_id, `type`, `text`, article_status, is_top, is_essence, is_lock, 
-      latest_replied_on, tag_str, ip, ip_loc, thumbs_cont, collection_cont, views_count, 
+    (text_type, category_id, `type`,`topic_id`, `text`, article_status, is_top, is_essence, is_lock,
+      latest_replied_on, tag_str, ip, ip_loc, views_count,
       comments_count, comments_status, visible_status, create_time, create_user_id, update_time, 
       update_user_id, deleted, version)
     values
     <foreach collection="list" item="item" separator=",">
-      (#{item.textType,jdbcType=TINYINT}, #{item.categoryId,jdbcType=BIGINT}, #{item.type,jdbcType=TINYINT}, 
+      (#{item.textType,jdbcType=TINYINT}, #{item.categoryId,jdbcType=BIGINT}, #{item.type,jdbcType=TINYINT},
+      #{item.topicId,jdbcType=INTEGER},
         #{item.text,jdbcType=LONGVARCHAR}, #{item.articleStatus,jdbcType=TINYINT}, #{item.isTop,jdbcType=TINYINT}, 
         #{item.isEssence,jdbcType=TINYINT}, #{item.isLock,jdbcType=TINYINT}, #{item.latestRepliedOn,jdbcType=BIGINT}, 
-        #{item.tagStr,jdbcType=VARCHAR}, #{item.ip,jdbcType=VARCHAR}, #{item.ipLoc,jdbcType=VARCHAR}, 
-        #{item.thumbsCont,jdbcType=BIGINT}, #{item.collectionCont,jdbcType=BIGINT}, #{item.viewsCount,jdbcType=BIGINT}, 
+        #{item.tagStr,jdbcType=VARCHAR}, #{item.ip,jdbcType=VARCHAR}, #{item.ipLoc,jdbcType=VARCHAR},  #{item.viewsCount,jdbcType=BIGINT},
         #{item.commentsCount,jdbcType=BIGINT}, #{item.commentsStatus,jdbcType=TINYINT}, 
         #{item.visibleStatus,jdbcType=TINYINT}, #{item.createTime,jdbcType=TIMESTAMP}, 
         #{item.createUserId,jdbcType=BIGINT}, #{item.updateTime,jdbcType=TIMESTAMP}, #{item.updateUserId,jdbcType=BIGINT}, 

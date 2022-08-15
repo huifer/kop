@@ -8,9 +8,9 @@
     <result column="user_id" jdbcType="BIGINT" property="userId" />
     <result column="tag" jdbcType="VARCHAR" property="tag" />
     <result column="quote_num" jdbcType="BIGINT" property="quoteNum" />
-    <result column="create_time" jdbcType="BIGINT" property="createTime" />
-    <result column="update_time" jdbcType="BIGINT" property="updateTime" />
-    <result column="deleted_time" jdbcType="BIGINT" property="deletedTime" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="deleted_time" jdbcType="TIMESTAMP" property="deletedTime" />
     <result column="deleted" jdbcType="TINYINT" property="deleted" />
   </resultMap>
   <sql id="Base_Column_List">

@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 public class UserRepositoryImpl implements UserRepository {
   @Autowired private CustomerUserMapper userMapper;
@@ -28,6 +30,19 @@ public class UserRepositoryImpl implements UserRepository {
   @Override
   public IPage<CustomerUser> page(long cur, long size) {
     QueryWrapper<CustomerUser> queryWrapper = new QueryWrapper<>();
+    return userMapper.selectPage(new Page<>(cur, size), queryWrapper);
+  }
+
+  /**
+   * @param cur
+   * @param size
+   * @param uids 用户id
+   * @return
+   */
+  @Override
+  public IPage<CustomerUser> page(long cur, long size, List<Long> uids) {
+    QueryWrapper<CustomerUser> queryWrapper = new QueryWrapper<>();
+    queryWrapper.lambda().in(CustomerUser::getId,uids);
     return userMapper.selectPage(new Page<>(cur, size), queryWrapper);
   }
 }
