@@ -7,6 +7,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.Date;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -42,14 +43,20 @@ public class ScoreRecord implements Serializable {
      */
     @TableField(value = "score_count")
     @ApiModelProperty(value = "具体加的分数 ")
-    private Integer scoreCount;
+    private Long scoreCount;
+
+    /**
+     * 积分所有人
+     */
+    @TableField(value = "user_id")
+    private Long userId;
 
     /**
      * 创建时间
      */
     @TableField(value = "create_time")
     @ApiModelProperty(value = "创建时间")
-    private Date createTime;
+    private LocalDateTime createTime;
 
     /**
      * 创建用户

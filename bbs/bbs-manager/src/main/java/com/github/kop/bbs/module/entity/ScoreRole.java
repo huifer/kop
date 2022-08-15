@@ -1,11 +1,11 @@
 package com.github.kop.bbs.module.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
+import com.github.kop.bbs.module.enums.ScoreTypeEnums;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.Date;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -30,6 +30,8 @@ public class ScoreRole implements Serializable {
 
     /**
      * 积分类型  1 签到积分 2 发帖积分 3 评论积分 4 惩罚积分
+     * <p>
+     * {@link  ScoreTypeEnums}
      */
     @TableField(value = "role_type")
     @ApiModelProperty(value = "积分类型  1 签到积分 2 发帖积分 3 评论积分 4 惩罚积分")
@@ -43,11 +45,16 @@ public class ScoreRole implements Serializable {
     private Integer addType;
 
     /**
-     * 积分数量 0 不限
+     * 获取的积分
      */
     @TableField(value = "score")
-    @ApiModelProperty(value = "积分数量 0 自定义分数 ")
-    private Integer score;
+    @ApiModelProperty(value = "获取的积分")
+    private Long score;
+    /**
+     * 周期内最多获取的积分数量
+     */
+    @TableField(value = "max_score")
+    private Long maxScore;
 
     /**
      * 积分周期(周期内只能得一次分) 0 没有周期(即不限制得分)  1 天 2 周 3 月 4 年
@@ -57,9 +64,15 @@ public class ScoreRole implements Serializable {
     private Integer scoreCycle;
 
     /**
+     * 周期具体数字
+     */
+    @TableField(value = "cycle_num")
+    private Integer cycleNum;
+
+    /**
      * 创建时间
      */
-    @TableField(value = "create_time",fill = FieldFill.INSERT)
+    @TableField(value = "create_time", fill = FieldFill.INSERT)
     @ApiModelProperty(value = "创建时间")
     private LocalDateTime createTime;
 
@@ -96,6 +109,7 @@ public class ScoreRole implements Serializable {
      */
     @TableField(value = "version")
     @ApiModelProperty(value = "乐观锁")
+    @Version
     private Long version;
 
     private static final long serialVersionUID = 1L;

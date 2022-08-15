@@ -24,21 +24,44 @@ public class ScoreRoleRepositoryImpl implements ScoreRoleRepository {
     @Resource
     private ScoreRoleMapper scoreRoleMapper;
 
+    @Override
+    public ScoreRole findByType(int type) {
+        QueryWrapper<ScoreRole> queryWrapper = new QueryWrapper<>();
+        queryWrapper.lambda()
+            .eq(ScoreRole::getRoleType, type);
+        return this.scoreRoleMapper.selectOne(queryWrapper);
+    }
 
     @Override
     public int insert(ScoreRole build) {
+        checkRoleType(build);
         return scoreRoleMapper.insert(build);
+    }
+
+    private void checkRoleType(ScoreRole build) {
+        boolean b = hasRoleType(build.getRoleType());
+        if (b) {
+            throw new RuntimeException("该规则已存在");
+        }
+    }
+
+    public boolean hasRoleType(int roleType) {
+        QueryWrapper<ScoreRole> queryWrapper = new QueryWrapper<>();
+        queryWrapper.lambda()
+            .eq(ScoreRole::getRoleType, roleType);
+        return scoreRoleMapper.exists(queryWrapper);
     }
 
     @Override
     public int update(ScoreRole scoreCycle) {
+        checkRoleType(scoreCycle);
         return scoreRoleMapper.updateById(scoreCycle);
     }
 
     @Override
     public int delete(Long id) {
         return scoreRoleMapper.updateById(ScoreRole.builder()
-                .roleId(id)
+            .roleId(id)
                 .deleted(DeletedEnum.TRUE.getCode())
                 .build());
     }

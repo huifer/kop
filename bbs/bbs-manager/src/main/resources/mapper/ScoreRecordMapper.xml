@@ -52,14 +52,26 @@
       #{item.scoreRecordId,jdbcType=BIGINT}
     </foreach>
   </update>
-  <insert id="batchInsert" keyColumn="score_record_id" keyProperty="scoreRecordId" parameterType="map" useGeneratedKeys="true">
+  <insert id="batchInsert" keyColumn="score_record_id" keyProperty="scoreRecordId"
+    parameterType="map" useGeneratedKeys="true">
     <!--@mbg.generated-->
     insert into bbs_score_record
     (role_id, score_count, create_time, create_user_id)
     values
     <foreach collection="list" item="item" separator=",">
-      (#{item.roleId,jdbcType=BIGINT}, #{item.scoreCount,jdbcType=INTEGER}, #{item.createTime,jdbcType=TIMESTAMP}, 
-        #{item.createUserId,jdbcType=BIGINT})
+      (#{item.roleId,jdbcType=BIGINT}, #{item.scoreCount,jdbcType=INTEGER},
+      #{item.createTime,jdbcType=TIMESTAMP},
+      #{item.createUserId,jdbcType=BIGINT})
     </foreach>
   </insert>
+
+  <select id="sumScoreByRole" resultType="java.lang.Long">
+    select sum(score_count)
+    from bbs_score_record
+    where 1 = 1
+      and create_time  <![CDATA[ >= ]]>  #{startTime}
+      and create_time <![CDATA[ <= ]]>  #{endTime}
+      and user_id = #{userId}
+      and roleId = #{roleId}
+  </select>
 </mapper>

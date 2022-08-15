@@ -1,15 +1,19 @@
 package com.github.kop.bbs.event.point;
 
-import com.github.kop.bbs.module.enums.PointTypeEnums;
+import com.github.kop.bbs.module.enums.ScoreTypeEnums;
 
 /**
  * 签到事件
  */
 public class SignInEvent extends PointEvent {
 
+  public SignInEvent(Long userId) {
+    super(userId);
+  }
+
   @Override
-  PointTypeEnums type() {
-    return PointTypeEnums.SIG_IN;
+  ScoreTypeEnums type() {
+    return ScoreTypeEnums.SIG_IN;
 
   }
 }

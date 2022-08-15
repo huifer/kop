@@ -20,4 +20,6 @@ public interface ScoreRoleRepository {
     int delete(Long id);
 
     IPage<ScoreRole> pageList(Page<ScoreRole> objectPage, PageListScoreRoleReq pageListScoreRoleReq);
+
+    ScoreRole findByType(int type);
 }

@@ -1,14 +1,18 @@
 package com.github.kop.bbs.event.point;
 
-import com.github.kop.bbs.module.enums.PointTypeEnums;
+import com.github.kop.bbs.module.enums.ScoreTypeEnums;
 
 /**
  * 发帖事件
  */
 public class PushPostEvent extends PointEvent {
 
+  public PushPostEvent(Long userId) {
+    super(userId);
+  }
+
   @Override
-  PointTypeEnums type() {
-    return PointTypeEnums.PUSH_POINT;
+  ScoreTypeEnums type() {
+    return ScoreTypeEnums.PUSH_POINT;
   }
 }

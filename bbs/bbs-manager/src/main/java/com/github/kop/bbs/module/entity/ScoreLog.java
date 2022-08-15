@@ -15,6 +15,7 @@ import lombok.NoArgsConstructor;
 
 /**
  * 论坛的积分日志
+ * fixme: 和ScoreRecord是否冲突
  */
 @ApiModel(value = "论坛的积分日志")
 @Data
@@ -41,7 +42,7 @@ public class ScoreLog implements Serializable {
      * 具体加的分数
      */
     @TableField(value = "score_count")
-    @ApiModelProperty(value = "具体加的分数 ")
+    @ApiModelProperty(value = "具体加的分数")
     private Integer scoreCount;
 
     /**
