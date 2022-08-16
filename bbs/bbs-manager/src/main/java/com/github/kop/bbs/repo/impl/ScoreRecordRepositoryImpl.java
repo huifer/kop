@@ -15,11 +15,11 @@ public class ScoreRecordRepositoryImpl implements ScoreRecordRepository {
   @Autowired private ScoreRecordMapper scoreRecordMapper;
 
   @Override
-  public ScoreRecord findByRoleIdAndUserIdAndMinCreateAt(Long roleId, Long userId) {
+  public ScoreRecord findByRoleIdAndUserIdAndMinCreateAt(Long scoreRuleId, Long userId) {
     QueryWrapper<ScoreRecord> queryWrapper = new QueryWrapper<>();
     queryWrapper
         .lambda()
-        .eq(ScoreRecord::getRoleId, roleId)
+        .eq(ScoreRecord::getScoreRuleId, scoreRuleId)
         .eq(ScoreRecord::getUserId, userId)
         .orderByAsc(ScoreRecord::getCreateTime)
         .last("limit 1");
@@ -29,8 +29,8 @@ public class ScoreRecordRepositoryImpl implements ScoreRecordRepository {
 
   @Override
   public Long sumScoreByRole(
-      Long roleId, Long userId, LocalDateTime startTime, LocalDateTime endTime) {
-    return scoreRecordMapper.sumScoreByRole(roleId, userId, startTime, endTime);
+      Long scoreRuleId, Long userId, LocalDateTime startTime, LocalDateTime endTime) {
+    return scoreRecordMapper.sumScoreByRule(scoreRuleId, userId, startTime, endTime);
   }
 
   @Transactional(rollbackFor = {Exception.class})

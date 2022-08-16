@@ -37,7 +37,7 @@ public class ScoreRoleServiceImpl implements ScoreRoleService {
     categoryCreateAndUpdateValidate.createValidate(req);
     return scoreRoleRepository.insert(
             ScoreRole.builder()
-                .roleType(req.getRoleType())
+                .ruleType(req.getRuleType())
                 .addType(req.getAddType())
                 .score(req.getScore())
                 .scoreCycle(req.getScoreCycle())
@@ -47,11 +47,11 @@ public class ScoreRoleServiceImpl implements ScoreRoleService {
 
   @Override
   public Boolean update(UpdateScoreRoleReq req) {
-    categoryCreateAndUpdateValidate.idValidate(req.getRoleId());
+    categoryCreateAndUpdateValidate.idValidate(req.getScoreRuleId());
     return scoreRoleRepository.update(
             ScoreRole.builder()
-                .roleId(req.getRoleId())
-                .roleType(req.getRoleType())
+                .scoreRoleId(req.getScoreRuleId())
+                .ruleType(req.getRuleType())
                 .addType(req.getAddType())
                 .score(req.getScore())
                 .scoreCycle(req.getScoreCycle())
@@ -75,8 +75,8 @@ public class ScoreRoleServiceImpl implements ScoreRoleService {
 
   private ScorePageListRes conv(ScoreRole scoreRole) {
     ScorePageListRes res = new ScorePageListRes();
-    res.setRoleId(scoreRole.getRoleId());
-    res.setRoleType(ScoreRoleEnum.getDescByCode(scoreRole.getRoleType()));
+    res.setScoreRuleId(scoreRole.getScoreRoleId());
+    res.setRuleType(ScoreRoleEnum.getDescByCode(scoreRole.getRuleType()));
     res.setAddType(ScoreAddTypeEnum.getDescByCode(scoreRole.getAddType()));
     res.setScore(scoreRole.getScore() == 0 ? "自定义分数" : scoreRole.getScore().toString());
     res.setScoreCycle(ScoreCycleEnum.getDescByCode(scoreRole.getScoreCycle()));
@@ -96,14 +96,14 @@ public class ScoreRoleServiceImpl implements ScoreRoleService {
 
     // 获取用户第一次获取积分的日期
 
-    LocalDateTime startTime = scoreRecordService.firstGetScore(scoreRole.getRoleId(), userId);
+    LocalDateTime startTime = scoreRecordService.firstGetScore(scoreRole.getScoreRoleId(), userId);
     // 计算周期范围内的最后一天
     ScoreCycleEnums scoreCycleEnums = ScoreCycleEnums.conv(scoreCycle);
 
     LocalDateTime endTime = calcEndTime(startTime, scoreCycleEnums, cycleNum);
     // 计算时间范围内获得的积分
     Long sumScore =
-        scoreRecordService.sumScoreByRole(scoreRole.getRoleId(), userId, startTime, endTime);
+        scoreRecordService.sumScoreByRule(scoreRole.getScoreRoleId(), userId, startTime, endTime);
 
     Long maxScore = scoreRole.getMaxScore();
     if (maxScore == null || maxScore == 0) {
@@ -152,7 +152,7 @@ public class ScoreRoleServiceImpl implements ScoreRoleService {
     @Override
     public void createValidate(CreateScoreRoleReq createScoreRoleReq) throws ValidateException {
       // todo: 数据合法性校验 ScoreOperationEnums、ScoreTypeEnums
-      if (ObjectUtils.isEmpty(createScoreRoleReq.getRoleType())) {
+      if (ObjectUtils.isEmpty(createScoreRoleReq.getRuleType())) {
         throw new ValidateException("积分类型不能为空");
       }
       if (ObjectUtils.isEmpty(createScoreRoleReq.getAddType())) {

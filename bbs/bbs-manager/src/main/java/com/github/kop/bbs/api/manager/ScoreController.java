@@ -33,7 +33,7 @@ public class ScoreController {
   @ApiOperation(value = "更新积分规则")
   @PutMapping("/{id}")
   public RespVO<Boolean> update(@PathVariable("id") Long id, @RequestBody UpdateScoreRoleReq req) {
-    req.setRoleId(id);
+    req.setScoreRuleId(id);
     return RespVO.success(scoreRoleService.update(req));
   }
 

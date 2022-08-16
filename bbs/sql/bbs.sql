@@ -228,11 +228,13 @@ CREATE TABLE `bbs_role` (
 DROP TABLE IF EXISTS `bbs_score_record`;
 CREATE TABLE `bbs_score_record` (
                                     `score_record_id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '积分日志主键',
-                                    `role_id` bigint(20) NOT NULL COMMENT '积分规则',
+                                    `score_role_id` bigint(20) NOT NULL COMMENT '积分规则',
                                     `score_count` int(11) NOT NULL COMMENT '具体加的分数 ',
                                     `create_time` datetime DEFAULT NULL COMMENT '创建时间',
                                     `create_user_id` bigint(20) DEFAULT NULL COMMENT '创建用户',
                                     `user_id` bigint(20) NOT NULL COMMENT '用户id',
+                                    `score_cycle` tinyint(4) DEFAULT NULL COMMENT '积分周期类型(周期内只能得一次分) 0 没有周期(即不限制得分)  1 天 2 周 3 月 4 年 ',
+                                    `cycle_count` int(11) unsigned DEFAULT NULL COMMENT '积分周期数',
                                     PRIMARY KEY (`score_record_id`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC COMMENT='论坛的积分记录';
 
@@ -241,11 +243,12 @@ CREATE TABLE `bbs_score_record` (
 -- ----------------------------
 DROP TABLE IF EXISTS `bbs_score_role`;
 CREATE TABLE `bbs_score_role` (
-                                  `role_id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '积分规则主键',
-                                  `role_type` tinyint(4) NOT NULL COMMENT '积分类型  1 签到积分 2 发帖积分 3 评论积分 4 惩罚积分',
+                                  `score_role_id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '积分规则主键',
+                                  `rule_type` tinyint(4) NOT NULL COMMENT '积分类型  1 签到积分 2 发帖积分 3 评论积分 4 惩罚积分',
                                   `add_type` tinyint(4) NOT NULL COMMENT '增减类型  0 减少 1 增加',
                                   `score` bigint(20) DEFAULT NULL COMMENT '可获得的积分数量',
                                   `score_cycle` tinyint(4) NOT NULL COMMENT '积分周期(周期内只能得一次分) 0 没有周期(即不限制得分)  1 天 2 周 3 月 4 年 ',
+                                  `effect_time` datetime DEFAULT NULL COMMENT '生效时间,表示此规则什么时候生效,(即周期计算的开始时间)',
                                   `create_time` datetime DEFAULT NULL COMMENT '创建时间',
                                   `create_user_id` bigint(20) DEFAULT NULL COMMENT '创建用户',
                                   `update_time` datetime DEFAULT NULL COMMENT '更新时间',
@@ -254,7 +257,7 @@ CREATE TABLE `bbs_score_role` (
                                   `version` bigint(20) DEFAULT '0' COMMENT '乐观锁',
                                   `cycle_num` int(11) DEFAULT NULL COMMENT '周期数字（N天，N周,N年）',
                                   `max_score` bigint(11) DEFAULT NULL COMMENT '周期内最多获取的积分数量（ 0 不限 ）',
-                                  PRIMARY KEY (`role_id`) USING BTREE
+                                  PRIMARY KEY (`score_role_id`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC COMMENT='论坛的积分规则配置';
 
 -- ----------------------------

@@ -22,10 +22,10 @@ public class ScoreRecordServiceImpl implements ScoreRecordService {
 
   @Transactional(rollbackFor = {Exception.class})
   @Override
-  public boolean grant(Long userId, Long roleId, Long score) {
+  public boolean grant(Long userId, Long scoreRuleId, Long score) {
 
     ScoreRecord scoreRecord = new ScoreRecord();
-    scoreRecord.setRoleId(roleId);
+    scoreRecord.setScoreRuleId(scoreRuleId);
     scoreRecord.setScoreCount(score);
     scoreRecord.setUserId(userId);
     scoreRecord.setCreateTime(LocalDateTime.now());
@@ -34,8 +34,8 @@ public class ScoreRecordServiceImpl implements ScoreRecordService {
   }
 
   @Override
-  public Long sumScoreByRole(
-      Long roleId, Long userId, LocalDateTime startTime, LocalDateTime endTime) {
-    return scoreRecordRepository.sumScoreByRole(roleId, userId, startTime, endTime);
+  public Long sumScoreByRule(
+      Long scoreRuleId, Long userId, LocalDateTime startTime, LocalDateTime endTime) {
+    return scoreRecordRepository.sumScoreByRole(scoreRuleId, userId, startTime, endTime);
   }
 }

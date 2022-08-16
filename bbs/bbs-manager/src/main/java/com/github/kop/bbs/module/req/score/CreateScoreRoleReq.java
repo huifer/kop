@@ -15,7 +15,7 @@ public class CreateScoreRoleReq {
 
   /** 积分类型 1 签到积分 2 发帖积分 3 评论积分 4 惩罚积分 */
   @ApiModelProperty(value = "积分类型  1 签到积分 2 发帖积分 3 评论积分 4 惩罚积分")
-  private Integer roleType;
+  private Integer ruleType;
 
   /** 增减类型 0 减少 1 增加 */
   @ApiModelProperty(value = "增减类型  0 减少 1 增加")

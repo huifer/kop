@@ -5,14 +5,16 @@
     <!--@mbg.generated-->
     <!--@Table bbs_score_record-->
     <id column="score_record_id" jdbcType="BIGINT" property="scoreRecordId" />
-    <result column="role_id" jdbcType="BIGINT" property="roleId" />
+    <result column="score_rule_id" jdbcType="BIGINT" property="scoreRuleId" />
     <result column="score_count" jdbcType="INTEGER" property="scoreCount" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="create_user_id" jdbcType="BIGINT" property="createUserId" />
+    <result column="score_cycle" jdbcType="TINYINT" property="scoreCycle" />
+    <result column="cycle_count" jdbcType="INTEGER" property="cycleCount" />
   </resultMap>
   <sql id="Base_Column_List">
     <!--@mbg.generated-->
-    score_record_id, role_id, score_count, create_time, create_user_id
+    score_record_id, score_rule_id, score_count, create_time, create_user_id,score_cycle,cycle_count
   </sql>
   <update id="updateBatchSelective" parameterType="java.util.List">
     <!--@mbg.generated-->
@@ -20,8 +22,8 @@
     <trim prefix="set" suffixOverrides=",">
       <trim prefix="role_id = case" suffix="end,">
         <foreach collection="list" index="index" item="item">
-          <if test="item.roleId != null">
-            when score_record_id = #{item.scoreRecordId,jdbcType=BIGINT} then #{item.roleId,jdbcType=BIGINT}
+          <if test="item.scoreRuleId != null">
+            when score_record_id = #{item.scoreRecordId,jdbcType=BIGINT} then #{item.scoreRuleId,jdbcType=BIGINT}
           </if>
         </foreach>
       </trim>
@@ -46,6 +48,20 @@
           </if>
         </foreach>
       </trim>
+      <trim prefix="score_cycle = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.scoreCycle != null">
+            when score_record_id = #{item.scoreRecordId,jdbcType=BIGINT} then #{item.scoreCycle,jdbcType=BIGINT}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="cycle_count = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.scoreCount != null">
+            when score_record_id = #{item.scoreRecordId,jdbcType=BIGINT} then #{item.scoreCount,jdbcType=BIGINT}
+          </if>
+        </foreach>
+      </trim>
     </trim>
     where score_record_id in
     <foreach close=")" collection="list" item="item" open="(" separator=", ">
@@ -56,22 +72,25 @@
     parameterType="map" useGeneratedKeys="true">
     <!--@mbg.generated-->
     insert into bbs_score_record
-    (role_id, score_count, create_time, create_user_id)
+    (score_rule_id, score_count, create_time, create_user_id,score_cycle,cycle_count)
     values
     <foreach collection="list" item="item" separator=",">
-      (#{item.roleId,jdbcType=BIGINT}, #{item.scoreCount,jdbcType=INTEGER},
+      (#{item.scoreRuleId,jdbcType=BIGINT}, #{item.scoreCount,jdbcType=INTEGER},
       #{item.createTime,jdbcType=TIMESTAMP},
-      #{item.createUserId,jdbcType=BIGINT})
+      #{item.createUserId,jdbcType=BIGINT},
+      #{item.scoreCycle,jdbcType=TINYINT},
+      #{item.cycleCount,jdbcType=INTEGER}
+      )
     </foreach>
   </insert>
 
-  <select id="sumScoreByRole" resultType="java.lang.Long">
+  <select id="sumScoreByRule" resultType="java.lang.Long">
     select sum(score_count)
     from bbs_score_record
     where 1 = 1
       and create_time  <![CDATA[ >= ]]>  #{startTime}
       and create_time <![CDATA[ <= ]]>  #{endTime}
       and user_id = #{userId}
-      and roleId = #{roleId}
+      and score_rule_id = #{scoreRuleId}
   </select>
 </mapper>

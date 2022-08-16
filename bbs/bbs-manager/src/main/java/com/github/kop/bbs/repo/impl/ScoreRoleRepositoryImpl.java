@@ -25,7 +25,7 @@ public class ScoreRoleRepositoryImpl implements ScoreRoleRepository {
   @Override
   public ScoreRole findByType(int type) {
     QueryWrapper<ScoreRole> queryWrapper = new QueryWrapper<>();
-    queryWrapper.lambda().eq(ScoreRole::getRoleType, type);
+    queryWrapper.lambda().eq(ScoreRole::getRuleType, type);
     return this.scoreRoleMapper.selectOne(queryWrapper);
   }
 
@@ -36,7 +36,7 @@ public class ScoreRoleRepositoryImpl implements ScoreRoleRepository {
   }
 
   private void checkRoleType(ScoreRole build) {
-    boolean b = hasRoleType(build.getRoleType());
+    boolean b = hasRoleType(build.getRuleType());
     if (b) {
       throw new RuntimeException("该规则已存在");
     }
@@ -44,7 +44,7 @@ public class ScoreRoleRepositoryImpl implements ScoreRoleRepository {
 
   public boolean hasRoleType(int roleType) {
     QueryWrapper<ScoreRole> queryWrapper = new QueryWrapper<>();
-    queryWrapper.lambda().eq(ScoreRole::getRoleType, roleType);
+    queryWrapper.lambda().eq(ScoreRole::getRuleType, roleType);
     return scoreRoleMapper.exists(queryWrapper);
   }
 
@@ -57,7 +57,7 @@ public class ScoreRoleRepositoryImpl implements ScoreRoleRepository {
   @Override
   public int delete(Long id) {
     return scoreRoleMapper.updateById(
-        ScoreRole.builder().roleId(id).deleted(DeletedEnum.TRUE.getCode()).build());
+        ScoreRole.builder().scoreRoleId(id).deleted(DeletedEnum.TRUE.getCode()).build());
   }
 
   @Override
@@ -68,7 +68,7 @@ public class ScoreRoleRepositoryImpl implements ScoreRoleRepository {
         .lambda()
         .eq(
             ObjectUtils.isNotEmpty(pageListScoreRoleReq.getRoleType()),
-            ScoreRole::getRoleType,
+            ScoreRole::getRuleType,
             pageListScoreRoleReq.getRoleType())
         .eq(
             ObjectUtils.isNotEmpty(pageListScoreRoleReq.getAddType()),

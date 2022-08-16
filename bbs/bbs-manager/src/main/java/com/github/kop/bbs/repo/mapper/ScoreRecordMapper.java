@@ -14,8 +14,8 @@ public interface ScoreRecordMapper extends BaseMapper<ScoreRecord> {
 
   int batchInsert(@Param("list") List<ScoreRecord> list);
 
-  Long sumScoreByRole(
-      @Param("roleId") Long roleId,
+  Long sumScoreByRule(
+      @Param("scoreRuleId") Long scoreRuleId,
       @Param("userId") Long userId,
       @Param("startTime") LocalDateTime startTime,
       @Param("endTime") LocalDateTime endTime);

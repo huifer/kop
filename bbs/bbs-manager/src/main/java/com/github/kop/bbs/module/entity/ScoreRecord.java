@@ -25,8 +25,8 @@ public class ScoreRecord implements Serializable {
   private Long scoreRecordId;
 
   /** 积分规则 */
-  @TableField(value = "role_id")
-  private Long roleId;
+  @TableField(value = "score_rule_id")
+  private Long scoreRuleId;
 
   /** 具体加的分数 */
   @TableField(value = "score_count")
@@ -47,6 +47,14 @@ public class ScoreRecord implements Serializable {
   /** 创建用户 */
   @TableField(value = "create_user_id")
   private Long createUserId;
+
+  /** 周期类型  积分周期类型(周期内只能得一次分) 0 没有周期(即不限制得分)  1 天 2 周 3 月 4 年 */
+  @TableField(value = "score_cycle")
+  private Integer scoreCycle;
+
+  /** 周期数 */
+  @TableField(value = "cycle_count")
+  private Integer cycleCount;
 
   private static final long serialVersionUID = 1L;
 }

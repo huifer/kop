@@ -19,16 +19,16 @@ import lombok.NoArgsConstructor;
 @TableName(value = "bbs_score_role")
 public class ScoreRole implements Serializable {
   /** 积分规则主键 */
-  @TableId(value = "role_id", type = IdType.AUTO)
-  private Long roleId;
+  @TableId(value = "score_role_id", type = IdType.AUTO)
+  private Long scoreRoleId;
 
   /**
    * 积分类型  2 发帖积分 3 评论积分 4 惩罚积分
    *
    * <p>{@link ScoreTypeEnums}
    */
-  @TableField(value = "role_type")
-  private Integer roleType;
+  @TableField(value = "rule_type")
+  private Integer ruleType;
 
   /** 增减类型 0 减少 1 增加 */
   @TableField(value = "add_type")
@@ -49,9 +49,12 @@ public class ScoreRole implements Serializable {
   @TableField(value = "cycle_num")
   private Integer cycleNum;
 
+  /** 生效时间 */
+  @TableField(value = "effect_time", fill = FieldFill.INSERT)
+  private LocalDateTime effectTime;
+
   /** 创建时间 */
   @TableField(value = "create_time", fill = FieldFill.INSERT)
-  @ApiModelProperty(value = "创建时间")
   private LocalDateTime createTime;
 
   /** 创建用户 */

@@ -24,7 +24,7 @@ public class CommonSendScoreService implements SendScoreService {
 
     if (scoreRole != null) {
       return this.scoreRecordService.grant(
-          event.getUserId(), scoreRole.getRoleId(), scoreRole.getScore());
+          event.getUserId(), scoreRole.getScoreRoleId(), scoreRole.getScore());
     }
     return false;
   }
