@@ -178,6 +178,25 @@ CREATE TABLE `bbs_mid_user_category` (
                                          PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COMMENT='版主与分类的中间表';
 
+
+-- ----------------------------
+-- Table structure for bbs_user_category_apply
+-- ----------------------------
+DROP TABLE IF EXISTS `bbs_user_category_apply`;
+CREATE TABLE `bbs_user_category_apply` (
+                                         `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
+                                         `user_id` bigint(20) NOT NULL COMMENT '用户id',
+                                         `status` tinyint(4) NOT NULL COMMENT '状态 0 待审核 1 审核通过 2 审核不通过',
+                                         `category_id` bigint(20) NOT NULL COMMENT '版块id',
+                                         `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+                                         `update_time` datetime DEFAULT NULL COMMENT '更新时间',
+                                         `update_user_id` bigint(20) DEFAULT NULL COMMENT '更新用户',
+                                         `deleted` tinyint(4) DEFAULT '0' COMMENT '逻辑删除标记位',
+                                         `version` bigint(20) DEFAULT '0' COMMENT '乐观锁',
+                                         PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COMMENT='版主申请表';
+
+
 -- ----------------------------
 -- Table structure for bbs_mid_user_role
 -- ----------------------------
