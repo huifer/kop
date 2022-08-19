@@ -4,8 +4,8 @@ public interface UserCategoryApplyService {
 
     /**
      * 申请版主
-     * @param categoryId
+     * @param categoryId 板块id
      * @return
      */
-    Boolean applyCategory(Long categoryId);
+    boolean  applyCategory(Long categoryId,Long userId);
 }
