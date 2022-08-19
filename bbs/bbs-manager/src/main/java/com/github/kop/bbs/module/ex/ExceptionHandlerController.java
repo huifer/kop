@@ -1,10 +1,10 @@
-package com.github.kop.bbs.api;
+package com.github.kop.bbs.module.ex;
 
-import com.github.kop.bbs.module.ex.NoceException;
-import com.github.kop.bbs.module.ex.ValidateException;
+import com.github.kop.bbs.config.ExceptionCodeConfiguration;
 import com.github.kop.bbs.module.res.RespVO;
 import io.jsonwebtoken.ExpiredJwtException;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -17,6 +17,9 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @RestControllerAdvice
 @Slf4j
 public class ExceptionHandlerController {
+
+  @Autowired
+  private ExceptionCodeConfiguration exceptionCodeConfiguration;
 
   @ExceptionHandler(Exception.class)
   public RespVO<String> handleException(Exception e) {
@@ -44,5 +47,10 @@ public class ExceptionHandlerController {
   @ExceptionHandler(ExpiredJwtException.class)
   public RespVO<String> handleValidateException(ExpiredJwtException e) {
     return RespVO.error("请重新登录!");
+  }
+
+  @ExceptionHandler(BizException.class)
+  public RespVO<String> handleBizException(BizException e) {
+    return RespVO.error(e.code, exceptionCodeConfiguration.getMessage(e.code));
   }
 }

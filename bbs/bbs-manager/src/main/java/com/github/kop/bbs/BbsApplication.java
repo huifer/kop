@@ -1,5 +1,6 @@
 package com.github.kop.bbs;
 
+import com.github.kop.bbs.config.ExceptionCodeConfiguration;
 import org.mybatis.spring.annotation.MapperScan;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,6 +23,7 @@ public class BbsApplication {
 
   public static void main(String[] args) {
     ConfigurableApplicationContext run = SpringApplication.run(BbsApplication.class, args);
+    ExceptionCodeConfiguration bean = run.getBean(ExceptionCodeConfiguration.class);
     logger.info("bbs项目启动成功");
     logger.info(
         "\n  _                   _      _          \n"
