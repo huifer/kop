@@ -34,10 +34,18 @@ public class UserCategoryApplyRepositoryImpl implements UserCategoryApplyReposit
                 .build());
     }
 
+    /**
+     * 一个人只能申请一个版主
+     * @param categoryId
+     * @param userId
+     */
     private void validateByCategoryAndUser(Long categoryId,Long userId){
-        List<UserCategoryApply> list = getByCategoryIdAndUserId(userId,categoryId);
-        if (ObjectUtils.isNotEmpty(list)){
-            throw new NoceException("当前版块已经申请版主!");
+        QueryWrapper<UserCategoryApply> queryWrapper = new QueryWrapper<>();
+        queryWrapper.lambda()
+            .eq(UserCategoryApply::getUserId, userId);
+        Long aLong = this.userCategoryApplyMapper.selectCount(queryWrapper);
+        if (aLong > 0) {
+            throw new RuntimeException("您已申请过其他版主，请勿重复申请");
         }
     }
 
