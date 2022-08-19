@@ -12,8 +12,8 @@ public class BizException extends RuntimeException {
     this.code = code;
   }
 
-
-  public void setHttpStatusCode(ExceptionEnums exceptionEnums) {
+  public BizException(ExceptionEnums exceptionEnums) {
     this.code = exceptionEnums.getCode();
   }
+
 }
