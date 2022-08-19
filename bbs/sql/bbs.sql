@@ -179,6 +179,50 @@ CREATE TABLE `bbs_mid_user_category` (
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COMMENT='版主与分类的中间表';
 
 
+
+
+-- ----------------------------
+-- Table structure for bbs_mid_user_category_vote
+-- ----------------------------
+DROP TABLE IF EXISTS `bbs_mid_user_category_vote`;
+CREATE TABLE `bbs_mid_user_category_vote` (
+                                         `vote_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
+                                         `category_id` bigint(20) NOT NULL COMMENT '版块id',
+                                         `apply_start_time` datetime DEFAULT NULL COMMENT '申请开始时间(时间范围内允许申请)',
+                                         `apply_end_time` datetime DEFAULT NULL COMMENT '申请结束时间',
+                                         `vote_start_time` datetime DEFAULT NULL COMMENT '投票开始时间(时间范围内允许投票)',
+                                         `vote_end_time` datetime DEFAULT NULL COMMENT '投票结束时间',
+                                         `deleted` tinyint(3) NOT NULL COMMENT '是否删除 0 为未删除、1 为已删除',
+                                         PRIMARY KEY (`vote_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COMMENT='版主投票表';
+
+-- ----------------------------
+-- Table structure for bbs_mid_user_category_vote_apply
+-- ----------------------------
+DROP TABLE IF EXISTS `bbs_mid_user_category_vote_apply`;
+CREATE TABLE `bbs_mid_user_category_vote_apply` (
+                                              `apply_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
+                                              `category_id` bigint(20) NOT NULL COMMENT '版块id',
+                                              `user_id` bigint(20) NOT NULL COMMENT '用户id',
+                                              `ticket_count` bigint(20) NOT NULL COMMENT '投票票数',
+                                              `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+                                              `deleted` tinyint(3) NOT NULL COMMENT '是否删除 0 为未删除、1 为已删除',
+                                              PRIMARY KEY (`apply_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COMMENT='版主投票申请表';
+
+-- ----------------------------
+-- Table structure for bbs_category_vote_apply_log
+-- ----------------------------
+DROP TABLE IF EXISTS `bbs_category_vote_apply_log`;
+CREATE TABLE `bbs_category_vote_apply_log` (
+                                    `vote_apply_log_id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '版主投票记录主键',
+                                    `apply_id` bigint(20) unsigned NOT NULL COMMENT '版主投票申请表主键',
+                                    `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+                                    `create_user_id` bigint(20) DEFAULT NULL COMMENT '创建用户',
+                                    PRIMARY KEY (`vote_apply_log_id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC COMMENT='版主投票记录表';
+
+
 -- ----------------------------
 -- Table structure for bbs_user_category_apply
 -- ----------------------------
