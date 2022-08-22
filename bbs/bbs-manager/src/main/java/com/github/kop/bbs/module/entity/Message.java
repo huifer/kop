@@ -31,7 +31,7 @@ public class Message implements Serializable {
   @TableField(value = "message_event_id")
   private Long messageEventId;
 
-  /** 接收方用户ID */
+  /** 发送发用户ID */
   @TableField(value = "sender_user_id")
   private Long senderUserId;
 

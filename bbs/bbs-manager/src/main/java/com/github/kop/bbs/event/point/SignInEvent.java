@@ -1,6 +1,6 @@
 package com.github.kop.bbs.event.point;
 
-import com.github.kop.bbs.module.enums.ScoreTypeEnums;
+import com.github.kop.bbs.module.enums.ScoreTypeEnum;
 
 /** 签到事件 */
 public class SignInEvent extends PointEvent {
@@ -10,7 +10,7 @@ public class SignInEvent extends PointEvent {
   }
 
   @Override
-  public ScoreTypeEnums type() {
-    return ScoreTypeEnums.SIG_IN;
+  public ScoreTypeEnum type() {
+    return ScoreTypeEnum.SIG_IN;
   }
 }

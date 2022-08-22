@@ -1,6 +1,6 @@
 package com.github.kop.bbs.module.enums;
 
-public enum ScoreTypeEnums {
+public enum ScoreTypeEnum {
   /** 评论 */
   COMMENT(3, "评论积分"),
   /** 发帖 */
@@ -11,7 +11,7 @@ public enum ScoreTypeEnums {
   private final int code;
   private final String name;
 
-  ScoreTypeEnums(int code, String name) {
+  ScoreTypeEnum(int code, String name) {
     this.code = code;
     this.name = name;
   }

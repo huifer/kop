@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@Api(tags = "使用申请版块接口")
+@Api(tags = "消费者-申请版块接口")
 @RestController
 @RequestMapping("/customer/category")
 public class CustomerCategoryApi {

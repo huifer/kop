@@ -122,6 +122,11 @@ public class UserServiceImpl implements UserService {
     return res;
   }
 
+  @Override
+  public User byUserId(Long id) {
+    return this.userRepository.selectById(id);
+  }
+
   protected class UserCreateAndUpdateValidate
       implements CreateValidate<CreateUserReq>, UpdateValidate<UpdateUserReq> {
     @Override

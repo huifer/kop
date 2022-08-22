@@ -1,6 +1,6 @@
 package com.github.kop.bbs.event.point;
 
-import com.github.kop.bbs.module.enums.ScoreTypeEnums;
+import com.github.kop.bbs.module.enums.ScoreTypeEnum;
 
 /** 评论事件 */
 public class CommentEvent extends PointEvent {
@@ -10,7 +10,7 @@ public class CommentEvent extends PointEvent {
   }
 
   @Override
-  public ScoreTypeEnums type() {
-    return ScoreTypeEnums.COMMENT;
+  public ScoreTypeEnum type() {
+    return ScoreTypeEnum.COMMENT;
   }
 }

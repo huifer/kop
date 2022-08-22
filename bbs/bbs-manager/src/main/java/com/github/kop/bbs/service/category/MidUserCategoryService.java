@@ -1,6 +1,6 @@
 package com.github.kop.bbs.service.category;
 
-import com.github.kop.bbs.module.req.midUserCategory.CreateMidUserCategoryReq;
+import com.github.kop.bbs.module.req.category.CreateMidUserCategoryReq;
 
 /**
  * 版主与分类的中间表 服务类

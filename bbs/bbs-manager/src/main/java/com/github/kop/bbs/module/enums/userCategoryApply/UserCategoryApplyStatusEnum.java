@@ -10,7 +10,7 @@ import lombok.Getter;
  */
 @Getter
 @AllArgsConstructor
-public enum UserCategoryApplyStatus {
+public enum UserCategoryApplyStatusEnum {
 
     /**
      * 状态 0 待审核 1 审核通过 2 审核不通过
@@ -28,8 +28,8 @@ public enum UserCategoryApplyStatus {
 
 
     public static String getDescByCode(Integer code){
-        UserCategoryApplyStatus[] values = values();
-        for (UserCategoryApplyStatus value : values) {
+        UserCategoryApplyStatusEnum[] values = values();
+        for (UserCategoryApplyStatusEnum value : values) {
             if(value.code.equals(code)){
                 return value.desc;
             }

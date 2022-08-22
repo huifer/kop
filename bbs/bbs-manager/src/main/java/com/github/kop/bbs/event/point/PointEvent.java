@@ -1,6 +1,6 @@
 package com.github.kop.bbs.event.point;
 
-import com.github.kop.bbs.module.enums.ScoreTypeEnums;
+import com.github.kop.bbs.module.enums.ScoreTypeEnum;
 
 /** 积分事件 */
 public abstract class PointEvent {
@@ -16,5 +16,5 @@ public abstract class PointEvent {
     return userId;
   }
 
-  public abstract ScoreTypeEnums type();
+  public abstract ScoreTypeEnum type();
 }

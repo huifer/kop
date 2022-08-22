@@ -1,6 +1,6 @@
 package com.github.kop.bbs.api.manager;
 
-import com.github.kop.bbs.module.req.midUserCategory.CreateMidUserCategoryReq;
+import com.github.kop.bbs.module.req.category.CreateMidUserCategoryReq;
 import com.github.kop.bbs.module.res.RespVO;
 import com.github.kop.bbs.service.category.MidUserCategoryService;
 import io.swagger.annotations.Api;
@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
  * @author ahxiaoqi
  * @since 2022-08-13
  */
-@Api(tags = "版主接口")
+@Api(tags = "管理端-版主接口")
 @RestController
 @RequestMapping("/mid_user_category")
 public class MidUserCategoryController {

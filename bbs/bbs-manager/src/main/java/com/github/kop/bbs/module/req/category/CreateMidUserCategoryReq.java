@@ -1,4 +1,4 @@
-package com.github.kop.bbs.module.req.midUserCategory;
+package com.github.kop.bbs.module.req.category;
 
 import com.baomidou.mybatisplus.annotation.TableField;
 import io.swagger.annotations.ApiModel;

@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
  * @desc 积分配置接口
  * @time 2022/8/14 14:34
  */
-@Api(tags = "积分配置接口")
+@Api(tags = "管理端-积分配置接口")
 @RestController
 @RequestMapping("/score")
 public class ScoreController {

@@ -1,9 +1,7 @@
 package com.github.kop.bbs.module.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
-import com.github.kop.bbs.module.enums.ScoreTypeEnums;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import com.github.kop.bbs.module.enums.ScoreTypeEnum;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
@@ -25,7 +23,7 @@ public class ScoreRole implements Serializable {
   /**
    * 积分类型  2 发帖积分 3 评论积分 4 惩罚积分
    *
-   * <p>{@link ScoreTypeEnums}
+   * <p>{@link ScoreTypeEnum}
    */
   @TableField(value = "rule_type")
   private Integer ruleType;

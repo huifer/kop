@@ -1,12 +1,20 @@
 package com.github.kop.bbs.api.manager;
 
+import com.github.kop.bbs.module.req.user.CreateUserReq;
+import com.github.kop.bbs.module.req.user.LoginUserReq;
 import com.github.kop.bbs.module.req.user.UpdateUserReq;
 import com.github.kop.bbs.module.res.RespVO;
+import com.github.kop.bbs.module.res.user.UserLoginRes;
 import com.github.kop.bbs.service.user.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import javax.annotation.Resource;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * @auth ahxiaoqi
@@ -18,7 +26,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/user")
 public class UserController {
 
-  @Resource private UserService userService;
+
 
   @ApiOperation(value = "修改用户")
   @PutMapping("/{id}")
@@ -27,4 +35,6 @@ public class UserController {
     req.setId(id);
     return RespVO.success(userService.updateUser(req));
   }
+
+
 }

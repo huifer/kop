@@ -7,7 +7,7 @@ import com.github.kop.bbs.module.enums.DeletedEnum;
 import com.github.kop.bbs.module.enums.role.RoleEnum;
 import com.github.kop.bbs.module.ex.NoceException;
 import com.github.kop.bbs.module.ex.ValidateException;
-import com.github.kop.bbs.module.req.midUserCategory.CreateMidUserCategoryReq;
+import com.github.kop.bbs.module.req.category.CreateMidUserCategoryReq;
 import com.github.kop.bbs.repo.MidUserCategoryRepository;
 import com.github.kop.bbs.service.category.MidUserCategoryService;
 import com.github.kop.bbs.service.role.RoleService;

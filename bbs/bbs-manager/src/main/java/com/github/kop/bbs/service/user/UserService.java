@@ -1,5 +1,6 @@
 package com.github.kop.bbs.service.user;
 
+import com.github.kop.bbs.module.entity.User;
 import com.github.kop.bbs.module.req.user.CreateUserReq;
 import com.github.kop.bbs.module.req.user.LoginUserReq;
 import com.github.kop.bbs.module.req.user.UpdateUserReq;
@@ -30,4 +31,6 @@ public interface UserService {
    * @return
    */
   UserLoginRes login(LoginUserReq req);
+
+  User byUserId(Long id);
 }

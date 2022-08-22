@@ -3,10 +3,9 @@ package com.github.kop.bbs.service.score.impl;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.github.kop.bbs.module.entity.ScoreRole;
-import com.github.kop.bbs.module.enums.ScoreCycleEnums;
-import com.github.kop.bbs.module.enums.ScoreTypeEnums;
+import com.github.kop.bbs.module.enums.ScoreCycleEnum;
+import com.github.kop.bbs.module.enums.ScoreTypeEnum;
 import com.github.kop.bbs.module.enums.score.ScoreAddTypeEnum;
-import com.github.kop.bbs.module.enums.score.ScoreCycleEnum;
 import com.github.kop.bbs.module.enums.score.ScoreRoleEnum;
 import com.github.kop.bbs.module.ex.ValidateException;
 import com.github.kop.bbs.module.req.score.CreateScoreRoleReq;
@@ -79,14 +78,14 @@ public class ScoreRoleServiceImpl implements ScoreRoleService {
     res.setRuleType(ScoreRoleEnum.getDescByCode(scoreRole.getRuleType()));
     res.setAddType(ScoreAddTypeEnum.getDescByCode(scoreRole.getAddType()));
     res.setScore(scoreRole.getScore() == 0 ? "自定义分数" : scoreRole.getScore().toString());
-    res.setScoreCycle(ScoreCycleEnum.getDescByCode(scoreRole.getScoreCycle()));
+    res.setScoreCycle(com.github.kop.bbs.module.enums.score.ScoreCycleEnum.getDescByCode(scoreRole.getScoreCycle()));
     return res;
   }
 
   @Autowired private ScoreRecordService scoreRecordService;
 
   @Override
-  public ScoreRole exceededMax(ScoreTypeEnums type, Long userId) {
+  public ScoreRole exceededMax(ScoreTypeEnum type, Long userId) {
     // 获取用户id对应积分类型已经获得的积分
     ScoreRole scoreRole = this.scoreRoleRepository.findByType(type.getCode());
     // 周期数字
@@ -98,9 +97,9 @@ public class ScoreRoleServiceImpl implements ScoreRoleService {
 
     LocalDateTime startTime = scoreRecordService.firstGetScore(scoreRole.getScoreRoleId(), userId);
     // 计算周期范围内的最后一天
-    ScoreCycleEnums scoreCycleEnums = ScoreCycleEnums.conv(scoreCycle);
+    ScoreCycleEnum scoreCycleEnum = ScoreCycleEnum.conv(scoreCycle);
 
-    LocalDateTime endTime = calcEndTime(startTime, scoreCycleEnums, cycleNum);
+    LocalDateTime endTime = calcEndTime(startTime, scoreCycleEnum, cycleNum);
     // 计算时间范围内获得的积分
     Long sumScore =
         scoreRecordService.sumScoreByRule(scoreRole.getScoreRoleId(), userId, startTime, endTime);
@@ -123,16 +122,16 @@ public class ScoreRoleServiceImpl implements ScoreRoleService {
    * 计算截至时间
    *
    * @param startTime 开始时间
-   * @param scoreCycleEnums 周期类型
+   * @param scoreCycleEnum 周期类型
    * @param cycleNum 周期天数
    * @return 截至时间
    */
   private LocalDateTime calcEndTime(
-      LocalDateTime startTime, ScoreCycleEnums scoreCycleEnums, Integer cycleNum) {
+      LocalDateTime startTime, ScoreCycleEnum scoreCycleEnum, Integer cycleNum) {
     if (cycleNum == null) {
       throw new RuntimeException("周期数值必填");
     }
-    switch (scoreCycleEnums) {
+    switch (scoreCycleEnum) {
       case DAY:
         return startTime.plusDays(cycleNum);
       case WEEK:

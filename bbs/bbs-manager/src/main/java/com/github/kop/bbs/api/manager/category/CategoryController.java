@@ -1,4 +1,4 @@
-package com.github.kop.bbs.api.manager;
+package com.github.kop.bbs.api.manager.category;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.github.kop.bbs.module.req.category.CreateCategoryReq;
@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
  * @desc 版块控制器
  * @time 2022/8/11 21:36
  */
-@Api(tags = "版块接口")
+@Api(tags = "管理端-版块接口")
 @RestController
 @RequestMapping("/category")
 public class CategoryController {

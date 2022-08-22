@@ -1,7 +1,7 @@
 package com.github.kop.bbs.module.enums;
 
 // 1 天 2 周 3 月 4 年
-public enum ScoreCycleEnums {
+public enum ScoreCycleEnum {
   DAY(1, "天"),
   WEEK(1, "周"),
   MONTH(1, "月"),
@@ -10,13 +10,13 @@ public enum ScoreCycleEnums {
   private final int code;
   private final String name;
 
-  ScoreCycleEnums(int code, String name) {
+  ScoreCycleEnum(int code, String name) {
     this.code = code;
     this.name = name;
   }
 
-  public static ScoreCycleEnums conv(Integer scoreCycle) {
-    for (ScoreCycleEnums value : values()) {
+  public static ScoreCycleEnum conv(Integer scoreCycle) {
+    for (ScoreCycleEnum value : values()) {
       if (value.code == scoreCycle) {
         return value;
       }
