@@ -5,7 +5,7 @@ import lombok.Getter;
 
 @AllArgsConstructor
 @Getter
-public enum TipsStatusEnum {
+public enum MessageStatusEnum {
   READ(1,"已读"),
   NOT_READ(0,"未读"),
 

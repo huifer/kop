@@ -1,4 +1,5 @@
-package com.github.kop.bbs.module;
+package com.github.kop.bbs.module.enums;
+
 
 import lombok.Getter;
 

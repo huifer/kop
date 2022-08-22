@@ -3,8 +3,8 @@ package com.github.kop.bbs.service.message.impl;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.github.kop.bbs.module.entity.Message;
 import com.github.kop.bbs.module.entity.User;
-import com.github.kop.bbs.module.enums.TipsStatusEnum;
-import com.github.kop.bbs.module.enums.TipsTypeEnum;
+import com.github.kop.bbs.module.enums.MessageStatusEnum;
+import com.github.kop.bbs.module.enums.MessageTypeEnum;
 import com.github.kop.bbs.module.req.message.MessageQueryReq;
 import com.github.kop.bbs.module.req.message.UserSendMessageReq;
 import com.github.kop.bbs.module.res.message.MessageResp;
@@ -27,12 +27,12 @@ public class MessageServiceImpl implements MessageService {
   @Override
   public boolean sendPrivateMessage(Long fromUserId, UserSendMessageReq userSendMessageReq) {
     Message message = new Message();
-    message.setTipsType(TipsTypeEnum.PRIVATE_MESSAGE.getCode());
+    message.setTipsType(MessageTypeEnum.PRIVATE_MESSAGE.getCode());
     message.setSenderUserId(fromUserId);
     message.setReceiverUserId(userSendMessageReq.getSendToUserId());
     message.setBrief(null);
     message.setContent(userSendMessageReq.getContent());
-    message.setTipsStatus(TipsStatusEnum.NOT_READ.getCode());
+    message.setTipsStatus(MessageStatusEnum.NOT_READ.getCode());
 
     return messageRepository.create(message);
   }

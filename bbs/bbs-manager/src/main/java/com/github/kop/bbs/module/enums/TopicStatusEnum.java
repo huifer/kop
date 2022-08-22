@@ -6,25 +6,28 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 /**
- * 申诉类别 1 账号申诉 2 帖子申诉
+ * 话题状态 0 待审核  1 审核通过 2 审核不通过
  */
 @AllArgsConstructor
 @Getter
-public enum AppealTypeEnum {
-  ACCOUNT(1,"账号申诉"),
-  INVITATION(2,"帖子申诉")
+public enum TopicStatusEnum {
+  TO_AUDIT(0, "待审核"),
+  PASS(1, "审核通过"),
+  NO_PASS(2, "审核不通过"),
   ;
   private final Integer code;
 
   private final String desc;
 
-  public static AppealTypeEnum conv(int  appealType) {
-    for (AppealTypeEnum value : values()) {
-      if (value.code == appealType) {
+  public static TopicStatusEnum conv(int code){
+    for (TopicStatusEnum value : values()) {
+      if (value.code == code) {
+
         return value;
       }
     }
     throw new BizException(ExceptionEnums.CONV_ENUM_EXCEPTION);
 
   }
+
 }

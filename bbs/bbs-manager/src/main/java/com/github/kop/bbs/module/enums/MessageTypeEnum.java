@@ -10,7 +10,7 @@ import lombok.Getter;
  */
 @AllArgsConstructor
 @Getter
-public enum TipsTypeEnum {
+public enum MessageTypeEnum {
 
   DYNAMIC(1, "动态"),
   COMMENT(2, "评论"),
@@ -22,8 +22,8 @@ public enum TipsTypeEnum {
   private final int code;
   private final String name;
 
-  public static TipsTypeEnum conv(int code) {
-    for (TipsTypeEnum value : values()) {
+  public static MessageTypeEnum conv(int code) {
+    for (MessageTypeEnum value : values()) {
       if (value.code == code) {
         return value;
       }

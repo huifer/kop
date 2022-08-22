@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.github.kop.bbs.module.entity.Message;
-import com.github.kop.bbs.module.enums.TipsStatusEnum;
+import com.github.kop.bbs.module.enums.MessageStatusEnum;
 import com.github.kop.bbs.module.req.message.MessageQueryReq;
 import com.github.kop.bbs.repo.MessageRepository;
 import com.github.kop.bbs.repo.mapper.MessageMapper;
@@ -27,7 +27,7 @@ public class MessageRepositoryImpl implements MessageRepository {
   @Transactional(rollbackFor = Exception.class)
   @Override
   public boolean updateToRead(Long userId) {
-    return this.mapper.updateToRead(userId, TipsStatusEnum.READ);
+    return this.mapper.updateToRead(userId, MessageStatusEnum.READ);
   }
 
   @Override

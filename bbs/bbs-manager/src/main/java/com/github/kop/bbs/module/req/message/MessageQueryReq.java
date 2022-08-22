@@ -1,6 +1,6 @@
 package com.github.kop.bbs.module.req.message;
 
-import com.github.kop.bbs.module.enums.TipsTypeEnum;
+import com.github.kop.bbs.module.enums.MessageTypeEnum;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -14,12 +14,12 @@ public class MessageQueryReq {
 
 
   @ApiModelProperty("通知类型枚举")
-  private TipsTypeEnum tipsTypeEnum;
+  private MessageTypeEnum messageTypeEnum;
 
 
   public void setTipsType(Integer tipsType) {
     this.tipsType = tipsType;
-    this.tipsTypeEnum = TipsTypeEnum.conv(tipsType);
+    this.messageTypeEnum = MessageTypeEnum.conv(tipsType);
   }
 
 

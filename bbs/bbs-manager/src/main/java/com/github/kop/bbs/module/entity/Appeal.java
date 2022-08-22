@@ -28,7 +28,7 @@ public class Appeal implements Serializable {
 
   /** 申诉类别 1 账号申诉 2 帖子申诉 */
   @TableField(value = "appeal_type")
-  private Long appealType;
+  private Integer appealType;
 
   /** 申诉标题 */
   @TableField(value = "appeal_title")
@@ -37,6 +37,9 @@ public class Appeal implements Serializable {
   /** 申诉描述 */
   @TableField(value = "appeal_text")
   private String appealText;
+  /** 申诉人 */
+  @TableField(value = "appeal_user_id")
+  private Long appealUserId;
 
   /** 申诉附件 */
   @TableField(value = "appeal_file")
@@ -46,17 +49,6 @@ public class Appeal implements Serializable {
   @TableField(value = "create_time")
   private Date createTime;
 
-  /** 创建用户 */
-  @TableField(value = "create_user_id")
-  private Long createUserId;
-
-  /** 更新时间 */
-  @TableField(value = "update_time")
-  private Date updateTime;
-
-  /** 更新用户 */
-  @TableField(value = "update_user_id")
-  private Long updateUserId;
 
   /** 逻辑删除标记位 */
   @TableField(value = "deleted")
