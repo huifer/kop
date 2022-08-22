@@ -14,7 +14,7 @@ public interface UserService {
    * @param req
    * @return
    */
-  Boolean create(CreateUserReq req);
+  Boolean createCustomerUser(CreateUserReq req);
 
   /**
    * 更新用户

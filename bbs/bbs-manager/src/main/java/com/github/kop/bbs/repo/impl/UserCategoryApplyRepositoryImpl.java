@@ -2,7 +2,7 @@ package com.github.kop.bbs.repo.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.github.kop.bbs.module.entity.UserCategoryApply;
-import com.github.kop.bbs.module.enums.userCategoryApply.UserCategoryApplyStatusEnum;
+import com.github.kop.bbs.module.enums.category.UserCategoryApplyStatusEnum;
 import com.github.kop.bbs.repo.UserCategoryApplyRepository;
 import com.github.kop.bbs.repo.mapper.UserCategoryApplyMapper;
 import javax.annotation.Resource;

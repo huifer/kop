@@ -28,7 +28,7 @@ public class OpenController {
   @ApiOperation(value = "用户注册")
   @PostMapping("/user/create")
   public RespVO<Boolean> create(@RequestBody CreateUserReq req) {
-    return RespVO.success(userService.create(req));
+    return RespVO.success(userService.createCustomerUser(req));
   }
 
   @ApiOperation(value = "用户登录")

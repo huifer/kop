@@ -1,4 +1,4 @@
-package com.github.kop.bbs.module.enums.userCategoryApply;
+package com.github.kop.bbs.module.enums.category;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

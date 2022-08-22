@@ -23,7 +23,7 @@ public class CustomerUserController {
   public RespVO<Boolean> register(
       @RequestBody CreateUserReq req
   ) {
-    return RespVO.success(this.userService.create(req));
+    return RespVO.success(this.userService.createCustomerUser(req));
   }
 
   @ApiOperation(value = "用户登录")

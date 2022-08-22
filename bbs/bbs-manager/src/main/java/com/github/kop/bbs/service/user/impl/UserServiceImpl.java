@@ -39,7 +39,7 @@ public class UserServiceImpl implements UserService {
 
   @Override
   @Transactional(rollbackFor = Exception.class)
-  public Boolean create(CreateUserReq req) {
+  public Boolean createCustomerUser(CreateUserReq req) {
     userCreateAndUpdateValidate.createValidate(req);
     // 随机生成盐
     String salt = RandomStringUtils.randomAlphanumeric(10);
