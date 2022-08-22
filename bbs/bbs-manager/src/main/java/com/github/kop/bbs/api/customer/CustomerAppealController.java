@@ -32,7 +32,7 @@ public class CustomerAppealController {
   }
 
   @ApiOperation(value = "申诉分页")
-  @PostMapping("/page")
+  @PostMapping("/page/{page}/{size}")
   public RespVO<IPage<AppealResp>> page(
       @PathVariable("page") Long page,
       @PathVariable("size") Long size

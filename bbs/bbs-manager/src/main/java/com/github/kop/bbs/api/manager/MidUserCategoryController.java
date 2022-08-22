@@ -1,8 +1,11 @@
 package com.github.kop.bbs.api.manager;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.github.kop.bbs.module.req.category.CreateMidUserCategoryReq;
 import com.github.kop.bbs.module.res.RespVO;
+import com.github.kop.bbs.module.res.category.CategoryListRes;
 import com.github.kop.bbs.service.category.MidUserCategoryService;
+import com.github.kop.bbs.service.category.UserCategoryApplyService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import javax.annotation.Resource;

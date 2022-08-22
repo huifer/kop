@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.github.kop.bbs.repo.mapper.MidUserCategoryVoteMapper">
+  <resultMap id="BaseResultMap" type="com.github.kop.bbs.module.entity.MidUserCategoryVote">
+    <!--@mbg.generated-->
+    <!--@Table bbs_mid_user_category_vote-->
+    <id column="vote_id" jdbcType="BIGINT" property="voteId" />
+    <result column="category_id" jdbcType="BIGINT" property="categoryId" />
+    <result column="application_count" jdbcType="BIGINT" property="applicationCount" />
+    <result column="already_count" jdbcType="BIGINT" property="alreadyCount" />
+    <result column="apply_start_time" jdbcType="TIMESTAMP" property="applyStartTime" />
+    <result column="apply_end_time" jdbcType="TIMESTAMP" property="applyEndTime" />
+    <result column="vote_start_time" jdbcType="TIMESTAMP" property="voteStartTime" />
+    <result column="vote_end_time" jdbcType="TIMESTAMP" property="voteEndTime" />
+    <result column="deleted" jdbcType="TINYINT" property="deleted" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    vote_id, category_id, application_count, already_count, apply_start_time, apply_end_time, 
+    vote_start_time, vote_end_time, deleted
+  </sql>
+</mapper>
