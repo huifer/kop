@@ -24,7 +24,7 @@ public class UserBlackList implements Serializable {
   @TableId(value = "black_list_id", type = IdType.AUTO)
   private Long blackListId;
 
-  /** 拉黑的人 */
+  /** 被拉黑的人 */
   @TableField(value = "black_user_id")
   private Long blackUserId;
 
