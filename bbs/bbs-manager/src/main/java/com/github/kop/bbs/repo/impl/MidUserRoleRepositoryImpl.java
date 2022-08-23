@@ -5,6 +5,7 @@ import com.github.kop.bbs.module.entity.MidUserRole;
 import com.github.kop.bbs.module.ex.NoceException;
 import com.github.kop.bbs.repo.MidUserRoleRepository;
 import com.github.kop.bbs.repo.mapper.MidUserRoleMapper;
+import java.util.List;
 import javax.annotation.Resource;
 import org.springframework.stereotype.Repository;
 
@@ -46,4 +47,10 @@ public class MidUserRoleRepositoryImpl implements MidUserRoleRepository {
   public int deleteUserRole(Long userId, Long roleId) {
     return bbsMidUserRoleMapper.deleteUserRole(userId, roleId);
   }
+
+  @Override
+  public List<Long> byUserId(Long userId) {
+    return bbsMidUserRoleMapper.byUserId(userId);
+  }
+
 }

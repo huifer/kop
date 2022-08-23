@@ -11,16 +11,20 @@ import com.github.kop.bbs.module.req.user.LoginUserReq;
 import com.github.kop.bbs.module.req.user.UpdateUserReq;
 import com.github.kop.bbs.module.res.user.UserLoginRes;
 import com.github.kop.bbs.repo.UserRepository;
+import com.github.kop.bbs.service.role.RoleService;
 import com.github.kop.bbs.service.user.MidUserRoleService;
 import com.github.kop.bbs.service.user.UserService;
 import com.github.kop.bbs.utils.CreateValidate;
 import com.github.kop.bbs.utils.JwtTokenUtil;
 import com.github.kop.bbs.utils.UpdateValidate;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.List;
 import javax.annotation.Resource;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.DigestUtils;
@@ -31,11 +35,16 @@ public class UserServiceImpl implements UserService {
   protected final UserCreateAndUpdateValidate userCreateAndUpdateValidate =
       new UserCreateAndUpdateValidate();
 
-  @Resource private JwtTokenUtil jwtTokenUtil;
+  @Resource
+  private JwtTokenUtil jwtTokenUtil;
 
-  @Resource private UserRepository userRepository;
+  @Resource
+  private UserRepository userRepository;
 
-  @Resource private MidUserRoleService midUserRoleService;
+  @Resource
+  private MidUserRoleService midUserRoleService;
+  @Autowired
+  private RoleService roleService;
 
   @Override
   @Transactional(rollbackFor = Exception.class)
@@ -127,8 +136,21 @@ public class UserServiceImpl implements UserService {
     return this.userRepository.selectById(id);
   }
 
+  @Override
+  public boolean hasRoles(Long userId, RoleEnum[] roles) {
+
+    // 带校验
+    List<String> toCheck = new ArrayList<>(roles.length);
+    for (RoleEnum role : roles) {
+      toCheck.add(role.getRoleCode());
+    }
+
+    return roleService.hasRoleCodes(toCheck, userId);
+  }
+
   protected class UserCreateAndUpdateValidate
       implements CreateValidate<CreateUserReq>, UpdateValidate<UpdateUserReq> {
+
     @Override
     public void createValidate(CreateUserReq createUserReq) throws ValidateException {
       String name = createUserReq.getUsername();
@@ -147,6 +169,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void updateValidate(UpdateUserReq updateUserReq) throws ValidateException {}
+    public void updateValidate(UpdateUserReq updateUserReq) throws ValidateException {
+    }
   }
 }

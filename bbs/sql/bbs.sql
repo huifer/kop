@@ -11,7 +11,7 @@
  Target Server Version : 50733
  File Encoding         : 65001
 
- Date: 22/08/2022 19:49:56
+ Date: 23/08/2022 10:40:38
 */
 
 SET NAMES utf8mb4;
@@ -24,7 +24,6 @@ DROP TABLE IF EXISTS `bbs_appeal`;
 CREATE TABLE `bbs_appeal`  (
   `appeal_id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '申诉主键',
   `appeal_type` tinyint(4) NOT NULL COMMENT '申诉类别 1 账号申诉 2 帖子申诉',
-  `appeal_status` tinyint(4) NOT NULL COMMENT '申诉状态 0 待处理 1 处理中(有回复算处理中) 2 待用户评价 3 处理完成',
   `appeal_title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '申诉标题',
   `appeal_text` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '申诉描述',
   `appeal_file` varchar(800) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '申诉附件',
@@ -37,26 +36,20 @@ CREATE TABLE `bbs_appeal`  (
 
 -- ----------------------------
 -- Table structure for bbs_appeal_receipt
-
--- 暂定流程为 用户发起申诉-----> 管理员回执------> 用户回复--------> 用户评价认为是否完成---------->是 就处理完成 ,否则继续回执
- -- ----------------------------
+-- ----------------------------
 DROP TABLE IF EXISTS `bbs_appeal_receipt`;
 CREATE TABLE `bbs_appeal_receipt`  (
-                               `appeal_receipt_id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '申诉回执主键',
-                               `appeal_id` bigint(20) NOT NULL  COMMENT '申诉主键',
-                               `order` int(11) NOT NULL  COMMENT '申诉回执顺序',
-                               `appeal_official_reply` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '官方回复',
-                               `appeal_user_reply` varchar(800) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '用户回复',
-                               `deleted` tinyint(4) NULL DEFAULT 0 COMMENT '逻辑删除标记位',
-                               `version` bigint(20) NULL DEFAULT 0 COMMENT '乐观锁',
-                               `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
-                               `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
-                               PRIMARY KEY (`appeal_receipt_id`) USING BTREE
+  `appeal_receipt_id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '申诉回执主键',
+  `appeal_id` bigint(20) NOT NULL COMMENT '申诉主键',
+  `order` int(11) NOT NULL COMMENT '申诉回执顺序',
+  `appeal_official_reply` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '官方回复',
+  `appeal_user_reply` varchar(800) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '用户回复',
+  `deleted` tinyint(4) NULL DEFAULT 0 COMMENT '逻辑删除标记位',
+  `version` bigint(20) NULL DEFAULT 0 COMMENT '乐观锁',
+  `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
+  `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
+  PRIMARY KEY (`appeal_receipt_id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '申诉回执' ROW_FORMAT = DYNAMIC;
-
-
-
-
 
 -- ----------------------------
 -- Table structure for bbs_category
@@ -158,6 +151,8 @@ CREATE TABLE `bbs_invitation`  (
   `invitation_id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '帖子主键',
   `text_type` tinyint(4) NOT NULL COMMENT '帖子正文类型  1 富文本 2 md',
   `category_id` bigint(20) NOT NULL COMMENT '论坛类别',
+  `type` tinyint(4) NOT NULL COMMENT '帖子类型：0动态、1板块内容',
+  `topic_id` bigint(20) NULL DEFAULT NULL COMMENT '话题主键 动态可以选择加话题',
   `text` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '帖子正文',
   `article_status` tinyint(4) NULL DEFAULT 0 COMMENT '文章状态 0 待审核 1 审核通过',
   `is_top` tinyint(3) UNSIGNED NOT NULL DEFAULT 0 COMMENT '是否置顶',
@@ -181,27 +176,12 @@ CREATE TABLE `bbs_invitation`  (
 ) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '论坛的帖子' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
--- Table structure for bbs_post_new
--- ----------------------------
-DROP TABLE IF EXISTS `bbs_post_new`;
-CREATE TABLE `bbs_post_new`  (
-                                `post_new_id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '动态主键',
-                                `topic_id` bigint(20) NULL DEFAULT NULL COMMENT '话题主键 动态可以选择加话题',
-                                `content` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '详细内容',
-                                `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
-                                `deleted` tinyint(4) NULL DEFAULT 0 COMMENT '逻辑删除标记位',
-                                PRIMARY KEY (`post_new_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '论坛的动态' ROW_FORMAT = DYNAMIC;
-
-
-
--- ----------------------------
 -- Table structure for bbs_message
 -- ----------------------------
 DROP TABLE IF EXISTS `bbs_message`;
 CREATE TABLE `bbs_message`  (
   `message_id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '消息主键',
-  `tips_type` tinyint(4) NOT NULL COMMENT ' 通知类型，1动态，2评论，3帖子回复通知，4评论回复通知 5私信，6 申诉回执,99系统通知 ',
+  `tips_type` tinyint(4) NOT NULL COMMENT ' 通知类型，1动态，2评论，3帖子回复通知，4评论回复通知 5私信，99系统通知',
   `message_event_id` bigint(20) NOT NULL COMMENT '产生消息的对应内容的主键',
   `sender_user_id` bigint(20) NOT NULL COMMENT '发送发用户ID',
   `receiver_user_id` bigint(20) NOT NULL COMMENT '接收方用户ID',
@@ -240,7 +220,7 @@ CREATE TABLE `bbs_mid_user_category_vote`  (
   `vote_end_time` datetime NULL DEFAULT NULL COMMENT '投票结束时间',
   `deleted` tinyint(3) NOT NULL COMMENT '是否删除 0 为未删除、1 为已删除',
   PRIMARY KEY (`vote_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '版主投票表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '版主投票表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Table structure for bbs_mid_user_category_vote_apply
@@ -248,14 +228,14 @@ CREATE TABLE `bbs_mid_user_category_vote`  (
 DROP TABLE IF EXISTS `bbs_mid_user_category_vote_apply`;
 CREATE TABLE `bbs_mid_user_category_vote_apply`  (
   `apply_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '主键',
-  `vote_id` bigint(20) UNSIGNED NOT NULL  COMMENT '版主投票表主键',
+  `vote_id` bigint(20) UNSIGNED NOT NULL COMMENT '版主投票表主键',
   `category_id` bigint(20) NOT NULL COMMENT '版块id',
   `user_id` bigint(20) NOT NULL COMMENT '用户id',
   `ticket_count` bigint(20) NOT NULL COMMENT '投票票数',
   `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
   `deleted` tinyint(3) NOT NULL COMMENT '是否删除 0 为未删除、1 为已删除',
   PRIMARY KEY (`apply_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '版主投票申请表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '版主投票申请表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Table structure for bbs_mid_user_role
@@ -429,6 +409,19 @@ CREATE TABLE `bbs_user_category_apply`  (
   `version` bigint(20) NULL DEFAULT 0 COMMENT '乐观锁',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '版主申请表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for bbs_user_dynamic
+-- ----------------------------
+DROP TABLE IF EXISTS `bbs_user_dynamic`;
+CREATE TABLE `bbs_user_dynamic`  (
+  `user_dynamic_id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '动态主键',
+  `topic_id` bigint(20) NULL DEFAULT NULL COMMENT '话题主键 动态可以选择加话题',
+  `content` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '详细内容',
+  `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
+  `deleted` tinyint(4) NULL DEFAULT 0 COMMENT '逻辑删除标记位',
+  PRIMARY KEY (`user_dynamic_id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '论坛的动态' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Table structure for bbs_user_follower_list

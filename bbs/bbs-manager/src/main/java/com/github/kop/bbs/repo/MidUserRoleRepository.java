@@ -1,6 +1,7 @@
 package com.github.kop.bbs.repo;
 
 import com.github.kop.bbs.module.entity.MidUserRole;
+import java.util.List;
 
 /**
  * @auth ahxiaoqi
@@ -27,4 +28,6 @@ public interface MidUserRoleRepository {
    * @return 受影响行数
    */
   int deleteUserRole(Long userId, Long roleId);
+
+  List<Long> byUserId(Long userId);
 }

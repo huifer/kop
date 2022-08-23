@@ -2,10 +2,10 @@ package com.github.kop.bbs.service.category.impl;
 
 import org.springframework.stereotype.Service;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.github.kop.bbs.module.entity.PostNew;
+import com.github.kop.bbs.module.entity.UserDynamic;
 import com.github.kop.bbs.repo.mapper.PostNewMapper;
 import com.github.kop.bbs.service.category.BbsPostNewService;
 @Service
-public class BbsPostNewServiceImpl extends ServiceImpl<PostNewMapper, PostNew> implements BbsPostNewService{
+public class BbsPostNewServiceImpl extends ServiceImpl<PostNewMapper, UserDynamic> implements BbsPostNewService{
 
 }

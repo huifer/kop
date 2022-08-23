@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.github.kop.bbs.repo.mapper.PostNewMapper">
-  <resultMap id="BaseResultMap" type="com.github.kop.bbs.module.entity.PostNew">
+  <resultMap id="BaseResultMap" type="com.github.kop.bbs.module.entity.UserDynamic">
     <!--@mbg.generated-->
     <!--@Table bbs_post_new-->
     <id column="post_new_id" jdbcType="BIGINT" property="postNewId" />
