@@ -20,9 +20,6 @@ public class RoleApiAspect {
   @Autowired
   private UserService userService;
 
-  public static void main(String[] args) {
-    RoleApi annotation = AnnotationUtils.findAnnotation(C.class, RoleApi.class);
-  }
 
   @Pointcut("@annotation(com.github.kop.bbs.aop.role.RoleApi)")
   public void pointFn() {

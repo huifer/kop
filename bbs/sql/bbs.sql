@@ -11,7 +11,7 @@
  Target Server Version : 50733
  File Encoding         : 65001
 
- Date: 23/08/2022 10:40:38
+ Date: 23/08/2022 13:31:29
 */
 
 SET NAMES utf8mb4;
@@ -113,6 +113,7 @@ CREATE TABLE `bbs_comment`  (
   `create_user_id` bigint(20) NULL DEFAULT NULL COMMENT '创建用户',
   `deleted` tinyint(4) NULL DEFAULT 0 COMMENT '逻辑删除标记位',
   `version` bigint(20) NULL DEFAULT 0 COMMENT '乐观锁',
+  `ref_id` bigint(20) NULL DEFAULT NULL COMMENT '主体id',
   PRIMARY KEY (`comment_id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '论坛的帖子评论' ROW_FORMAT = DYNAMIC;
 
@@ -279,7 +280,7 @@ CREATE TABLE `bbs_role`  (
   `role_code` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '角色code',
   `deleted` tinyint(3) NULL DEFAULT NULL COMMENT '是否删除 0 为未删除、1 为已删除',
   PRIMARY KEY (`role_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '角色表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for bbs_score_record

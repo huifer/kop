@@ -27,7 +27,9 @@ public class Comment implements Serializable {
   /** 评论类别 1 帖子 2 评论 3 话题 */
   @TableField(value = "comment_type")
   private Integer commentType;
-
+  /** 主体id */
+  @TableField(value = "ref_id")
+  private Long refId;
   /** 最上级id */
   @TableField(value = "top_id")
   private Long topId;
