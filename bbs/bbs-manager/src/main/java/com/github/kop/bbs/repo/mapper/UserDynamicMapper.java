@@ -2,6 +2,9 @@ package com.github.kop.bbs.repo.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.github.kop.bbs.module.entity.UserDynamic;
+import org.apache.ibatis.annotations.Mapper;
 
-public interface PostNewMapper extends BaseMapper<UserDynamic> {
+@Mapper
+public interface UserDynamicMapper extends BaseMapper<UserDynamic> {
+
 }

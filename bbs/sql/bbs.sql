@@ -11,7 +11,7 @@
  Target Server Version : 50733
  File Encoding         : 65001
 
- Date: 23/08/2022 13:31:29
+ Date: 23/08/2022 16:53:14
 */
 
 SET NAMES utf8mb4;
@@ -421,6 +421,7 @@ CREATE TABLE `bbs_user_dynamic`  (
   `content` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '详细内容',
   `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
   `deleted` tinyint(4) NULL DEFAULT 0 COMMENT '逻辑删除标记位',
+  `create_user_id` bigint(20) NULL DEFAULT NULL COMMENT '创建用户',
   PRIMARY KEY (`user_dynamic_id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '论坛的动态' ROW_FORMAT = DYNAMIC;
 
