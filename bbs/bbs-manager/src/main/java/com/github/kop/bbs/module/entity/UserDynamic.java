@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.annotation.TableName;
+import java.time.LocalDateTime;
 import java.util.Date;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -44,7 +45,13 @@ public class UserDynamic {
    * 创建时间
    */
   @TableField(value = "create_time", fill = FieldFill.INSERT)
-  private Date createTime;
+  private LocalDateTime createTime;
+
+  /**
+   * 创建人
+   */
+  @TableField(value = "create_user_id", fill = FieldFill.INSERT)
+  private Long createUserId;
 
   /**
    * 逻辑删除标记位

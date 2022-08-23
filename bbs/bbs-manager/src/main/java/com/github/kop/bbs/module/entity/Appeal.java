@@ -9,6 +9,7 @@ import com.baomidou.mybatisplus.annotation.Version;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.Date;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -47,7 +48,7 @@ public class Appeal implements Serializable {
 
   /** 创建时间 */
   @TableField(value = "create_time")
-  private Date createTime;
+  private LocalDateTime createTime;
 
 
   /** 逻辑删除标记位 */
