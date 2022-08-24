@@ -41,4 +41,8 @@ public class MidUserRole implements Serializable {
   /** 是否删除 0 为未删除、1 为已删除 */
   @TableField("deleted")
   private Integer deleted;
+  /** 创建用户 */
+  @TableField(value = "create_user_id")
+  private Long createUserId;
 }
+

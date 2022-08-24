@@ -67,6 +67,8 @@ public class CategoryRepositoryImpl implements CategoryRepository {
     return this.bbsCategoryMapper.subList(categoryId);
   }
 
-
-
+  @Override
+  public Category byId(Long id) {
+    return this.bbsCategoryMapper.selectById(id);
+  }
 }

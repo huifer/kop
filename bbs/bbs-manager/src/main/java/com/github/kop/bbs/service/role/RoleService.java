@@ -1,6 +1,7 @@
 package com.github.kop.bbs.service.role;
 
 import com.github.kop.bbs.module.entity.Role;
+import com.github.kop.bbs.module.res.role.RoleListResp;
 import java.util.List;
 
 public interface RoleService {
@@ -16,4 +17,7 @@ public interface RoleService {
    * @return
    */
   boolean hasRoleCodes(List<String> toCheck, Long userId);
+
+  List<RoleListResp> list();
+
 }

@@ -1,9 +1,13 @@
 package com.github.kop.bbs.repo.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.github.kop.bbs.module.entity.User;
+import com.github.kop.bbs.module.req.user.UserQueryReq;
 import com.github.kop.bbs.repo.UserRepository;
 import com.github.kop.bbs.repo.mapper.UserMapper;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -58,5 +62,20 @@ public class UserRepositoryImpl implements UserRepository {
     QueryWrapper<User> queryWrapper = new QueryWrapper<>();
     queryWrapper.lambda().eq(User::getUsername, name);
     return this.userMapper.exists(queryWrapper);
+  }
+
+  @Override
+  public IPage<User> page(Long page, Long size, UserQueryReq req) {
+    QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+    queryWrapper.lambda()
+        .like(StringUtils.isNotBlank(req.getUsername()), User::getUsername, req.getUsername())
+        .like(StringUtils.isNotBlank(req.getNickname()), User::getNickname, req.getNickname())
+        .between(
+            req.getRegisterStartTime() != null && req.getRegisterEndTime() != null,
+            User::getRegisterTime,
+            req.getRegisterStartTime(), req.getRegisterEndTime()
+        )
+    ;
+    return this.userMapper.selectPage(new Page<>(page, size), queryWrapper);
   }
 }

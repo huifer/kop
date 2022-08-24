@@ -1,11 +1,14 @@
 package com.github.kop.bbs.service.user;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.github.kop.bbs.module.entity.User;
 import com.github.kop.bbs.module.enums.role.RoleEnum;
 import com.github.kop.bbs.module.req.user.CreateUserReq;
 import com.github.kop.bbs.module.req.user.LoginUserReq;
 import com.github.kop.bbs.module.req.user.UpdateUserReq;
+import com.github.kop.bbs.module.req.user.UserQueryReq;
 import com.github.kop.bbs.module.res.user.UserLoginRes;
+import com.github.kop.bbs.module.res.user.UserQueryResp;
 
 public interface UserService {
 
@@ -42,4 +45,9 @@ public interface UserService {
    * @param roles 角色集合
    */
   boolean hasRoles(Long userId, RoleEnum[] roles);
+
+  /**
+   * 管理端分页查询
+   */
+  IPage<UserQueryResp> page(Long page, Long size, UserQueryReq req);
 }

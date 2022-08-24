@@ -16,6 +16,9 @@ public class CategoryListRes {
   /** 分类名称 */
   @ApiModelProperty(value = "分类名称")
   private String categoryName;
+  /** 父板块 */
+  @ApiModelProperty(value = "父板块名称")
+  private String parentName;
 
   /** 分类图标 */
   @ApiModelProperty(value = "分类图标")

@@ -8,6 +8,7 @@ import com.github.kop.bbs.repo.mapper.MidUserRoleMapper;
 import java.util.List;
 import javax.annotation.Resource;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @auth ahxiaoqi
@@ -25,6 +26,7 @@ public class MidUserRoleRepositoryImpl implements MidUserRoleRepository {
    * @param midUserRole
    */
   @Override
+  @Transactional(rollbackFor = {Exception.class})
   public int insert(MidUserRole midUserRole) {
     validateUserRole(midUserRole.getUserId(), midUserRole.getRoleCode());
     return bbsMidUserRoleMapper.insert(midUserRole);
@@ -43,6 +45,7 @@ public class MidUserRoleRepositoryImpl implements MidUserRoleRepository {
     return bbsMidUserRoleMapper.exists(queryWrapper);
   }
 
+  @Transactional(rollbackFor = {Exception.class})
   @Override
   public int deleteUserRole(Long userId, Long roleId) {
     return bbsMidUserRoleMapper.deleteUserRole(userId, roleId);
@@ -53,4 +56,15 @@ public class MidUserRoleRepositoryImpl implements MidUserRoleRepository {
     return bbsMidUserRoleMapper.byUserId(userId);
   }
 
+  @Transactional(rollbackFor = {Exception.class})
+  @Override
+  public int insertAll(List<MidUserRole> userRoles) {
+
+    int i = 0;
+    for (MidUserRole userRole : userRoles) {
+
+      i = i + insert(userRole);
+    }
+    return i;
+  }
 }

@@ -39,7 +39,7 @@ public class CategoryController {
   }
 
   @ApiOperation(value = "版块列表")
-  @GetMapping("/list/{page}/{size}")
+  @GetMapping("/page/{page}/{size}")
   public RespVO<IPage<CategoryListRes>> page(
       @PathVariable(value = "page") Long page,
       @PathVariable(value = "size") Long size,

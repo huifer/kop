@@ -101,10 +101,18 @@ public class CategoryServiceImpl implements CategoryService {
     return res;
   }
 
+
   private CategoryListRes conv(Category category) {
     CategoryListRes res = new CategoryListRes();
     res.setCategoryIcon(category.getCategoryIcon());
     res.setCategoryName(category.getCategoryName());
+    Long parentId = category.getParentId();
+    Category parentCategory = this.categoryRepository.byId(parentId);
+    if (parentCategory != null) {
+      res.setParentName(parentCategory.getCategoryName());
+
+    }
+
     res.setViewPermissions(
         CategoryViewPermissionsEnum.getEnumByCode(category.getViewPermissions()).getDesc());
     return res;

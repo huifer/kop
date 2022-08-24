@@ -18,14 +18,20 @@ public enum RoleEnum {
   WEBMASTER(3L, "版主", "webmaster"),
 
   USER(4L, "普通用户", "user"),
-  ;
+  INVITATION(5L, "审核人员", "invitation");
 
-  /** 角色id */
+  /**
+   * 角色id
+   */
   private final Long roleId;
 
-  /** 角色名称 */
+  /**
+   * 角色名称
+   */
   private final String roleName;
 
-  /** 角色名称 */
+  /**
+   * 角色名称
+   */
   private final String roleCode;
 }

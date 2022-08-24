@@ -1,5 +1,6 @@
 package com.github.kop.bbs.service.user.impl;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.github.kop.bbs.module.entity.MidUserRole;
 import com.github.kop.bbs.module.entity.User;
 import com.github.kop.bbs.module.enums.DeletedEnum;
@@ -9,7 +10,9 @@ import com.github.kop.bbs.module.ex.ValidateException;
 import com.github.kop.bbs.module.req.user.CreateUserReq;
 import com.github.kop.bbs.module.req.user.LoginUserReq;
 import com.github.kop.bbs.module.req.user.UpdateUserReq;
+import com.github.kop.bbs.module.req.user.UserQueryReq;
 import com.github.kop.bbs.module.res.user.UserLoginRes;
+import com.github.kop.bbs.module.res.user.UserQueryResp;
 import com.github.kop.bbs.repo.UserRepository;
 import com.github.kop.bbs.service.role.RoleService;
 import com.github.kop.bbs.service.user.MidUserRoleService;
@@ -20,6 +23,7 @@ import com.github.kop.bbs.utils.UpdateValidate;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Function;
 import javax.annotation.Resource;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.RandomStringUtils;
@@ -171,5 +175,22 @@ public class UserServiceImpl implements UserService {
     @Override
     public void updateValidate(UpdateUserReq updateUserReq) throws ValidateException {
     }
+  }
+
+  @Override
+  public IPage<UserQueryResp> page(Long page, Long size, UserQueryReq req) {
+    IPage<User> userIPage = this.userRepository.page(page, size, req);
+    return userIPage.convert(new Function<User, UserQueryResp>() {
+      @Override
+      public UserQueryResp apply(User user) {
+        UserQueryResp userQueryResp = new UserQueryResp();
+        userQueryResp.setId(user.getId());
+        userQueryResp.setUsername(user.getUsername());
+        userQueryResp.setAvatar(user.getAvatar());
+        userQueryResp.setNickname(user.getNickname());
+        userQueryResp.setRegisterTime(user.getRegisterTime());
+        return userQueryResp;
+      }
+    });
   }
 }

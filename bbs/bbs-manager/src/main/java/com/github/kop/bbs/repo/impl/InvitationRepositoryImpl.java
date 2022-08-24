@@ -8,6 +8,7 @@ import com.github.kop.bbs.repo.InvitationRepository;
 import com.github.kop.bbs.repo.mapper.InvitationMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 public class InvitationRepositoryImpl implements InvitationRepository {
@@ -23,6 +24,7 @@ public class InvitationRepositoryImpl implements InvitationRepository {
     return this.invitationMapper.selectPage(new Page<>(page, size), queryWrapper);
   }
 
+  @Transactional(rollbackFor = {Exception.class})
   @Override
   public int create(Invitation invitation) {
     return invitationMapper.insert(invitation);

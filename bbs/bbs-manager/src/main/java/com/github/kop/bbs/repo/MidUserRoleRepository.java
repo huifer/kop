@@ -30,4 +30,6 @@ public interface MidUserRoleRepository {
   int deleteUserRole(Long userId, Long roleId);
 
   List<Long> byUserId(Long userId);
+
+  int  insertAll(List<MidUserRole> userRoles);
 }

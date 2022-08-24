@@ -32,4 +32,5 @@ public interface CategoryRepository {
   List<Category> subList(Long categoryId);
 
 
+  Category byId(Long id);
 }

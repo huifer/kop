@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.github.kop.bbs.event.invitation.InvitationCreated;
 import com.github.kop.bbs.module.entity.Invitation;
 import com.github.kop.bbs.module.enums.InvitationArticleStatus;
+import com.github.kop.bbs.module.req.invitation.InvitationAuditReq;
 import com.github.kop.bbs.module.req.invitation.InvitationCreateReq;
 import com.github.kop.bbs.module.res.invitation.InvitationQueryResp;
 import com.github.kop.bbs.repo.InvitationRepository;
@@ -15,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEvent;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class InvitationServiceImpl implements InvitationService {
@@ -26,6 +28,7 @@ public class InvitationServiceImpl implements InvitationService {
   @Autowired
   private ApplicationEventPublisher eventPublisher;
 
+  @Transactional(rollbackFor = {Exception.class})
   @Override
   public boolean create(InvitationCreateReq req) {
     Invitation invitation = new Invitation();
@@ -56,5 +59,12 @@ public class InvitationServiceImpl implements InvitationService {
       }
 
     });
+  }
+
+  @Transactional(rollbackFor = {Exception.class})
+  @Override
+  public boolean audit(Long userId, InvitationAuditReq req) {
+    // TODO: 2022/8/24 审核流程优化，一个人审核改为多人审核
+    return false;
   }
 }

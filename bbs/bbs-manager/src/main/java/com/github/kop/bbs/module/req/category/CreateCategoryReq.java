@@ -14,11 +14,11 @@ import lombok.Data;
 public class CreateCategoryReq {
 
   /** 分类名称 */
-  @ApiModelProperty(value = "分类名称")
+  @ApiModelProperty(value = "板块名称")
   private String categoryName;
 
   /** 分类图标 */
-  @ApiModelProperty(value = "分类图标")
+  @ApiModelProperty(value = "板块图标")
   private String categoryIcon;
 
   /** 上级id */

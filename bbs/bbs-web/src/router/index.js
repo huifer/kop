@@ -55,6 +55,12 @@ const routes = [
     component: () => import ('../components/customer/CategoryIndex'),
   },
 
+  {
+    path: '/manager_category',
+    name: '管理端板块',
+    component: () => import ('../components/manger/ManagerCategory'),
+  },
+
 ]
 
 const router = createRouter({
