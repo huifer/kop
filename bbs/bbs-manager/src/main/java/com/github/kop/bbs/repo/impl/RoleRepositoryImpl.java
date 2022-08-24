@@ -34,4 +34,10 @@ public class RoleRepositoryImpl implements RoleRepository {
         .in(Role::getRoleCode, roleCode);
     return roleMapper.selectList(queryWrapper);
   }
+
+  @Override
+  public List<Role> list() {
+    QueryWrapper<Role> queryWrapper = new QueryWrapper<>();
+    return this.roleMapper.selectList(queryWrapper);
+  }
 }

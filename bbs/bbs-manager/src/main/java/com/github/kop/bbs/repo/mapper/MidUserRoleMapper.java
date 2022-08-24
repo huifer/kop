@@ -15,11 +15,15 @@ import org.apache.ibatis.annotations.Param;
 @Mapper
 public interface MidUserRoleMapper extends BaseMapper<MidUserRole> {
 
-  /** 删除角色 */
+  /**
+   * 删除角色
+   */
   int deleteUserRole(@Param("userId") Long userId, @Param("roleId") Long roleId);
 
   /**
    * 根据用户id查询角色id
    */
   List<Long> byUserId(@Param("userId") Long userId);
+
+  List<Long> findByUserId(@Param("userId") Long userId);
 }

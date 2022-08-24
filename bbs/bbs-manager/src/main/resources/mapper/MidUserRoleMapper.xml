@@ -10,4 +10,9 @@
   <select id="byUserId" resultType="java.lang.Long">
     select role_id from  bbs_mid_user_role where  user_id = #{userId}
   </select>
+
+<select id="findByUserId" resultType="java.lang.Long">
+  select *
+  from bbs_mid_user_role where user_id = #{userId}
+  </select>
 </mapper>

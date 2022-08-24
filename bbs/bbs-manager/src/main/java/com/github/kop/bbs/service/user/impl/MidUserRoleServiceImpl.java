@@ -3,6 +3,7 @@ package com.github.kop.bbs.service.user.impl;
 import com.github.kop.bbs.module.entity.MidUserRole;
 import com.github.kop.bbs.module.entity.Role;
 import com.github.kop.bbs.module.req.user.UserBindRoleReq;
+import com.github.kop.bbs.module.res.role.RoleListResp;
 import com.github.kop.bbs.repo.MidUserRoleRepository;
 import com.github.kop.bbs.service.role.RoleService;
 import com.github.kop.bbs.service.user.MidUserRoleService;
@@ -67,6 +68,33 @@ public class MidUserRoleServiceImpl implements MidUserRoleService {
       userRoles.add(e);
     }
 
-    return this.midUserRoleRepository.insertAll(userRoles) > 0;
+    return this.midUserRoleRepository.insertAll(userRoles) == userBindRoleReq.getRoleIds().size();
+  }
+
+  @Override
+  public List<RoleListResp> userRoleList(Long userId) {
+    List<Long> roleIds = this.midUserRoleRepository.findByUserId(userId);
+
+    List<Role> roles = roleService.findByIds(roleIds);
+    List<RoleListResp> res = new ArrayList<>();
+    for (Role role : roles) {
+      RoleListResp e = new RoleListResp();
+      e.setRoleId(role.getRoleId());
+      e.setRoleName(role.getRoleName());
+      e.setRoleCode(role.getRoleCode());
+      res.add(e);
+    }
+    return res;
+  }
+
+  @Transactional(rollbackFor = {Exception.class})
+  @Override
+  public boolean removeRole(Long userId, UserBindRoleReq userBindRoleReq) {
+    int i = 0;
+    for (Long roleId : userBindRoleReq.getRoleIds()) {
+      i = i + this.midUserRoleRepository.deleteUserRole(userBindRoleReq.getUserId(), roleId);
+    }
+
+    return i == userBindRoleReq.getRoleIds().size();
   }
 }

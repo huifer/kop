@@ -67,4 +67,10 @@ public class MidUserRoleRepositoryImpl implements MidUserRoleRepository {
     }
     return i;
   }
+
+  @Override
+  public List<Long> findByUserId(Long userId) {
+    return this.bbsMidUserRoleMapper.findByUserId(userId);
+  }
+
 }

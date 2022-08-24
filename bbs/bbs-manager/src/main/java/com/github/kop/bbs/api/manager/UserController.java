@@ -4,10 +4,14 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.github.kop.bbs.module.req.user.UpdateUserReq;
 import com.github.kop.bbs.module.req.user.UserQueryReq;
 import com.github.kop.bbs.module.res.RespVO;
+import com.github.kop.bbs.module.res.role.RoleListResp;
 import com.github.kop.bbs.module.res.user.UserQueryResp;
+import com.github.kop.bbs.service.role.RoleService;
+import com.github.kop.bbs.service.user.MidUserRoleService;
 import com.github.kop.bbs.service.user.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -47,5 +51,15 @@ public class UserController {
   ) {
 
     return RespVO.success(this.userService.page(page, size, req));
+  }
+
+  @Autowired
+  private MidUserRoleService midUserRoleService;
+
+  @ApiOperation("查看用户角色列表")
+  @GetMapping("/role_list/{user_id}")
+  public RespVO<List<RoleListResp>> userRoleList(@PathVariable("user_id") Long userId){
+    return RespVO.success(midUserRoleService.userRoleList(userId));
+
   }
 }

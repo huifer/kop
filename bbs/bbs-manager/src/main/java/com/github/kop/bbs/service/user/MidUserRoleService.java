@@ -2,6 +2,8 @@ package com.github.kop.bbs.service.user;
 
 import com.github.kop.bbs.module.entity.MidUserRole;
 import com.github.kop.bbs.module.req.user.UserBindRoleReq;
+import com.github.kop.bbs.module.res.role.RoleListResp;
+import java.util.List;
 
 /**
  * 用户角色中间表 服务类
@@ -32,8 +34,22 @@ public interface MidUserRoleService {
 
   /**
    * 赋予角色
-   * @param userId 操作人id
+   *
+   * @param userId          操作人id
    * @param userBindRoleReq 赋予角色参数
    */
   boolean giveRole(Long userId, UserBindRoleReq userBindRoleReq);
+
+  /**
+   * 查看用户所有角色
+   */
+  List<RoleListResp> userRoleList(Long userId);
+
+  /**
+   * 移除角色
+   *
+   * @param userId          操作人id
+   * @param userBindRoleReq 移除角色参数
+   */
+  boolean removeRole(Long userId, UserBindRoleReq userBindRoleReq);
 }

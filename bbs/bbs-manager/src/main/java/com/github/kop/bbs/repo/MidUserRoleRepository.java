@@ -32,4 +32,9 @@ public interface MidUserRoleRepository {
   List<Long> byUserId(Long userId);
 
   int  insertAll(List<MidUserRole> userRoles);
+
+  /**
+   * 根据用户id查询用户角色id
+   */
+  List<Long> findByUserId(Long userId);
 }

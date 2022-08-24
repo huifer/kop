@@ -20,4 +20,5 @@ public interface RoleService {
 
   List<RoleListResp> list();
 
+  List<Role> findByIds(List<Long> roleIds);
 }

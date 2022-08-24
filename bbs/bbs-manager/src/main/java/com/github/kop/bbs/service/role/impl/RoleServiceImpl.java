@@ -1,9 +1,11 @@
 package com.github.kop.bbs.service.role.impl;
 
 import com.github.kop.bbs.module.entity.Role;
+import com.github.kop.bbs.module.res.role.RoleListResp;
 import com.github.kop.bbs.repo.MidUserRoleRepository;
 import com.github.kop.bbs.repo.RoleRepository;
 import com.github.kop.bbs.service.role.RoleService;
+import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,4 +39,23 @@ public class RoleServiceImpl implements RoleService {
     return roles.size() > 0 && (roles.size() <= toCheck.size());
   }
 
+  @Override
+  public List<RoleListResp> list() {
+    List<Role> roles = this.roleRepository.list();
+    List<RoleListResp> res = new ArrayList<>(roles.size());
+    for (Role role : roles) {
+      RoleListResp e = new RoleListResp();
+      e.setRoleId(role.getRoleId());
+      e.setRoleName(role.getRoleName());
+      e.setRoleCode(role.getRoleCode());
+      res.add(e);
+    }
+
+    return res;
+  }
+
+  @Override
+  public List<Role> findByIds(List<Long> roleIds) {
+    return this.roleRepository.listById(roleIds);
+  }
 }
