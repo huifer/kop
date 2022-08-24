@@ -1,6 +1,7 @@
 package com.github.kop.bbs.Interceptor;
 
 import com.github.kop.bbs.module.ex.NoceException;
+import com.github.kop.bbs.utils.IpUtil;
 import com.github.kop.bbs.utils.JwtTokenUtil;
 import com.github.kop.bbs.utils.UserInfoThread;
 import javax.annotation.Resource;
@@ -40,6 +41,7 @@ public class TokenVerifyInterceptor implements HandlerInterceptor {
       throw new NoceException("token无效");
     }
     UserInfoThread.setUserId(Long.parseLong(userId));
+    UserInfoThread.setIp(IpUtil.getRealIp(request));
     return true;
   }
 }

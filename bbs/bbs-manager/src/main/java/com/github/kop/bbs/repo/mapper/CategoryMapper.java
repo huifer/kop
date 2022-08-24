@@ -23,4 +23,9 @@ public interface CategoryMapper extends BaseMapper<Category> {
    * @return
    */
   IPage<Category> listWithPage(Page<Category> objectPage, @Param("req") QueryCategoryReq req);
+
+  List<Category> topList();
+
+  List<Category> subList(@Param("categoryId") Long categoryId);
+
 }

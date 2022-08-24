@@ -1,18 +1,16 @@
 package com.github.kop.bbs.module.enums;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.Getter;
 
 /**
- * 帖子类型：1动态、2板块内容
+ * ** 帖子状态 0 待审核 1 审核通过
  */
 @AllArgsConstructor
 @Getter
-public enum InvitationTypeEnum {
-
-  dynamic(1,"动态"),
-  plate(2,"板块"),
+public enum InvitationArticleStatus {
+  PENDING_REVIEW(0, "待审核"),
+  PASS(1, "审核通过"),
   ;
   private final int code;
   private final String name;

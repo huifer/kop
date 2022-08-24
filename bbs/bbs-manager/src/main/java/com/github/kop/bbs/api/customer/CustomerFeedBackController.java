@@ -36,7 +36,8 @@ public class CustomerFeedBackController {
   @GetMapping("/page/{page}/{size}")
   public RespVO<IPage<FeedBackResp>> page(
       @PathVariable("page") Long page,
-      @PathVariable("size") Long size) {
+      @PathVariable("size") Long size
+  ) {
     return RespVO.success(feedbackRecordService.page(page, size));
   }
 }

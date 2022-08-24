@@ -5,6 +5,7 @@ import com.github.kop.bbs.module.req.category.CreateCategoryReq;
 import com.github.kop.bbs.module.req.category.QueryCategoryReq;
 import com.github.kop.bbs.module.req.category.UpdateCategoryReq;
 import com.github.kop.bbs.module.res.category.CategoryListRes;
+import java.util.List;
 
 /** 板块服务 */
 public interface CategoryService {
@@ -33,5 +34,16 @@ public interface CategoryService {
    * @param req
    * @return
    */
-  IPage<CategoryListRes> list(Long page, Long size, QueryCategoryReq req);
+  IPage<CategoryListRes> page(Long page, Long size, QueryCategoryReq req);
+
+  /**
+   * 顶层板块列表
+   */
+  List<CategoryListRes> topList();
+
+
+  /**
+   * 某个板块下的板块列表
+   */
+  List<CategoryListRes> subList(Long categoryId);
 }

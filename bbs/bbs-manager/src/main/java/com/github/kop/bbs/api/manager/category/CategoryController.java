@@ -40,10 +40,10 @@ public class CategoryController {
 
   @ApiOperation(value = "版块列表")
   @GetMapping("/list/{page}/{size}")
-  public RespVO<IPage<CategoryListRes>> list(
+  public RespVO<IPage<CategoryListRes>> page(
       @PathVariable(value = "page") Long page,
       @PathVariable(value = "size") Long size,
       @RequestBody QueryCategoryReq req) {
-    return RespVO.success(bbsCategoryService.list(page, size, req));
+    return RespVO.success(bbsCategoryService.page(page, size, req));
   }
 }

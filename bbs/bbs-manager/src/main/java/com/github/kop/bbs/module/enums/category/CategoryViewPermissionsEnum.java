@@ -11,7 +11,7 @@ import lombok.Getter;
  */
 @Getter
 @AllArgsConstructor
-public enum ViewPermissionsEnum {
+public enum CategoryViewPermissionsEnum {
 
   // 分类查看权限 0 全部 1 登录用户 2 支付积分(会员免费积分查看可以视为直接支付过积分) 4 会员
 
@@ -28,9 +28,9 @@ public enum ViewPermissionsEnum {
 
   private final String desc;
 
-  public static ViewPermissionsEnum getEnumByCode(Integer code) {
-    ViewPermissionsEnum[] values = values();
-    for (ViewPermissionsEnum value : values) {
+  public static CategoryViewPermissionsEnum getEnumByCode(Integer code) {
+    CategoryViewPermissionsEnum[] values = values();
+    for (CategoryViewPermissionsEnum value : values) {
       if (value.code.equals(code)) {
         return value;
       }

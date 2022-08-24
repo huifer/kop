@@ -2,6 +2,7 @@ package com.github.kop.bbs.module.res;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import java.time.LocalDateTime;
 import java.util.Date;
 import lombok.Data;
 
@@ -29,7 +30,7 @@ public class AppealResp {
   private String appealFile;
 
   @ApiModelProperty("创建时间")
-  private Date createTime;
+  private LocalDateTime createTime;
 
 
 }

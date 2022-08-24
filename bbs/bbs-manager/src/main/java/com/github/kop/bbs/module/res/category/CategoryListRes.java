@@ -21,6 +21,9 @@ public class CategoryListRes {
   @ApiModelProperty(value = "分类图标")
   private String categoryIcon;
 
+  @ApiModelProperty(value = "帖子数量")
+  private Long invitationCount;
+
   /** 分类查看权限 0 全部 1 登录用户 2 支付积分(会员免费积分查看可以视为直接支付过积分) 4 会员 */
   @ApiModelProperty(value = "分类查看权限")
   private String viewPermissions;

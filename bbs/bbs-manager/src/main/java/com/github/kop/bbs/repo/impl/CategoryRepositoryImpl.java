@@ -8,6 +8,7 @@ import com.github.kop.bbs.module.ex.ValidateException;
 import com.github.kop.bbs.module.req.category.QueryCategoryReq;
 import com.github.kop.bbs.repo.CategoryRepository;
 import com.github.kop.bbs.repo.mapper.CategoryMapper;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -55,4 +56,17 @@ public class CategoryRepositoryImpl implements CategoryRepository {
     queryWrapper.lambda().eq(Category::getCategoryName, categoryName);
     return this.bbsCategoryMapper.exists(queryWrapper);
   }
+
+  @Override
+  public List<Category> topList() {
+    return this.bbsCategoryMapper.topList();
+  }
+
+  @Override
+  public List<Category> subList(Long categoryId) {
+    return this.bbsCategoryMapper.subList(categoryId);
+  }
+
+
+
 }

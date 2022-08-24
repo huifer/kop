@@ -2,7 +2,7 @@ package com.github.kop.bbs.service.category.impl;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.github.kop.bbs.module.entity.Category;
-import com.github.kop.bbs.module.enums.category.ViewPermissionsEnum;
+import com.github.kop.bbs.module.enums.category.CategoryViewPermissionsEnum;
 import com.github.kop.bbs.module.ex.ValidateException;
 import com.github.kop.bbs.module.req.category.CreateCategoryReq;
 import com.github.kop.bbs.module.req.category.QueryCategoryReq;
@@ -12,6 +12,8 @@ import com.github.kop.bbs.repo.CategoryRepository;
 import com.github.kop.bbs.service.category.CategoryService;
 import com.github.kop.bbs.utils.CreateValidate;
 import com.github.kop.bbs.utils.UpdateValidate;
+import java.util.ArrayList;
+import java.util.List;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -72,9 +74,31 @@ public class CategoryServiceImpl implements CategoryService {
    * @return
    */
   @Override
-  public IPage<CategoryListRes> list(Long page, Long size, QueryCategoryReq req) {
+  public IPage<CategoryListRes> page(Long page, Long size, QueryCategoryReq req) {
     IPage<Category> list = this.categoryRepository.page(page, size, req);
     return list.convert(this::conv);
+  }
+
+  @Override
+  public List<CategoryListRes> topList() {
+    List<Category> list = this.categoryRepository.topList();
+    List<CategoryListRes> res = new ArrayList<>();
+    for (Category category : list) {
+      // TODO: 2022/8/24 帖子数量计算
+      res.add(conv(category));
+    }
+    return res;
+  }
+
+  @Override
+  public List<CategoryListRes> subList(Long categoryId) {
+    List<Category> list = this.categoryRepository.subList(categoryId);
+    List<CategoryListRes> res = new ArrayList<>();
+    for (Category category : list) {
+      // TODO: 2022/8/24 帖子数量计算
+      res.add(conv(category));
+    }
+    return res;
   }
 
   private CategoryListRes conv(Category category) {
@@ -82,7 +106,7 @@ public class CategoryServiceImpl implements CategoryService {
     res.setCategoryIcon(category.getCategoryIcon());
     res.setCategoryName(category.getCategoryName());
     res.setViewPermissions(
-        ViewPermissionsEnum.getEnumByCode(category.getViewPermissions()).getDesc());
+        CategoryViewPermissionsEnum.getEnumByCode(category.getViewPermissions()).getDesc());
     return res;
   }
 

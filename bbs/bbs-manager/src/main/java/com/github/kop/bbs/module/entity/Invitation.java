@@ -28,23 +28,15 @@ public class Invitation implements Serializable {
   @TableField(value = "text_type")
   private Integer textType;
 
-  /** 论坛类别 */
+  /** 论坛板块 */
   @TableField(value = "category_id")
   private Long categoryId;
-
-  /** 帖子类型：0动态、1板块内容 */
-  @TableField(value = "`type`")
-  private Integer type;
-
-  /** 话题主键 动态可以选择加话题 */
-  @TableField(value = "`topic_id`")
-  private Integer topicId;
 
   /** 帖子正文 */
   @TableField(value = "`text`")
   private String text;
 
-  /** 文章状态 0 待审核 1 审核通过 */
+  /** 帖子状态 0 待审核 1 审核通过 */
   @TableField(value = "article_status")
   private Integer articleStatus;
 
@@ -88,7 +80,7 @@ public class Invitation implements Serializable {
   @TableField(value = "comments_status")
   private Integer commentsStatus;
 
-  /** 文章可见类型 0 全部可见 1 仅我可见 2 粉丝可见 */
+  /** 帖子可见类型 0 全部可见 1 仅我可见 2 粉丝可见 */
   @TableField(value = "visible_status")
   private Integer visibleStatus;
 

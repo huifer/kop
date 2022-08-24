@@ -122,4 +122,15 @@
       and category_name like concat('%',#{req.categoryName},'%')
     </if>
   </select>
+
+  <select id="topList" resultMap="BaseResultMap">
+    select * from bbs_category where parent_id is null
+  </select>
+
+  <select id="subList" resultMap="BaseResultMap">
+    select * from bbs_category where parent_id  = #{categoryId}
+
+  </select>
+
+
 </mapper>
