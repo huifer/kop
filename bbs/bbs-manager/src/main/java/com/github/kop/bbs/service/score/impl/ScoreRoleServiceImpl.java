@@ -86,6 +86,7 @@ public class ScoreRoleServiceImpl implements ScoreRoleService {
 
   @Override
   public ScoreRole exceededMax(ScoreTypeEnum type, Long userId) {
+    // TODO: 2022/8/26 流程重置
     // 获取用户id对应积分类型已经获得的积分
     ScoreRole scoreRole = this.scoreRoleRepository.findByType(type.getCode());
     // 周期数字

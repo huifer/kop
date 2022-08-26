@@ -72,6 +72,7 @@ public class CustomerUserOperationController {
   public RespVO<Boolean> cancelBlock(@PathVariable(value = "user_id") Long targetUserId) {
     return RespVO.success(
         userBlackListService.cancelBlock(UserInfoThread.getUserId(), targetUserId));
-
   }
+  // TODO: 2022/8/26 绑定第三方登陆
+
 }

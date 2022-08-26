@@ -23,7 +23,6 @@ public class CustomerCategoryApi {
   @Resource
   private MidUserCategoryVoteApplyService midUserCategoryVoteApplyService;
 
-
   @PostMapping("/apply/manager")
   @ApiOperation(value = "申请版主投票")
   public RespVO<Boolean> applyVote(@RequestBody Long voteId) {

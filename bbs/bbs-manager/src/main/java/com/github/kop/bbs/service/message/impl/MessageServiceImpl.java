@@ -26,6 +26,7 @@ public class MessageServiceImpl implements MessageService {
 
   @Override
   public boolean sendPrivateMessage(Long fromUserId, UserSendMessageReq userSendMessageReq) {
+    // TODO: 2022/8/26 检查是否拉黑，拉黑不允许发送
     Message message = new Message();
     message.setTipsType(MessageTypeEnum.PRIVATE_MESSAGE.getCode());
     message.setSenderUserId(fromUserId);

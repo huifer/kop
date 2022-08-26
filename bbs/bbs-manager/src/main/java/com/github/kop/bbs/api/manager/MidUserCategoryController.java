@@ -35,4 +35,5 @@ public class MidUserCategoryController {
   public RespVO<Boolean> delete(@PathVariable("id") Long id, @PathVariable("userId") Long userId) {
     return RespVO.success(midUserCategoryService.delete(id, userId));
   }
+  // TODO: 2022/8/26 查看当前板块下申请人 ，发布投票
 }

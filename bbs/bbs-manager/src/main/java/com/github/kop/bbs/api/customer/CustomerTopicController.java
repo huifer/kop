@@ -42,4 +42,5 @@ public class CustomerTopicController {
     return RespVO.success(topicService.pagePass(page, size));
   }
 
+  // TODO: 2022/8/26 话题内容分页 ，热度和创建时间两种排序
 }

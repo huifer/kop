@@ -40,4 +40,5 @@ public class CustomerInvitationController {
   ) {
     return RespVO.success(this.invitationService.page(categoryId, page, size));
   }
+  // TODO: 2022/8/26 帖子评论
 }
