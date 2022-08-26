@@ -1,7 +1,11 @@
-package com.github.kop.bbs.api.customer;
+package com.github.kop.bbs.api.manager.topic;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.github.kop.bbs.module.req.topic.TopicCreateReq;
+import com.github.kop.bbs.aop.role.RoleApi;
+import com.github.kop.bbs.module.enums.role.RoleEnum;
+import com.github.kop.bbs.module.req.invitation.InvitationAuditReq;
+import com.github.kop.bbs.module.req.topic.TopicAuditReq;
+import com.github.kop.bbs.module.req.topic.TopicQueryReq;
 import com.github.kop.bbs.module.res.RespVO;
 import com.github.kop.bbs.module.res.topic.TopicQueryResp;
 import com.github.kop.bbs.service.topic.TopicService;
@@ -16,30 +20,32 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@Api("话题")
+@Api(tags = "管理的-论坛话题")
 @RestController
-@RequestMapping("/customer/topic")
-public class CustomerTopicController {
+@RequestMapping("/manager/topic")
+public class ManagerTopicController {
 
   @Autowired
   private TopicService topicService;
 
 
-  @ApiOperation("创建话题")
-  @PostMapping("/create")
-  public RespVO<Boolean> create(
-      @RequestBody TopicCreateReq req
+  @RoleApi(roles = {RoleEnum.AUDIT})
+  @ApiOperation("审核")
+  @PostMapping("/audit")
+  public RespVO<Boolean> audit(
+      @RequestBody TopicAuditReq req
   ) {
-    return RespVO.success(topicService.create(req, UserInfoThread.getUserId()));
+    return RespVO.success(topicService.audit(UserInfoThread.getUserId(), req));
   }
 
-  @ApiOperation("话题列表")
+  @ApiOperation("分页")
   @GetMapping("/page/{page}/{size}")
   public RespVO<IPage<TopicQueryResp>> page(
       @PathVariable("page") Long page,
-      @PathVariable("size") Long size
+      @PathVariable("size") Long size,
+      TopicQueryReq req
   ) {
-    return RespVO.success(topicService.pagePass(page, size));
-  }
 
+    return RespVO.success(topicService.page(page, size,req));
+  }
 }

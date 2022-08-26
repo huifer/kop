@@ -9,7 +9,6 @@ import com.github.kop.bbs.utils.UserInfoThread;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,7 +22,7 @@ public class ManagerInvitationController {
   @Autowired
   private InvitationService invitationService;
 
-  @RoleApi(roles = {RoleEnum.INVITATION})
+  @RoleApi(roles = {RoleEnum.AUDIT})
   @ApiOperation("审核")
   @PostMapping("/audit")
   public RespVO<Boolean> audit(
@@ -31,4 +30,6 @@ public class ManagerInvitationController {
   ) {
     return RespVO.success(invitationService.audit(UserInfoThread.getUserId(), req));
   }
+
+
 }

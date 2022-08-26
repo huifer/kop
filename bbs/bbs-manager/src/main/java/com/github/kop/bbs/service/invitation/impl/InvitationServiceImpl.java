@@ -3,17 +3,19 @@ package com.github.kop.bbs.service.invitation.impl;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.github.kop.bbs.event.invitation.InvitationCreated;
 import com.github.kop.bbs.module.entity.Invitation;
+import com.github.kop.bbs.module.enums.AuditStatusEnum;
+import com.github.kop.bbs.module.enums.AuditTypeEnum;
 import com.github.kop.bbs.module.enums.InvitationArticleStatus;
 import com.github.kop.bbs.module.req.invitation.InvitationAuditReq;
 import com.github.kop.bbs.module.req.invitation.InvitationCreateReq;
 import com.github.kop.bbs.module.res.invitation.InvitationQueryResp;
 import com.github.kop.bbs.repo.InvitationRepository;
+import com.github.kop.bbs.service.audit.AuditServiceFactory;
 import com.github.kop.bbs.service.invitation.InvitationService;
 import com.github.kop.bbs.service.user.UserService;
 import com.github.kop.bbs.utils.UserInfoThread;
 import java.util.function.Function;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationEvent;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -61,10 +63,15 @@ public class InvitationServiceImpl implements InvitationService {
     });
   }
 
+  @Autowired
+  private AuditServiceFactory auditServiceFactory;
+
   @Transactional(rollbackFor = {Exception.class})
   @Override
   public boolean audit(Long userId, InvitationAuditReq req) {
     // TODO: 2022/8/24 审核流程优化，一个人审核改为多人审核
-    return false;
+
+    return auditServiceFactory.factory(AuditTypeEnum.INVITATION)
+        .audit(userId, req.getInvitationId(), AuditStatusEnum.conv(req.isPass()), req.getContext());
   }
 }

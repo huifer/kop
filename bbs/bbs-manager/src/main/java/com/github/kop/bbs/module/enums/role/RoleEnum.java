@@ -18,7 +18,7 @@ public enum RoleEnum {
   WEBMASTER(3L, "版主", "webmaster"),
 
   USER(4L, "普通用户", "user"),
-  INVITATION(5L, "审核人员", "invitation");
+  AUDIT(5L, "审核人员", "audit");
 
   /**
    * 角色id
