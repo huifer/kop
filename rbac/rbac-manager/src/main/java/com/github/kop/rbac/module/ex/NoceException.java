@@ -6,28 +6,28 @@ public class NoceException extends RuntimeException {
   private static final long serialVersionUID = 1L;
 
   private AppHttpCodeEnum enums;
-  private String msg;
+  private String message;
   private int code = 3500;
 
   public NoceException(String msg) {
     super(msg);
-    this.msg = msg;
+    this.message = msg;
   }
 
   public NoceException(String msg, Throwable e) {
     super(msg, e);
-    this.msg = msg;
+    this.message = msg;
   }
 
   public NoceException(String msg, int code) {
     super(msg);
-    this.msg = msg;
+    this.message = msg;
     this.code = code;
   }
 
   public NoceException(String msg, int code, Throwable e) {
     super(msg, e);
-    this.msg = msg;
+    this.message = msg;
     this.code = code;
   }
 
@@ -38,7 +38,8 @@ public class NoceException extends RuntimeException {
   }
 
   public NoceException(AppHttpCodeEnum enums) {
-
+    this.message=enums.getMsg();
+    this.code=enums.getCode();
     this.enums = enums;
   }
 
@@ -50,12 +51,9 @@ public class NoceException extends RuntimeException {
     this.enums = enums;
   }
 
-  public String getMsg() {
-    return msg;
-  }
-
-  public void setMsg(String msg) {
-    this.msg = msg;
+  @Override
+  public String getMessage() {
+    return message;
   }
 
   public int getCode() {
