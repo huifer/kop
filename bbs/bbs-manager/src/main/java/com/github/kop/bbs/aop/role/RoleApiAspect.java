@@ -1,5 +1,6 @@
 package com.github.kop.bbs.aop.role;
 
+import com.github.kop.bbs.module.ex.RoleCheckException;
 import com.github.kop.bbs.service.role.RoleService;
 import com.github.kop.bbs.service.user.UserService;
 import com.github.kop.bbs.utils.UserInfoThread;
@@ -43,10 +44,11 @@ public class RoleApiAspect {
     }
     if (roleApi != null) {
       boolean b = userService.hasRoles(UserInfoThread.getUserId(), roleApi.roles());
+      if(!b){
+        throw new RoleCheckException("当前用户权限不足");
+      }
     }
-
-    Object object = joinPoint.proceed();
-    return object;
+    return joinPoint.proceed();
   }
 
 }
