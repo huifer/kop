@@ -1,6 +1,8 @@
 package com.github.kop.bbs.service.category;
 
 
+import com.github.kop.bbs.module.entity.MidUserCategoryVoteApply;
+
 public interface MidUserCategoryVoteService {
 
 
@@ -12,6 +14,8 @@ public interface MidUserCategoryVoteService {
     Integer verifyByVoteId(Long voteSettingId,Long userId);
 
     boolean applyVote(Long voteSettingId, Long userId);
+
+    MidUserCategoryVoteApply findByApplyId(Long applyId);
 }
 
 

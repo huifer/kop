@@ -44,4 +44,12 @@ public class MidUserCategoryVoteApplyRepositoryImpl implements MidUserCategoryVo
         verifyByUserId(build.getUserId());
         return midUserCategoryVoteApplyMapper.insert(build);
     }
+
+    @Override
+    public MidUserCategoryVoteApply findByApplyId(Long applyId) {
+        QueryWrapper<MidUserCategoryVoteApply> queryWrapper = new QueryWrapper<>();
+        queryWrapper.lambda().eq(MidUserCategoryVoteApply::getApplyId,applyId)
+                .eq(MidUserCategoryVoteApply::getDeleted,DeletedEnum.FALSE.getCode());
+        return midUserCategoryVoteApplyMapper.selectOne(queryWrapper);
+    }
 }

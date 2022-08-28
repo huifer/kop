@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.github.kop.bbs.repo.mapper.VoteTicketLogMapper">
+  <resultMap id="BaseResultMap" type="com.github.kop.bbs.module.entity.VoteTicketLog">
+    <!--@mbg.generated-->
+    <!--@Table bbs_vote_ticket_log-->
+    <id column="ticket_count_log_id" jdbcType="BIGINT" property="ticketCountLogId" />
+    <result column="apply_id" jdbcType="BIGINT" property="applyId" />
+    <result column="user_id" jdbcType="BIGINT" property="userId" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="deleted" jdbcType="TINYINT" property="deleted" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    ticket_count_log_id, apply_id, user_id, create_time, deleted
+  </sql>
+</mapper>

@@ -11,4 +11,6 @@ public interface MidUserCategoryVoteApplyRepository {
     void verifyByUserId(Long userId);
 
     Integer insert(MidUserCategoryVoteApply build);
+
+    MidUserCategoryVoteApply findByApplyId(Long applyId);
 }

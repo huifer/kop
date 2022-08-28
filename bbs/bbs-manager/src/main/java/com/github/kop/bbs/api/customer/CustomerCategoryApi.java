@@ -1,8 +1,10 @@
 package com.github.kop.bbs.api.customer;
 
+import com.github.kop.bbs.module.entity.MidUserCategoryVoteApply;
 import com.github.kop.bbs.module.res.RespVO;
 import com.github.kop.bbs.module.res.category.CategoryListRes;
 import com.github.kop.bbs.service.category.CategoryService;
+import com.github.kop.bbs.service.category.MidUserCategoryVoteApplyService;
 import com.github.kop.bbs.service.category.MidUserCategoryVoteService;
 import com.github.kop.bbs.utils.UserInfoThread;
 import io.swagger.annotations.Api;
@@ -21,6 +23,12 @@ public class CustomerCategoryApi {
   @Resource
   private MidUserCategoryVoteService midUserCategoryVoteService;
 
+  @Autowired
+  private CategoryService bbsCategoryService;
+
+  @Resource
+  private MidUserCategoryVoteApplyService midUserCategoryVoteApplyService;
+
   @PostMapping("/apply/manager")
   @ApiOperation(value = "申请版主投票")
   public RespVO<Boolean> applyVote(@RequestBody Long voteSettingId) {
@@ -28,8 +36,14 @@ public class CustomerCategoryApi {
     return RespVO.success(midUserCategoryVoteService.applyVote(voteSettingId, userId));
   }
 
-  @Autowired
-  private CategoryService bbsCategoryService;
+  @PostMapping("/add/vote/ticket")
+  @ApiOperation(value = "版主投票")
+  public RespVO<Boolean> addVoteTicket(@RequestBody Long applyId) {
+    Long userId = UserInfoThread.getUserId();
+    return RespVO.success(midUserCategoryVoteApplyService.addVoteTicket(applyId, userId));
+  }
+
+
 
   @ApiOperation(value = "顶层板块列表")
   @GetMapping("/top_list/")

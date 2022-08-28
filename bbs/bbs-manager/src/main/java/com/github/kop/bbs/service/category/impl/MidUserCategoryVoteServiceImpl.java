@@ -6,7 +6,6 @@ import com.github.kop.bbs.module.enums.DeletedEnum;
 import com.github.kop.bbs.module.enums.role.RoleEnum;
 import com.github.kop.bbs.module.ex.NoceException;
 import com.github.kop.bbs.repo.MidUserCategoryVoteApplyRepository;
-import com.github.kop.bbs.service.category.MidUserCategoryService;
 import com.github.kop.bbs.service.category.UserCategoryVoteSettingService;
 import com.github.kop.bbs.service.category.MidUserCategoryVoteService;
 import com.github.kop.bbs.service.user.MidUserRoleService;
@@ -56,6 +55,11 @@ public class MidUserCategoryVoteServiceImpl implements MidUserCategoryVoteServic
     @Override
     public boolean applyVote(Long voteSettingId, Long userId) {
         return verifyByVoteId(voteSettingId,userId)>0;
+    }
+
+    @Override
+    public MidUserCategoryVoteApply findByApplyId(Long applyId) {
+        return midUserCategoryVoteApplyRepository.findByApplyId(applyId);
     }
 }
 
