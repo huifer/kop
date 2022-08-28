@@ -1,10 +1,16 @@
 package com.github.kop.bbs.repo.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.github.kop.bbs.module.entity.MidUserCategoryVoteApply;
+import com.github.kop.bbs.module.enums.DeletedEnum;
+import com.github.kop.bbs.module.ex.NoceException;
 import com.github.kop.bbs.repo.MidUserCategoryVoteApplyRepository;
 import com.github.kop.bbs.repo.mapper.MidUserCategoryVoteApplyMapper;
 import org.springframework.stereotype.Repository;
 
 import javax.annotation.Resource;
+import java.util.Collection;
+import java.util.List;
 
 /**
  * @auth ahxiaoqi
@@ -17,4 +23,25 @@ public class MidUserCategoryVoteApplyRepositoryImpl implements MidUserCategoryVo
     @Resource
     private MidUserCategoryVoteApplyMapper midUserCategoryVoteApplyMapper;
 
+    @Override
+    public void verifyByUserId(Long userId) {
+        if (findEfficient(userId).size() > 0){
+            throw new NoceException("已经申请其他或申请已提交");
+        }
+    }
+
+    /**
+     * 根据用户获取投票结束时间内的申请
+     * @param userId
+     * @return
+     */
+    private List<MidUserCategoryVoteApply> findEfficient(Long userId) {
+        return  midUserCategoryVoteApplyMapper.findEfficient(userId);
+    }
+
+    @Override
+    public Integer insert(MidUserCategoryVoteApply build) {
+        verifyByUserId(build.getUserId());
+        return midUserCategoryVoteApplyMapper.insert(build);
+    }
 }

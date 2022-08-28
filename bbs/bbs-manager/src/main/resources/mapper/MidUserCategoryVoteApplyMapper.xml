@@ -5,7 +5,7 @@
     <!--@mbg.generated-->
     <!--@Table bbs_mid_user_category_vote_apply-->
     <id column="apply_id" jdbcType="BIGINT" property="applyId" />
-    <result column="vote_id" jdbcType="BIGINT" property="voteId" />
+    <result column="vote_setting_id" jdbcType="BIGINT" property="voteSettingId" />
     <result column="category_id" jdbcType="BIGINT" property="categoryId" />
     <result column="user_id" jdbcType="BIGINT" property="userId" />
     <result column="ticket_count" jdbcType="BIGINT" property="ticketCount" />
@@ -14,6 +14,14 @@
   </resultMap>
   <sql id="Base_Column_List">
     <!--@mbg.generated-->
-    apply_id, vote_id, category_id, user_id, ticket_count, create_time, deleted
+    apply_id, vote_setting_id, category_id, user_id, ticket_count, create_time, deleted
   </sql>
+
+  <select id="findEfficient" resultMap="BaseResultMap">
+    select a.apply_id,a.vote_setting_id, a.category_id, a.user_id, a.ticket_count, a.create_time, a.deleted
+    from bbs_mid_user_category_vote_apply  a,bbs_user_category_vote_setting b
+    where a.deleted = 0 and b.deleted = 0
+    and b.apply_end_time &lt;= now()
+    and a.user_id = #{userId}
+  </select>
 </mapper>

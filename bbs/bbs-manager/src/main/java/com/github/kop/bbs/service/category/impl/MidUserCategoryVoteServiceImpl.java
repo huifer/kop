@@ -1,43 +1,61 @@
 package com.github.kop.bbs.service.category.impl;
 
-import com.github.kop.bbs.module.entity.MidUserCategoryVote;
+import com.github.kop.bbs.module.entity.MidUserCategoryVoteApply;
+import com.github.kop.bbs.module.entity.UserCategoryVoteSetting;
+import com.github.kop.bbs.module.enums.DeletedEnum;
+import com.github.kop.bbs.module.enums.role.RoleEnum;
 import com.github.kop.bbs.module.ex.NoceException;
-import com.github.kop.bbs.repo.MidUserCategoryVoteRepository;
+import com.github.kop.bbs.repo.MidUserCategoryVoteApplyRepository;
+import com.github.kop.bbs.service.category.MidUserCategoryService;
+import com.github.kop.bbs.service.category.UserCategoryVoteSettingService;
 import com.github.kop.bbs.service.category.MidUserCategoryVoteService;
-import org.apache.commons.lang3.ObjectUtils;
+import com.github.kop.bbs.service.user.MidUserRoleService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.time.LocalDateTime;
-import java.util.Objects;
 
 @Service
 public class MidUserCategoryVoteServiceImpl implements MidUserCategoryVoteService {
 
 
     @Resource
-    private MidUserCategoryVoteRepository midUserCategoryVoteRepository;
+    private MidUserCategoryVoteApplyRepository midUserCategoryVoteApplyRepository;
+
+    @Resource
+    private UserCategoryVoteSettingService userCategoryVoteSettingService;
+
+
+    @Resource
+    private MidUserRoleService midUserRoleService;
+
 
     /**
      * 根据voteId验证投票
      *
-     * @param voteId
+     * @param voteSettingId
      */
     @Override
-    public void verifyByVoteId(Long voteId) {
-        MidUserCategoryVote midUserCategoryVote = midUserCategoryVoteRepository.findById(voteId);
-        if (ObjectUtils.isEmpty(midUserCategoryVote)) {
-            throw new NoceException("该投票不存在!");
+    public Integer verifyByVoteId(Long voteSettingId,Long userId) {
+        // 验证是否有身份
+        boolean b = midUserRoleService.existsUserRole(userId, RoleEnum.WEBMASTER.getRoleCode());
+        if(b){
+            throw new NoceException("您已经是版主,无法申请");
         }
-        // 申请时间结束了
-        if (midUserCategoryVote.getApplyEndTime().isAfter(LocalDateTime.now())) {
-            throw new NoceException("申请时间已过!");
-        }
-        // 申请人数已满
-        if (midUserCategoryVote.getApplicationCount() > 0 && Objects.equals(midUserCategoryVote.getAlreadyCount(), midUserCategoryVote.getApplicationCount())) {
-            throw new NoceException("申请人数已满!");
-        }
-        // TODO: 2022/8/23 校验重复申请
+        // 验证投票设置
+        UserCategoryVoteSetting userCategoryVoteSetting = userCategoryVoteSettingService.verifyByVoteId(voteSettingId);
+        midUserCategoryVoteApplyRepository.verifyByUserId(userId);
+        return midUserCategoryVoteApplyRepository.insert(MidUserCategoryVoteApply.builder()
+                .voteSettingId(userCategoryVoteSetting.getVoteSettingId())
+                .categoryId(userCategoryVoteSetting.getCategoryId())
+                .userId(userId)
+                .deleted(DeletedEnum.FALSE.getCode())
+                .build());
+    }
+
+
+    @Override
+    public boolean applyVote(Long voteSettingId, Long userId) {
+        return verifyByVoteId(voteSettingId,userId)>0;
     }
 }
 

@@ -5,29 +5,29 @@
     <!--@mbg.generated-->
     <!--@Table bbs_message-->
     <id column="message_id" jdbcType="BIGINT" property="messageId" />
-    <result column="tpis_type" jdbcType="TINYINT" property="tpisType" />
+    <result column="message_type" jdbcType="TINYINT" property="messageType" />
     <result column="message_event_id" jdbcType="BIGINT" property="messageEventId" />
     <result column="sender_user_id" jdbcType="BIGINT" property="senderUserId" />
     <result column="receiver_user_id" jdbcType="BIGINT" property="receiverUserId" />
     <result column="brief" jdbcType="VARCHAR" property="brief" />
     <result column="content" jdbcType="VARCHAR" property="content" />
-    <result column="tips_status" jdbcType="TINYINT" property="tipsStatus" />
+    <result column="message_status" jdbcType="TINYINT" property="messageStatus" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="deleted" jdbcType="TINYINT" property="deleted" />
   </resultMap>
   <sql id="Base_Column_List">
     <!--@mbg.generated-->
-    message_id, tpis_type, message_event_id, sender_user_id, receiver_user_id, brief, 
-    content, tips_status, create_time, deleted
+    message_id, message_type, message_event_id, sender_user_id, receiver_user_id, brief, 
+    content, message_status, create_time, deleted
   </sql>
   <update id="updateBatchSelective" parameterType="java.util.List">
     <!--@mbg.generated-->
     update bbs_message
     <trim prefix="set" suffixOverrides=",">
-      <trim prefix="tpis_type = case" suffix="end,">
+      <trim prefix="message_type = case" suffix="end,">
         <foreach collection="list" index="index" item="item">
-          <if test="item.tpisType != null">
-            when message_id = #{item.messageId,jdbcType=BIGINT} then #{item.tpisType,jdbcType=TINYINT}
+          <if test="item.messageType != null">
+            when message_id = #{item.messageId,jdbcType=BIGINT} then #{item.messageType,jdbcType=TINYINT}
           </if>
         </foreach>
       </trim>
@@ -68,8 +68,8 @@
       </trim>
       <trim prefix="tips_status = case" suffix="end,">
         <foreach collection="list" index="index" item="item">
-          <if test="item.tipsStatus != null">
-            when message_id = #{item.messageId,jdbcType=BIGINT} then #{item.tipsStatus,jdbcType=TINYINT}
+          <if test="item.messageStatus != null">
+            when message_id = #{item.messageId,jdbcType=BIGINT} then #{item.messageStatus,jdbcType=TINYINT}
           </if>
         </foreach>
       </trim>
@@ -96,13 +96,13 @@
   <insert id="batchInsert" keyColumn="message_id" keyProperty="messageId" parameterType="map" useGeneratedKeys="true">
     <!--@mbg.generated-->
     insert into bbs_message
-    (tpis_type, message_event_id, sender_user_id, receiver_user_id, brief, content, tips_status, 
+    (message_type, message_event_id, sender_user_id, receiver_user_id, brief, content, tips_status, 
       create_time, deleted)
     values
     <foreach collection="list" item="item" separator=",">
-      (#{item.tpisType,jdbcType=TINYINT}, #{item.messageEventId,jdbcType=BIGINT}, #{item.senderUserId,jdbcType=BIGINT}, 
+      (#{item.messageType,jdbcType=TINYINT}, #{item.messageEventId,jdbcType=BIGINT}, #{item.senderUserId,jdbcType=BIGINT}, 
         #{item.receiverUserId,jdbcType=BIGINT}, #{item.brief,jdbcType=VARCHAR}, #{item.content,jdbcType=VARCHAR}, 
-        #{item.tipsStatus,jdbcType=TINYINT}, #{item.createTime,jdbcType=TIMESTAMP}, #{item.deleted,jdbcType=TINYINT}
+        #{item.messageStatus,jdbcType=TINYINT}, #{item.createTime,jdbcType=TIMESTAMP}, #{item.deleted,jdbcType=TINYINT}
         )
     </foreach>
   </insert>

@@ -1,11 +1,9 @@
 package com.github.kop.bbs.api.customer;
 
-import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.github.kop.bbs.module.req.category.QueryCategoryReq;
 import com.github.kop.bbs.module.res.RespVO;
 import com.github.kop.bbs.module.res.category.CategoryListRes;
 import com.github.kop.bbs.service.category.CategoryService;
-import com.github.kop.bbs.service.category.MidUserCategoryVoteApplyService;
+import com.github.kop.bbs.service.category.MidUserCategoryVoteService;
 import com.github.kop.bbs.utils.UserInfoThread;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -21,13 +19,13 @@ import org.springframework.web.bind.annotation.*;
 public class CustomerCategoryApi {
 
   @Resource
-  private MidUserCategoryVoteApplyService midUserCategoryVoteApplyService;
+  private MidUserCategoryVoteService midUserCategoryVoteService;
 
   @PostMapping("/apply/manager")
   @ApiOperation(value = "申请版主投票")
-  public RespVO<Boolean> applyVote(@RequestBody Long voteId) {
+  public RespVO<Boolean> applyVote(@RequestBody Long voteSettingId) {
     Long userId = UserInfoThread.getUserId();
-    return RespVO.success(midUserCategoryVoteApplyService.applyVote(voteId, userId));
+    return RespVO.success(midUserCategoryVoteService.applyVote(voteSettingId, userId));
   }
 
   @Autowired

@@ -17,13 +17,13 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@TableName(value = "bbs_mid_user_category_vote")
-public class MidUserCategoryVote {
+@TableName(value = "bbs_user_category_vote_setting")
+public class UserCategoryVoteSetting {
     /**
      * 主键
      */
-    @TableId(value = "vote_id", type = IdType.INPUT)
-    private Long voteId;
+    @TableId(value = "vote_setting_id", type = IdType.INPUT)
+    private Long voteSettingId;
 
     /**
      * 版块id

@@ -28,12 +28,12 @@ public class MessageServiceImpl implements MessageService {
   public boolean sendPrivateMessage(Long fromUserId, UserSendMessageReq userSendMessageReq) {
     // TODO: 2022/8/26 检查是否拉黑，拉黑不允许发送
     Message message = new Message();
-    message.setTipsType(MessageTypeEnum.PRIVATE_MESSAGE.getCode());
+    message.setMessageType(MessageTypeEnum.PRIVATE_MESSAGE.getCode());
     message.setSenderUserId(fromUserId);
     message.setReceiverUserId(userSendMessageReq.getSendToUserId());
     message.setBrief(null);
     message.setContent(userSendMessageReq.getContent());
-    message.setTipsStatus(MessageStatusEnum.NOT_READ.getCode());
+    message.setMessageStatus(MessageStatusEnum.NOT_READ.getCode());
 
     return messageRepository.create(message);
   }
@@ -69,7 +69,7 @@ public class MessageServiceImpl implements MessageService {
   @NotNull
   private MessageResp conv(Message msg) {
     MessageResp messageResp = new MessageResp();
-    messageResp.setTipsType(msg.getTipsType());
+    messageResp.setMessageType(msg.getMessageType());
     messageResp.setMessageEventId(msg.getMessageEventId());
     messageResp.setSenderUserId(msg.getSenderUserId());
 

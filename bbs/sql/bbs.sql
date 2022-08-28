@@ -70,17 +70,6 @@ CREATE TABLE `bbs_category`  (
   PRIMARY KEY (`category_id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '论坛的板块' ROW_FORMAT = DYNAMIC;
 
--- ----------------------------
--- Table structure for bbs_category_vote_apply_log
--- ----------------------------
-DROP TABLE IF EXISTS `bbs_category_vote_apply_log`;
-CREATE TABLE `bbs_category_vote_apply_log`  (
-  `vote_apply_log_id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '版主投票记录主键',
-  `apply_id` bigint(20) UNSIGNED NOT NULL COMMENT '版主投票申请表主键',
-  `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
-  `create_user_id` bigint(20) NULL DEFAULT NULL COMMENT '创建用户',
-  PRIMARY KEY (`vote_apply_log_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '版主投票记录表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Table structure for bbs_collection_log
@@ -151,6 +140,7 @@ DROP TABLE IF EXISTS `bbs_invitation`;
 CREATE TABLE `bbs_invitation`  (
   `invitation_id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '帖子主键',
   `text_type` tinyint(4) NOT NULL COMMENT '帖子正文类型  1 富文本 2 md',
+  `top_category_id` bigint(20) NOT NULL COMMENT 'top论坛类别',
   `category_id` bigint(20) NOT NULL COMMENT '论坛类别',
   `type` tinyint(4) NOT NULL COMMENT '帖子类型：0动态、1板块内容',
   `topic_id` bigint(20) NULL DEFAULT NULL COMMENT '话题主键 动态可以选择加话题',
@@ -182,13 +172,13 @@ CREATE TABLE `bbs_invitation`  (
 DROP TABLE IF EXISTS `bbs_message`;
 CREATE TABLE `bbs_message`  (
   `message_id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '消息主键',
-  `tips_type` tinyint(4) NOT NULL COMMENT ' 通知类型，1动态，2评论，3帖子回复通知，4评论回复通知 5私信，99系统通知',
+  `message_type` tinyint(4) NOT NULL COMMENT ' 通知类型，1动态，2评论，3帖子回复通知，4评论回复通知 5私信，99系统通知',
   `message_event_id` bigint(20) NOT NULL COMMENT '产生消息的对应内容的主键',
   `sender_user_id` bigint(20) NOT NULL COMMENT '发送发用户ID',
   `receiver_user_id` bigint(20) NOT NULL COMMENT '接收方用户ID',
   `brief` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '摘要说明',
   `content` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '详细内容',
-  `tips_status` tinyint(4) NOT NULL COMMENT '状态 0 未读 1 已读',
+  `message_status` tinyint(4) NOT NULL COMMENT '状态 0 未读 1 已读',
   `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
   `deleted` tinyint(4) NULL DEFAULT 0 COMMENT '逻辑删除标记位',
   PRIMARY KEY (`message_id`) USING BTREE
@@ -207,11 +197,11 @@ CREATE TABLE `bbs_mid_user_category`  (
 ) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '版主与分类的中间表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
--- Table structure for bbs_mid_user_category_vote
+-- Table structure for bbs_category_vote_setting
 -- ----------------------------
-DROP TABLE IF EXISTS `bbs_mid_user_category_vote`;
-CREATE TABLE `bbs_mid_user_category_vote`  (
-  `vote_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '主键',
+DROP TABLE IF EXISTS `bbs_user_category_vote_setting`;
+CREATE TABLE `bbs_user_category_vote_setting`  (
+  `vote_setting_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '主键',
   `category_id` bigint(20) NOT NULL COMMENT '版块id',
   `application_count` bigint(20) UNSIGNED NOT NULL COMMENT '申请人数限制 0 不限制 ',
   `already_count` bigint(20) UNSIGNED NOT NULL COMMENT '已经申请的人  ',
@@ -220,8 +210,8 @@ CREATE TABLE `bbs_mid_user_category_vote`  (
   `vote_start_time` datetime NULL DEFAULT NULL COMMENT '投票开始时间(时间范围内允许投票)',
   `vote_end_time` datetime NULL DEFAULT NULL COMMENT '投票结束时间',
   `deleted` tinyint(3) NOT NULL COMMENT '是否删除 0 为未删除、1 为已删除',
-  PRIMARY KEY (`vote_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '版主投票表' ROW_FORMAT = DYNAMIC;
+  PRIMARY KEY (`vote_setting_id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '版主投票设置表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Table structure for bbs_mid_user_category_vote_apply
@@ -229,14 +219,44 @@ CREATE TABLE `bbs_mid_user_category_vote`  (
 DROP TABLE IF EXISTS `bbs_mid_user_category_vote_apply`;
 CREATE TABLE `bbs_mid_user_category_vote_apply`  (
   `apply_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '主键',
-  `vote_id` bigint(20) UNSIGNED NOT NULL COMMENT '版主投票表主键',
+  `vote_setting_id` bigint(20) UNSIGNED NOT NULL COMMENT '版主投票表主键',
   `category_id` bigint(20) NOT NULL COMMENT '版块id',
   `user_id` bigint(20) NOT NULL COMMENT '用户id',
-  `ticket_count` bigint(20) NOT NULL COMMENT '投票票数',
+  `ticket_count` bigint(20) NOT NULL COMMENT '投票票数(结束时间后持久化,投票开始时间内不维护)',
   `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
   `deleted` tinyint(3) NOT NULL COMMENT '是否删除 0 为未删除、1 为已删除',
   PRIMARY KEY (`apply_id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '版主投票申请表' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Table structure for bbs_vote_ticket_count
+-- ----------------------------
+
+DROP TABLE IF EXISTS `bbs_vote_ticket_count`;
+CREATE TABLE `bbs_vote_ticket_count`  (
+                                                     `ticket_count_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '主键',
+                                                     `apply_id` bigint(20) UNSIGNED NOT NULL COMMENT '申请表主键',
+                                                     `ticket_count` bigint(20) NOT NULL COMMENT '投票票数',
+                                                     `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
+                                                     `deleted` tinyint(3) NOT NULL COMMENT '是否删除 0 为未删除、1 为已删除',
+                                                     PRIMARY KEY (`ticket_count_id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '版主票数记录表' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Table structure for bbs_vote_ticket_log
+-- ----------------------------
+
+DROP TABLE IF EXISTS `bbs_vote_ticket_log`;
+CREATE TABLE `bbs_vote_ticket_log`  (
+                                          `ticket_count_log_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '主键',
+                                          `apply_id` bigint(20) UNSIGNED NOT NULL COMMENT '申请表主键',
+                                          `user_id` bigint(20) NOT NULL COMMENT '用户id',
+                                          `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
+                                          `deleted` tinyint(3) NOT NULL COMMENT '是否删除 0 为未删除、1 为已删除',
+                                          PRIMARY KEY (`ticket_count_log_id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '版主票数记录表' ROW_FORMAT = DYNAMIC;
+
+
 
 -- ----------------------------
 -- Table structure for bbs_mid_user_role
@@ -332,6 +352,7 @@ CREATE TABLE `bbs_tag`  (
   `create_time` datetime NOT NULL COMMENT '创建时间',
   `update_time` datetime NOT NULL COMMENT '修改时间',
   `deleted_time` datetime NOT NULL COMMENT '删除时间',
+  `version` bigint(20) NULL DEFAULT 0 COMMENT '乐观锁',
   `deleted` tinyint(3) UNSIGNED NOT NULL DEFAULT 0 COMMENT '是否删除 0 为未删除、1 为已删除',
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `idx_tag`(`tag`) USING BTREE,
@@ -394,22 +415,6 @@ CREATE TABLE `bbs_user_black_list`  (
   PRIMARY KEY (`black_list_id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '用户黑名单' ROW_FORMAT = DYNAMIC;
 
--- ----------------------------
--- Table structure for bbs_user_category_apply
--- ----------------------------
-DROP TABLE IF EXISTS `bbs_user_category_apply`;
-CREATE TABLE `bbs_user_category_apply`  (
-  `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '主键',
-  `user_id` bigint(20) NOT NULL COMMENT '用户id',
-  `status` tinyint(4) NOT NULL COMMENT '状态 0 待审核 1 审核通过 2 审核不通过',
-  `category_id` bigint(20) NOT NULL COMMENT '版块id',
-  `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
-  `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
-  `update_user_id` bigint(20) NULL DEFAULT NULL COMMENT '更新用户',
-  `deleted` tinyint(4) NULL DEFAULT 0 COMMENT '逻辑删除标记位',
-  `version` bigint(20) NULL DEFAULT 0 COMMENT '乐观锁',
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '版主申请表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for bbs_user_dynamic

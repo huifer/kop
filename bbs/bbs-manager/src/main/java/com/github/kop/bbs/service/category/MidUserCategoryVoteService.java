@@ -7,9 +7,11 @@ public interface MidUserCategoryVoteService {
     /**
      * 根据voteId验证投票
      *
-     * @param voteId
+     * @param voteSettingId
      */
-    void verifyByVoteId(Long voteId);
+    Integer verifyByVoteId(Long voteSettingId,Long userId);
+
+    boolean applyVote(Long voteSettingId, Long userId);
 }
 
 

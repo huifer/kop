@@ -8,7 +8,7 @@ import lombok.Data;
 @ApiModel("消息实体")
 public class MessageResp {
   @ApiModelProperty(value = "通知类型")
-  private Integer tipsType;
+  private Integer messageType;
 
   @ApiModelProperty(value = "产生消息的对应内容的主键")
   private Long messageEventId;

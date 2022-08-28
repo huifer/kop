@@ -24,8 +24,8 @@ public class Message implements Serializable {
   private Long messageId;
 
   /** 通知类型，1动态，2评论，3回复，4私信，99系统通知 */
-  @TableField(value = "tips_type")
-  private Integer tipsType;
+  @TableField(value = "message_type")
+  private Integer messageType;
 
   /** 产生消息的对应内容的主键 */
   @TableField(value = "message_event_id")
@@ -48,8 +48,8 @@ public class Message implements Serializable {
   private String content;
 
   /** 状态 0 未读 1 已读 */
-  @TableField(value = "tips_status")
-  private Integer tipsStatus;
+  @TableField(value = "message_status")
+  private Integer messageStatus;
 
   /** 创建时间 */
   @TableField(value = "create_time")

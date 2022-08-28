@@ -1,9 +1,7 @@
 package com.github.kop.bbs.module.entity;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.*;
+
 import java.time.LocalDateTime;
 import java.util.Date;
 import lombok.AllArgsConstructor;
@@ -29,8 +27,8 @@ public class MidUserCategoryVoteApply {
     /**
      * 版主投票表主键
      */
-    @TableField(value = "vote_id")
-    private Long voteId;
+    @TableField(value = "vote_setting_id")
+    private Long voteSettingId;
 
     /**
      * 版块id
@@ -53,7 +51,7 @@ public class MidUserCategoryVoteApply {
     /**
      * 创建时间
      */
-    @TableField(value = "create_time")
+    @TableField(value = "create_time",fill = FieldFill.INSERT)
     private LocalDateTime createTime;
 
     /**
