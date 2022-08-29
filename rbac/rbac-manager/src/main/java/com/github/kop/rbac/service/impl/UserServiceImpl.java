@@ -123,6 +123,22 @@ public class UserServiceImpl implements UserService {
 
   @Autowired private JwtTokenUtil jwtTokenUtil;
 
+
+  @Override
+  public int createUser(CreateUserReq req) {
+    userCreateAndUpdateValidate.companyCreateUser(req);
+    RbacUser rbacUser = new RbacUser();
+    rbacUser.setName(req.getName());
+    rbacUser.setPhone(req.getPhone());
+    rbacUser.setGrade(req.getGrade());
+    rbacUser.setCompanyId(req.getCompanyId());
+    rbacUser.setPassword(
+            DigestUtils.md5DigestAsHex(req.getPassword().getBytes(StandardCharsets.UTF_8)));
+    rbacUser.setCompanyId(UserInfoThread.getCompanyId());
+
+    return this.userRepository.create(rbacUser);
+  }
+
   @Override
   public UserLoginRes login(String username, String password, Long companyId) {
     RbacUser user =
@@ -150,6 +166,16 @@ public class UserServiceImpl implements UserService {
 
   protected class UserCreateAndUpdateValidate
       implements CreateValidate<CreateUserReq>, UpdateValidate<UpdateUserReq> {
+
+    public void companyCreateUser(CreateUserReq createUserReq){
+      Long companyId = createUserReq.getCompanyId();
+      if(companyId == null) {
+        throw new ValidateException("企业内创建用户企业必填");
+      }
+      createValidate(createUserReq);
+
+    }
+
     @Override
     public void createValidate(CreateUserReq createUserReq) throws ValidateException {
       String name = createUserReq.getName();
