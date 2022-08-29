@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@Api("管理端端用户接口")
+@Api("管理端-用户接口")
 @RestController
 @RequestMapping("/manager/user")
 public class ManagerUserCtr {

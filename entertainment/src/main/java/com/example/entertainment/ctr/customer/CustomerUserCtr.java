@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@Api("消费者端用户接口")
+@Api("消费者端-用户接口")
 @RestController
 @RequestMapping("/customer/user")
 public class CustomerUserCtr {

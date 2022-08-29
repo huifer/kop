@@ -58,7 +58,7 @@ public class CodeGenerator {
 
             .strategyConfig((scanner, builder) ->
                 builder
-                    .addTablePrefix("bbs")
+                    .addTablePrefix("ent_")
                     .addInclude(getTables(table))
                     .controllerBuilder().enableRestStyle().enableHyphenStyle()
                     .entityBuilder().enableLombok()
