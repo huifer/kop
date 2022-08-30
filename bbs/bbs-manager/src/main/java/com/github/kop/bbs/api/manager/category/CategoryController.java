@@ -5,7 +5,7 @@ import com.github.kop.bbs.module.req.category.CreateCategoryReq;
 import com.github.kop.bbs.module.req.category.QueryCategoryReq;
 import com.github.kop.bbs.module.req.category.UpdateCategoryReq;
 import com.github.kop.bbs.module.res.RespVO;
-import com.github.kop.bbs.module.res.category.CategoryListRes;
+import com.github.kop.bbs.module.res.category.customer.CategoryListRes;
 import com.github.kop.bbs.service.category.CategoryService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

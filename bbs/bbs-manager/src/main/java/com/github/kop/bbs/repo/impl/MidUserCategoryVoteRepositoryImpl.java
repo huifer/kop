@@ -22,4 +22,9 @@ public class MidUserCategoryVoteRepositoryImpl implements UserCategoryVoteSettin
     public UserCategoryVoteSetting findById(Long voteId) {
         return midUserCategoryVoteMapper.selectById(voteId);
     }
+
+    @Override
+    public UserCategoryVoteSetting findStartSetting(Long categoryId) {
+        return midUserCategoryVoteMapper.findStartSetting(categoryId);
+    }
 }

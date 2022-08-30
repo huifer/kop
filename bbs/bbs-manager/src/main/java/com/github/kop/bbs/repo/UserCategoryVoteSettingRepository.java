@@ -9,4 +9,6 @@ import com.github.kop.bbs.module.entity.UserCategoryVoteSetting;
  */
 public interface UserCategoryVoteSettingRepository {
     UserCategoryVoteSetting findById(Long voteSettingId);
+
+    UserCategoryVoteSetting findStartSetting(Long categoryId);
 }

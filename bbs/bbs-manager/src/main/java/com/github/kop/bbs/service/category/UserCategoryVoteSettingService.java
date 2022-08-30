@@ -7,6 +7,10 @@ public interface UserCategoryVoteSettingService {
 
 
     UserCategoryVoteSetting verifyByVoteId(Long voteSettingId);
+
+    void verifyTicketTime(Long voteSettingId);
+
+    UserCategoryVoteSetting findStartSetting(Long categoryId);
 }
 
 

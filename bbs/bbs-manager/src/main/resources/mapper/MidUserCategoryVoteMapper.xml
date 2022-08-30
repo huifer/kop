@@ -19,4 +19,13 @@
     vote_id, category_id, application_count, already_count, apply_start_time, apply_end_time, 
     vote_start_time, vote_end_time, deleted
   </sql>
+
+  <select id="findStartSetting" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List"/>
+    from bbs_mid_user_category_vote
+    where is_delete = 0
+    and vote_start_time &gt;= now()
+    and vote_end_time &lt;= now()
+    and category_id = #{categoryId}
+  </select>
 </mapper>

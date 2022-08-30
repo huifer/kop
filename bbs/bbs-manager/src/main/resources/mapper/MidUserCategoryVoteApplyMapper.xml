@@ -21,6 +21,7 @@
     select a.apply_id,a.vote_setting_id, a.category_id, a.user_id, a.ticket_count, a.create_time, a.deleted
     from bbs_mid_user_category_vote_apply  a,bbs_user_category_vote_setting b
     where a.deleted = 0 and b.deleted = 0
+    and b.apply_start_time &gt;=now()
     and b.apply_end_time &lt;= now()
     and a.user_id = #{userId}
   </select>

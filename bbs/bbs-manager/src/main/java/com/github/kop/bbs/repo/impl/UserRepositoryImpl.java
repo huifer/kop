@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Repository
 public class UserRepositoryImpl implements UserRepository {
 
@@ -77,5 +79,13 @@ public class UserRepositoryImpl implements UserRepository {
         )
     ;
     return this.userMapper.selectPage(new Page<>(page, size), queryWrapper);
+  }
+
+  @Override
+  public List<User> findByUserIds(List<Long> userIdList) {
+    QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+    queryWrapper.lambda()
+            .in(User::getId, userIdList);
+    return userMapper.selectList(queryWrapper);
   }
 }

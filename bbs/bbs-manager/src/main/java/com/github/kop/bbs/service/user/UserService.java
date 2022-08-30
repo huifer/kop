@@ -10,6 +10,8 @@ import com.github.kop.bbs.module.req.user.UserQueryReq;
 import com.github.kop.bbs.module.res.user.UserLoginRes;
 import com.github.kop.bbs.module.res.user.UserQueryResp;
 
+import java.util.List;
+
 public interface UserService {
 
   /**
@@ -50,4 +52,6 @@ public interface UserService {
    * 管理端分页查询
    */
   IPage<UserQueryResp> page(Long page, Long size, UserQueryReq req);
+
+  List<User> findByUserIds(List<Long> userIdList);
 }

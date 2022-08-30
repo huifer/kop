@@ -14,4 +14,9 @@
     <!--@mbg.generated-->
     ticket_count_id, apply_id, ticket_count, create_time, deleted
   </sql>
+
+  <update id="addVoteTicket">
+    update bbs_vote_ticket_count set ticket_count = ticket_count+1
+    where apply_id = #{userId} and deleted = 0
+    </update>
 </mapper>

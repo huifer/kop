@@ -9,7 +9,6 @@ import com.github.kop.bbs.repo.mapper.MidUserCategoryVoteApplyMapper;
 import org.springframework.stereotype.Repository;
 
 import javax.annotation.Resource;
-import java.util.Collection;
 import java.util.List;
 
 /**
@@ -40,7 +39,7 @@ public class MidUserCategoryVoteApplyRepositoryImpl implements MidUserCategoryVo
     }
 
     @Override
-    public Integer insert(MidUserCategoryVoteApply build) {
+    public int insert(MidUserCategoryVoteApply build) {
         verifyByUserId(build.getUserId());
         return midUserCategoryVoteApplyMapper.insert(build);
     }
@@ -51,5 +50,13 @@ public class MidUserCategoryVoteApplyRepositoryImpl implements MidUserCategoryVo
         queryWrapper.lambda().eq(MidUserCategoryVoteApply::getApplyId,applyId)
                 .eq(MidUserCategoryVoteApply::getDeleted,DeletedEnum.FALSE.getCode());
         return midUserCategoryVoteApplyMapper.selectOne(queryWrapper);
+    }
+
+    @Override
+    public List<MidUserCategoryVoteApply> findByVoteSettingId(Long voteSettingId) {
+        QueryWrapper<MidUserCategoryVoteApply> queryWrapper = new QueryWrapper<>();
+        queryWrapper.lambda().eq(MidUserCategoryVoteApply::getVoteSettingId,voteSettingId)
+                .eq(MidUserCategoryVoteApply::getDeleted,DeletedEnum.FALSE.getCode());
+        return midUserCategoryVoteApplyMapper.selectList(queryWrapper);
     }
 }

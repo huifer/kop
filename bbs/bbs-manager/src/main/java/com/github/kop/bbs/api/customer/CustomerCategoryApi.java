@@ -1,11 +1,11 @@
 package com.github.kop.bbs.api.customer;
 
-import com.github.kop.bbs.module.entity.MidUserCategoryVoteApply;
 import com.github.kop.bbs.module.res.RespVO;
-import com.github.kop.bbs.module.res.category.CategoryListRes;
+import com.github.kop.bbs.module.res.category.customer.CategoryListRes;
+import com.github.kop.bbs.module.res.category.customer.CategoryVoteListRes;
 import com.github.kop.bbs.service.category.CategoryService;
 import com.github.kop.bbs.service.category.MidUserCategoryVoteApplyService;
-import com.github.kop.bbs.service.category.MidUserCategoryVoteService;
+import com.github.kop.bbs.service.category.VoteTicketCountService;
 import com.github.kop.bbs.utils.UserInfoThread;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -20,29 +20,35 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/customer/category")
 public class CustomerCategoryApi {
 
-  @Resource
-  private MidUserCategoryVoteService midUserCategoryVoteService;
-
   @Autowired
   private CategoryService bbsCategoryService;
 
   @Resource
   private MidUserCategoryVoteApplyService midUserCategoryVoteApplyService;
 
+  @Resource
+  private VoteTicketCountService voteTicketCountService;
+
   @PostMapping("/apply/manager")
   @ApiOperation(value = "申请版主投票")
   public RespVO<Boolean> applyVote(@RequestBody Long voteSettingId) {
     Long userId = UserInfoThread.getUserId();
-    return RespVO.success(midUserCategoryVoteService.applyVote(voteSettingId, userId));
+    return RespVO.success(midUserCategoryVoteApplyService.applyVote(voteSettingId, userId));
   }
 
   @PostMapping("/add/vote/ticket")
   @ApiOperation(value = "版主投票")
   public RespVO<Boolean> addVoteTicket(@RequestBody Long applyId) {
     Long userId = UserInfoThread.getUserId();
-    return RespVO.success(midUserCategoryVoteApplyService.addVoteTicket(applyId, userId));
+    return RespVO.success(voteTicketCountService.addVoteTicket(applyId, userId));
   }
 
+  @GetMapping("/get/category/vote/list/{categoryId}")
+  @ApiOperation(value = "根据分类获取进行中的版主投票列表")
+  public RespVO<CategoryVoteListRes> getCategoryVoteList(@PathVariable("categoryId") Long categoryId) {
+    Long userId = UserInfoThread.getUserId();
+    return RespVO.success(midUserCategoryVoteApplyService.getCategoryVoteList(categoryId,userId));
+  }
 
 
   @ApiOperation(value = "顶层板块列表")

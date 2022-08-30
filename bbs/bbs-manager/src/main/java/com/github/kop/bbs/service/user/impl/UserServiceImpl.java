@@ -193,4 +193,9 @@ public class UserServiceImpl implements UserService {
       }
     });
   }
+
+  @Override
+  public List<User> findByUserIds(List<Long> userIdList) {
+    return userRepository.findByUserIds(userIdList);
+  }
 }

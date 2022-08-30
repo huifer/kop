@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.github.kop.bbs.module.req.category.CreateCategoryReq;
 import com.github.kop.bbs.module.req.category.QueryCategoryReq;
 import com.github.kop.bbs.module.req.category.UpdateCategoryReq;
-import com.github.kop.bbs.module.res.category.CategoryListRes;
+import com.github.kop.bbs.module.res.category.customer.CategoryListRes;
 import java.util.List;
 
 /** 板块服务 */

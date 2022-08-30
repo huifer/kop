@@ -2,6 +2,8 @@ package com.github.kop.bbs.repo;
 
 import com.github.kop.bbs.module.entity.MidUserCategoryVoteApply;
 
+import java.util.List;
+
 /**
  * @auth ahxiaoqi
  * @desc
@@ -10,7 +12,9 @@ import com.github.kop.bbs.module.entity.MidUserCategoryVoteApply;
 public interface MidUserCategoryVoteApplyRepository {
     void verifyByUserId(Long userId);
 
-    Integer insert(MidUserCategoryVoteApply build);
+    int insert(MidUserCategoryVoteApply build);
 
     MidUserCategoryVoteApply findByApplyId(Long applyId);
+
+    List<MidUserCategoryVoteApply> findByVoteSettingId(Long voteSettingId);
 }

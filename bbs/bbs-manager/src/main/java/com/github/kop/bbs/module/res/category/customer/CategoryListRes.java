@@ -1,4 +1,4 @@
-package com.github.kop.bbs.module.res.category;
+package com.github.kop.bbs.module.res.category.customer;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
