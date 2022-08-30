@@ -9,7 +9,7 @@ spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
-    password: szw123456
+    password: root123@
     url: 'jdbc:mysql://localhost:3306/entertainment?useSSL=false&serverTimezone=Asia/Shanghai&characterEncoding=utf-8'
     hikari:
       pool-name: selfHikariCP
@@ -22,6 +22,8 @@ spring:
       maximum-pool-size: 10
       minimum-idle: 5
       read-only: false
+  jpa:
+    database: mysql
 mybatis-plus:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
@@ -33,4 +35,4 @@ mybatis-plus:
   mapper-locations: classpath*:mapper/*.xml
 
 server:
-  port: 9192
+  port: 9018

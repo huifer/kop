@@ -62,14 +62,19 @@ public class CustomerUserServiceImpl implements CustomerUserService {
   public CustomerUserInfoResp login(CustomerLoginUserReq req) {
 
     Users users = this.userRepository.findByPhone(req.getPhone());
+    if (users == null) {
+      throw new RuntimeException("用户不存在");
+    }
     String salt = users.getSalt();
     if (this.userPasswordService.eq(req.getPassword(), users.getPassword(), salt)) {
       CustomerUserInfoResp customerUserInfoResp = new CustomerUserInfoResp();
       BeanUtils.copyProperties(users, customerUserInfoResp);
       customerUserInfoResp.setToken(this.tokenService.genToken(users.getId()));
       return customerUserInfoResp;
+    } else {
+
+      throw new RuntimeException("密码错误");
     }
-    throw new RuntimeException("密码错误");
   }
 
   @Override

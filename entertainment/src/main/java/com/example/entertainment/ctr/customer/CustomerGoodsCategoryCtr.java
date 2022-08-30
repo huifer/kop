@@ -1,6 +1,7 @@
 package com.example.entertainment.ctr.customer;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.example.entertainment.module.RespVO;
 import com.example.entertainment.module.manager.resp.goods.GoodsCategoryQueryResp;
 import com.example.entertainment.service.customer.CustomerGoodsCategoryService;
 import io.swagger.annotations.Api;
@@ -22,10 +23,10 @@ public class CustomerGoodsCategoryCtr {
 
   @ApiOperation("分页")
   @PostMapping("/page/{page}/{size}")
-  public ResponseEntity<IPage<GoodsCategoryQueryResp>> page(
+  public RespVO<IPage<GoodsCategoryQueryResp>> page(
       @PathVariable("page") int page,
       @PathVariable("size") int size
   ) {
-    return ResponseEntity.ok(this.customerGoodsCategoryService.page(page,size));
+    return RespVO.success(this.customerGoodsCategoryService.page(page,size));
   }
 }

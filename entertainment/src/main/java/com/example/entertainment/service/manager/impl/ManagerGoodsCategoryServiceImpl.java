@@ -27,7 +27,7 @@ public class ManagerGoodsCategoryServiceImpl implements ManagerGoodsCategoryServ
     goodsCategory.setName(req.getName());
     goodsCategory.setImage(req.getImage());
     goodsCategory.setOrder(req.getOrder());
-    goodsCategory.setIsShow(req.getIsShow());
+    goodsCategory.setIsShow(req.getIsShow() ? 1 : 0);
 
     return goodsCategoryRepository.create(goodsCategory) > 0;
   }

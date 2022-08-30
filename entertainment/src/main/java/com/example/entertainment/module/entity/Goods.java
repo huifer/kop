@@ -25,121 +25,121 @@ public class Goods implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @TableId(value = "id", type = IdType.AUTO)
+    @TableId(value = "`id`", type = IdType.AUTO)
     private Integer id;
 
     /**
      * 商品名字
      */
-    @TableField("name")
+    @TableField("`name`")
     private String name;
 
     /**
      * 商品标题
      */
-    @TableField("title")
+    @TableField("`title`")
     private String title;
 
     /**
      * 商品展示图
      */
-    @TableField("image")
+    @TableField("`image`")
     private String image;
 
     /**
      * 商品轮播图
      */
-    @TableField("images")
+    @TableField("`images`")
     private String images;
 
     /**
      * 商品售价
      */
-    @TableField("price")
+    @TableField("`price`")
     private BigDecimal price;
 
     /**
      * 商品介绍
      */
-    @TableField("content")
+    @TableField("`content`")
     private String content;
 
     /**
      * 排序值
      */
-    @TableField("order")
+    @TableField("`order`")
     private Integer order;
 
     /**
      * 开始售卖时间
      */
-    @TableField("start_time")
+    @TableField("`start_time`")
     private LocalDateTime startTime;
 
     /**
      * 结束结束时间
      */
-    @TableField("end_time")
+    @TableField("`end_time`")
     private LocalDateTime endTime;
 
     /**
      * 总份额
      */
-    @TableField("stock")
+    @TableField("`stock`")
     private Integer stock;
 
     /**
      * 销售量
      */
-    @TableField("sales")
+    @TableField("`sales`")
     private Integer sales;
 
     /**
      * 剩余份额
      */
-    @TableField("surplus")
+    @TableField("`surplus`")
     private Integer surplus;
 
     /**
      * 公司名称
      */
-    @TableField("company_name")
+    @TableField("`company_name`")
     private String companyName;
 
     /**
      * 公司头像
      */
-    @TableField("company_image")
+    @TableField("`company_image`")
     private String companyImage;
 
     /**
      * 创作者
      */
-    @TableField("creator")
+    @TableField("`creator`")
     private String creator;
 
     /**
      * 是否展示:0=未展示,1=展示
      */
-    @TableField("is_show")
+    @TableField("`is_show`")
     private Integer isShow;
 
     /**
      * 是否删除:0=未删除,1=已删除
      */
-    @TableField("is_del")
+    @TableField("`is_del`")
     private Integer isDel;
 
     /**
      * 作品标签
      */
-    @TableField("label")
+    @TableField("`label`")
     private String label;
 
     /**
      * 所属分类
      */
-    @TableField("goods_category_id")
+    @TableField("`goods_category_id`")
     private Integer goodsCategoryId;
 
 

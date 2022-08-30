@@ -17,6 +17,6 @@ public class GoodsCategoryCreateReq {
   @ApiModelProperty("排序值")
   private Integer order;
   @ApiModelProperty("是否展示")
-  private Integer isShow;
+  private Boolean isShow;
 
 }

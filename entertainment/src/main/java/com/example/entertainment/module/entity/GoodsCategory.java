@@ -24,37 +24,37 @@ public class GoodsCategory implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @TableId(value = "id", type = IdType.AUTO)
+    @TableId(value = "`id`", type = IdType.AUTO)
     private Integer id;
 
     /**
      * 系列名称
      */
-    @TableField("name")
+    @TableField("`name`")
     private String name;
 
     /**
      * 系列图片
      */
-    @TableField("image")
+    @TableField("`image`")
     private String image;
 
     /**
      * 排序值
      */
-    @TableField("order")
+    @TableField("`order`")
     private Integer order;
 
     /**
      * 是否展示:0=隐藏,1=展示
      */
-    @TableField("is_show")
+    @TableField("`is_show`")
     private Integer isShow;
 
     /**
      * 删除状态:0=未删除,1=已删除
      */
-    @TableField("is_del")
+    @TableField("`is_del`")
     @TableLogic
     private Integer isDel;
 

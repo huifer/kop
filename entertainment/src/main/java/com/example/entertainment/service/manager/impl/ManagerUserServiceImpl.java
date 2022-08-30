@@ -2,9 +2,13 @@ package com.example.entertainment.service.manager.impl;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.example.entertainment.module.entity.Users;
+import com.example.entertainment.module.enums.UserRoleEnums;
 import com.example.entertainment.module.manager.req.user.ManagerUserQueryReq;
+import com.example.entertainment.module.manager.resp.user.ManagerUserInfoResp;
 import com.example.entertainment.module.manager.resp.user.ManagerUserResp;
 import com.example.entertainment.repo.UserRepository;
+import com.example.entertainment.service.common.TokenService;
+import com.example.entertainment.service.common.UserPasswordService;
 import com.example.entertainment.service.manager.ManagerUserService;
 import java.util.function.Function;
 import org.springframework.beans.BeanUtils;
@@ -44,6 +48,33 @@ public class ManagerUserServiceImpl implements ManagerUserService {
     ManagerUserResp managerUserResp = new ManagerUserResp();
     BeanUtils.copyProperties(byId, managerUserResp);
     return managerUserResp;
+  }
+
+  @Autowired
+  private UserPasswordService userPasswordService;
+  @Autowired
+  private TokenService tokenService;
+
+  @Override
+  public ManagerUserInfoResp login(Users users) {
+    Users byPhone = this.userRepository.findByPhone(users.getPhone());
+    if (byPhone != null) {
+      String salt = users.getSalt();
+      if (this.userPasswordService.eq(users.getPassword(), byPhone.getPassword(), salt)) {
+        ManagerUserInfoResp managerUserInfoResp = new ManagerUserInfoResp();
+        BeanUtils.copyProperties(users, managerUserInfoResp);
+        managerUserInfoResp.setToken(this.tokenService.genToken(users.getId()));
+
+        Integer roleId = users.getRoleId();
+        if (!roleId.equals(UserRoleEnums.ADMIN.getCode())) {
+          throw new RuntimeException("非管理员无法登陆");
+        }
+        return managerUserInfoResp;
+      } else {
+        throw new RuntimeException("密码错误");
+      }
+    }
+    throw new RuntimeException("用户不存在");
   }
 
   @Override
