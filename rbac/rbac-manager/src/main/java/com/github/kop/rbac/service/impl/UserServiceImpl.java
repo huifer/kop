@@ -3,6 +3,7 @@ package com.github.kop.rbac.service.impl;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.github.kop.rbac.module.entity.RbacUser;
 import com.github.kop.rbac.module.ex.ValidateException;
+import com.github.kop.rbac.module.req.companyUser.CompanyUserReq;
 import com.github.kop.rbac.module.req.user.CreateUserReq;
 import com.github.kop.rbac.module.req.user.QueryUserReq;
 import com.github.kop.rbac.module.req.user.UpdateUserReq;
@@ -11,19 +12,22 @@ import com.github.kop.rbac.module.res.user.UserLoginRes;
 import com.github.kop.rbac.module.res.user.UserQueryRes;
 import com.github.kop.rbac.repo.UserRepository;
 import com.github.kop.rbac.service.CompanyService;
+import com.github.kop.rbac.service.CompanyUserService;
 import com.github.kop.rbac.service.UserBindService;
 import com.github.kop.rbac.service.UserService;
 import com.github.kop.rbac.utils.CreateValidate;
 import com.github.kop.rbac.utils.JwtTokenUtil;
 import com.github.kop.rbac.utils.UpdateValidate;
 import com.github.kop.rbac.utils.UserInfoThread;
-import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.List;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.DigestUtils;
+
+import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -32,6 +36,7 @@ public class UserServiceImpl implements UserService {
   @Autowired private UserRepository userRepository;
   @Autowired private UserBindService userBindService;
   @Autowired private CompanyService companyService;
+  @Autowired private CompanyUserService companyUserService;
 
   @Override
   public int create(CreateUserReq req) {
@@ -125,6 +130,7 @@ public class UserServiceImpl implements UserService {
 
 
   @Override
+  @Transactional(rollbackFor = {Exception.class})
   public int createUser(CreateUserReq req) {
     userCreateAndUpdateValidate.companyCreateUser(req);
     RbacUser rbacUser = new RbacUser();
@@ -134,9 +140,10 @@ public class UserServiceImpl implements UserService {
     rbacUser.setCompanyId(req.getCompanyId());
     rbacUser.setPassword(
             DigestUtils.md5DigestAsHex(req.getPassword().getBytes(StandardCharsets.UTF_8)));
-    rbacUser.setCompanyId(UserInfoThread.getCompanyId());
+    this.userRepository.create(rbacUser);
+    CompanyUserReq companyUserReq = new CompanyUserReq(rbacUser.getId(), rbacUser.getCompanyId());
 
-    return this.userRepository.create(rbacUser);
+    return this.companyUserService.createCompanyUser(companyUserReq);
   }
 
   @Override
@@ -179,7 +186,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public void createValidate(CreateUserReq createUserReq) throws ValidateException {
       String name = createUserReq.getName();
-      if (!StringUtils.isEmpty(name)) {
+      if (StringUtils.isEmpty(name)) {
         throw new ValidateException("用户名必填");
       }
       boolean existsName = userRepository.existsName(name);
@@ -187,7 +194,7 @@ public class UserServiceImpl implements UserService {
         throw new ValidateException("用户名已存在");
       }
       String phone = createUserReq.getPhone();
-      if (!StringUtils.isEmpty(phone)) {
+      if (StringUtils.isEmpty(phone)) {
         throw new ValidateException("联系方式必填");
       }
 
