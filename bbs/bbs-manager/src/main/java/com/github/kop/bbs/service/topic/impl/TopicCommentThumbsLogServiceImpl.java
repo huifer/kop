@@ -8,6 +8,6 @@ import com.github.kop.bbs.module.entity.TopicCommentThumbsLog;
 import com.github.kop.bbs.repo.mapper.TopicCommentThumbsLogMapper;
 import com.github.kop.bbs.service.topic.TopicCommentThumbsLogService;
 @Service
-public class TopicCommentThumbsLogServiceImpl extends ServiceImpl<TopicCommentThumbsLogMapper, TopicCommentThumbsLog> implements TopicCommentThumbsLogService{
+public class TopicCommentThumbsLogServiceImpl  implements TopicCommentThumbsLogService{
 
 }

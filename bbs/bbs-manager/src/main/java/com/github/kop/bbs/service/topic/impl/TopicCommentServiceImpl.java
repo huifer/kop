@@ -8,6 +8,6 @@ import com.github.kop.bbs.module.entity.TopicComment;
 import com.github.kop.bbs.repo.mapper.TopicCommentMapper;
 import com.github.kop.bbs.service.topic.TopicCommentService;
 @Service
-public class TopicCommentServiceImpl extends ServiceImpl<TopicCommentMapper, TopicComment> implements TopicCommentService{
+public class TopicCommentServiceImpl implements TopicCommentService{
 
 }
