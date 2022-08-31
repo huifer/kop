@@ -1,13 +1,21 @@
 package com.github.kop.bbs.module.res.invitation;
 
-import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+
+import java.util.Arrays;
 import java.util.List;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @ApiModel("帖子查询对象")
 @Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class InvitationQueryResp {
 
   @ApiModelProperty("发帖人")

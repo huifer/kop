@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.github.kop.bbs.repo.mapper.InvitationCommentThumbsLogMapper">
+  <resultMap id="BaseResultMap" type="com.github.kop.bbs.module.entity.InvitationCommentThumbsLog">
+    <!--@mbg.generated-->
+    <!--@Table bbs_invitation_comment_thumbs_log-->
+    <id column="ic_thumbs_log_id" jdbcType="BIGINT" property="icThumbsLogId" />
+    <result column="invitation_comment_id" jdbcType="BIGINT" property="invitationCommentId" />
+    <result column="thumbs_type" jdbcType="TINYINT" property="thumbsType" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="create_user_id" jdbcType="BIGINT" property="createUserId" />
+    <result column="deleted" jdbcType="TINYINT" property="deleted" />
+    <result column="version" jdbcType="BIGINT" property="version" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    ic_thumbs_log_id, invitation_comment_id, thumbs_type, create_time, create_user_id, 
+    deleted, version
+  </sql>
+</mapper>

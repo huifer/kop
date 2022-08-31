@@ -27,7 +27,7 @@ public class InvitationCreateReq {
   public String tagStrings() {
     if (tags != null) {
       StringBuffer sb = new StringBuffer();
-      tags.stream().forEach(str -> {
+      tags.forEach(str -> {
         sb.append(str).append(",");
       });
       sb.deleteCharAt(sb.length() - 1);

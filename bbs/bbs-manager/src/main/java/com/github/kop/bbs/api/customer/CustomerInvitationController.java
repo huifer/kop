@@ -1,9 +1,11 @@
 package com.github.kop.bbs.api.customer;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.github.kop.bbs.module.req.invitation.InvitationCommentReq;
 import com.github.kop.bbs.module.req.invitation.InvitationCreateReq;
 import com.github.kop.bbs.module.res.RespVO;
 import com.github.kop.bbs.module.res.invitation.InvitationQueryResp;
+import com.github.kop.bbs.service.invitation.InvitationCommentService;
 import com.github.kop.bbs.service.invitation.InvitationService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -15,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.annotation.Resource;
+
 @Api("消费端-论坛帖子接口")
 @RestController
 @RequestMapping("/customer/invitation")
@@ -22,6 +26,9 @@ public class CustomerInvitationController {
 
   @Autowired
   private InvitationService invitationService;
+
+  @Resource
+  private InvitationCommentService invitationCommentService;
 
   @ApiOperation("发帖")
   @PostMapping("/")
@@ -40,5 +47,15 @@ public class CustomerInvitationController {
   ) {
     return RespVO.success(this.invitationService.page(categoryId, page, size));
   }
-  // TODO: 2022/8/26 帖子评论
+
+  @ApiOperation("帖子评论")
+  @PostMapping("/comment")
+  public RespVO<Boolean> createInvitationComment(
+          @RequestBody InvitationCommentReq req
+  ) {
+    return RespVO.success(invitationCommentService.create(req));
+  }
+
+
+
 }

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.github.kop.bbs.repo.mapper.InvitationCommentMapper">
+  <resultMap id="BaseResultMap" type="com.github.kop.bbs.module.entity.InvitationComment">
+    <!--@mbg.generated-->
+    <!--@Table bbs_invitation_comment-->
+    <id column="invitation_comment_id" jdbcType="BIGINT" property="invitationCommentId" />
+    <result column="invitation_comment_type" jdbcType="TINYINT" property="invitationCommentType" />
+    <result column="pid" jdbcType="BIGINT" property="pid" />
+    <result column="top_id" jdbcType="BIGINT" property="topId" />
+    <result column="level_path" jdbcType="BIGINT" property="levelPath" />
+    <result column="thumbs_cont" jdbcType="BIGINT" property="thumbsCont" />
+    <result column="ip" jdbcType="VARCHAR" property="ip" />
+    <result column="ip_loc" jdbcType="VARCHAR" property="ipLoc" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="create_user_id" jdbcType="BIGINT" property="createUserId" />
+    <result column="deleted" jdbcType="TINYINT" property="deleted" />
+    <result column="version" jdbcType="BIGINT" property="version" />
+    <result column="ref_id" jdbcType="BIGINT" property="refId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    invitation_comment_id, invitation_comment_type, pid, top_id, level_path, thumbs_cont, 
+    ip, ip_loc, create_time, create_user_id, deleted, version, ref_id
+  </sql>
+</mapper>

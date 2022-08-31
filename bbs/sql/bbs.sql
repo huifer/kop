@@ -88,10 +88,10 @@ CREATE TABLE `bbs_collection_log`  (
 -- ----------------------------
 -- Table structure for bbs_comment
 -- ----------------------------
-DROP TABLE IF EXISTS `bbs_comment`;
-CREATE TABLE `bbs_comment`  (
-  `comment_id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '帖子评论主键',
-  `comment_type` tinyint(4) NOT NULL COMMENT '评论类别 1 帖子 2 评论 3 话题',
+DROP TABLE IF EXISTS `bbs_invitation_comment`;
+CREATE TABLE `bbs_invitation_comment`  (
+  `invitation_comment_id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '帖子评论主键',
+  `invitation_comment_type` tinyint(4) NOT NULL COMMENT '评论类别 1 帖子 2 帖子评论',
   `pid` bigint(20) NOT NULL COMMENT '上级id',
   `top_id` bigint(20) NULL DEFAULT NULL COMMENT '最上级id',
   `level_path` bigint(20) NOT NULL COMMENT '层级路径',
@@ -103,23 +103,60 @@ CREATE TABLE `bbs_comment`  (
   `deleted` tinyint(4) NULL DEFAULT 0 COMMENT '逻辑删除标记位',
   `version` bigint(20) NULL DEFAULT 0 COMMENT '乐观锁',
   `ref_id` bigint(20) NULL DEFAULT NULL COMMENT '主体id',
-  PRIMARY KEY (`comment_id`) USING BTREE
+  PRIMARY KEY (`invitation_comment_id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '论坛的帖子评论' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Table structure for bbs_comment_thumbs_log
 -- ----------------------------
-DROP TABLE IF EXISTS `bbs_comment_thumbs_log`;
-CREATE TABLE `bbs_comment_thumbs_log`  (
-  `thumbs_log_id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '点赞日志主键',
-  `comment_id` bigint(20) NOT NULL COMMENT '帖子评论主键',
+DROP TABLE IF EXISTS `bbs_invitation_comment_thumbs_log`;
+CREATE TABLE `bbs_invitation_comment_thumbs_log`  (
+  `ic_thumbs_log_id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '帖子评论点赞日志主键',
+  `invitation_comment_id` bigint(20) NOT NULL COMMENT '帖子评论主键',
   `thumbs_type` tinyint(4) NULL DEFAULT NULL COMMENT '点赞类型 1 点赞 2踩',
   `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
   `create_user_id` bigint(20) NULL DEFAULT NULL COMMENT '创建用户',
   `deleted` tinyint(4) NULL DEFAULT 0 COMMENT '逻辑删除标记位',
   `version` bigint(20) NULL DEFAULT 0 COMMENT '乐观锁',
-  PRIMARY KEY (`thumbs_log_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '评论的点赞日志' ROW_FORMAT = DYNAMIC;
+  PRIMARY KEY (`ic_thumbs_log_id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '帖子评论点赞日志主键' ROW_FORMAT = DYNAMIC;
+
+
+DROP TABLE IF EXISTS `bbs_topic_comment`;
+CREATE TABLE `bbs_topic_comment`  (
+  `topic_comment_id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '话题评论主键',
+  `topic_comment_type` tinyint(4) NOT NULL COMMENT '评论类别 1 话题 2 话题评论',
+  `pid` bigint(20) NOT NULL COMMENT '上级id',
+  `top_id` bigint(20) NULL DEFAULT NULL COMMENT '最上级id',
+  `level_path` bigint(20) NOT NULL COMMENT '层级路径',
+  `thumbs_cont` bigint(20) NULL DEFAULT NULL COMMENT '点赞数',
+  `ip` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT 'IP地址',
+  `ip_loc` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT 'IP城市地址',
+  `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
+  `create_user_id` bigint(20) NULL DEFAULT NULL COMMENT '创建用户',
+  `deleted` tinyint(4) NULL DEFAULT 0 COMMENT '逻辑删除标记位',
+  `version` bigint(20) NULL DEFAULT 0 COMMENT '乐观锁',
+  `ref_id` bigint(20) NULL DEFAULT NULL COMMENT '主体id',
+  PRIMARY KEY (`topic_comment_id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '论坛的话题评论' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Table structure for bbs_comment_thumbs_log
+-- ----------------------------
+DROP TABLE IF EXISTS `bbs_topic_comment_thumbs_log`;
+CREATE TABLE `bbs_topic_comment_thumbs_log`  (
+  `tc_thumbs_log_id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '话题评论点赞日志主键',
+  `topic_comment_id` bigint(20) NOT NULL COMMENT '话题评论主键',
+  `thumbs_type` tinyint(4) NULL DEFAULT NULL COMMENT '点赞类型 1 点赞 2踩',
+  `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
+  `create_user_id` bigint(20) NULL DEFAULT NULL COMMENT '创建用户',
+  `deleted` tinyint(4) NULL DEFAULT 0 COMMENT '逻辑删除标记位',
+  `version` bigint(20) NULL DEFAULT 0 COMMENT '乐观锁',
+  PRIMARY KEY (`tc_thumbs_log_id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '话题评论点赞日志主键' ROW_FORMAT = DYNAMIC;
+
+
+
 
 -- ----------------------------
 -- Table structure for bbs_feedback_record
