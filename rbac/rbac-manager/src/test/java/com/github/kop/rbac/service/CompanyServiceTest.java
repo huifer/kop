@@ -2,8 +2,10 @@ package com.github.kop.rbac.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.github.kop.rbac.RbacApplication;
+import com.github.kop.rbac.module.req.company.CompanyCreateUserReq;
 import com.github.kop.rbac.module.req.company.CreateCompanyReq;
 import com.github.kop.rbac.module.req.company.UpdateCompanyReq;
+import com.github.kop.rbac.module.req.user.CreateUserReq;
 import com.github.kop.rbac.module.res.company.CompanyQueryRes;
 import org.junit.jupiter.api.Assertions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +14,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest(classes = {RbacApplication.class})
 class CompanyServiceTest {
   @Autowired private CompanyService companyService;
+  @Autowired
+  private UserService userService;
+  @Autowired private CompanyUserService companyUserService;
 
   @org.junit.jupiter.api.Test
   void create() {
@@ -50,4 +55,6 @@ class CompanyServiceTest {
 
   @org.junit.jupiter.api.Test
   void list() {}
+
+
 }

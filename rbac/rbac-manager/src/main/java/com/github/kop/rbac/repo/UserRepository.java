@@ -6,7 +6,7 @@ import com.github.kop.rbac.module.req.user.QueryUserReq;
 import java.util.List;
 
 public interface UserRepository {
-  int create(RbacUser rbacUser);
+  Long create(RbacUser rbacUser);
 
   RbacUser byId(Long id);
 

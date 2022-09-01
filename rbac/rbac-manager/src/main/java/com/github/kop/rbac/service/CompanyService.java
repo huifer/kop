@@ -1,10 +1,10 @@
 package com.github.kop.rbac.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.github.kop.rbac.module.req.company.CompanyCreateUserReq;
 import com.github.kop.rbac.module.req.company.CreateCompanyReq;
 import com.github.kop.rbac.module.req.company.QueryCompanyReq;
 import com.github.kop.rbac.module.req.company.UpdateCompanyReq;
-import com.github.kop.rbac.module.req.user.CreateUserReq;
 import com.github.kop.rbac.module.res.company.CompanyQueryRes;
 import java.util.List;
 
@@ -21,4 +21,5 @@ public interface CompanyService {
 
   List<CompanyQueryRes> list(QueryCompanyReq req);
 
+  Long createUser(CompanyCreateUserReq req);
 }

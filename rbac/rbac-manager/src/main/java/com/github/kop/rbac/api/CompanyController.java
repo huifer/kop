@@ -1,6 +1,7 @@
 package com.github.kop.rbac.api;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.github.kop.rbac.module.req.company.CompanyCreateUserReq;
 import com.github.kop.rbac.module.req.company.CreateCompanyReq;
 import com.github.kop.rbac.module.req.company.QueryCompanyReq;
 import com.github.kop.rbac.module.req.company.UpdateCompanyReq;
@@ -75,9 +76,9 @@ public class CompanyController {
 
     @ApiOperation(value = "企业内创建用户")
     @PostMapping("/createUser")
-    public RespVO<?> createUser(@RequestBody CreateUserReq req) {
+    public RespVO<Boolean> createUser(@RequestBody CompanyCreateUserReq req) {
 
-     return RespVO.success(userService.createUser(req) > 1);
+     return RespVO.success(companyService.createUser(req) != null);
     }
 
 }

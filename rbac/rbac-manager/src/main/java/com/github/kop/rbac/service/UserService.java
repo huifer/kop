@@ -9,7 +9,7 @@ import com.github.kop.rbac.module.res.user.UserQueryRes;
 import java.util.List;
 
 public interface UserService {
-  int create(CreateUserReq req);
+  Long create(CreateUserReq req);
 
   int update(UpdateUserReq req);
 
@@ -23,5 +23,5 @@ public interface UserService {
 
   UserLoginRes login(String username, String password, Long companyId);
 
-    int createUser(CreateUserReq req);
+
 }

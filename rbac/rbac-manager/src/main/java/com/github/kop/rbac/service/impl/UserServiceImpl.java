@@ -1,18 +1,18 @@
 package com.github.kop.rbac.service.impl;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.github.kop.rbac.module.entity.RbacCompany;
 import com.github.kop.rbac.module.entity.RbacUser;
 import com.github.kop.rbac.module.ex.ValidateException;
-import com.github.kop.rbac.module.req.companyUser.CompanyUserReq;
 import com.github.kop.rbac.module.req.user.CreateUserReq;
 import com.github.kop.rbac.module.req.user.QueryUserReq;
 import com.github.kop.rbac.module.req.user.UpdateUserReq;
 import com.github.kop.rbac.module.res.company.CompanyQueryRes;
 import com.github.kop.rbac.module.res.user.UserLoginRes;
 import com.github.kop.rbac.module.res.user.UserQueryRes;
+import com.github.kop.rbac.repo.CompanyRepository;
 import com.github.kop.rbac.repo.UserRepository;
 import com.github.kop.rbac.service.CompanyService;
-import com.github.kop.rbac.service.CompanyUserService;
 import com.github.kop.rbac.service.UserBindService;
 import com.github.kop.rbac.service.UserService;
 import com.github.kop.rbac.utils.CreateValidate;
@@ -21,8 +21,8 @@ import com.github.kop.rbac.utils.UpdateValidate;
 import com.github.kop.rbac.utils.UserInfoThread;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.DigestUtils;
 
 import java.nio.charset.StandardCharsets;
@@ -34,12 +34,12 @@ public class UserServiceImpl implements UserService {
   protected final UserCreateAndUpdateValidate userCreateAndUpdateValidate =
       new UserCreateAndUpdateValidate();
   @Autowired private UserRepository userRepository;
-  @Autowired private UserBindService userBindService;
-  @Autowired private CompanyService companyService;
-  @Autowired private CompanyUserService companyUserService;
+  @Autowired
+  private UserBindService userBindService;
+  @Autowired private CompanyRepository companyRepository;
 
   @Override
-  public int create(CreateUserReq req) {
+  public Long create(CreateUserReq req) {
     userCreateAndUpdateValidate.createValidate(req);
     RbacUser rbacUser = new RbacUser();
     rbacUser.setName(req.getName());
@@ -91,9 +91,10 @@ public class UserServiceImpl implements UserService {
 
     userQueryRes.setDeptName(
         userBindService.getBindDeptName(rbacUser.getId(), UserInfoThread.getCompanyId()));
-    CompanyQueryRes companyQueryRes = companyService.byId(UserInfoThread.getCompanyId());
-    if (companyQueryRes != null) {
-      userQueryRes.setCompanyName(companyQueryRes.getName());
+
+    RbacCompany rbacCompany = companyRepository.byId(UserInfoThread.getCompanyId());
+    if (rbacCompany != null) {
+      userQueryRes.setCompanyName(rbacCompany.getName());
     }
     userQueryRes.setMainPostName(
         userBindService.getBindMainPostName(rbacUser.getId(), UserInfoThread.getCompanyId()));
@@ -129,22 +130,7 @@ public class UserServiceImpl implements UserService {
   @Autowired private JwtTokenUtil jwtTokenUtil;
 
 
-  @Override
-  @Transactional(rollbackFor = {Exception.class})
-  public int createUser(CreateUserReq req) {
-    userCreateAndUpdateValidate.companyCreateUser(req);
-    RbacUser rbacUser = new RbacUser();
-    rbacUser.setName(req.getName());
-    rbacUser.setPhone(req.getPhone());
-    rbacUser.setGrade(req.getGrade());
-    rbacUser.setCompanyId(req.getCompanyId());
-    rbacUser.setPassword(
-            DigestUtils.md5DigestAsHex(req.getPassword().getBytes(StandardCharsets.UTF_8)));
-    this.userRepository.create(rbacUser);
-    CompanyUserReq companyUserReq = new CompanyUserReq(rbacUser.getId(), rbacUser.getCompanyId());
 
-    return this.companyUserService.createCompanyUser(companyUserReq);
-  }
 
   @Override
   public UserLoginRes login(String username, String password, Long companyId) {
@@ -174,14 +160,7 @@ public class UserServiceImpl implements UserService {
   protected class UserCreateAndUpdateValidate
       implements CreateValidate<CreateUserReq>, UpdateValidate<UpdateUserReq> {
 
-    public void companyCreateUser(CreateUserReq createUserReq){
-      Long companyId = createUserReq.getCompanyId();
-      if(companyId == null) {
-        throw new ValidateException("企业内创建用户企业必填");
-      }
-      createValidate(createUserReq);
 
-    }
 
     @Override
     public void createValidate(CreateUserReq createUserReq) throws ValidateException {

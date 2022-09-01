@@ -4,17 +4,25 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.github.kop.rbac.module.entity.RbacCompany;
 import com.github.kop.rbac.module.enums.AppHttpCodeEnum;
 import com.github.kop.rbac.module.ex.ValidateException;
+import com.github.kop.rbac.module.req.company.CompanyCreateUserReq;
 import com.github.kop.rbac.module.req.company.CreateCompanyReq;
 import com.github.kop.rbac.module.req.company.QueryCompanyReq;
 import com.github.kop.rbac.module.req.company.UpdateCompanyReq;
+import com.github.kop.rbac.module.req.companyUser.CompanyUserReq;
+import com.github.kop.rbac.module.req.user.CreateUserReq;
 import com.github.kop.rbac.module.res.company.CompanyQueryRes;
 import com.github.kop.rbac.repo.CompanyRepository;
 import com.github.kop.rbac.service.CompanyService;
+import com.github.kop.rbac.service.CompanyUserService;
+import com.github.kop.rbac.service.UserService;
 import com.github.kop.rbac.utils.CreateValidate;
 import com.github.kop.rbac.utils.UpdateValidate;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -28,6 +36,10 @@ public class CompanyServiceImpl implements CompanyService {
     private final CompanyRepository companyRepository;
     private final CompanyCreateAndUpdateValidate companyCreateAndUpdateValidate =
             new CompanyCreateAndUpdateValidate();
+    @Autowired
+    private UserService userService;
+    @Autowired
+    private CompanyUserService companyUserService;
 
     public CompanyServiceImpl(CompanyRepository companyRepository) {
         this.companyRepository = companyRepository;
@@ -108,8 +120,10 @@ public class CompanyServiceImpl implements CompanyService {
     }
 
 
-    protected static final class CompanyCreateAndUpdateValidate
+    protected static class CompanyCreateAndUpdateValidate
             implements CreateValidate<CreateCompanyReq>, UpdateValidate<UpdateCompanyReq> {
+
+
         @Override
         public void createValidate(CreateCompanyReq req) throws ValidateException {
             String name = req.getName();
@@ -129,5 +143,20 @@ public class CompanyServiceImpl implements CompanyService {
                 throw new ValidateException("企业名称必填");
             }
         }
+    }
+
+
+    @Override
+    @Transactional(rollbackFor = {Exception.class})
+    public Long createUser(CompanyCreateUserReq req) {
+        CreateUserReq createUserReq = new CreateUserReq();
+        BeanUtils.copyProperties(req, createUserReq);
+        Long userId = userService.create(createUserReq);
+        if(req.getCompanyId()!=null){
+            CompanyUserReq companyUserReq = new CompanyUserReq(userId, req.getCompanyId());
+            this.companyUserService.createCompanyUser(companyUserReq);
+        }
+
+        return userId;
     }
 }
