@@ -1,6 +1,6 @@
 package com.github.kop.bbs.module.req.message;
 
-import com.github.kop.bbs.module.enums.MessageTypeEnum;
+import com.github.kop.bbs.module.enums.message.MessageTypeEnum;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;

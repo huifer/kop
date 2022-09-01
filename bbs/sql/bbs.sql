@@ -94,8 +94,8 @@ CREATE TABLE `bbs_invitation_comment`  (
   `invitation_comment_type` tinyint(4) NOT NULL COMMENT '评论类别 1 帖子 2 帖子评论',
   `pid` bigint(20) NOT NULL COMMENT '上级id',
   `top_id` bigint(20) NULL DEFAULT NULL COMMENT '最上级id',
-  `level_path` bigint(20) NOT NULL COMMENT '层级路径',
-  `thumbs_cont` bigint(20) NULL DEFAULT NULL COMMENT '点赞数',
+  `comment_content` varchar(200) NOT NULL COMMENT '评论内容',
+  `thumbs_cont`  bigint(20)  NULL DEFAULT NULL COMMENT '点赞数',
   `ip` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT 'IP地址',
   `ip_loc` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT 'IP城市地址',
   `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
@@ -128,7 +128,7 @@ CREATE TABLE `bbs_topic_comment`  (
   `topic_comment_type` tinyint(4) NOT NULL COMMENT '评论类别 1 话题 2 话题评论',
   `pid` bigint(20) NOT NULL COMMENT '上级id',
   `top_id` bigint(20) NULL DEFAULT NULL COMMENT '最上级id',
-  `level_path` bigint(20) NOT NULL COMMENT '层级路径',
+  `comment_content` varchar(200) NOT NULL COMMENT '评论内容',
   `thumbs_cont` bigint(20) NULL DEFAULT NULL COMMENT '点赞数',
   `ip` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT 'IP地址',
   `ip_loc` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT 'IP城市地址',
@@ -202,6 +202,22 @@ CREATE TABLE `bbs_invitation`  (
   `version` bigint(20) NULL DEFAULT 0 COMMENT '乐观锁',
   PRIMARY KEY (`invitation_id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '论坛的帖子' ROW_FORMAT = DYNAMIC;
+
+
+# 暂时不使用
+
+# DROP TABLE IF EXISTS `bbs_invitation_comment_count`;
+# CREATE TABLE `bbs_invitation_comment_count`  (
+#                                                  `invitation_comment_count_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '主键',
+#                                                  `invitation_id` bigint(20) UNSIGNED NOT NULL COMMENT '帖子主键',
+#                                                  `comment_count` bigint(20) NOT NULL COMMENT '评论数',
+#                                                  `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
+#                                                  `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
+#                                                  `deleted` tinyint(3) NOT NULL COMMENT '是否删除 0 为未删除、1 为已删除',
+#                                                  PRIMARY KEY (`invitation_comment_count_id`) USING BTREE
+# ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '话题评论数量记录表' ROW_FORMAT = DYNAMIC;
+
+
 
 -- ----------------------------
 -- Table structure for bbs_message
@@ -424,6 +440,20 @@ CREATE TABLE `bbs_topic`  (
   `create_user_id` bigint(20) NULL DEFAULT NULL COMMENT '创建用户',
   PRIMARY KEY (`topic_id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '话题' ROW_FORMAT = DYNAMIC;
+
+
+DROP TABLE IF EXISTS `bbs_topic_comment_count`;
+CREATE TABLE `bbs_topic_comment_count`  (
+                                          `topic_comment_count_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '主键',
+                                          `topic_id` bigint(20) UNSIGNED NOT NULL COMMENT '话题主键',
+                                          `comment_count` bigint(20) NOT NULL COMMENT '评论数',
+                                          `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
+                                          `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
+                                          `deleted` tinyint(3) NOT NULL COMMENT '是否删除 0 为未删除、1 为已删除',
+                                          PRIMARY KEY (`topic_comment_count_id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '话题评论数量记录表' ROW_FORMAT = DYNAMIC;
+
+
 
 -- ----------------------------
 -- Table structure for bbs_user

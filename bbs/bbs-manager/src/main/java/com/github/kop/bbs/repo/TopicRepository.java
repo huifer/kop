@@ -11,7 +11,7 @@ public interface TopicRepository {
   /**
    * 分页查询通过审核的
    */
-  IPage<Topic> pagePass(Long page, Long size);
+  IPage<Topic> pagePass(Long page, Long size, String topicTitle, Integer topicSortType);
 
   IPage<Topic> page(Long page, Long size, TopicQueryReq req);
 }

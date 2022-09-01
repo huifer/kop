@@ -1,4 +1,4 @@
-package com.github.kop.bbs.module.enums;
+package com.github.kop.bbs.module.enums.score;
 
 // 增减类型  0 减少 1 增加
 public enum ScoreOperationEnum {

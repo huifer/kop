@@ -1,7 +1,7 @@
 package com.github.kop.bbs.module.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
-import com.github.kop.bbs.module.enums.ScoreTypeEnum;
+import com.github.kop.bbs.module.enums.score.ScoreTypeEnum;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;

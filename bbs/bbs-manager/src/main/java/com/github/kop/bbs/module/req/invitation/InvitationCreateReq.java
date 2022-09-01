@@ -1,10 +1,10 @@
 package com.github.kop.bbs.module.req.invitation;
 
-import com.github.kop.bbs.module.enums.InvitationTextTypeEnum;
+import com.github.kop.bbs.module.enums.invitation.InvitationTextTypeEnum;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.util.List;
-import java.util.stream.Collectors;
+
 import lombok.Data;
 
 @ApiModel("发帖参数")

@@ -2,7 +2,7 @@ package com.github.kop.bbs.service.score;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.github.kop.bbs.module.entity.ScoreRole;
-import com.github.kop.bbs.module.enums.ScoreTypeEnum;
+import com.github.kop.bbs.module.enums.score.ScoreTypeEnum;
 import com.github.kop.bbs.module.req.score.CreateScoreRoleReq;
 import com.github.kop.bbs.module.req.score.PageListScoreRoleReq;
 import com.github.kop.bbs.module.req.score.UpdateScoreRoleReq;

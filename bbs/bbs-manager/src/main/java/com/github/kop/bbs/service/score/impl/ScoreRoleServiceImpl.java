@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.github.kop.bbs.module.entity.ScoreRole;
 import com.github.kop.bbs.module.enums.ScoreCycleEnum;
-import com.github.kop.bbs.module.enums.ScoreTypeEnum;
+import com.github.kop.bbs.module.enums.score.ScoreTypeEnum;
 import com.github.kop.bbs.module.enums.score.ScoreAddTypeEnum;
 import com.github.kop.bbs.module.enums.score.ScoreRoleEnum;
 import com.github.kop.bbs.module.ex.ValidateException;

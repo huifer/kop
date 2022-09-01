@@ -70,4 +70,16 @@
         #{item.createTime,jdbcType=TIMESTAMP}, #{item.createUserId,jdbcType=BIGINT})
     </foreach>
   </insert>
+
+  <select id="selectOrderByHot" resultMap="BaseResultMap">
+    select a.*
+    from bbs_topic a,bbs_topic_comment_count b
+    where a.topic_id = b.topic_id
+    <if test="topicTitle!=null and topicTitle!=''">
+      and topic_title like concat('%',#{topicTitle},'%')
+    </if>
+    order by b.comment_count desc
+
+
+  </select>
 </mapper>

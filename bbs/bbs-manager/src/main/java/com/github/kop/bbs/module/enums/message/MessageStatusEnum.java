@@ -1,4 +1,4 @@
-package com.github.kop.bbs.module.enums;
+package com.github.kop.bbs.module.enums.message;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

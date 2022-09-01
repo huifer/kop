@@ -44,10 +44,10 @@ public class TopicComment {
     private Long topId;
 
     /**
-     * 层级路径
+     * 评论内容
      */
-    @TableField(value = "level_path")
-    private Long levelPath;
+    @TableField(value = "comment_content")
+    private Long commentContent;
 
     /**
      * 点赞数

@@ -1,4 +1,4 @@
-package com.github.kop.bbs.module.enums;
+package com.github.kop.bbs.module.enums.score;
 
 public enum ScoreTypeEnum {
   /** 评论 */

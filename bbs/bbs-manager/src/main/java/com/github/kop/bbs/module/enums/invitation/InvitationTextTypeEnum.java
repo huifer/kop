@@ -1,4 +1,4 @@
-package com.github.kop.bbs.module.enums;
+package com.github.kop.bbs.module.enums.invitation;
 
 import com.github.kop.bbs.module.ex.BizException;
 import com.github.kop.bbs.module.ex.ExceptionEnums;

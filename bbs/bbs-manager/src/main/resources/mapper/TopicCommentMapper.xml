@@ -8,7 +8,7 @@
     <result column="topic_comment_type" jdbcType="TINYINT" property="topicCommentType" />
     <result column="pid" jdbcType="BIGINT" property="pid" />
     <result column="top_id" jdbcType="BIGINT" property="topId" />
-    <result column="level_path" jdbcType="BIGINT" property="levelPath" />
+    <result column="comment_content" jdbcType="BIGINT" property="commentContent" />
     <result column="thumbs_cont" jdbcType="BIGINT" property="thumbsCont" />
     <result column="ip" jdbcType="VARCHAR" property="ip" />
     <result column="ip_loc" jdbcType="VARCHAR" property="ipLoc" />
@@ -20,7 +20,7 @@
   </resultMap>
   <sql id="Base_Column_List">
     <!--@mbg.generated-->
-    topic_comment_id, topic_comment_type, pid, top_id, level_path, thumbs_cont, ip, ip_loc, 
+    topic_comment_id, topic_comment_type, pid, top_id, comment_content, thumbs_cont, ip, ip_loc,
     create_time, create_user_id, deleted, version, ref_id
   </sql>
 </mapper>

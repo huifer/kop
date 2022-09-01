@@ -7,6 +7,7 @@ import com.github.kop.bbs.module.res.RespVO;
 import com.github.kop.bbs.module.res.invitation.InvitationQueryResp;
 import com.github.kop.bbs.service.invitation.InvitationCommentService;
 import com.github.kop.bbs.service.invitation.InvitationService;
+import com.github.kop.bbs.utils.UserInfoThread;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;

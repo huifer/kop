@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.github.kop.bbs.repo.mapper.TopicCommentCountMapper">
+  <resultMap id="BaseResultMap" type="com.github.kop.bbs.module.entity.TopicCommentCount">
+    <!--@mbg.generated-->
+    <!--@Table bbs_topic_comment_count-->
+    <id column="topic_comment_count_id" jdbcType="BIGINT" property="topicCommentCountId" />
+    <result column="topic_id" jdbcType="BIGINT" property="topicId" />
+    <result column="comment_count" jdbcType="BIGINT" property="commentCount" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="deleted" jdbcType="TINYINT" property="deleted" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    topic_comment_count_id, topic_id, comment_count, create_time, update_time, deleted
+  </sql>
+</mapper>

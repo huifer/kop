@@ -6,7 +6,7 @@ import com.github.kop.bbs.module.entity.Invitation;
 import com.github.kop.bbs.module.entity.User;
 import com.github.kop.bbs.module.enums.AuditStatusEnum;
 import com.github.kop.bbs.module.enums.AuditTypeEnum;
-import com.github.kop.bbs.module.enums.InvitationArticleStatus;
+import com.github.kop.bbs.module.enums.invitation.InvitationArticleStatus;
 import com.github.kop.bbs.module.req.invitation.InvitationAuditReq;
 import com.github.kop.bbs.module.req.invitation.InvitationCreateReq;
 import com.github.kop.bbs.module.res.invitation.InvitationQueryResp;
@@ -20,7 +20,6 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.ObjectUtils;

@@ -1,4 +1,4 @@
-package com.github.kop.bbs.module.req.invitation;
+package com.github.kop.bbs.module.req.topic;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -7,11 +7,11 @@ import lombok.Data;
 /**
  * @auth ahxiaoqi
  * @desc
- * @time 2022/8/31 22:23
+ * @time 2022/9/1 23:05
  */
-@ApiModel("帖子评论")
+@ApiModel("评论对象")
 @Data
-public class InvitationCommentReq {
+public class TopicCommentReq {
 
     /**
      * 主体id
@@ -23,7 +23,7 @@ public class InvitationCommentReq {
      * 评论类别 1 帖子 2 帖子评论
      */
     @ApiModelProperty(value = "评论类别")
-    private Integer invitationCommentType;
+    private Integer topicCommentType;
 
     @ApiModelProperty(value = "评论内容")
     private Long commentContent;
