@@ -8,11 +8,11 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
-import java.util.ArrayDeque;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Queue;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.locks.ReentrantLock;
 
 /**
@@ -23,8 +23,6 @@ import java.util.concurrent.locks.ReentrantLock;
 @Slf4j
 @Component
 public class TopicCommentListener implements ApplicationListener<TopicCommentEvent> {
-
-    private static final Long threshold = 100L;
 
     // 总和的阈值
     private static final Long sumThreshold = 1000L;
@@ -41,13 +39,12 @@ public class TopicCommentListener implements ApplicationListener<TopicCommentEve
      */
     private static Long sumCount = 0L;
 
-    private static final ReentrantLock LOCK = new ReentrantLock();
+    /**
+     * 上次更新的时间
+     */
+    private static LocalDateTime lastUpdateTime = LocalDateTime.now();
 
-    // 更新用的对象
-    private static  List<TopicCommentUpdateBo> updateList = new ArrayList<>();
 
-    // 插入的队列 ,应该不需要
-    private static Queue<List<TopicCommentUpdateBo>> updateQueue = new ArrayDeque<>();
 
     @Resource
     private TopicCommentCountService topicCommentCountService;
@@ -59,28 +56,32 @@ public class TopicCommentListener implements ApplicationListener<TopicCommentEve
      */
     @Override
     public void onApplicationEvent(@NotNull TopicCommentEvent event) {
-        // 暂时进来就加锁
-        LOCK.lock();
-        try {
-            Long merge = commentCountMap.merge(event.getTopicId(), 1L, Long::sum);
-            // 大于阈值,添加到更新用的对象
-            if (merge > threshold){
-                updateList.add(TopicCommentUpdateBo.builder()
-                        .topicId(event.getTopicId())
-                        .commentCount(merge)
-                        .build());
-                sumCount += merge;
-                if (sumCount >sumThreshold){
-                    updateQueue.add(updateList);
-                    updateList.clear();
-                }
+        Long merge = commentCountMap.merge(event.getTopicId(), 1L, Long::sum);
+        // 大于阈值,添加到更新用的对象
+        sumCount += merge;
+        // 到达阈值执行更新操作
+        if (sumCount > sumThreshold) {
+            LocalDateTime lastUpdateTimeCache = lastUpdateTime;
+            HashMap<Long,Long> cacheMap = new HashMap<>(commentCountMap);
+            List<TopicCommentUpdateBo> updateBoArrayList = new ArrayList<>();
+            commentCountMap.forEach((topicId, count) -> {
+                updateBoArrayList.add(TopicCommentUpdateBo.builder().topicId(event.getTopicId()).commentCount(merge).build());
+            });
+            commentCountMap.clear();
+            try {
+                topicCommentCountService.updateCommentCount(updateBoArrayList);
+                lastUpdateTime = LocalDateTime.now();
             }
-        }catch (Exception e){
-            log.info("评论计数事件发生错误",e);
-        }finally {
-            LOCK.unlock();
+            catch (Exception e){
+                // 更新失败了重新保存到map里面
+                log.error("评价数量更新发生错误",e);
+                lastUpdateTime = lastUpdateTimeCache;
+                cacheMap.forEach((topicId, count)->{
+                    commentCountMap.merge(topicId,count,Long::sum);
+                });
+            }
         }
-        // TODO: 2022/9/2 去更新评论数量
+
 
     }
 

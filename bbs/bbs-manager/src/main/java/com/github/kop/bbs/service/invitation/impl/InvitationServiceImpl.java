@@ -11,6 +11,7 @@ import com.github.kop.bbs.module.req.invitation.InvitationAuditReq;
 import com.github.kop.bbs.module.req.invitation.InvitationCreateReq;
 import com.github.kop.bbs.module.res.invitation.InvitationQueryResp;
 import com.github.kop.bbs.repo.InvitationRepository;
+import com.github.kop.bbs.service.IpLocationService;
 import com.github.kop.bbs.service.audit.AuditServiceFactory;
 import com.github.kop.bbs.service.invitation.InvitationService;
 import com.github.kop.bbs.service.user.UserService;
@@ -28,6 +29,8 @@ import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.annotation.Resource;
+
 @Service
 public class InvitationServiceImpl implements InvitationService {
 
@@ -37,6 +40,9 @@ public class InvitationServiceImpl implements InvitationService {
   private UserService userService;
   @Autowired
   private ApplicationEventPublisher eventPublisher;
+
+  @Resource
+  private IpLocationService ipLocationService;
 
   @Transactional(rollbackFor = {Exception.class})
   @Override
@@ -48,8 +54,7 @@ public class InvitationServiceImpl implements InvitationService {
     invitation.setArticleStatus(InvitationArticleStatus.PENDING_REVIEW.getCode());
     invitation.setTagStr(req.tagStrings());
     invitation.setIp(UserInfoThread.getIp());
-    // TODO: 2022/8/24 ip归属地填写
-//    invitation.setIpLoc();
+    invitation.setIpLoc(ipLocationService.getLocation(UserInfoThread.getIp()));
 
     boolean b = invitationRepository.create(invitation) > 0;
     if (b) {
