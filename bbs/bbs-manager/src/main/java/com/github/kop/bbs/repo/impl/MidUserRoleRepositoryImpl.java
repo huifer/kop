@@ -73,4 +73,16 @@ public class MidUserRoleRepositoryImpl implements MidUserRoleRepository {
     return this.bbsMidUserRoleMapper.findByUserId(userId);
   }
 
+  /**
+   * 根据角色获取
+   *
+   * @param roleCode
+   * @return
+   */
+  @Override
+  public List<MidUserRole> findByRole(String roleCode) {
+    QueryWrapper<MidUserRole> queryWrapper = new QueryWrapper<>();
+    queryWrapper.lambda().eq(MidUserRole::getRoleCode, roleCode);
+    return bbsMidUserRoleMapper.selectList(queryWrapper);
+  }
 }

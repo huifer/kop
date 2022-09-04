@@ -1,5 +1,6 @@
-package com.github.kop.bbs.module.res.invitation;
+package com.github.kop.bbs.module.res.invitation.customer;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
@@ -27,6 +28,9 @@ public class InvitationQueryResp {
   @ApiModelProperty("板块id")
   private Long categoryId;
 
+  /** 帖子状态 0 待审核 1 审核通过 */
+  @ApiModelProperty("帖子状态 0 待审核 1 审核通过")
+  private Integer articleStatus;
 
   @ApiModelProperty("是否精华")
   private Integer isEssence;

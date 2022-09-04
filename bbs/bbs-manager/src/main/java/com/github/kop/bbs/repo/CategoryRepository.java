@@ -33,4 +33,6 @@ public interface CategoryRepository {
 
 
   Category byId(Long id);
+
+  List<Category> findByCategoryIds(List<Long> categoryIds);
 }

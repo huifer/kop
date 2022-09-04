@@ -37,4 +37,11 @@ public interface MidUserRoleRepository {
    * 根据用户id查询用户角色id
    */
   List<Long> findByUserId(Long userId);
+
+  /**
+   * 根据角色获取
+   * @param roleCode
+   * @return
+   */
+  List<MidUserRole> findByRole(String roleCode);
 }

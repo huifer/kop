@@ -52,4 +52,11 @@ public interface MidUserRoleService {
    * @param userBindRoleReq 移除角色参数
    */
   boolean removeRole(Long userId, UserBindRoleReq userBindRoleReq);
+
+  /**
+   * 根据角色获取
+   * @param roleCode
+   * @return
+   */
+  List<MidUserRole> findByRole(String roleCode);
 }

@@ -30,6 +30,11 @@ public class BbsConfiguration {
    */
   private Integer topicCommentCheckTime = 10;
 
+  /**
+   * 帖子审核通过百分比
+   */
+  private Integer auditThreshold = 50;
+
   public enum BBSEnv {
     DEV,
     PROD

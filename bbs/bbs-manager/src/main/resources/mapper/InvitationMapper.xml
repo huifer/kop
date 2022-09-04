@@ -7,10 +7,10 @@
     <id column="invitation_id" jdbcType="BIGINT" property="invitationId" />
     <result column="text_type" jdbcType="TINYINT" property="textType" />
     <result column="category_id" jdbcType="BIGINT" property="categoryId" />
-    <result column="type" jdbcType="TINYINT" property="type" />
-    <result column="topic_id" jdbcType="TINYINT" property="topicId" />
     <result column="text" jdbcType="LONGVARCHAR" property="text" />
     <result column="article_status" jdbcType="TINYINT" property="articleStatus" />
+    <result column="audit_pass_progress" jdbcType="TINYINT" property="auditPassProgress" />
+    <result column="audit_pass_count" jdbcType="TINYINT" property="auditPassCount" />
     <result column="is_top" jdbcType="TINYINT" property="isTop" />
     <result column="is_essence" jdbcType="TINYINT" property="isEssence" />
     <result column="is_lock" jdbcType="TINYINT" property="isLock" />
@@ -31,7 +31,7 @@
   </resultMap>
   <sql id="Base_Column_List">
     <!--@mbg.generated-->
-    invitation_id, text_type, category_id, `type`, `topic_id`,`text`, article_status, is_top, is_essence,
+    invitation_id, text_type, category_id, `text`, article_status,audit_pass_progress, audit_pass_count,is_top, is_essence,
     is_lock, latest_replied_on, tag_str, ip, ip_loc, views_count,
     comments_count, comments_status, visible_status, create_time, create_user_id, update_time, 
     update_user_id, deleted, version
@@ -54,20 +54,6 @@
           </if>
         </foreach>
       </trim>
-      <trim prefix="`type` = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          <if test="item.type != null">
-            when invitation_id = #{item.invitationId,jdbcType=BIGINT} then #{item.type,jdbcType=TINYINT}
-          </if>
-        </foreach>
-      </trim>
-      <trim prefix="`topic_id` = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          <if test="item.topicId != null">
-            when invitation_id = #{item.invitationId,jdbcType=BIGINT} then #{item.topicId,jdbcType=TINYINT}
-          </if>
-        </foreach>
-      </trim>
       <trim prefix="`text` = case" suffix="end,">
         <foreach collection="list" index="index" item="item">
           <if test="item.text != null">
@@ -79,6 +65,20 @@
         <foreach collection="list" index="index" item="item">
           <if test="item.articleStatus != null">
             when invitation_id = #{item.invitationId,jdbcType=BIGINT} then #{item.articleStatus,jdbcType=TINYINT}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="audit_pass_progress = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.auditPassProgress != null">
+            when invitation_id = #{item.invitationId,jdbcType=BIGINT} then #{item.auditPassProgress,jdbcType=TINYINT}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="audit_pass_count = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.auditPassCount != null">
+            when invitation_id = #{item.invitationId,jdbcType=BIGINT} then #{item.auditPassCount,jdbcType=TINYINT}
           </if>
         </foreach>
       </trim>
@@ -210,21 +210,27 @@
   <insert id="batchInsert" keyColumn="invitation_id" keyProperty="invitationId" parameterType="map" useGeneratedKeys="true">
     <!--@mbg.generated-->
     insert into bbs_invitation
-    (text_type, category_id, `type`,`topic_id`, `text`, article_status, is_top, is_essence, is_lock,
+    (text_type, category_id, `text`, article_status, audit_pass_progress,audit_pass_count,is_top, is_essence, is_lock,
       latest_replied_on, tag_str, ip, ip_loc, views_count,
-      comments_count, comments_status, visible_status, create_time, create_user_id, update_time, 
+      comments_count, comments_status, visible_status, create_time, create_user_id, update_time,
       update_user_id, deleted, version)
     values
     <foreach collection="list" item="item" separator=",">
-      (#{item.textType,jdbcType=TINYINT}, #{item.categoryId,jdbcType=BIGINT}, #{item.type,jdbcType=TINYINT},
-      #{item.topicId,jdbcType=INTEGER},
-        #{item.text,jdbcType=LONGVARCHAR}, #{item.articleStatus,jdbcType=TINYINT}, #{item.isTop,jdbcType=TINYINT}, 
-        #{item.isEssence,jdbcType=TINYINT}, #{item.isLock,jdbcType=TINYINT}, #{item.latestRepliedOn,jdbcType=BIGINT}, 
+      (#{item.textType,jdbcType=TINYINT}, #{item.categoryId,jdbcType=BIGINT},
+        #{item.text,jdbcType=LONGVARCHAR}, #{item.articleStatus,jdbcType=TINYINT},
+         #{item.auditPassProgress,jdbcType=INTEGER},#{item.auditPassCount},#{item.isTop,jdbcType=TINYINT},
+        #{item.isEssence,jdbcType=TINYINT}, #{item.isLock,jdbcType=TINYINT}, #{item.latestRepliedOn,jdbcType=BIGINT},
         #{item.tagStr,jdbcType=VARCHAR}, #{item.ip,jdbcType=VARCHAR}, #{item.ipLoc,jdbcType=VARCHAR},  #{item.viewsCount,jdbcType=BIGINT},
-        #{item.commentsCount,jdbcType=BIGINT}, #{item.commentsStatus,jdbcType=TINYINT}, 
-        #{item.visibleStatus,jdbcType=TINYINT}, #{item.createTime,jdbcType=TIMESTAMP}, 
-        #{item.createUserId,jdbcType=BIGINT}, #{item.updateTime,jdbcType=TIMESTAMP}, #{item.updateUserId,jdbcType=BIGINT}, 
+        #{item.commentsCount,jdbcType=BIGINT}, #{item.commentsStatus,jdbcType=TINYINT},
+        #{item.visibleStatus,jdbcType=TINYINT}, #{item.createTime,jdbcType=TIMESTAMP},
+        #{item.createUserId,jdbcType=BIGINT}, #{item.updateTime,jdbcType=TIMESTAMP}, #{item.updateUserId,jdbcType=BIGINT},
         #{item.deleted,jdbcType=TINYINT}, #{item.version,jdbcType=BIGINT})
     </foreach>
   </insert>
+
+  <update id="updateAuditStatus">
+    update bbs_invitation set audit_pass_count = audit_pass_count+1,audit_pass_progress = FLOOR((audit_pass_count+1/#{auditUserCount})*100),
+                              article_status = if(FLOOR((audit_pass_count+1/9)*100) &gt;=#{auditThreshold},1,2)
+    where invitation_id = #{invitationId}
+  </update>
 </mapper>

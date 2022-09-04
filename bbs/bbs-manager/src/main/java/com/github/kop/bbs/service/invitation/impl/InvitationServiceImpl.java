@@ -2,6 +2,7 @@ package com.github.kop.bbs.service.invitation.impl;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.github.kop.bbs.event.invitation.InvitationCreated;
+import com.github.kop.bbs.module.entity.Category;
 import com.github.kop.bbs.module.entity.Invitation;
 import com.github.kop.bbs.module.entity.User;
 import com.github.kop.bbs.module.enums.AuditStatusEnum;
@@ -9,10 +10,12 @@ import com.github.kop.bbs.module.enums.AuditTypeEnum;
 import com.github.kop.bbs.module.enums.invitation.InvitationArticleStatus;
 import com.github.kop.bbs.module.req.invitation.InvitationAuditReq;
 import com.github.kop.bbs.module.req.invitation.InvitationCreateReq;
-import com.github.kop.bbs.module.res.invitation.InvitationQueryResp;
+import com.github.kop.bbs.module.res.invitation.customer.InvitationQueryResp;
+import com.github.kop.bbs.module.res.invitation.manager.InvitationAuditRes;
 import com.github.kop.bbs.repo.InvitationRepository;
 import com.github.kop.bbs.service.IpLocationService;
 import com.github.kop.bbs.service.audit.AuditServiceFactory;
+import com.github.kop.bbs.service.category.CategoryService;
 import com.github.kop.bbs.service.invitation.InvitationService;
 import com.github.kop.bbs.service.user.UserService;
 import com.github.kop.bbs.utils.UserInfoThread;
@@ -44,6 +47,10 @@ public class InvitationServiceImpl implements InvitationService {
   @Resource
   private IpLocationService ipLocationService;
 
+  @Resource
+  private CategoryService categoryService;
+
+
   @Transactional(rollbackFor = {Exception.class})
   @Override
   public boolean create(InvitationCreateReq req) {
@@ -66,7 +73,7 @@ public class InvitationServiceImpl implements InvitationService {
 
   @Override
   public IPage<InvitationQueryResp> page(Long categoryId, Long page, Long size) {
-    IPage<Invitation> invitationIPage = this.invitationRepository.page(categoryId, page, size);
+    IPage<Invitation> invitationIPage = this.invitationRepository.page(categoryId, null,page, size);
     Map<Long,String> userNameMap = Collections.emptyMap();
     if(ObjectUtils.isNotEmpty(invitationIPage.getRecords())){
       List<Long> userIds = invitationIPage.getRecords().stream().map(Invitation::getCreateUserId).collect(Collectors.toList());
@@ -77,6 +84,7 @@ public class InvitationServiceImpl implements InvitationService {
     return invitationIPage.convert(invitation ->InvitationQueryResp.builder()
             .createUserName(finalUserNameMap.getOrDefault(invitation.getCreateUserId(),""))
             .createUserId(invitation.getCreateUserId())
+            .articleStatus(invitation.getArticleStatus())
             .categoryId(invitation.getCategoryId())
             .isEssence(invitation.getIsEssence())
             .isLock(invitation.getIsLock())
@@ -87,13 +95,49 @@ public class InvitationServiceImpl implements InvitationService {
             .build() );
   }
 
+  /**
+   * 审核帖子列表
+   *
+   * @param categoryId
+   * @param page
+   * @param pageSize
+   * @return
+   */
+  @Override
+  public IPage<InvitationAuditRes> auditList(Long categoryId, Long page, Long pageSize) {
+    IPage<Invitation> invitationIPage = this.invitationRepository.page(categoryId, null,page, pageSize);
+    Map<Long,String> userNameMap = Collections.emptyMap();
+    Map<Long,String> cateGoryNameMap = Collections.emptyMap();
+    if(ObjectUtils.isNotEmpty(invitationIPage.getRecords())){
+      List<Long> userIds = invitationIPage.getRecords().stream().map(Invitation::getCreateUserId).collect(Collectors.toList());
+      List<User> byUserIds = userService.findByUserIds(userIds);
+      userNameMap = byUserIds.stream().collect(Collectors.toMap(User::getId,User::getNickname));
+      List<Long> categoryIds = invitationIPage.getRecords().stream().map(Invitation::getCategoryId).collect(Collectors.toList());
+      List<Category> categoryList = categoryService.findByCategoryIds(categoryIds);
+      cateGoryNameMap = categoryList.stream().collect(Collectors.toMap(Category::getCategoryId,Category::getCategoryName));
+    }
+    Map<Long, String> finalUserNameMap = userNameMap;
+    Map<Long, String> finalCateGoryNameMap = cateGoryNameMap;
+    return invitationIPage.convert(invitation ->InvitationAuditRes.builder()
+            .createUserName(finalUserNameMap.getOrDefault(invitation.getCreateUserId(),""))
+            .createUserId(invitation.getCreateUserId())
+            .articleStatus(invitation.getArticleStatus())
+            .categoryId(invitation.getCategoryId())
+            .categoryName(finalCateGoryNameMap.getOrDefault(invitation.getCategoryId(),""))
+            .build() );
+  }
+
+  @Override
+  public int updateAuditStatus(int auditUserCount, Integer auditThreshold, Long invitationId) {
+    return invitationRepository.updateAuditStatus(auditUserCount,auditThreshold,invitationId);
+  }
+
   @Autowired
   private AuditServiceFactory auditServiceFactory;
 
   @Transactional(rollbackFor = {Exception.class})
   @Override
   public boolean audit(Long userId, InvitationAuditReq req) {
-    // TODO: 2022/8/24 审核流程优化，一个人审核改为多人审核
 
     return auditServiceFactory.factory(AuditTypeEnum.INVITATION)
         .audit(userId, req.getInvitationId(), AuditStatusEnum.conv(req.isPass()), req.getContext());

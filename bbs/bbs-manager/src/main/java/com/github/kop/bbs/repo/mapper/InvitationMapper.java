@@ -11,4 +11,7 @@ public interface InvitationMapper extends BaseMapper<Invitation> {
   int updateBatchSelective(List<Invitation> list);
 
   int batchInsert(@Param("list") List<Invitation> list);
+
+  int updateAuditStatus( @Param("auditUserCount") int auditUserCount,
+                        @Param("auditThreshold") Integer auditThreshold, @Param("invitationId") Long invitationId);
 }

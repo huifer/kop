@@ -118,6 +118,11 @@ public class CategoryServiceImpl implements CategoryService {
     return res;
   }
 
+  @Override
+  public List<Category> findByCategoryIds(List<Long> categoryIds) {
+    return categoryRepository.findByCategoryIds(categoryIds);
+  }
+
   protected class CategoryCreateAndUpdateValidate
       implements CreateValidate<CreateCategoryReq>, UpdateValidate<UpdateCategoryReq> {
 

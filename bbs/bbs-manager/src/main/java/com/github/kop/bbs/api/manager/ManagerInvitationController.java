@@ -1,18 +1,17 @@
 package com.github.kop.bbs.api.manager;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.github.kop.bbs.aop.role.RoleApi;
 import com.github.kop.bbs.module.enums.role.RoleEnum;
 import com.github.kop.bbs.module.req.invitation.InvitationAuditReq;
 import com.github.kop.bbs.module.res.RespVO;
+import com.github.kop.bbs.module.res.invitation.manager.InvitationAuditRes;
 import com.github.kop.bbs.service.invitation.InvitationService;
 import com.github.kop.bbs.utils.UserInfoThread;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @Api("管理端-帖子接口")
 @RestController
@@ -31,6 +30,16 @@ public class ManagerInvitationController {
     return RespVO.success(invitationService.audit(UserInfoThread.getUserId(), req));
   }
 
-  // TODO: 2022/8/26 分页
+
+  @RoleApi(roles = {RoleEnum.AUDIT})
+  @ApiOperation("待审核列表")
+  @PostMapping("/audit/list/{page}/{pageSize}")
+  public RespVO<IPage<InvitationAuditRes>> auditList(
+          @PathVariable Long page,
+          @PathVariable Long pageSize,
+          @RequestBody Long categoryId
+  ) {
+    return RespVO.success(invitationService.auditList(categoryId,page,pageSize));
+  }
 
 }

@@ -183,6 +183,8 @@ CREATE TABLE `bbs_invitation`  (
   `topic_id` bigint(20) NULL DEFAULT NULL COMMENT '话题主键 动态可以选择加话题',
   `text` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '帖子正文',
   `article_status` tinyint(4) NULL DEFAULT 0 COMMENT '文章状态 0 待审核 1 审核通过',
+  `audit_pass_progress` int(11) NULL DEFAULT 0 COMMENT '审核通过进度',
+  `audit_pass_count` int(11) NULL DEFAULT 0 COMMENT '审核通过数量',
   `is_top` tinyint(3) UNSIGNED NOT NULL DEFAULT 0 COMMENT '是否置顶',
   `is_essence` tinyint(3) UNSIGNED NOT NULL DEFAULT 0 COMMENT '是否精华',
   `is_lock` tinyint(3) UNSIGNED NOT NULL DEFAULT 0 COMMENT '是否锁定',
@@ -203,6 +205,18 @@ CREATE TABLE `bbs_invitation`  (
   PRIMARY KEY (`invitation_id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '论坛的帖子' ROW_FORMAT = DYNAMIC;
 
+
+DROP TABLE IF EXISTS `bbs_invitation_audit_log`;
+CREATE TABLE `bbs_invitation_audit_log`  (
+                                                 `invitation_audit_log_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '主键',
+                                                 `invitation_id` bigint(20) UNSIGNED NOT NULL COMMENT '帖子主键',
+                                                 `article_status` tinyint(4) NULL DEFAULT 0 COMMENT '文章状态 0 待审核 1 审核通过',
+                                                 `audit_content` varchar(200)  NOT NULL DEFAULT '' COMMENT '审核备注',
+                                                 `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
+                                                 `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
+                                                 `deleted` tinyint(3) NOT NULL COMMENT '是否删除 0 为未删除、1 为已删除',
+                                                 PRIMARY KEY (`invitation_audit_log_id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '论坛帖子审核记录表' ROW_FORMAT = DYNAMIC;
 
 # 暂时不使用
 

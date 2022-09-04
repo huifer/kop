@@ -1,6 +1,7 @@
 package com.github.kop.bbs.service.category;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.github.kop.bbs.module.entity.Category;
 import com.github.kop.bbs.module.req.category.CreateCategoryReq;
 import com.github.kop.bbs.module.req.category.QueryCategoryReq;
 import com.github.kop.bbs.module.req.category.UpdateCategoryReq;
@@ -46,4 +47,6 @@ public interface CategoryService {
    * 某个板块下的板块列表
    */
   List<CategoryListRes> subList(Long categoryId);
+
+  List<Category> findByCategoryIds(List<Long> categoryIds);
 }

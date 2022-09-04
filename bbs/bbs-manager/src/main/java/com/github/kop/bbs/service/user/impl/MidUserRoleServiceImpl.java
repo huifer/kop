@@ -97,4 +97,15 @@ public class MidUserRoleServiceImpl implements MidUserRoleService {
 
     return i == userBindRoleReq.getRoleIds().size();
   }
+
+  /**
+   * 根据角色获取
+   *
+   * @param roleCode
+   * @return
+   */
+  @Override
+  public List<MidUserRole> findByRole(String roleCode) {
+    return midUserRoleRepository.findByRole(roleCode);
+  }
 }

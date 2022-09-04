@@ -40,6 +40,15 @@ public class Invitation implements Serializable {
   @TableField(value = "article_status")
   private Integer articleStatus;
 
+  /** 审核通过进度 (审核通过人数/总审核人员人数)*100 */
+  @TableField(value = "audit_pass_progress")
+  private Integer auditPassProgress;
+
+
+  /** 审核通过数量 */
+  @TableField(value = "audit_pass_count")
+  private Integer auditPassCount;
+
   /** 是否置顶 */
   @TableField(value = "is_top")
   private Integer isTop;
