@@ -1,5 +1,6 @@
 package com.github.kop.bbs.repo;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.github.kop.bbs.module.entity.UserCategoryVoteSetting;
 
 /**
@@ -10,5 +11,13 @@ import com.github.kop.bbs.module.entity.UserCategoryVoteSetting;
 public interface UserCategoryVoteSettingRepository {
     UserCategoryVoteSetting findById(Long voteSettingId);
 
-    UserCategoryVoteSetting findStartSetting(Long categoryId);
+    UserCategoryVoteSetting findVoteStartSetting(Long categoryId);
+
+    int insert(UserCategoryVoteSetting build);
+
+    UserCategoryVoteSetting findApplyStartSetting(Long categoryId);
+
+    void updateApplyCount(Long voteSettingId);
+
+    IPage<UserCategoryVoteSetting> voteSettingList(Long categoryId,Integer orderType, Integer page, Integer pageSize);
 }

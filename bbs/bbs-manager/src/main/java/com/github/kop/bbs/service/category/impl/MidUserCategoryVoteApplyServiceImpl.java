@@ -61,6 +61,8 @@ public class MidUserCategoryVoteApplyServiceImpl implements MidUserCategoryVoteA
         int insert = midUserCategoryVoteApplyRepository.insert(midUserCategoryVoteApply);
         // 插入投票数量记录
         if (insert > 0) {
+            // 版主投票设置理论上比申请要少很多,暂时申请人数不做分表处理
+            userCategoryVoteSettingService.updateApplyCount(voteSettingId);
             return voteTicketCountRepository.insert(VoteTicketCount.builder()
                     .applyId(midUserCategoryVoteApply.getApplyId())
                     .ticketCount(0L)
@@ -93,7 +95,7 @@ public class MidUserCategoryVoteApplyServiceImpl implements MidUserCategoryVoteA
      */
     @Override
     public CategoryVoteListRes getCategoryVoteList(Long categoryId, Long userId) {
-        UserCategoryVoteSetting userCategoryVoteSetting = userCategoryVoteSettingService.findStartSetting(categoryId);
+        UserCategoryVoteSetting userCategoryVoteSetting = userCategoryVoteSettingService.findVoteStartSetting(categoryId);
         List<MidUserCategoryVoteApply> applyList = midUserCategoryVoteApplyRepository.findByVoteSettingId(userCategoryVoteSetting.getVoteSettingId());
         if(ObjectUtils.isEmpty(applyList)){
             return CategoryVoteListRes.builder()

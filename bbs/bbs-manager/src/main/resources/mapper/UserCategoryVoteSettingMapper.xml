@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.github.kop.bbs.repo.mapper.MidUserCategoryVoteMapper">
+<mapper namespace="com.github.kop.bbs.repo.mapper.UserCategoryVoteSettingMapper">
   <resultMap id="BaseResultMap" type="com.github.kop.bbs.module.entity.UserCategoryVoteSetting">
     <!--@mbg.generated-->
-    <!--@Table bbs_mid_user_category_vote-->
-    <id column="vote_id" jdbcType="BIGINT" property="voteId" />
+    <!--@Table bbs_user_category_vote_setting-->
+    <id column="vote_setting_id" jdbcType="BIGINT" property="voteSettingId" />
     <result column="category_id" jdbcType="BIGINT" property="categoryId" />
     <result column="application_count" jdbcType="BIGINT" property="applicationCount" />
     <result column="already_count" jdbcType="BIGINT" property="alreadyCount" />
@@ -16,16 +16,30 @@
   </resultMap>
   <sql id="Base_Column_List">
     <!--@mbg.generated-->
-    vote_id, category_id, application_count, already_count, apply_start_time, apply_end_time, 
+    vote_setting_id, category_id, application_count, already_count, apply_start_time, apply_end_time,
     vote_start_time, vote_end_time, deleted
   </sql>
 
-  <select id="findStartSetting" resultMap="BaseResultMap">
+  <select id="findVoteStartSetting" resultMap="BaseResultMap">
     select <include refid="Base_Column_List"/>
-    from bbs_mid_user_category_vote
-    where is_delete = 0
+    from bbs_user_category_vote_setting
+    where deleted = 0
     and vote_start_time &gt;= now()
     and vote_end_time &lt;= now()
     and category_id = #{categoryId}
   </select>
+
+  <select id="findApplyStartSetting" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List"/>
+    from bbs_user_category_vote_setting
+    where deleted = 0
+    and apply_start_time &gt;= now()
+    and apply_end_time &lt;= now()
+    and category_id = #{categoryId}
+  </select>
+
+  <update id="updateApplyCount">
+    update bbs_user_category_vote_setting set already_count = already_count+1
+    where deleted = 0 and category_id =#{voteSettingId}
+  </update>
 </mapper>

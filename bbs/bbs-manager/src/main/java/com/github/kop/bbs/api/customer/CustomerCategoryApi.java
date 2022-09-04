@@ -3,8 +3,10 @@ package com.github.kop.bbs.api.customer;
 import com.github.kop.bbs.module.res.RespVO;
 import com.github.kop.bbs.module.res.category.customer.CategoryListRes;
 import com.github.kop.bbs.module.res.category.customer.CategoryVoteListRes;
+import com.github.kop.bbs.module.res.category.customer.CustomerUserCategoryVoteSettingRes;
 import com.github.kop.bbs.service.category.CategoryService;
 import com.github.kop.bbs.service.category.MidUserCategoryVoteApplyService;
+import com.github.kop.bbs.service.category.UserCategoryVoteSettingService;
 import com.github.kop.bbs.service.category.VoteTicketCountService;
 import com.github.kop.bbs.utils.UserInfoThread;
 import io.swagger.annotations.Api;
@@ -28,6 +30,18 @@ public class CustomerCategoryApi {
 
   @Resource
   private VoteTicketCountService voteTicketCountService;
+
+  @Resource
+  private UserCategoryVoteSettingService userCategoryVoteSettingService;
+
+  @ApiOperation(value = "根据版块获取进行中的申请设置信息")
+  @GetMapping("/apply/setting/{category_id}")
+  public RespVO<CustomerUserCategoryVoteSettingRes> getApplyStartSetting(
+          @PathVariable("category_id") Long categoryId
+  ) {
+    return RespVO.success(userCategoryVoteSettingService.getApplyStartSetting(categoryId));
+
+  }
 
   @PostMapping("/apply/manager")
   @ApiOperation(value = "申请版主投票")
