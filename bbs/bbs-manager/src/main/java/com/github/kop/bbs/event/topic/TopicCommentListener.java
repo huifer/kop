@@ -1,5 +1,6 @@
 package com.github.kop.bbs.event.topic;
 
+import com.github.kop.bbs.config.BbsConfiguration;
 import com.github.kop.bbs.module.bo.TopicCommentUpdateBo;
 import com.github.kop.bbs.service.topic.TopicCommentCountService;
 import lombok.extern.slf4j.Slf4j;
@@ -8,12 +9,10 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
-import java.time.LocalDate;
+import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.CopyOnWriteArrayList;
-import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * @auth ahxiaoqi
@@ -24,8 +23,6 @@ import java.util.concurrent.locks.ReentrantLock;
 @Component
 public class TopicCommentListener implements ApplicationListener<TopicCommentEvent> {
 
-    // 总和的阈值
-    private static final Long sumThreshold = 1000L;
 
     // 目前的设计
     // map,评论数量到了设定的阈值之后进入提交队列,设置当前数量为当前值-进队列的值,小于0 则为0
@@ -44,6 +41,8 @@ public class TopicCommentListener implements ApplicationListener<TopicCommentEve
      */
     private static LocalDateTime lastUpdateTime = LocalDateTime.now();
 
+    @Resource
+    private BbsConfiguration bbsConfiguration;
 
 
     @Resource
@@ -59,8 +58,9 @@ public class TopicCommentListener implements ApplicationListener<TopicCommentEve
         Long merge = commentCountMap.merge(event.getTopicId(), 1L, Long::sum);
         // 大于阈值,添加到更新用的对象
         sumCount += merge;
+        Duration duration = Duration.between(LocalDateTime.now(), lastUpdateTime);
         // 到达阈值执行更新操作
-        if (sumCount > sumThreshold) {
+        if (sumCount >  bbsConfiguration.getTopicCommentSumThreshold() || duration.toMinutes() >= bbsConfiguration.getTopicCommentCheckTime() ) {
             LocalDateTime lastUpdateTimeCache = lastUpdateTime;
             HashMap<Long,Long> cacheMap = new HashMap<>(commentCountMap);
             List<TopicCommentUpdateBo> updateBoArrayList = new ArrayList<>();
@@ -85,10 +85,4 @@ public class TopicCommentListener implements ApplicationListener<TopicCommentEve
 
     }
 
-
-    public static void main(String[] args) {
-        ConcurrentHashMap<Long,Long> commentCountMap = new ConcurrentHashMap<>();
-        System.out.println(commentCountMap.merge(1L,89L, Long::sum));
-        System.out.println(commentCountMap.merge(1L,1L, Long::sum));
-    }
 }

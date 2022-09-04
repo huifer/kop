@@ -15,4 +15,21 @@
     <!--@mbg.generated-->
     topic_comment_count_id, topic_id, comment_count, create_time, update_time, deleted
   </sql>
+
+  <update id="updateCommentCount">
+    update bbs_topic_comment_count
+    <trim prefix="set" suffixOverrides=",">
+      <trim prefix="comment_count = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.commentCount != null">
+            when topic_id = #{item.topicId,jdbcType=BIGINT} then comment_count+#{item.commentCount,jdbcType=VARCHAR}
+          </if>
+        </foreach>
+      </trim>
+    </trim>
+    where topic_id in
+    <foreach close=")" collection="list" item="item" open="(" separator=", ">
+      #{item.topicId,jdbcType=BIGINT}
+    </foreach>
+    </update>
 </mapper>
