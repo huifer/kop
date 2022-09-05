@@ -15,6 +15,12 @@ public class AppealResp {
   @ApiModelProperty("申诉类别名称")
   private String  appealTypeString;
 
+  @ApiModelProperty("申诉状态")
+  private Integer appealStatus;
+
+  @ApiModelProperty("申诉状态文字")
+  private String appealStatusString;
+
   @ApiModelProperty("申诉标题")
   private String appealTitle;
 

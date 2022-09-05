@@ -24,6 +24,7 @@ DROP TABLE IF EXISTS `bbs_appeal`;
 CREATE TABLE `bbs_appeal`  (
   `appeal_id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '申诉主键',
   `appeal_type` tinyint(4) NOT NULL COMMENT '申诉类别 1 账号申诉 2 帖子申诉',
+  `appeal_status` tinyint(4) NOT NULL COMMENT '申诉状态 1 处理中 2 处理完成',
   `appeal_title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '申诉标题',
   `appeal_text` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '申诉描述',
   `appeal_file` varchar(800) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '申诉附件',

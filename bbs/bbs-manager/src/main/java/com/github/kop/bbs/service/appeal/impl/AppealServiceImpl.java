@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.github.kop.bbs.module.entity.Appeal;
 import com.github.kop.bbs.module.entity.User;
 import com.github.kop.bbs.module.enums.AppealTypeEnum;
+import com.github.kop.bbs.module.enums.appeal.AppealStatusEnum;
 import com.github.kop.bbs.module.req.appeal.CreateAppealReq;
 import com.github.kop.bbs.module.res.AppealResp;
 import com.github.kop.bbs.repo.AppealRepository;
@@ -24,6 +25,7 @@ public class AppealServiceImpl implements AppealService {
   public boolean create(CreateAppealReq req) {
     Appeal appeal = new Appeal();
     appeal.setAppealType(req.getAppealType());
+    appeal.setAppealStatus(AppealStatusEnum.PENDING.getCode());
     appeal.setAppealTitle(req.getAppealTitle());
     appeal.setAppealText(req.getAppealText());
     appeal.setAppealFile(req.getAppealFile());
@@ -40,6 +42,8 @@ public class AppealServiceImpl implements AppealService {
         AppealResp appealResp = new AppealResp();
         appealResp.setAppealType(appeal.getAppealType());
         appealResp.setAppealTypeString(AppealTypeEnum.conv(appeal.getAppealType()).getDesc());
+        appealResp.setAppealStatus(appeal.getAppealStatus());
+        appealResp.setAppealStatus(AppealStatusEnum.conv(appeal.getAppealStatus()).getCode());
         appealResp.setAppealTitle(appeal.getAppealTitle());
         appealResp.setAppealText(appeal.getAppealText());
         appealResp.setAppealUserId(appeal.getAppealUserId());

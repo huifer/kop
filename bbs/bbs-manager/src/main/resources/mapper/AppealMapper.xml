@@ -5,113 +5,19 @@
     <!--@mbg.generated-->
     <!--@Table bbs_appeal-->
     <id column="appeal_id" jdbcType="BIGINT" property="appealId" />
-    <result column="appeal_type" jdbcType="BIGINT" property="appealType" />
+    <result column="appeal_type" jdbcType="TINYINT" property="appealType" />
+    <result column="appeal_status" jdbcType="TINYINT" property="appealStatus" />
     <result column="appeal_title" jdbcType="VARCHAR" property="appealTitle" />
     <result column="appeal_text" jdbcType="VARCHAR" property="appealText" />
     <result column="appeal_file" jdbcType="VARCHAR" property="appealFile" />
-    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
-    <result column="create_user_id" jdbcType="BIGINT" property="createUserId" />
-    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
-    <result column="update_user_id" jdbcType="BIGINT" property="updateUserId" />
     <result column="deleted" jdbcType="TINYINT" property="deleted" />
     <result column="version" jdbcType="BIGINT" property="version" />
+    <result column="appeal_user_id" jdbcType="BIGINT" property="appealUserId" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
   </resultMap>
   <sql id="Base_Column_List">
     <!--@mbg.generated-->
-    appeal_id, appeal_type, appeal_title, appeal_text, appeal_file, create_time, create_user_id, 
-    update_time, update_user_id, deleted, version
+    appeal_id, appeal_type, appeal_status, appeal_title, appeal_text, appeal_file, deleted, 
+    version, appeal_user_id, create_time
   </sql>
-  <update id="updateBatchSelective" parameterType="java.util.List">
-    <!--@mbg.generated-->
-    update bbs_appeal
-    <trim prefix="set" suffixOverrides=",">
-      <trim prefix="appeal_type = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          <if test="item.appealType != null">
-            when appeal_id = #{item.appealId,jdbcType=BIGINT} then #{item.appealType,jdbcType=BIGINT}
-          </if>
-        </foreach>
-      </trim>
-      <trim prefix="appeal_title = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          <if test="item.appealTitle != null">
-            when appeal_id = #{item.appealId,jdbcType=BIGINT} then #{item.appealTitle,jdbcType=VARCHAR}
-          </if>
-        </foreach>
-      </trim>
-      <trim prefix="appeal_text = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          <if test="item.appealText != null">
-            when appeal_id = #{item.appealId,jdbcType=BIGINT} then #{item.appealText,jdbcType=VARCHAR}
-          </if>
-        </foreach>
-      </trim>
-      <trim prefix="appeal_file = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          <if test="item.appealFile != null">
-            when appeal_id = #{item.appealId,jdbcType=BIGINT} then #{item.appealFile,jdbcType=VARCHAR}
-          </if>
-        </foreach>
-      </trim>
-      <trim prefix="create_time = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          <if test="item.createTime != null">
-            when appeal_id = #{item.appealId,jdbcType=BIGINT} then #{item.createTime,jdbcType=TIMESTAMP}
-          </if>
-        </foreach>
-      </trim>
-      <trim prefix="create_user_id = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          <if test="item.createUserId != null">
-            when appeal_id = #{item.appealId,jdbcType=BIGINT} then #{item.createUserId,jdbcType=BIGINT}
-          </if>
-        </foreach>
-      </trim>
-      <trim prefix="update_time = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          <if test="item.updateTime != null">
-            when appeal_id = #{item.appealId,jdbcType=BIGINT} then #{item.updateTime,jdbcType=TIMESTAMP}
-          </if>
-        </foreach>
-      </trim>
-      <trim prefix="update_user_id = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          <if test="item.updateUserId != null">
-            when appeal_id = #{item.appealId,jdbcType=BIGINT} then #{item.updateUserId,jdbcType=BIGINT}
-          </if>
-        </foreach>
-      </trim>
-      <trim prefix="deleted = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          <if test="item.deleted != null">
-            when appeal_id = #{item.appealId,jdbcType=BIGINT} then #{item.deleted,jdbcType=TINYINT}
-          </if>
-        </foreach>
-      </trim>
-      <trim prefix="version = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          <if test="item.version != null">
-            when appeal_id = #{item.appealId,jdbcType=BIGINT} then #{item.version,jdbcType=BIGINT}
-          </if>
-        </foreach>
-      </trim>
-    </trim>
-    where appeal_id in
-    <foreach close=")" collection="list" item="item" open="(" separator=", ">
-      #{item.appealId,jdbcType=BIGINT}
-    </foreach>
-  </update>
-  <insert id="batchInsert" keyColumn="appeal_id" keyProperty="appealId" parameterType="map" useGeneratedKeys="true">
-    <!--@mbg.generated-->
-    insert into bbs_appeal
-    (appeal_type, appeal_title, appeal_text, appeal_file, create_time, create_user_id, 
-      update_time, update_user_id, deleted, version)
-    values
-    <foreach collection="list" item="item" separator=",">
-      (#{item.appealType,jdbcType=BIGINT}, #{item.appealTitle,jdbcType=VARCHAR}, #{item.appealText,jdbcType=VARCHAR}, 
-        #{item.appealFile,jdbcType=VARCHAR}, #{item.createTime,jdbcType=TIMESTAMP}, #{item.createUserId,jdbcType=BIGINT}, 
-        #{item.updateTime,jdbcType=TIMESTAMP}, #{item.updateUserId,jdbcType=BIGINT}, #{item.deleted,jdbcType=TINYINT}, 
-        #{item.version,jdbcType=BIGINT})
-    </foreach>
-  </insert>
 </mapper>
