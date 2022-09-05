@@ -1,6 +1,7 @@
 package com.github.kop.bbs.service.invitation;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.github.kop.bbs.module.entity.Invitation;
 import com.github.kop.bbs.module.req.invitation.InvitationAuditReq;
 import com.github.kop.bbs.module.req.invitation.InvitationCreateReq;
 import com.github.kop.bbs.module.res.invitation.customer.InvitationQueryResp;
@@ -29,4 +30,6 @@ public interface InvitationService {
   IPage<InvitationAuditRes> auditList(Long categoryId, Long page, Long pageSize);
 
     int updateAuditStatus(int auditUserCount, Integer auditThreshold, Long invitationId);
+
+  Invitation findByIdAndAuditStatus(Long sid, Integer auditStatus);
 }

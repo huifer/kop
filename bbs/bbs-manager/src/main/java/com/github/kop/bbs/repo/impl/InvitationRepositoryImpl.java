@@ -47,4 +47,12 @@ public class InvitationRepositoryImpl implements InvitationRepository {
   public int updateAuditStatus( int auditUserCount, Integer auditThreshold, Long invitationId) {
     return invitationMapper.updateAuditStatus(auditUserCount,auditThreshold,invitationId);
   }
+
+  @Override
+  public Invitation findByIdAndAuditStatus(Long sid, Integer auditStatus) {
+    QueryWrapper<Invitation> queryWrapper = new QueryWrapper<>();
+    queryWrapper.lambda().eq(Invitation::getInvitationId,sid)
+            .eq(Invitation::getArticleStatus,auditStatus);
+    return invitationMapper.selectOne(queryWrapper);
+  }
 }

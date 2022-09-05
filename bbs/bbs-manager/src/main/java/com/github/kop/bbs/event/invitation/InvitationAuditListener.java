@@ -2,6 +2,7 @@ package com.github.kop.bbs.event.invitation;
 
 import com.github.kop.bbs.config.BbsConfiguration;
 import com.github.kop.bbs.module.bo.InvitationAuditEventBo;
+import com.github.kop.bbs.module.entity.Invitation;
 import com.github.kop.bbs.module.entity.InvitationAuditLog;
 import com.github.kop.bbs.module.entity.MidUserRole;
 import com.github.kop.bbs.module.enums.AuditStatusEnum;
@@ -10,6 +11,7 @@ import com.github.kop.bbs.module.enums.role.RoleEnum;
 import com.github.kop.bbs.service.invitation.InvitationAuditLogService;
 import com.github.kop.bbs.service.invitation.InvitationService;
 import com.github.kop.bbs.service.user.MidUserRoleService;
+import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.context.ApplicationListener;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -52,12 +54,16 @@ public class InvitationAuditListener implements ApplicationListener<InvitationAu
 
         InvitationAuditEventBo invitationAuditEventBo = event.getInvitationAuditEventBo();
 
-
-        List<MidUserRole> auditUserList =  midUserRoleService.findByRole(RoleEnum.AUDIT.getRoleCode());
-        // 当前可以审核的人员数量
-        int auditUserCount = auditUserList.stream().map(MidUserRole::getUserId).collect(Collectors.toSet()).size();
         // 更新帖子审核状态
         if (AuditStatusEnum.PASS.getCode().equals(invitationAuditEventBo.getAuditStatusEnum().getCode())){
+            // 根据状态和id获取帖子,如果帖子已经审核通过了,就不需要执行了
+            Invitation invitation = invitationService.findByIdAndAuditStatus(invitationAuditEventBo.getSid(),AuditStatusEnum.PASS.getCode());
+            if(ObjectUtils.isNotEmpty(invitation)){
+                return;
+            }
+            List<MidUserRole> auditUserList =  midUserRoleService.findByRole(RoleEnum.AUDIT.getRoleCode());
+            // 当前可以审核的人员数量
+            int auditUserCount = auditUserList.stream().map(MidUserRole::getUserId).collect(Collectors.toSet()).size();
             invitationService.updateAuditStatus(auditUserCount, bbsConfiguration.getAuditThreshold(),invitationAuditEventBo.getSid());
         }
         invitationAuditLogService.insert(InvitationAuditLog.builder()

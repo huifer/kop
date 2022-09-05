@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Repository
 public class MessageRepositoryImpl implements MessageRepository {
 
@@ -46,5 +48,10 @@ public class MessageRepositoryImpl implements MessageRepository {
         .eq(Message::getReceiverUserId, userId);
 
     return this.mapper.selectPage(new Page<>(page, size), queryWrapper);
+  }
+
+  @Override
+  public void batchInsert(List<Message> messageList) {
+    mapper.batchInsert(messageList);
   }
 }

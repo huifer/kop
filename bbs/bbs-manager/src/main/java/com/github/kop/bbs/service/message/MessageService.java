@@ -5,6 +5,8 @@ import com.github.kop.bbs.module.req.message.MessageQueryReq;
 import com.github.kop.bbs.module.req.message.UserSendMessageReq;
 import com.github.kop.bbs.module.res.message.MessageResp;
 
+import java.util.List;
+
 public interface MessageService {
 
   /**
@@ -25,4 +27,6 @@ public interface MessageService {
   IPage<MessageResp> page(Long page, Long size, MessageQueryReq req, Long userId);
 
   MessageResp byId(Long id, Long userId);
+
+  void batchSendMessage(Long fromUserId, List<Long> userIds, int code, String content);
 }

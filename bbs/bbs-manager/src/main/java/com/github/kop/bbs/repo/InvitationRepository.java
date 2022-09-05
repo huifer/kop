@@ -17,4 +17,6 @@ public interface InvitationRepository {
    * @return
    */
     int updateAuditStatus( int auditUserCount, Integer auditThreshold, Long invitationId);
+
+  Invitation findByIdAndAuditStatus(Long sid, Integer auditStatus);
 }

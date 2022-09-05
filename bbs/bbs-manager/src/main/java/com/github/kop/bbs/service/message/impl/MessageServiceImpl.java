@@ -11,6 +11,9 @@ import com.github.kop.bbs.module.res.message.MessageResp;
 import com.github.kop.bbs.repo.MessageRepository;
 import com.github.kop.bbs.service.message.MessageService;
 import com.github.kop.bbs.service.user.UserService;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.function.Function;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -80,5 +83,22 @@ public class MessageServiceImpl implements MessageService {
     messageResp.setContent(msg.getContent());
 
     return messageResp;
+  }
+
+  @Override
+  public void batchSendMessage(Long fromUserId, List<Long> userIds, int type, String content) {
+    List<Message> messageList = new ArrayList<>();
+    for (Long userId : userIds) {
+      Message message = new Message();
+      message.setMessageType(type);
+      message.setSenderUserId(fromUserId);
+      message.setReceiverUserId(userId);
+      message.setBrief(null);
+      message.setContent(content);
+      message.setMessageStatus(MessageStatusEnum.NOT_READ.getCode());
+      messageList.add(message);
+      messageRepository.batchInsert(messageList);
+    }
+
   }
 }

@@ -132,6 +132,11 @@ public class InvitationServiceImpl implements InvitationService {
     return invitationRepository.updateAuditStatus(auditUserCount,auditThreshold,invitationId);
   }
 
+  @Override
+  public Invitation findByIdAndAuditStatus(Long sid, Integer auditStatus) {
+    return invitationRepository.findByIdAndAuditStatus(sid,auditStatus);
+  }
+
   @Autowired
   private AuditServiceFactory auditServiceFactory;
 
