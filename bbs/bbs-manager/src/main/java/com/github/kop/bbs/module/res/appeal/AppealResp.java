@@ -1,14 +1,21 @@
-package com.github.kop.bbs.module.res;
+package com.github.kop.bbs.module.res.appeal;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.time.LocalDateTime;
-import java.util.Date;
+
 import lombok.Data;
 
 @Data
 @ApiModel("申诉详情")
 public class AppealResp {
+  /**
+   * 申诉主键
+   */
+  @ApiModelProperty("申诉主键")
+  private Long appealId;
 
   @ApiModelProperty("申诉类别")
   private Integer appealType;
