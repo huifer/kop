@@ -6,6 +6,7 @@ import com.github.kop.bbs.module.entity.Appeal;
 import com.github.kop.bbs.module.entity.AppealReceipt;
 import com.github.kop.bbs.module.ex.NoceException;
 import com.github.kop.bbs.module.req.appeal.ReplyAppealReq;
+import com.github.kop.bbs.module.res.appeal.AppealReceiptResp;
 import com.github.kop.bbs.repo.AppealReceiptRepository;
 import com.github.kop.bbs.service.appeal.AppealReceiptService;
 import com.github.kop.bbs.service.appeal.AppealService;
@@ -15,6 +16,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @auth ahxiaoqi
@@ -84,7 +87,30 @@ public class AppealReceiptImpl implements AppealReceiptService {
         }
         AppealReceipt  appealReceipt =  appealReceiptRepository.findById(appealReceiptId);
         if (ObjectUtils.isEmpty(appealReceipt))throw new NoceException("当前流程不存在");
+        AppealReceipt appealReceiptVerify = appealReceiptRepository.verifyCustomer(appealReceiptId);
+        if(ObjectUtils.isNotEmpty(appealReceiptVerify)){
+            throw new NoceException("当前流程已经回复");
+        }
         appealReceiptRepository.updateCustomerContent(appealReceiptId,req.getContent());
         return null;
+    }
+
+    /**
+     * 申诉回执列表
+     *
+     * @param appealId
+     * @return
+     */
+    @Override
+    public List<AppealReceiptResp> receiptList(Long appealId) {
+        List<AppealReceipt> appealReceiptList = appealReceiptRepository.findByAppealId(appealId);
+        return appealReceiptList.stream().map(v-> AppealReceiptResp.builder()
+                .appealUserReply(v.getAppealUserReply())
+                .appealId(v.getAppealId())
+                .order(v.getOrder())
+                .appealOfficialReply(v.getAppealOfficialReply())
+                .appealUserReply(v.getAppealUserReply())
+                .updateTime(v.getUpdateTime())
+                .build()).collect(Collectors.toList());
     }
 }

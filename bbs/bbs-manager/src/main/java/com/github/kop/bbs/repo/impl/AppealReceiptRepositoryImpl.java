@@ -9,6 +9,7 @@ import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.stereotype.Repository;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * @auth ahxiaoqi
@@ -69,5 +70,21 @@ public class AppealReceiptRepositoryImpl implements AppealReceiptRepository {
         updateWrapper.lambda().eq(AppealReceipt::getAppealReceiptId,appealReceiptId);
         appealReceiptMapper.update(AppealReceipt.builder()
                 .appealUserReply(content).build(), updateWrapper);
+    }
+
+    @Override
+    public List<AppealReceipt> findByAppealId(Long appealId) {
+        QueryWrapper<AppealReceipt> queryWrapper = new QueryWrapper<>();
+        queryWrapper.lambda().eq(AppealReceipt::getAppealId,appealId)
+                .orderByDesc(AppealReceipt::getOrder);
+        return appealReceiptMapper.selectList(queryWrapper);
+    }
+
+    @Override
+    public AppealReceipt verifyCustomer(Long appealReceiptId) {
+        QueryWrapper<AppealReceipt> queryWrapper = new QueryWrapper<>();
+        queryWrapper.lambda().eq(AppealReceipt::getAppealReceiptId,appealReceiptId)
+                .isNotNull(AppealReceipt::getAppealUserReply);
+        return appealReceiptMapper.selectOne(queryWrapper);
     }
 }

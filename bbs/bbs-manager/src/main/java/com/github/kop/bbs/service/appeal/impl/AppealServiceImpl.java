@@ -8,11 +8,14 @@ import com.github.kop.bbs.module.enums.appeal.AppealStatusEnum;
 import com.github.kop.bbs.module.req.appeal.AppealManagerPageReq;
 import com.github.kop.bbs.module.req.appeal.CreateAppealReq;
 import com.github.kop.bbs.module.req.appeal.ReplyAppealReq;
+import com.github.kop.bbs.module.res.appeal.AppealReceiptResp;
 import com.github.kop.bbs.module.res.appeal.AppealResp;
 import com.github.kop.bbs.repo.AppealRepository;
 import com.github.kop.bbs.service.appeal.AppealService;
 import com.github.kop.bbs.service.user.UserService;
 import com.github.kop.bbs.utils.UserInfoThread;
+
+import java.util.List;
 import java.util.function.Function;
 
 import org.apache.commons.lang3.ObjectUtils;

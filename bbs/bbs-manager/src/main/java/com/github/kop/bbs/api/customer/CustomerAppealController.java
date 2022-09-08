@@ -3,6 +3,7 @@ package com.github.kop.bbs.api.customer;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.github.kop.bbs.module.req.appeal.CreateAppealReq;
 import com.github.kop.bbs.module.req.appeal.ReplyAppealReq;
+import com.github.kop.bbs.module.res.appeal.AppealReceiptResp;
 import com.github.kop.bbs.module.res.appeal.AppealResp;
 import com.github.kop.bbs.module.res.RespVO;
 import com.github.kop.bbs.service.appeal.AppealReceiptService;
@@ -11,13 +12,10 @@ import com.github.kop.bbs.utils.UserInfoThread;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @Api(tags = "消费者-论坛申诉")
 @RestController
@@ -58,7 +56,12 @@ public class CustomerAppealController {
     return RespVO.success(appealReceiptService.customerReplyAppeal(appealId, appealReceiptId, req));
   }
 
-  // TODO: 2022/9/6 申诉的详情,验证回复流程,不能越级回复
 
+  @ApiOperation(value = "申诉回执列表")
+  @GetMapping("/receipt/list/{appealId}")
+  public RespVO<List<AppealReceiptResp>> receiptList(
+          @PathVariable Long appealId) {
+    return RespVO.success(appealReceiptService.receiptList(appealId));
+  }
 
 }

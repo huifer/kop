@@ -2,6 +2,8 @@ package com.github.kop.bbs.repo;
 
 import com.github.kop.bbs.module.entity.AppealReceipt;
 
+import java.util.List;
+
 /**
  * @auth ahxiaoqi
  * @desc
@@ -24,4 +26,8 @@ public interface AppealReceiptRepository {
     void updateManagerContent(Long appealReceiptId, String content);
 
     void updateCustomerContent(Long appealReceiptId, String content);
+
+    List<AppealReceipt> findByAppealId(Long appealId);
+
+    AppealReceipt verifyCustomer(Long appealReceiptId);
 }
