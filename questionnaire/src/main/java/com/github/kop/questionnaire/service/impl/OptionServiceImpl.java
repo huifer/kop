@@ -4,7 +4,9 @@ import com.github.kop.questionnaire.entity.Option;
 import com.github.kop.questionnaire.mapper.OptionMapper;
 import com.github.kop.questionnaire.service.IOptionService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * <p>
@@ -15,6 +17,13 @@ import org.springframework.stereotype.Service;
  * @since 2022-09-07
  */
 @Service
-public class OptionServiceImpl extends ServiceImpl<OptionMapper, Option> implements IOptionService {
+public class OptionServiceImpl implements IOptionService {
 
+  @Autowired
+  private OptionMapper optionMapper;
+@Transactional(rollbackFor = {Exception.class})
+  @Override
+  public boolean create(Option option) {
+    return optionMapper.insert(option) > 0;
+  }
 }

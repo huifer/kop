@@ -1,8 +1,8 @@
 package com.github.kop.questionnaire.service.impl;
 
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.github.kop.questionnaire.entity.SurveyHistory;
 import com.github.kop.questionnaire.mapper.SurveyHistoryMapper;
-import com.github.kop.questionnaire.service.ISurveyHistoryService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
  * @since 2022-09-07
  */
 @Service
-public class SurveyHistoryServiceImpl extends ServiceImpl<SurveyHistoryMapper, SurveyHistory> implements ISurveyHistoryService {
+public class SurveyHistoryServiceImpl extends ServiceImpl<SurveyHistoryMapper, SurveyHistory> implements
+    IService<SurveyHistory> {
 
 }

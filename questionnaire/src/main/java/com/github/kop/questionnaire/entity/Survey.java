@@ -36,7 +36,7 @@ public class Survey implements Serializable {
      * 1发布 2 未发布
      */
     @TableField("status")
-    private Integer status;
+    private Integer status = 0 ;
 
 
 }

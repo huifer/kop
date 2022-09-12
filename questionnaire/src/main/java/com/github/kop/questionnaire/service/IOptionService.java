@@ -11,6 +11,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @author Zen Huifer
  * @since 2022-09-07
  */
-public interface IOptionService extends IService<Option> {
+public interface IOptionService  {
 
+  boolean create(Option option);
 }
