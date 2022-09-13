@@ -2,6 +2,7 @@ package com.github.kop.questionnaire.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.github.kop.questionnaire.entity.SurveyHistory;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
@@ -13,6 +14,7 @@ import org.apache.ibatis.annotations.Select;
  * @author Zen Huifer
  * @since 2022-09-07
  */
+@Mapper
 public interface SurveyHistoryMapper extends BaseMapper<SurveyHistory> {
 
   @Select("select max(sv) from survey_history where survey_id  = #{surveyId} ")
