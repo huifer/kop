@@ -24,6 +24,11 @@ public class OptionController {
   @Autowired
   private IOptionService optionService;
 
+  /**
+   * 第三步：创建选项
+   * @param option
+   * @return
+   */
   @PostMapping("/create")
   public ResponseEntity<Boolean> create(@RequestBody Option option) {
     return ResponseEntity.ok(this.optionService.create(option));

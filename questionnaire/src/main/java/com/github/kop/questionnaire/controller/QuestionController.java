@@ -24,6 +24,11 @@ public class QuestionController {
   @Autowired
   private IQuestionService questionService;
 
+  /**
+   * 第三步：创建选项
+   * @param question
+   * @return
+   */
   @PostMapping("create")
   public ResponseEntity<Boolean> create(@RequestBody Question question) {
     return ResponseEntity.ok(questionService.create(question));

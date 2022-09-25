@@ -31,6 +31,11 @@ public class SurveyController {
   private ISurveyService surveyService;
 
 
+  /**
+   * 第一步：创建问卷
+   * @param survey
+   * @return
+   */
   @PostMapping("/create")
   public ResponseEntity<Boolean> create(
       @RequestBody CreateSurveyReq survey
