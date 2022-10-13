@@ -1,4 +1,4 @@
-package com.github.huifer.codegenerator;
+package com.github.kop.pm.codegenerator;
 
 import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.generator.FastAutoGenerator;
