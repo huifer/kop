@@ -30,4 +30,6 @@ public class CustomerGoodsCategoryCtr {
     return RespVO.success(this.customerGoodsCategoryService.page(page,size));
   }
 
+
+
 }

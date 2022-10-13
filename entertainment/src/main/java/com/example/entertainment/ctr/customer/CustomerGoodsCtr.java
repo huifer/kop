@@ -4,6 +4,7 @@ import com.example.entertainment.module.RespVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -14,8 +15,11 @@ import org.springframework.web.bind.annotation.RestController;
 public class CustomerGoodsCtr {
 
   @ApiOperation("查看商品信息")
-  @GetMapping("/info")
-  public RespVO info() {
+  @GetMapping("/info/{id}")
+  public RespVO info(
+      @PathVariable("id") Long id
+  ) {
+
     return null;
   }
 
@@ -28,6 +32,12 @@ public class CustomerGoodsCtr {
   @ApiOperation("转赠商品")
   @PostMapping("/transfer")
   public RespVO transfer() {
+    return null;
+  }
+
+  @PostMapping("/goumai")
+  @ApiOperation("购买")
+  public RespVO goumai() {
     return null;
   }
 }
