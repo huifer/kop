@@ -8,6 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import lombok.Data;
+import lombok.experimental.FieldNameConstants;
 
 /**
  * 项目bug处理人
@@ -15,6 +16,8 @@ import lombok.Data;
 @Data
 @Entity
 @Table(name = "project_bug_executor")
+@org.hibernate.annotations.Table(appliesTo = "project_bug_executor", comment = "项目bug处理人")
+@FieldNameConstants
 public class ProjectBugExecutor implements Serializable {
 
   private static final long serialVersionUID = 1L;

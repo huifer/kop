@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import lombok.Data;
+import lombok.experimental.FieldNameConstants;
 
 /**
  * 项目任务执行历史
@@ -16,6 +17,8 @@ import lombok.Data;
 @Data
 @Entity
 @Table(name = "project_task_history")
+@org.hibernate.annotations.Table(appliesTo = "project_task_history", comment = "项目任务执行历史")
+@FieldNameConstants
 public class ProjectTaskHistory implements Serializable {
 
   private static final long serialVersionUID = 1L;
