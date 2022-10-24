@@ -46,4 +46,18 @@ public class ProjectTaskExecutor implements Serializable {
   @Column(name = "user_id")
   private Integer userId;
 
+  /**
+   * 项目id
+   */
+  @ApiModelProperty("项目id")
+  @Column(name = "project_id")
+  private Integer projectId;
+
+  /**
+   * 版本id
+   */
+  @ApiModelProperty("版本id")
+  @Column(name = "project_edition_id")
+  private Integer projectEditionId;
+
 }

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.github.kop.pm.repository1.ProjectTaskCollaboratorRepository">
-  <resultMap id="BaseResultMap" type="com.github.kop.pm.module1.ProjectTaskCollaborator">
+<mapper namespace="com.github.kop.pm.repository.ProjectTaskCollaboratorRepository">
+  <resultMap id="BaseResultMap" type="com.github.kop.pm.module.ProjectTaskCollaborator">
     <!--@JPA.Support generated on 2022-10-14 10:13:41.-->
     <!--@Table project_task_collaborator-->
     <id column="id" jdbcType="INTEGER" property="id"/>

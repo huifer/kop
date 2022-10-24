@@ -39,6 +39,12 @@ public class ProjectEdition implements Serializable {
   @ApiModelProperty("版本")
   @Column(name = "edition")
   private String edition;
+  /**
+   * 项目id
+   */
+  @ApiModelProperty("项目id")
+  @Column(name = "project_id")
+  private Integer projectId;
 
   /**
    * 开始时间

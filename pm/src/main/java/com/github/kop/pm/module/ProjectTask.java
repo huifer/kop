@@ -71,7 +71,9 @@ public class ProjectTask implements Serializable {
   private Integer pid;
 
   /**
-   * 任务类型
+   * 任务类型,
+   * 1. 系统分配bug
+   * 2. 系统分配feature
    */
   @ApiModelProperty("任务类型")
   @Column(name = "type")

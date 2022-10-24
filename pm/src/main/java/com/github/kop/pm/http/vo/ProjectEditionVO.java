@@ -25,6 +25,9 @@ public class ProjectEditionVO implements Serializable {
   @ApiModelProperty("版本")
   private String edition;
 
+  @ApiModelProperty("项目id")
+  private Integer projectId;
+
 
   /**
    * 开始时间

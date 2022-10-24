@@ -1,7 +1,7 @@
 
 spring:
   application:
-    name: bbs-manager
+    name: project-manager
   mvc:
     pathmatch:
       matching-strategy: ANT_PATH_MATCHER
@@ -21,6 +21,27 @@ spring:
       maximum-pool-size: 10
       minimum-idle: 5
       read-only: false
+  jpa:
+    open-in-view: false
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+    properties:
+      hibernate:
+        session:
+          events:
+            log:
+              LOG_QUERIES_SLOWER_THAN_MS: '25'
+      #      输出执行sql，生产关闭
+      hibernate.show_sql: false
+      hibernate.format_sql: false
+      hibernate.dialect: org.hibernate.dialect.MySQL8Dialect
+      hibernate.id.new_generator_mappings: false
+      hibernate.jdbc.fetch_size: 100
+      hibernate.jdbc.batch_size: 20
+      hibernate.hbm2ddl.auto: update
+      hibernate.generate_statistics: false
+      hibernate.enable_lazy_load_no_trans: true
+    database: mysql
+    defer-datasource-initialization: true
 mybatis-plus:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
@@ -33,13 +54,3 @@ mybatis-plus:
 
 server:
   port: 9192
-
-bbs:
-  expireSec: 30000
-  secret: eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjYwMTQ3MTk3LCJleHAiOjE2NjAxNzcxOTd9.tXA_mvUxjknRo18KfpfggFcnHyK2O95h8xBbrv_cLQ3ieEdPpQp5bcUUqCefLEYDxxjWEoR5nrBeqRfqZJB7Z
-
-  url:
-    white:
-      - /open/**
-        /**/open/**
-  env: dev
