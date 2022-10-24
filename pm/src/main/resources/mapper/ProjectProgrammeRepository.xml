@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.github.kop.pm.repository1.ProjectProgrammeRepository">
+  <resultMap id="BaseResultMap" type="com.github.kop.pm.module1.ProjectProgramme">
+    <!--@JPA.Support generated on 2022-10-14 10:13:41.-->
+    <!--@Table project_programme-->
+    <id column="id" jdbcType="INTEGER" property="id"/>
+    <result column="name" jdbcType="VARCHAR" property="name"/>
+    <result column="git_url" jdbcType="VARCHAR" property="gitUrl"/>
+    <result column="project_id" jdbcType="INTEGER" property="projectId"/>
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@JPA.Support generated on 2022-10-14 10:13:41.-->
+    id, `name`, git_url, project_id
+  </sql>
+</mapper>

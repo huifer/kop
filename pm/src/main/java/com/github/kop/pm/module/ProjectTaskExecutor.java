@@ -1,5 +1,7 @@
 package com.github.kop.pm.module;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,11 +10,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import lombok.Data;
+import lombok.experimental.Accessors;
 import lombok.experimental.FieldNameConstants;
 
 /**
  * 任务执行人
  */
+@Accessors(chain = true)
+@ApiModel("任务执行人")
 @Data
 @Entity
 @Table(name = "project_task_executor")
@@ -30,12 +35,14 @@ public class ProjectTaskExecutor implements Serializable {
   /**
    * 项目任务
    */
+  @ApiModelProperty("项目任务")
   @Column(name = "project_task_id")
   private Integer projectTaskId;
 
   /**
    * 执行人
    */
+  @ApiModelProperty("执行人")
   @Column(name = "user_id")
   private Integer userId;
 

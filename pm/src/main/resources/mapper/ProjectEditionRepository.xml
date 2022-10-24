@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.github.kop.pm.repository1.ProjectEditionRepository">
+  <resultMap id="BaseResultMap" type="com.github.kop.pm.module1.ProjectEdition">
+    <!--@JPA.Support generated on 2022-10-14 10:13:40.-->
+    <!--@Table project_edition-->
+    <id column="id" jdbcType="INTEGER" property="id"/>
+    <result column="edition" jdbcType="VARCHAR" property="edition"/>
+    <result column="start_time" jdbcType="DATE" property="startTime"/>
+    <result column="end_time" jdbcType="DATE" property="endTime"/>
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@JPA.Support generated on 2022-10-14 10:13:40.-->
+    id, edition, start_time, end_time
+  </sql>
+</mapper>

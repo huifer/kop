@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.github.kop.pm.repository1.ProjectBugRepository">
+  <resultMap id="BaseResultMap" type="com.github.kop.pm.module1.ProjectBug">
+    <!--@JPA.Support generated on 2022-10-14 10:13:40.-->
+    <!--@Table project_bug-->
+    <id column="id" jdbcType="INTEGER" property="id"/>
+    <result column="project_id" jdbcType="INTEGER" property="projectId"/>
+    <result column="project_edition_id" jdbcType="INTEGER" property="projectEditionId"/>
+    <result column="name" jdbcType="VARCHAR" property="name"/>
+    <result column="desc" jdbcType="VARCHAR" property="desc"/>
+    <result column="project_feature_id" jdbcType="INTEGER" property="projectFeatureId"/>
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@JPA.Support generated on 2022-10-14 10:13:40.-->
+    id, project_id, project_edition_id, `name`, `desc`, project_feature_id
+  </sql>
+</mapper>

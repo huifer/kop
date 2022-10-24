@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.github.kop.pm.repository1.ProjectTaskHistoryRepository">
+  <resultMap id="BaseResultMap" type="com.github.kop.pm.module1.ProjectTaskHistory">
+    <!--@JPA.Support generated on 2022-10-14 10:13:42.-->
+    <!--@Table project_task_history-->
+    <id column="id" jdbcType="INTEGER" property="id"/>
+    <result column="project_task_id" jdbcType="INTEGER" property="projectTaskId"/>
+    <result column="start_time" jdbcType="TIMESTAMP" property="startTime"/>
+    <result column="end_time" jdbcType="TIMESTAMP" property="endTime"/>
+    <result column="user_id" jdbcType="INTEGER" property="userId"/>
+    <result column="note" jdbcType="VARCHAR" property="note"/>
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@JPA.Support generated on 2022-10-14 10:13:42.-->
+    id, project_task_id, start_time, end_time, user_id, note
+  </sql>
+</mapper>

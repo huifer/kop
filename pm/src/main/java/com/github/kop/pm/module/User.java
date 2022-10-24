@@ -1,5 +1,7 @@
 package com.github.kop.pm.module;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,11 +10,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import lombok.Data;
+import lombok.experimental.Accessors;
 import lombok.experimental.FieldNameConstants;
 
 /**
  * 用户表
  */
+@Accessors(chain = true)
+@ApiModel("用户表")
 @Data
 @Entity
 @Table(name = "user")
@@ -30,12 +35,14 @@ public class User implements Serializable {
   /**
    * 用户名
    */
+  @ApiModelProperty("用户名")
   @Column(name = "username")
   private String username;
 
   /**
    * 密码
    */
+  @ApiModelProperty("密码")
   @Column(name = "password")
   private String password;
 

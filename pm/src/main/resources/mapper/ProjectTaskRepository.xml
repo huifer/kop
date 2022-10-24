@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.github.kop.pm.repository1.ProjectTaskRepository">
+  <resultMap id="BaseResultMap" type="com.github.kop.pm.module1.ProjectTask">
+    <!--@JPA.Support generated on 2022-10-14 10:13:41.-->
+    <!--@Table project_task-->
+    <id column="id" jdbcType="INTEGER" property="id"/>
+    <result column="project_id" jdbcType="INTEGER" property="projectId"/>
+    <result column="project_edition_id" jdbcType="INTEGER" property="projectEditionId"/>
+    <result column="name" jdbcType="VARCHAR" property="name"/>
+    <result column="desc" jdbcType="VARCHAR" property="desc"/>
+    <result column="pid" jdbcType="INTEGER" property="pid"/>
+    <result column="type" jdbcType="INTEGER" property="type"/>
+    <result column="link" jdbcType="VARCHAR" property="link"/>
+    <result column="start_time" jdbcType="TIMESTAMP" property="startTime"/>
+    <result column="end_time" jdbcType="TIMESTAMP" property="endTime"/>
+    <result column="expected_start_time" jdbcType="TIMESTAMP" property="expectedStartTime"/>
+    <result column="expected_end_time" jdbcType="TIMESTAMP" property="expectedEndTime"/>
+    <result column="tims" jdbcType="DECIMAL" property="tims"/>
+    <result column="compile" jdbcType="INTEGER" property="compile"/>
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@JPA.Support generated on 2022-10-14 10:13:41.-->
+    id, project_id, project_edition_id, `name`, `desc`, pid, `type`, link, start_time, end_time,
+    expected_start_time, expected_end_time, tims, compile
+  </sql>
+</mapper>
