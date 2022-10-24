@@ -5,13 +5,10 @@ import com.github.kop.bbs.module.ex.ExceptionEnums;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
-/**
- * 1动态，2评论，3帖子回复通知，4评论回复通知 5私信，99系统通知
- */
+/** 1动态，2评论，3帖子回复通知，4评论回复通知 5私信，99系统通知 */
 @AllArgsConstructor
 @Getter
 public enum MessageTypeEnum {
-
   DYNAMIC(1, "动态"),
   COMMENT(2, "评论"),
   POST_REPLY(3, "帖子回复通知"),
@@ -30,5 +27,4 @@ public enum MessageTypeEnum {
     }
     throw new BizException(ExceptionEnums.CONV_ENUM_EXCEPTION);
   }
-
 }

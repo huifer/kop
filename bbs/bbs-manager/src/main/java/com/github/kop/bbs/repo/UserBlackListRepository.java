@@ -5,9 +5,9 @@ import com.github.kop.bbs.module.entity.UserBlackList;
 
 public interface UserBlackListRepository {
 
-  int  create(UserBlackList userBlackList);
+  int create(UserBlackList userBlackList);
 
-  int  deleteByUserIdAndTargetUserId(Long userId, Long targetUserId);
+  int deleteByUserIdAndTargetUserId(Long userId, Long targetUserId);
 
   IPage<UserBlackList> page(Long userId, Long page, Long size);
 }

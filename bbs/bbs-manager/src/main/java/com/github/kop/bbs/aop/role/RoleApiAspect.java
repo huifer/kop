@@ -1,7 +1,6 @@
 package com.github.kop.bbs.aop.role;
 
 import com.github.kop.bbs.module.ex.RoleCheckException;
-import com.github.kop.bbs.service.role.RoleService;
 import com.github.kop.bbs.service.user.UserService;
 import com.github.kop.bbs.utils.UserInfoThread;
 import java.lang.reflect.Method;
@@ -18,14 +17,10 @@ import org.springframework.stereotype.Component;
 @Component
 public class RoleApiAspect {
 
-  @Autowired
-  private UserService userService;
-
+  @Autowired private UserService userService;
 
   @Pointcut("@annotation(com.github.kop.bbs.aop.role.RoleApi)")
-  public void pointFn() {
-
-  }
+  public void pointFn() {}
 
   @Around("pointFn()")
   public Object check(ProceedingJoinPoint joinPoint) throws Throwable {
@@ -40,15 +35,13 @@ public class RoleApiAspect {
     roleApi = AnnotationUtils.findAnnotation(target.getClass(), RoleApi.class);
     if (roleApi == null) {
       roleApi = AnnotationUtils.findAnnotation(method, RoleApi.class);
-
     }
     if (roleApi != null) {
       boolean b = userService.hasRoles(UserInfoThread.getUserId(), roleApi.roles());
-      if(!b){
+      if (!b) {
         throw new RoleCheckException("当前用户权限不足");
       }
     }
     return joinPoint.proceed();
   }
-
 }

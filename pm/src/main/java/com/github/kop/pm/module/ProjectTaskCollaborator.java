@@ -13,9 +13,7 @@ import lombok.Data;
 import lombok.experimental.Accessors;
 import lombok.experimental.FieldNameConstants;
 
-/**
- * 任务协作人
- */
+/** 任务协作人 */
 @Accessors(chain = true)
 @ApiModel("任务协作人")
 @Data
@@ -32,32 +30,23 @@ public class ProjectTaskCollaborator implements Serializable {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Integer id;
 
-  /**
-   * 项目任务
-   */
+  /** 项目任务 */
   @ApiModelProperty("项目任务")
   @Column(name = "project_task_id")
   private Integer projectTaskId;
 
-  /**
-   * 协作人id
-   */
+  /** 协作人id */
   @ApiModelProperty("协作人id")
   @Column(name = "user_id")
   private Integer userId;
 
-  /**
-   * 项目id
-   */
+  /** 项目id */
   @ApiModelProperty("项目id")
   @Column(name = "project_id")
   private Integer projectId;
 
-  /**
-   * 版本id
-   */
+  /** 版本id */
   @ApiModelProperty("版本id")
   @Column(name = "project_edition_id")
   private Integer projectEditionId;
-
 }

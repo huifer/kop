@@ -15,8 +15,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserService {
 
-  @Autowired
-  private UserRepository userRepository;
+  @Autowired private UserRepository userRepository;
 
   public Integer save(UserVO vO) {
     User bean = new User();
@@ -51,7 +50,8 @@ public class UserService {
   }
 
   private User requireOne(Integer id) {
-    return userRepository.findById(id)
+    return userRepository
+        .findById(id)
         .orElseThrow(() -> new NoSuchElementException("Resource not found: " + id));
   }
 }

@@ -6,7 +6,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 public interface BlogCategoryMapper extends BaseMapper<BlogCategory> {
-    int updateBatchSelective(List<BlogCategory> list);
+  int updateBatchSelective(List<BlogCategory> list);
 
-    int batchInsert(@Param("list") List<BlogCategory> list);
+  int batchInsert(@Param("list") List<BlogCategory> list);
 }

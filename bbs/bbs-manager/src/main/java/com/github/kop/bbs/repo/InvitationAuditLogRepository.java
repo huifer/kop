@@ -8,5 +8,5 @@ import com.github.kop.bbs.module.entity.InvitationAuditLog;
  * @time 2022/9/4 22:06
  */
 public interface InvitationAuditLogRepository {
-    int insert(InvitationAuditLog build);
+  int insert(InvitationAuditLog build);
 }

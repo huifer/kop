@@ -21,16 +21,11 @@ public interface CategoryRepository {
    */
   boolean existsCategoryName(String categoryName);
 
-  /**
-   * 查询顶层板块
-   */
+  /** 查询顶层板块 */
   List<Category> topList();
 
-  /**
-   * 查询板块id下的一层板块
-   */
+  /** 查询板块id下的一层板块 */
   List<Category> subList(Long categoryId);
-
 
   Category byId(Long id);
 

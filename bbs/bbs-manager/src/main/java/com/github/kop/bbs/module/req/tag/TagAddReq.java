@@ -13,8 +13,7 @@ import lombok.Data;
 @Data
 public class TagAddReq {
 
-    /** 标签名 */
-    @ApiModelProperty(value = "标签名")
-    private String tag;
-
+  /** 标签名 */
+  @ApiModelProperty(value = "标签名")
+  private String tag;
 }

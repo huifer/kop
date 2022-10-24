@@ -4,9 +4,9 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.github.kop.bbs.module.entity.ScoreRole;
 import com.github.kop.bbs.module.enums.ScoreCycleEnum;
-import com.github.kop.bbs.module.enums.score.ScoreTypeEnum;
 import com.github.kop.bbs.module.enums.score.ScoreAddTypeEnum;
 import com.github.kop.bbs.module.enums.score.ScoreRoleEnum;
+import com.github.kop.bbs.module.enums.score.ScoreTypeEnum;
 import com.github.kop.bbs.module.ex.ValidateException;
 import com.github.kop.bbs.module.req.score.CreateScoreRoleReq;
 import com.github.kop.bbs.module.req.score.PageListScoreRoleReq;
@@ -78,7 +78,9 @@ public class ScoreRoleServiceImpl implements ScoreRoleService {
     res.setRuleType(ScoreRoleEnum.getDescByCode(scoreRole.getRuleType()));
     res.setAddType(ScoreAddTypeEnum.getDescByCode(scoreRole.getAddType()));
     res.setScore(scoreRole.getScore() == 0 ? "自定义分数" : scoreRole.getScore().toString());
-    res.setScoreCycle(com.github.kop.bbs.module.enums.score.ScoreCycleEnum.getDescByCode(scoreRole.getScoreCycle()));
+    res.setScoreCycle(
+        com.github.kop.bbs.module.enums.score.ScoreCycleEnum.getDescByCode(
+            scoreRole.getScoreCycle()));
     return res;
   }
 

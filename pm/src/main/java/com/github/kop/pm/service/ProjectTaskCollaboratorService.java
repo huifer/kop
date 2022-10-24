@@ -15,8 +15,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class ProjectTaskCollaboratorService {
 
-  @Autowired
-  private ProjectTaskCollaboratorRepository projectTaskCollaboratorRepository;
+  @Autowired private ProjectTaskCollaboratorRepository projectTaskCollaboratorRepository;
 
   public Integer save(ProjectTaskCollaboratorVO vO) {
     ProjectTaskCollaborator bean = new ProjectTaskCollaborator();
@@ -51,7 +50,8 @@ public class ProjectTaskCollaboratorService {
   }
 
   private ProjectTaskCollaborator requireOne(Integer id) {
-    return projectTaskCollaboratorRepository.findById(id)
+    return projectTaskCollaboratorRepository
+        .findById(id)
         .orElseThrow(() -> new NoSuchElementException("Resource not found: " + id));
   }
 }

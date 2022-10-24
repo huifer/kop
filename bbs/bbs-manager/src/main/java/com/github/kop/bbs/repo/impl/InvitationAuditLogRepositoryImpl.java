@@ -3,9 +3,8 @@ package com.github.kop.bbs.repo.impl;
 import com.github.kop.bbs.module.entity.InvitationAuditLog;
 import com.github.kop.bbs.repo.InvitationAuditLogRepository;
 import com.github.kop.bbs.repo.mapper.InvitationAuditLogMapper;
-import org.springframework.stereotype.Repository;
-
 import javax.annotation.Resource;
+import org.springframework.stereotype.Repository;
 
 /**
  * @auth ahxiaoqi
@@ -15,11 +14,10 @@ import javax.annotation.Resource;
 @Repository
 public class InvitationAuditLogRepositoryImpl implements InvitationAuditLogRepository {
 
-    @Resource
-    private InvitationAuditLogMapper invitationAuditLogMapper;
+  @Resource private InvitationAuditLogMapper invitationAuditLogMapper;
 
-    @Override
-    public int insert(InvitationAuditLog build) {
-        return invitationAuditLogMapper.insert(build);
-    }
+  @Override
+  public int insert(InvitationAuditLog build) {
+    return invitationAuditLogMapper.insert(build);
+  }
 }

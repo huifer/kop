@@ -11,7 +11,6 @@ import com.github.kop.bbs.module.res.message.MessageResp;
 import com.github.kop.bbs.repo.MessageRepository;
 import com.github.kop.bbs.service.message.MessageService;
 import com.github.kop.bbs.service.user.UserService;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;
@@ -22,10 +21,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class MessageServiceImpl implements MessageService {
 
-  @Autowired
-  private MessageRepository messageRepository;
-  @Autowired
-  private UserService userService;
+  @Autowired private MessageRepository messageRepository;
+  @Autowired private UserService userService;
 
   @Override
   public boolean sendPrivateMessage(Long fromUserId, UserSendMessageReq userSendMessageReq) {
@@ -51,12 +48,13 @@ public class MessageServiceImpl implements MessageService {
 
     IPage<Message> queryRes = this.messageRepository.page(page, size, req, userId);
 
-    return queryRes.convert(new Function<Message, MessageResp>() {
-      @Override
-      public MessageResp apply(Message message) {
-        return conv(message);
-      }
-    });
+    return queryRes.convert(
+        new Function<Message, MessageResp>() {
+          @Override
+          public MessageResp apply(Message message) {
+            return conv(message);
+          }
+        });
   }
 
   @Override
@@ -99,6 +97,5 @@ public class MessageServiceImpl implements MessageService {
       messageList.add(message);
       messageRepository.batchInsert(messageList);
     }
-
   }
 }

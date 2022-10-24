@@ -1,11 +1,9 @@
 package com.github.kop.pm.service;
 
-
 import com.github.kop.pm.Main;
 import com.github.kop.pm.http.vo.ProjectBindUserVO;
 import com.github.kop.pm.http.vo.ProjectBugExecutorVO;
 import com.github.kop.pm.http.vo.ProjectBugVO;
-import com.github.kop.pm.http.vo.ProjectEditionUpdateVO;
 import com.github.kop.pm.http.vo.ProjectEditionVO;
 import com.github.kop.pm.http.vo.ProjectFeatureUserVO;
 import com.github.kop.pm.http.vo.ProjectFeatureVO;
@@ -25,26 +23,16 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest(classes = {Main.class})
 class ProjectServiceTest {
 
-  @Autowired
-  private ProjectService projectService;
-  @Autowired
-  private ProjectEditionService projectEditionService;
-  @Autowired
-  private UserService userService;
-  @Autowired
-  private ProjectBindUserService projectBindUserService;
-  @Autowired
-  private ProjectProgrammeService projectProgrammeService;
-  @Autowired
-  private ProjectFeatureUserService projectFeatureUserService;
-  @Autowired
-  private ProjectFeatureService projectFeatureService;
-  @Autowired
-  private ProjectBugService projectBugService;
-  @Autowired
-  private ProjectBugExecutorService bugExecutorService;
-  @Autowired
-  private ProjectTaskService projectTaskService;
+  @Autowired private ProjectService projectService;
+  @Autowired private ProjectEditionService projectEditionService;
+  @Autowired private UserService userService;
+  @Autowired private ProjectBindUserService projectBindUserService;
+  @Autowired private ProjectProgrammeService projectProgrammeService;
+  @Autowired private ProjectFeatureUserService projectFeatureUserService;
+  @Autowired private ProjectFeatureService projectFeatureService;
+  @Autowired private ProjectBugService projectBugService;
+  @Autowired private ProjectBugExecutorService bugExecutorService;
+  @Autowired private ProjectTaskService projectTaskService;
 
   @Test
   void create() {
@@ -160,5 +148,4 @@ class ProjectServiceTest {
 
     System.out.println();
   }
-
 }

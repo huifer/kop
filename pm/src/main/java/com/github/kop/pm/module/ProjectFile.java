@@ -13,15 +13,12 @@ import lombok.Data;
 import lombok.experimental.Accessors;
 import lombok.experimental.FieldNameConstants;
 
-/**
- * 项目文件
- */
+/** 项目文件 */
 @Accessors(chain = true)
 @ApiModel("项目文件")
 @Data
 @Entity
 @Table(name = "project_file")
-
 @org.hibernate.annotations.Table(appliesTo = "project_file", comment = "项目文件")
 @FieldNameConstants
 public class ProjectFile implements Serializable {
@@ -33,32 +30,23 @@ public class ProjectFile implements Serializable {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Integer id;
 
-  /**
-   * 文件名称
-   */
+  /** 文件名称 */
   @ApiModelProperty("文件名称")
   @Column(name = "name")
   private String name;
 
-  /**
-   * 文件地址
-   */
+  /** 文件地址 */
   @ApiModelProperty("文件地址")
   @Column(name = "path")
   private String path;
 
-  /**
-   * 文件描述
-   */
+  /** 文件描述 */
   @ApiModelProperty("文件描述")
-  @Column(name = "desc")
+  @Column(name = "`desc`")
   private String desc;
 
-  /**
-   * 项目id
-   */
+  /** 项目id */
   @ApiModelProperty("项目id")
   @Column(name = "project_id")
   private Integer projectId;
-
 }

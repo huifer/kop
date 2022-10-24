@@ -6,11 +6,10 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.github.kop.customer.module.entity.CustomerUser;
 import com.github.kop.customer.repo.UserRepository;
 import com.github.kop.customer.repo.mapper.CustomerUserMapper;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
 
 @Service
 public class UserRepositoryImpl implements UserRepository {
@@ -42,7 +41,7 @@ public class UserRepositoryImpl implements UserRepository {
   @Override
   public IPage<CustomerUser> page(long cur, long size, List<Long> uids) {
     QueryWrapper<CustomerUser> queryWrapper = new QueryWrapper<>();
-    queryWrapper.lambda().in(CustomerUser::getId,uids);
+    queryWrapper.lambda().in(CustomerUser::getId, uids);
     return userMapper.selectPage(new Page<>(cur, size), queryWrapper);
   }
 }

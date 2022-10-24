@@ -3,9 +3,7 @@ package com.github.kop.bbs.module.enums.invitation;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
-/**
- * ** 帖子状态 0 待审核 1 审核通过
- */
+/** ** 帖子状态 0 待审核 1 审核通过 */
 @AllArgsConstructor
 @Getter
 public enum InvitationArticleStatus {

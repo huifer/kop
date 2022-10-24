@@ -6,7 +6,5 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ProjectFileRepository extends JpaRepository<ProjectFile, Integer>,
-    JpaSpecificationExecutor<ProjectFile> {
-
-}
+public interface ProjectFileRepository
+    extends JpaRepository<ProjectFile, Integer>, JpaSpecificationExecutor<ProjectFile> {}

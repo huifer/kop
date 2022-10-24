@@ -4,7 +4,7 @@ import com.github.kop.bbs.module.entity.Tag;
 
 public interface TagRepository {
 
-    boolean verifyName(String tag);
+  boolean verifyName(String tag);
 
-    int insert(Tag build);
+  int insert(Tag build);
 }

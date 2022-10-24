@@ -13,9 +13,7 @@ import lombok.Data;
 import lombok.experimental.Accessors;
 import lombok.experimental.FieldNameConstants;
 
-/**
- * 用户表
- */
+/** 用户表 */
 @Accessors(chain = true)
 @ApiModel("用户表")
 @Data
@@ -32,18 +30,13 @@ public class User implements Serializable {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Integer id;
 
-  /**
-   * 用户名
-   */
+  /** 用户名 */
   @ApiModelProperty("用户名")
   @Column(name = "username")
   private String username;
 
-  /**
-   * 密码
-   */
+  /** 密码 */
   @ApiModelProperty("密码")
   @Column(name = "password")
   private String password;
-
 }

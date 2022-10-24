@@ -1,204 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns="http://maven.apache.org/POM/4.0.0"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-
-  <groupId>com.github.huifer</groupId>
   <artifactId>pm</artifactId>
-  <version>1.0-SNAPSHOT</version>
-  <properties>
-    <maven.compiler.source>11</maven.compiler.source>
-    <maven.compiler.target>11</maven.compiler.target>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <mybatis-plus-version>3.5.2</mybatis-plus-version>
-    <jwt-version>0.9.1</jwt-version>
-    <jjwt-api-version>0.11.2</jjwt-api-version>
-    <jjwt-impl-version>0.11.2</jjwt-impl-version>
-    <jjwt-jackson-version>0.11.2</jjwt-jackson-version>
-    <knife4j-version>2.0.9</knife4j-version>
-  </properties>
-
-  <dependencyManagement>
-    <dependencies>
-      <dependency>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-dependencies</artifactId>
-        <version>2.7.1</version>
-        <type>pom</type>
-        <scope>import</scope>
-      </dependency>
-
-      <dependency>
-        <groupId>com.baomidou</groupId>
-        <artifactId>mybatis-plus-boot-starter</artifactId>
-        <version>${mybatis-plus-version}</version>
-      </dependency>
-      <dependency>
-        <groupId>com.github.xiaoymin</groupId>
-        <artifactId>knife4j-spring-boot-starter</artifactId>
-        <version>${knife4j-version}</version>
-      </dependency>
-      <dependency>
-        <groupId>io.jsonwebtoken</groupId>
-        <artifactId>jjwt</artifactId>
-        <version>${jwt-version}</version>
-      </dependency>
-
-      <dependency>
-        <groupId>io.jsonwebtoken</groupId>
-        <artifactId>jjwt-api</artifactId>
-        <version>${jjwt-api-version}</version>
-      </dependency>
-      <dependency>
-        <groupId>io.jsonwebtoken</groupId>
-        <artifactId>jjwt-impl</artifactId>
-        <version>${jjwt-impl-version}</version>
-      </dependency>
-      <dependency>
-        <groupId>io.jsonwebtoken</groupId>
-        <artifactId>jjwt-jackson</artifactId>
-        <version>${jjwt-jackson-version}</version>
-      </dependency>
-    </dependencies>
-
-  </dependencyManagement>
-
-  <dependencies>
-    <!-- https://mvnrepository.com/artifact/javax.validation/validation-api -->
-    <dependency>
-      <groupId>javax.validation</groupId>
-      <artifactId>validation-api</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.hibernate.validator</groupId>
-      <artifactId>hibernate-validator</artifactId>
-    </dependency>
-    <!-- https://mvnrepository.com/artifact/org.springframework.data/spring-data-jpa -->
-    <dependency>
-      <groupId>org.springframework.data</groupId>
-      <artifactId>spring-data-jpa</artifactId>
-    </dependency>
-
-    <!-- https://mvnrepository.com/artifact/org.hibernate.javax.persistence/hibernate-jpa-2.1-api -->
-    <dependency>
-      <groupId>org.hibernate.javax.persistence</groupId>
-      <artifactId>hibernate-jpa-2.1-api</artifactId>
-      <version>1.0.2.Final</version>
-    </dependency>
-    <!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-entitymanager -->
-    <dependency>
-      <groupId>org.hibernate</groupId>
-      <artifactId>hibernate-entitymanager</artifactId>
-    </dependency>
-
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-configuration-processor</artifactId>
-      <optional>true</optional>
-    </dependency>
-    <!--        <dependency>-->
-    <!--            <groupId>io.jsonwebtoken</groupId>-->
-    <!--            <artifactId>jjwt</artifactId>-->
-    <!--        </dependency>-->
-
-    <!-- https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt-api -->
-    <dependency>
-      <groupId>io.jsonwebtoken</groupId>
-      <artifactId>jjwt-api</artifactId>
-    </dependency>
-
-    <dependency>
-      <groupId>io.jsonwebtoken</groupId>
-      <artifactId>jjwt-impl</artifactId>
-      <scope>runtime</scope>
-    </dependency>
-    <dependency>
-      <groupId>io.jsonwebtoken</groupId>
-      <artifactId>jjwt-jackson</artifactId>
-      <scope>runtime</scope>
-    </dependency>
-
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-web</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>com.baomidou</groupId>
-      <artifactId>mybatis-plus-boot-starter</artifactId>
-    </dependency>
-
-    <dependency>
-      <groupId>mysql</groupId>
-      <artifactId>mysql-connector-java</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.projectlombok</groupId>
-      <artifactId>lombok</artifactId>
-    </dependency>
-
-    <dependency>
-      <groupId>com.github.xiaoymin</groupId>
-      <artifactId>knife4j-spring-boot-starter</artifactId>
-    </dependency>
-
-    <dependency>
-      <groupId>org.apache.commons</groupId>
-      <artifactId>commons-lang3</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-test</artifactId>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.junit.vintage</groupId>
-      <artifactId>junit-vintage-engine</artifactId>
-      <scope>test</scope>
-      <exclusions>
-        <exclusion>
-          <groupId>org.hamcrest</groupId>
-          <artifactId>hamcrest-core</artifactId>
-        </exclusion>
-      </exclusions>
-    </dependency>
-    <dependency>
-      <groupId>commons-collections</groupId>
-      <artifactId>commons-collections</artifactId>
-      <version>3.2.2</version>
-    </dependency>
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-aop</artifactId>
-    </dependency>
-
-
-  </dependencies>
 
   <build>
     <defaultGoal>compile</defaultGoal>
-    <resources>
-      <resource>
-        <directory>src/main/java</directory>
-        <filtering>false</filtering>
-      </resource>
-      <resource>
-        <directory>src/main/resources</directory>
-        <includes>
-          <include>**/*.yml</include>
-          <include>**/*.yaml</include>
-          <include>**/*.properties</include>
-          <include>**/*.xml</include>
-        </includes>
-        <filtering>false</filtering>
-      </resource>
-    </resources>
+    <finalName>project-manager</finalName>
     <plugins>
       <plugin>
-        <groupId>com.coveo</groupId>
         <artifactId>fmt-maven-plugin</artifactId>
-        <version>2.5.0</version>
         <executions>
           <execution>
             <goals>
@@ -206,12 +17,16 @@
             </goals>
           </execution>
         </executions>
+        <groupId>com.coveo</groupId>
+        <version>2.5.0</version>
       </plugin>
 
       <plugin>
-        <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>
-        <version>2.7.1</version>
+        <configuration>
+          <includeSystemScope>true</includeSystemScope>
+          <mainClass>com.github.kop.pm.Main</mainClass>
+        </configuration>
         <executions>
           <execution>
             <goals>
@@ -219,30 +34,26 @@
             </goals>
           </execution>
         </executions>
+        <groupId>org.springframework.boot</groupId>
 
 
-        <configuration>
-          <includeSystemScope>true</includeSystemScope>
-          <mainClass>com.github.kop.pm.Main</mainClass>
-        </configuration>
+        <version>2.7.1</version>
       </plugin>
 
       <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.6.0</version>
         <configuration>
+          <encoding>${project.build.sourceEncoding}</encoding>
           <source>11</source>
           <target>11</target>
-          <encoding>${project.build.sourceEncoding}</encoding>
         </configuration>
+        <groupId>org.apache.maven.plugins</groupId>
+        <version>3.6.0</version>
       </plugin>
 
 
       <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-jar-plugin</artifactId>
-        <version>3.1.0</version>
         <configuration>
           <archive>
             <manifest>
@@ -250,12 +61,201 @@
             </manifest>
           </archive>
         </configuration>
+        <groupId>org.apache.maven.plugins</groupId>
+        <version>3.1.0</version>
       </plugin>
 
 
     </plugins>
-    <finalName>project-manager</finalName>
+    <resources>
+      <resource>
+        <directory>src/main/java</directory>
+        <filtering>false</filtering>
+      </resource>
+      <resource>
+        <directory>src/main/resources</directory>
+        <filtering>false</filtering>
+        <includes>
+          <include>**/*.yml</include>
+          <include>**/*.yaml</include>
+          <include>**/*.properties</include>
+          <include>**/*.xml</include>
+        </includes>
+      </resource>
+    </resources>
   </build>
+  <dependencies>
+    <!-- https://mvnrepository.com/artifact/javax.validation/validation-api -->
+    <dependency>
+      <artifactId>validation-api</artifactId>
+      <groupId>javax.validation</groupId>
+    </dependency>
+    <dependency>
+      <artifactId>hibernate-validator</artifactId>
+      <groupId>org.hibernate.validator</groupId>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/org.springframework.data/spring-data-jpa -->
+    <dependency>
+      <artifactId>spring-data-jpa</artifactId>
+      <groupId>org.springframework.data</groupId>
+    </dependency>
+
+    <!-- https://mvnrepository.com/artifact/org.hibernate.javax.persistence/hibernate-jpa-2.1-api -->
+    <dependency>
+      <artifactId>hibernate-jpa-2.1-api</artifactId>
+      <groupId>org.hibernate.javax.persistence</groupId>
+      <version>1.0.2.Final</version>
+    </dependency>
+    <dependency>
+      <artifactId>spring-boot-starter-data-jpa</artifactId>
+      <groupId>org.springframework.boot</groupId>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-entitymanager -->
+    <dependency>
+      <artifactId>hibernate-entitymanager</artifactId>
+      <groupId>org.hibernate</groupId>
+    </dependency>
+
+    <dependency>
+      <artifactId>spring-boot-configuration-processor</artifactId>
+      <groupId>org.springframework.boot</groupId>
+      <optional>true</optional>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt-api -->
+    <dependency>
+      <artifactId>jjwt-api</artifactId>
+      <groupId>io.jsonwebtoken</groupId>
+    </dependency>
+
+    <dependency>
+      <artifactId>jjwt-impl</artifactId>
+      <groupId>io.jsonwebtoken</groupId>
+      <scope>runtime</scope>
+    </dependency>
+    <dependency>
+      <artifactId>jjwt-jackson</artifactId>
+      <groupId>io.jsonwebtoken</groupId>
+      <scope>runtime</scope>
+    </dependency>
+
+    <dependency>
+      <artifactId>spring-boot-starter-web</artifactId>
+      <groupId>org.springframework.boot</groupId>
+    </dependency>
+    <dependency>
+      <artifactId>mybatis-plus-boot-starter</artifactId>
+      <groupId>com.baomidou</groupId>
+    </dependency>
+
+    <dependency>
+      <artifactId>mysql-connector-java</artifactId>
+      <groupId>mysql</groupId>
+    </dependency>
+    <dependency>
+      <artifactId>lombok</artifactId>
+      <groupId>org.projectlombok</groupId>
+    </dependency>
+
+    <dependency>
+      <artifactId>knife4j-spring-boot-starter</artifactId>
+      <groupId>com.github.xiaoymin</groupId>
+    </dependency>
+
+    <dependency>
+      <artifactId>commons-lang3</artifactId>
+      <groupId>org.apache.commons</groupId>
+    </dependency>
+    <dependency>
+      <artifactId>spring-boot-starter-test</artifactId>
+      <groupId>org.springframework.boot</groupId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <artifactId>junit-vintage-engine</artifactId>
+      <exclusions>
+        <exclusion>
+          <artifactId>hamcrest-core</artifactId>
+          <groupId>org.hamcrest</groupId>
+        </exclusion>
+      </exclusions>
+      <groupId>org.junit.vintage</groupId>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <artifactId>commons-collections</artifactId>
+      <groupId>commons-collections</groupId>
+      <version>3.2.2</version>
+    </dependency>
+    <dependency>
+      <artifactId>spring-boot-starter-aop</artifactId>
+      <groupId>org.springframework.boot</groupId>
+    </dependency>
+
+
+  </dependencies>
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <artifactId>spring-boot-dependencies</artifactId>
+        <groupId>org.springframework.boot</groupId>
+        <scope>import</scope>
+        <type>pom</type>
+        <version>2.7.1</version>
+      </dependency>
+
+      <dependency>
+        <artifactId>mybatis-plus-boot-starter</artifactId>
+        <groupId>com.baomidou</groupId>
+        <version>${mybatis-plus-version}</version>
+      </dependency>
+      <dependency>
+        <artifactId>knife4j-spring-boot-starter</artifactId>
+        <groupId>com.github.xiaoymin</groupId>
+        <version>${knife4j-version}</version>
+      </dependency>
+      <dependency>
+        <artifactId>jjwt</artifactId>
+        <groupId>io.jsonwebtoken</groupId>
+        <version>${jwt-version}</version>
+      </dependency>
+
+      <dependency>
+        <artifactId>jjwt-api</artifactId>
+        <groupId>io.jsonwebtoken</groupId>
+        <version>${jjwt-api-version}</version>
+      </dependency>
+      <dependency>
+        <artifactId>jjwt-impl</artifactId>
+        <groupId>io.jsonwebtoken</groupId>
+        <version>${jjwt-impl-version}</version>
+      </dependency>
+      <dependency>
+        <artifactId>jjwt-jackson</artifactId>
+        <groupId>io.jsonwebtoken</groupId>
+        <version>${jjwt-jackson-version}</version>
+      </dependency>
+    </dependencies>
+
+  </dependencyManagement>
+  <groupId>com.github.huifer</groupId>
+
+  <modelVersion>4.0.0</modelVersion>
+
+  <properties>
+    <jjwt-api-version>0.11.2</jjwt-api-version>
+    <jjwt-impl-version>0.11.2</jjwt-impl-version>
+    <jjwt-jackson-version>0.11.2</jjwt-jackson-version>
+    <jwt-version>0.9.1</jwt-version>
+    <knife4j-version>2.0.9</knife4j-version>
+    <maven.compiler.source>11</maven.compiler.source>
+    <maven.compiler.target>11</maven.compiler.target>
+    <mybatis-plus-version>3.5.2</mybatis-plus-version>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+
+  <version>1.0-SNAPSHOT</version>
 
 
 </project>

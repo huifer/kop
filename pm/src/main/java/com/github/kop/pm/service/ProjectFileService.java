@@ -15,8 +15,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class ProjectFileService {
 
-  @Autowired
-  private ProjectFileRepository projectFileRepository;
+  @Autowired private ProjectFileRepository projectFileRepository;
 
   public Integer save(ProjectFileVO vO) {
     ProjectFile bean = new ProjectFile();
@@ -51,7 +50,8 @@ public class ProjectFileService {
   }
 
   private ProjectFile requireOne(Integer id) {
-    return projectFileRepository.findById(id)
+    return projectFileRepository
+        .findById(id)
         .orElseThrow(() -> new NoSuchElementException("Resource not found: " + id));
   }
 }

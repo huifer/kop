@@ -15,8 +15,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class ProjectTaskService {
 
-  @Autowired
-  private ProjectTaskRepository projectTaskRepository;
+  @Autowired private ProjectTaskRepository projectTaskRepository;
 
   public Integer save(ProjectTaskVO vO) {
     ProjectTask bean = new ProjectTask();
@@ -51,7 +50,8 @@ public class ProjectTaskService {
   }
 
   private ProjectTask requireOne(Integer id) {
-    return projectTaskRepository.findById(id)
+    return projectTaskRepository
+        .findById(id)
         .orElseThrow(() -> new NoSuchElementException("Resource not found: " + id));
   }
 }

@@ -8,5 +8,5 @@ import com.github.kop.bbs.module.entity.TopicComment;
  * @time 2022/9/1 23:04
  */
 public interface TopicCommentRepository {
-    int insert(TopicComment build);
+  int insert(TopicComment build);
 }

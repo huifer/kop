@@ -13,8 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Repository
 public class UserFollowerListRepositoryImpl implements UserFollowerListRepository {
 
-  @Autowired
-  private UserFollowerListMapper userFollowerListMapper;
+  @Autowired private UserFollowerListMapper userFollowerListMapper;
 
   @Transactional(rollbackFor = {Exception.class})
   @Override
@@ -26,7 +25,8 @@ public class UserFollowerListRepositoryImpl implements UserFollowerListRepositor
   @Override
   public int deleteByUserIdAndTargetUserId(Long userId, Long targetUserId) {
     QueryWrapper<UserFollowerList> queryWrapper = new QueryWrapper<>();
-    queryWrapper.lambda()
+    queryWrapper
+        .lambda()
         .eq(UserFollowerList::getCreateUserId, userId)
         .eq(UserFollowerList::getFollowerUserId, targetUserId);
     return userFollowerListMapper.delete(queryWrapper);
@@ -35,8 +35,7 @@ public class UserFollowerListRepositoryImpl implements UserFollowerListRepositor
   @Override
   public IPage<UserFollowerList> page(Long userId, Long page, Long size) {
     QueryWrapper<UserFollowerList> queryWrapper = new QueryWrapper<>();
-    queryWrapper.lambda()
-        .eq(UserFollowerList::getCreateUserId, userId);
+    queryWrapper.lambda().eq(UserFollowerList::getCreateUserId, userId);
     return this.userFollowerListMapper.selectPage(new Page<>(page, size), queryWrapper);
   }
 }

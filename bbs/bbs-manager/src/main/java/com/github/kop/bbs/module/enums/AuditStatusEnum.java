@@ -5,9 +5,7 @@ import com.github.kop.bbs.module.ex.ExceptionEnums;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
-/**
- * 审核状态 0 待审核  1 审核通过 2 审核不通过
- */
+/** 审核状态 0 待审核 1 审核通过 2 审核不通过 */
 @AllArgsConstructor
 @Getter
 public enum AuditStatusEnum {
@@ -29,7 +27,6 @@ public enum AuditStatusEnum {
     throw new BizException(ExceptionEnums.CONV_ENUM_EXCEPTION);
   }
 
-
   public static AuditStatusEnum conv(boolean b) {
     if (b) {
       return PASS;
@@ -37,5 +34,4 @@ public enum AuditStatusEnum {
       return NO_PASS;
     }
   }
-
 }

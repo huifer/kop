@@ -10,9 +10,6 @@ import lombok.Data;
 @Data
 public class ReplyAppealReq {
 
-    /**
-     * 内容
-     */
-    private  String content;
-
+  /** 内容 */
+  private String content;
 }

@@ -37,7 +37,7 @@ public class RbacRole implements Serializable {
   private String name;
 
   /** 角色描述 */
-  @TableField("desc")
+  @TableField("`desc`")
   private String desc;
 
   /** 创建时间 */

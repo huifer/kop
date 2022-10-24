@@ -1,10 +1,8 @@
 package com.github.kop.bbs.module.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
-
 import java.io.Serializable;
 import java.time.LocalDateTime;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -34,11 +32,11 @@ public class Tag implements Serializable {
   private Long quoteNum;
 
   /** 创建时间 */
-  @TableField(value = "create_time",fill = FieldFill.INSERT)
+  @TableField(value = "create_time", fill = FieldFill.INSERT)
   private LocalDateTime createTime;
 
   /** 修改时间 */
-  @TableField(value = "update_time",fill = FieldFill.INSERT_UPDATE)
+  @TableField(value = "update_time", fill = FieldFill.INSERT_UPDATE)
   private LocalDateTime updateTime;
 
   /** 删除时间 */

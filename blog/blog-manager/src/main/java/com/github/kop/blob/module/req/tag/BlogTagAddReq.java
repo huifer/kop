@@ -11,9 +11,7 @@ import lombok.Data;
 @Data
 public class BlogTagAddReq {
 
-    /**
-     * 标签名称
-     */
-    @TableField(value = "tag_name")
-    private String tagName;
+  /** 标签名称 */
+  @TableField(value = "tag_name")
+  private String tagName;
 }

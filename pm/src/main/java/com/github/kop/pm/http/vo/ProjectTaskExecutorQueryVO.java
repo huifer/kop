@@ -1,6 +1,5 @@
 package com.github.kop.pm.http.vo;
 
-
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.Serializable;
@@ -14,18 +13,11 @@ public class ProjectTaskExecutorQueryVO implements Serializable {
 
   private Integer id;
 
-
-  /**
-   * 项目任务
-   */
+  /** 项目任务 */
   @ApiModelProperty("项目任务")
   private Integer projectTaskId;
 
-
-  /**
-   * 执行人
-   */
+  /** 执行人 */
   @ApiModelProperty("执行人")
   private Integer userId;
-
 }

@@ -12,8 +12,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class FeedbackRecordRepositoryImpl implements FeedbackRecordRepository {
 
-  @Autowired
-  private FeedbackRecordMapper feedbackRecordMapper;
+  @Autowired private FeedbackRecordMapper feedbackRecordMapper;
 
   @Override
   public IPage<FeedbackRecord> page(Long page, Long size) {
@@ -25,5 +24,4 @@ public class FeedbackRecordRepositoryImpl implements FeedbackRecordRepository {
   public int create(FeedbackRecord feedbackRecord) {
     return feedbackRecordMapper.insert(feedbackRecord);
   }
-
 }

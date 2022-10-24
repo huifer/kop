@@ -11,15 +11,11 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public enum TopicSortTypeEnum {
+  CREATE_TIME(1, "创建时间"),
 
+  HOT(2, "热度");
 
-    CREATE_TIME(1,"创建时间"),
+  private final Integer code;
 
-    HOT(2,"热度")
-    ;
-
-    private final Integer code;
-
-    private final String desc;
-
+  private final String desc;
 }

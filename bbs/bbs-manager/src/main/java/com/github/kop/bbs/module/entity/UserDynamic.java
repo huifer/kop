@@ -7,15 +7,12 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.time.LocalDateTime;
-import java.util.Date;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-/**
- * 论坛的动态
- */
+/** 论坛的动态 */
 @Data
 @Builder
 @AllArgsConstructor
@@ -23,39 +20,27 @@ import lombok.NoArgsConstructor;
 @TableName(value = "bbs_user_dynamic")
 public class UserDynamic {
 
-  /**
-   * 动态主键
-   */
+  /** 动态主键 */
   @TableId(value = "user_dynamic_id", type = IdType.ASSIGN_ID)
   private Long postNewId;
 
-  /**
-   * 话题主键 动态可以选择加话题
-   */
+  /** 话题主键 动态可以选择加话题 */
   @TableField(value = "topic_id")
   private Long topicId;
 
-  /**
-   * 详细内容
-   */
+  /** 详细内容 */
   @TableField(value = "content")
   private String content;
 
-  /**
-   * 创建时间
-   */
+  /** 创建时间 */
   @TableField(value = "create_time", fill = FieldFill.INSERT)
   private LocalDateTime createTime;
 
-  /**
-   * 创建人
-   */
+  /** 创建人 */
   @TableField(value = "create_user_id", fill = FieldFill.INSERT)
   private Long createUserId;
 
-  /**
-   * 逻辑删除标记位
-   */
+  /** 逻辑删除标记位 */
   @TableField(value = "deleted")
   @TableLogic
   private Integer deleted;

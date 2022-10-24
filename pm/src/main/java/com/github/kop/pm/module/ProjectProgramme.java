@@ -13,9 +13,7 @@ import lombok.Data;
 import lombok.experimental.Accessors;
 import lombok.experimental.FieldNameConstants;
 
-/**
- * 工程
- */
+/** 工程 */
 @Accessors(chain = true)
 @ApiModel("工程")
 @Data
@@ -32,25 +30,18 @@ public class ProjectProgramme implements Serializable {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Integer id;
 
-  /**
-   * 工程名称
-   */
+  /** 工程名称 */
   @ApiModelProperty("工程名称")
   @Column(name = "name")
   private String name;
 
-  /**
-   * 工程仓库
-   */
+  /** 工程仓库 */
   @ApiModelProperty("工程仓库")
   @Column(name = "git_url")
   private String gitUrl;
 
-  /**
-   * 项目id
-   */
+  /** 项目id */
   @ApiModelProperty("项目id")
   @Column(name = "project_id")
   private Integer projectId;
-
 }

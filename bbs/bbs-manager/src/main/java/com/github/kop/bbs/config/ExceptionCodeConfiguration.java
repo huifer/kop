@@ -11,17 +11,17 @@ import org.springframework.stereotype.Component;
 @Component
 public class ExceptionCodeConfiguration {
 
-    private Map<Integer,String> codes =new HashMap<>();
+  private Map<Integer, String> codes = new HashMap<>();
 
-    public Map<Integer, String> getCodes() {
-        return codes;
-    }
+  public Map<Integer, String> getCodes() {
+    return codes;
+  }
 
-    public void setCodes(Map<Integer, String> codes) {
-        this.codes = codes;
-    }
+  public void setCodes(Map<Integer, String> codes) {
+    this.codes = codes;
+  }
 
-    public String getMessage(int code){
-        return codes.get(code);
-    }
+  public String getMessage(int code) {
+    return codes.get(code);
+  }
 }

@@ -13,11 +13,9 @@ import org.springframework.stereotype.Service;
 @Service
 public class RoleServiceImpl implements RoleService {
 
-  @Autowired
-  private RoleRepository roleRepository;
+  @Autowired private RoleRepository roleRepository;
 
-  @Autowired
-  private MidUserRoleRepository midUserRoleRepository;
+  @Autowired private MidUserRoleRepository midUserRoleRepository;
 
   @Override
   public Role byCode(String roleCode) {

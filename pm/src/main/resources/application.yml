@@ -31,8 +31,8 @@ spring:
             log:
               LOG_QUERIES_SLOWER_THAN_MS: '25'
       #      输出执行sql，生产关闭
-      hibernate.show_sql: false
-      hibernate.format_sql: false
+      hibernate.show_sql: true
+      hibernate.format_sql: true
       hibernate.dialect: org.hibernate.dialect.MySQL8Dialect
       hibernate.id.new_generator_mappings: false
       hibernate.jdbc.fetch_size: 100

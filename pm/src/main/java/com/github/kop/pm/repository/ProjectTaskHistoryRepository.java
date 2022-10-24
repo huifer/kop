@@ -6,7 +6,6 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ProjectTaskHistoryRepository extends JpaRepository<ProjectTaskHistory, Integer>,
-    JpaSpecificationExecutor<ProjectTaskHistory> {
-
-}
+public interface ProjectTaskHistoryRepository
+    extends JpaRepository<ProjectTaskHistory, Integer>,
+        JpaSpecificationExecutor<ProjectTaskHistory> {}

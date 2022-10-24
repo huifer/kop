@@ -6,7 +6,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 public interface BlogCommentMapper extends BaseMapper<BlogComment> {
-    int updateBatchSelective(List<BlogComment> list);
+  int updateBatchSelective(List<BlogComment> list);
 
-    int batchInsert(@Param("list") List<BlogComment> list);
+  int batchInsert(@Param("list") List<BlogComment> list);
 }

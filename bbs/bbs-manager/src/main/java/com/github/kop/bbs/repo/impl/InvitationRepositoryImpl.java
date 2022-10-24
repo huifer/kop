@@ -15,16 +15,15 @@ import org.springframework.transaction.annotation.Transactional;
 @Repository
 public class InvitationRepositoryImpl implements InvitationRepository {
 
-  @Autowired
-  private InvitationMapper invitationMapper;
+  @Autowired private InvitationMapper invitationMapper;
 
   @Override
-  public IPage<Invitation> page(Long categoryId,Long articleStatus ,Long page, Long size) {
+  public IPage<Invitation> page(Long categoryId, Long articleStatus, Long page, Long size) {
     QueryWrapper<Invitation> queryWrapper = new QueryWrapper<>();
-    LambdaQueryWrapper<Invitation> eq = queryWrapper.lambda()
-            .eq(Invitation::getCategoryId, categoryId);
-    if (ObjectUtils.isNotEmpty(articleStatus)){
-      eq.eq(Invitation::getArticleStatus,articleStatus);
+    LambdaQueryWrapper<Invitation> eq =
+        queryWrapper.lambda().eq(Invitation::getCategoryId, categoryId);
+    if (ObjectUtils.isNotEmpty(articleStatus)) {
+      eq.eq(Invitation::getArticleStatus, articleStatus);
     }
     return this.invitationMapper.selectPage(new Page<>(page, size), queryWrapper);
   }
@@ -44,15 +43,17 @@ public class InvitationRepositoryImpl implements InvitationRepository {
    * @return
    */
   @Override
-  public int updateAuditStatus( int auditUserCount, Integer auditThreshold, Long invitationId) {
-    return invitationMapper.updateAuditStatus(auditUserCount,auditThreshold,invitationId);
+  public int updateAuditStatus(int auditUserCount, Integer auditThreshold, Long invitationId) {
+    return invitationMapper.updateAuditStatus(auditUserCount, auditThreshold, invitationId);
   }
 
   @Override
   public Invitation findByIdAndAuditStatus(Long sid, Integer auditStatus) {
     QueryWrapper<Invitation> queryWrapper = new QueryWrapper<>();
-    queryWrapper.lambda().eq(Invitation::getInvitationId,sid)
-            .eq(Invitation::getArticleStatus,auditStatus);
+    queryWrapper
+        .lambda()
+        .eq(Invitation::getInvitationId, sid)
+        .eq(Invitation::getArticleStatus, auditStatus);
     return invitationMapper.selectOne(queryWrapper);
   }
 }

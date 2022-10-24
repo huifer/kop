@@ -13,5 +13,6 @@ public interface TopicMapper extends BaseMapper<Topic> {
 
   int batchInsert(@Param("list") List<Topic> list);
 
-  IPage<Topic> selectOrderByHot(@Param("page") Long page, @Param("size") Long size, @Param("topicTitle") String topicTitle);
+  IPage<Topic> selectOrderByHot(
+      @Param("page") Long page, @Param("size") Long size, @Param("topicTitle") String topicTitle);
 }

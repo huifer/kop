@@ -6,7 +6,6 @@ import java.io.Serializable;
 import javax.validation.constraints.NotNull;
 import lombok.Data;
 
-
 @Data
 @ApiModel("保存 项目功能参与人")
 public class ProjectFeatureUserVO implements Serializable {
@@ -17,32 +16,19 @@ public class ProjectFeatureUserVO implements Serializable {
   @NotNull(message = "id can not null")
   private Integer id;
 
-
-  /**
-   * 项目id
-   */
+  /** 项目id */
   @ApiModelProperty("项目id")
   private Integer projectId;
 
-
-  /**
-   * 版本id
-   */
+  /** 版本id */
   @ApiModelProperty("版本id")
   private Integer projectEditionId;
 
-
-  /**
-   * 功能id
-   */
+  /** 功能id */
   @ApiModelProperty("功能id")
   private Integer projectFeatureId;
 
-
-  /**
-   * 用户id
-   */
+  /** 用户id */
   @ApiModelProperty("用户id")
   private Integer userId;
-
 }

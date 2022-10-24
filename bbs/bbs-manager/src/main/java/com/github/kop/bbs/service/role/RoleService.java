@@ -11,7 +11,6 @@ public interface RoleService {
   List<Role> findByUserId(Long userId);
 
   /**
-   *
    * @param toCheck 带校验的角色编码
    * @param userId 用户id
    * @return

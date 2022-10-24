@@ -12,5 +12,4 @@ public interface RoleRepository {
   List<Role> byCodeAndRoleId(List<Long> roleIds, List<String> toCheck);
 
   List<Role> list();
-
 }

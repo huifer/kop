@@ -8,5 +8,5 @@ import com.github.kop.bbs.module.entity.InvitationComment;
  * @time 2022/8/31 21:12
  */
 public interface InvitationCommentRepository {
-    int insert(InvitationComment build);
+  int insert(InvitationComment build);
 }

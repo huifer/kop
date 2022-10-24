@@ -10,6 +10,7 @@ public class UserSendMessageReq {
 
   @ApiModelProperty(value = "消息内容")
   private String content;
+
   @ApiModelProperty(value = "接收人id")
   private Long sendToUserId;
 }

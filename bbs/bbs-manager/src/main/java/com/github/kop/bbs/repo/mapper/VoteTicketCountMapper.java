@@ -6,12 +6,11 @@ import org.apache.ibatis.annotations.Param;
 
 public interface VoteTicketCountMapper extends BaseMapper<VoteTicketCount> {
 
-
-    /**
-     * 投票
-     *
-     * @param applyId
-     * @return
-     */
-    int addVoteTicket(@Param("applyId") Long applyId);
+  /**
+   * 投票
+   *
+   * @param applyId
+   * @return
+   */
+  int addVoteTicket(@Param("applyId") Long applyId);
 }

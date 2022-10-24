@@ -11,11 +11,11 @@ import lombok.Data;
 @Data
 public class InvitationAuditEventBo {
 
-    private Long userId;
+  private Long userId;
 
-    private Long sid;
+  private Long sid;
 
-    private AuditStatusEnum auditStatusEnum;
+  private AuditStatusEnum auditStatusEnum;
 
-    private String note;
+  private String note;
 }

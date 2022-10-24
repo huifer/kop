@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 @Data
 public class CustomerAppealReplyBo {
 
-    private Long appealReceiptId;
+  private Long appealReceiptId;
 
-    private Long userId;
+  private Long userId;
 }

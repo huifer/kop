@@ -6,7 +6,6 @@ import java.io.Serializable;
 import javax.validation.constraints.NotNull;
 import lombok.Data;
 
-
 @Data
 @ApiModel("保存 任务执行人")
 public class ProjectTaskExecutorVO implements Serializable {
@@ -17,18 +16,11 @@ public class ProjectTaskExecutorVO implements Serializable {
   @NotNull(message = "id can not null")
   private Integer id;
 
-
-  /**
-   * 项目任务
-   */
+  /** 项目任务 */
   @ApiModelProperty("项目任务")
   private Integer projectTaskId;
 
-
-  /**
-   * 执行人
-   */
+  /** 执行人 */
   @ApiModelProperty("执行人")
   private Integer userId;
-
 }

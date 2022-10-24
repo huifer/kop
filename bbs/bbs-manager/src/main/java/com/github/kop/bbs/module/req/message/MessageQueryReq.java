@@ -12,15 +12,11 @@ public class MessageQueryReq {
   @ApiModelProperty("通知类型")
   private Integer tipsType;
 
-
   @ApiModelProperty("通知类型枚举")
   private MessageTypeEnum messageTypeEnum;
-
 
   public void setTipsType(Integer tipsType) {
     this.tipsType = tipsType;
     this.messageTypeEnum = MessageTypeEnum.conv(tipsType);
   }
-
-
 }

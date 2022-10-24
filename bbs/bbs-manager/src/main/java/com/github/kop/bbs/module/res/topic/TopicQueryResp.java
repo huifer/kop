@@ -10,9 +10,10 @@ public class TopicQueryResp {
 
   @ApiModelProperty("话题id")
   private Long topicId;
+
   @ApiModelProperty("话题标题")
   private String topicTitle;
+
   @ApiModelProperty("话题内容")
   private String topicContent;
-
 }

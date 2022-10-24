@@ -10,5 +10,6 @@ public interface UpdateValidate<U> extends Validate {
       throw new ValidateException(AppHttpCodeEnum.UPDATE_ID_ERROR);
     }
   }
+
   void updateValidate(U u) throws ValidateException;
 }

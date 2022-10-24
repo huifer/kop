@@ -13,6 +13,7 @@ public class InvitationAuditReq {
 
   @ApiModelProperty("审核意见")
   private boolean pass;
+
   @ApiModelProperty("审核意见文本")
   private String context;
 }

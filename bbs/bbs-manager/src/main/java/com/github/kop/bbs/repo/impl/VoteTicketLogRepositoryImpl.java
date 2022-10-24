@@ -5,10 +5,9 @@ import com.github.kop.bbs.module.entity.VoteTicketLog;
 import com.github.kop.bbs.module.enums.DeletedEnum;
 import com.github.kop.bbs.repo.VoteTicketLogRepository;
 import com.github.kop.bbs.repo.mapper.VoteTicketLogMapper;
-import org.springframework.stereotype.Repository;
-
-import javax.annotation.Resource;
 import java.util.List;
+import javax.annotation.Resource;
+import org.springframework.stereotype.Repository;
 
 /**
  * @auth ahxiaoqi
@@ -18,22 +17,21 @@ import java.util.List;
 @Repository
 public class VoteTicketLogRepositoryImpl implements VoteTicketLogRepository {
 
-    @Resource
-    private VoteTicketLogMapper voteTicketLogMapper;
+  @Resource private VoteTicketLogMapper voteTicketLogMapper;
 
-    @Override
-    public int insert(VoteTicketLog build) {
-        return voteTicketLogMapper.insert(build);
-    }
+  @Override
+  public int insert(VoteTicketLog build) {
+    return voteTicketLogMapper.insert(build);
+  }
 
-    @Override
-    public List<VoteTicketLog> findByUserIdAndApplyIdList(List<Long> applyIdList, Long userId) {
-        QueryWrapper<VoteTicketLog> queryWrapper = new QueryWrapper<>();
-        queryWrapper.lambda()
-                .in(VoteTicketLog::getApplyId,applyIdList)
-                .eq(VoteTicketLog::getUserId,userId)
-                .eq(VoteTicketLog::getDeleted, DeletedEnum.FALSE.getCode())
-        ;
-        return voteTicketLogMapper.selectList(queryWrapper);
-    }
+  @Override
+  public List<VoteTicketLog> findByUserIdAndApplyIdList(List<Long> applyIdList, Long userId) {
+    QueryWrapper<VoteTicketLog> queryWrapper = new QueryWrapper<>();
+    queryWrapper
+        .lambda()
+        .in(VoteTicketLog::getApplyId, applyIdList)
+        .eq(VoteTicketLog::getUserId, userId)
+        .eq(VoteTicketLog::getDeleted, DeletedEnum.FALSE.getCode());
+    return voteTicketLogMapper.selectList(queryWrapper);
+  }
 }

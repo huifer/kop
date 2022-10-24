@@ -75,7 +75,7 @@ public class CategoryRepositoryImpl implements CategoryRepository {
   @Override
   public List<Category> findByCategoryIds(List<Long> categoryIds) {
     QueryWrapper<Category> queryWrapper = new QueryWrapper<>();
-    queryWrapper.lambda().in(Category::getCategoryId,categoryIds);
+    queryWrapper.lambda().in(Category::getCategoryId, categoryIds);
     return bbsCategoryMapper.selectList(queryWrapper);
   }
 }

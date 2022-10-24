@@ -13,8 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Repository
 public class UserBlackListRepositoryImpl implements UserBlackListRepository {
 
-  @Autowired
-  private UserBlackListMapper userBlackListMapper;
+  @Autowired private UserBlackListMapper userBlackListMapper;
 
   @Transactional(rollbackFor = {Exception.class})
   @Override
@@ -26,7 +25,8 @@ public class UserBlackListRepositoryImpl implements UserBlackListRepository {
   @Override
   public int deleteByUserIdAndTargetUserId(Long userId, Long targetUserId) {
     QueryWrapper<UserBlackList> queryWrapper = new QueryWrapper<>();
-    queryWrapper.lambda()
+    queryWrapper
+        .lambda()
         .eq(UserBlackList::getCreateUserId, userId)
         .eq(UserBlackList::getBlackUserId, targetUserId);
     return userBlackListMapper.delete(queryWrapper);
@@ -35,8 +35,7 @@ public class UserBlackListRepositoryImpl implements UserBlackListRepository {
   @Override
   public IPage<UserBlackList> page(Long userId, Long page, Long size) {
     QueryWrapper<UserBlackList> queryWrapper = new QueryWrapper<>();
-    queryWrapper.lambda()
-        .eq(UserBlackList::getCreateUserId, userId);
+    queryWrapper.lambda().eq(UserBlackList::getCreateUserId, userId);
 
     return userBlackListMapper.selectPage(new Page<>(page, size), queryWrapper);
   }

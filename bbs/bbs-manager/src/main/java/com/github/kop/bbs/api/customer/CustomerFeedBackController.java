@@ -20,14 +20,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/customer/feed_back")
 public class CustomerFeedBackController {
 
-  @Autowired
-  private FeedbackRecordService feedbackRecordService;
+  @Autowired private FeedbackRecordService feedbackRecordService;
 
   @ApiOperation("创建反馈")
   @PostMapping("/")
-  public RespVO<Boolean> create(
-      @RequestBody FeedBackReq req
-  ) {
+  public RespVO<Boolean> create(@RequestBody FeedBackReq req) {
 
     return RespVO.success(feedbackRecordService.create(req));
   }
@@ -35,9 +32,7 @@ public class CustomerFeedBackController {
   @ApiOperation("反馈分页")
   @GetMapping("/page/{page}/{size}")
   public RespVO<IPage<FeedBackResp>> page(
-      @PathVariable("page") Long page,
-      @PathVariable("size") Long size
-  ) {
+      @PathVariable("page") Long page, @PathVariable("size") Long size) {
     return RespVO.success(feedbackRecordService.page(page, size));
   }
 }

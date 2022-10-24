@@ -13,15 +13,12 @@ import lombok.Data;
 import lombok.experimental.Accessors;
 import lombok.experimental.FieldNameConstants;
 
-/**
- * 项目功能参与人
- */
+/** 项目功能参与人 */
 @Accessors(chain = true)
 @ApiModel("项目功能参与人")
 @Data
 @Entity
 @Table(name = "project_feature_user")
-
 @org.hibernate.annotations.Table(appliesTo = "project_feature_user", comment = "项目功能参与人")
 @FieldNameConstants
 public class ProjectFeatureUser implements Serializable {
@@ -33,32 +30,23 @@ public class ProjectFeatureUser implements Serializable {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Integer id;
 
-  /**
-   * 项目id
-   */
+  /** 项目id */
   @ApiModelProperty("项目id")
   @Column(name = "project_id")
   private Integer projectId;
 
-  /**
-   * 版本id
-   */
+  /** 版本id */
   @ApiModelProperty("版本id")
   @Column(name = "project_edition_id")
   private Integer projectEditionId;
 
-  /**
-   * 功能id
-   */
+  /** 功能id */
   @ApiModelProperty("功能id")
   @Column(name = "project_feature_id")
   private Integer projectFeatureId;
 
-  /**
-   * 用户id
-   */
+  /** 用户id */
   @ApiModelProperty("用户id")
   @Column(name = "user_id")
   private Integer userId;
-
 }

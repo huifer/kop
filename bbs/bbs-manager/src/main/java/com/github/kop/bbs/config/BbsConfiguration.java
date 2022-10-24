@@ -20,19 +20,13 @@ public class BbsConfiguration {
   /** url 相关配置 */
   private Url url;
 
-  /**
-   * 话题评论更新阈值
-   */
+  /** 话题评论更新阈值 */
   private Long topicCommentSumThreshold = 100L;
 
-  /**
-   * 话题评论更新检查时间,单位分钟
-   */
+  /** 话题评论更新检查时间,单位分钟 */
   private Integer topicCommentCheckTime = 10;
 
-  /**
-   * 帖子审核通过百分比
-   */
+  /** 帖子审核通过百分比 */
   private Integer auditThreshold = 50;
 
   public enum BBSEnv {

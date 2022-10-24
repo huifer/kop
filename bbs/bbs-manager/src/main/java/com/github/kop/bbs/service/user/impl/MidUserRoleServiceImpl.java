@@ -25,8 +25,7 @@ public class MidUserRoleServiceImpl implements MidUserRoleService {
 
   @Resource private MidUserRoleRepository midUserRoleRepository;
 
-  @Autowired
-  private RoleService roleService;
+  @Autowired private RoleService roleService;
 
   /** 验证角色 */
   @Override

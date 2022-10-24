@@ -15,8 +15,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class ProjectFeatureUserService {
 
-  @Autowired
-  private ProjectFeatureUserRepository projectFeatureUserRepository;
+  @Autowired private ProjectFeatureUserRepository projectFeatureUserRepository;
 
   public Integer save(ProjectFeatureUserVO vO) {
     ProjectFeatureUser bean = new ProjectFeatureUser();
@@ -51,7 +50,8 @@ public class ProjectFeatureUserService {
   }
 
   private ProjectFeatureUser requireOne(Integer id) {
-    return projectFeatureUserRepository.findById(id)
+    return projectFeatureUserRepository
+        .findById(id)
         .orElseThrow(() -> new NoSuchElementException("Resource not found: " + id));
   }
 }

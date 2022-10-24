@@ -13,33 +13,22 @@ import lombok.Data;
 @Data
 public class TopicCommentReq {
 
-    /**
-     * 主体id
-     */
-    @ApiModelProperty(value = "主体id")
-    private Long refId;
+  /** 主体id */
+  @ApiModelProperty(value = "主体id")
+  private Long refId;
 
-    /**
-     * 评论类别 1 帖子 2 帖子评论
-     */
-    @ApiModelProperty(value = "评论类别")
-    private Integer topicCommentType;
+  /** 评论类别 1 帖子 2 帖子评论 */
+  @ApiModelProperty(value = "评论类别")
+  private Integer topicCommentType;
 
-    @ApiModelProperty(value = "评论内容")
-    private Long commentContent;
+  @ApiModelProperty(value = "评论内容")
+  private Long commentContent;
 
-    /**
-     * 上级id
-     */
-    @ApiModelProperty(value = "上级id")
-    private Long pid;
+  /** 上级id */
+  @ApiModelProperty(value = "上级id")
+  private Long pid;
 
-    /**
-     * 最上级id
-     */
-    @ApiModelProperty(value = "最上级id")
-    private Long topId;
-
-
-
+  /** 最上级id */
+  @ApiModelProperty(value = "最上级id")
+  private Long topId;
 }

@@ -12,25 +12,22 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
 @Api(tags = "消费者-用户接口")
 @RestController()
 @RequestMapping("customer/user")
 public class CustomerUserController {
-  @Resource
-  private UserService userService;
+  @Resource private UserService userService;
+
   @ApiOperation(value = "用户注册")
   @PostMapping("/")
-  public RespVO<Boolean> register(
-      @RequestBody CreateUserReq req
-  ) {
+  public RespVO<Boolean> register(@RequestBody CreateUserReq req) {
     return RespVO.success(this.userService.createCustomerUser(req));
   }
 
   @ApiOperation(value = "用户登录")
   @PostMapping("/login")
-  public RespVO<UserLoginRes> login(
-      @RequestBody LoginUserReq req
-  ) {
+  public RespVO<UserLoginRes> login(@RequestBody LoginUserReq req) {
     return RespVO.success(this.userService.login(req));
   }
 }

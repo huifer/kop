@@ -9,7 +9,6 @@ import com.github.kop.bbs.module.req.user.UpdateUserReq;
 import com.github.kop.bbs.module.req.user.UserQueryReq;
 import com.github.kop.bbs.module.res.user.UserLoginRes;
 import com.github.kop.bbs.module.res.user.UserQueryResp;
-
 import java.util.List;
 
 public interface UserService {
@@ -40,17 +39,15 @@ public interface UserService {
 
   User byUserId(Long id);
 
-
   /**
    * 用户是否有相关角色
+   *
    * @param userId 用户id
    * @param roles 角色集合
    */
   boolean hasRoles(Long userId, RoleEnum[] roles);
 
-  /**
-   * 管理端分页查询
-   */
+  /** 管理端分页查询 */
   IPage<UserQueryResp> page(Long page, Long size, UserQueryReq req);
 
   List<User> findByUserIds(List<Long> userIdList);

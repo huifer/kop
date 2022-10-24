@@ -15,5 +15,4 @@ public class BizException extends RuntimeException {
   public BizException(ExceptionEnums exceptionEnums) {
     this.code = exceptionEnums.getCode();
   }
-
 }

@@ -20,18 +20,12 @@ public enum RoleEnum {
   USER(4L, "普通用户", "user"),
   AUDIT(5L, "审核人员", "audit");
 
-  /**
-   * 角色id
-   */
+  /** 角色id */
   private final Long roleId;
 
-  /**
-   * 角色名称
-   */
+  /** 角色名称 */
   private final String roleName;
 
-  /**
-   * 角色名称
-   */
+  /** 角色名称 */
   private final String roleCode;
 }

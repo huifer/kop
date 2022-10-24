@@ -17,9 +17,7 @@ public class AuditServiceFactory implements InitializingBean {
     this.context = context;
   }
 
-  /**
-   * 根据审核类型获取审核服务
-   */
+  /** 根据审核类型获取审核服务 */
   public AuditService<?> factory(AuditTypeEnum auditTypeEnum) {
     return auditServiceMap.get(auditTypeEnum);
   }
@@ -31,9 +29,6 @@ public class AuditServiceFactory implements InitializingBean {
     beansOfType.forEach(
         (k, v) -> {
           auditServiceMap.put(v.type(), v);
-        }
-    );
+        });
   }
-
-
 }

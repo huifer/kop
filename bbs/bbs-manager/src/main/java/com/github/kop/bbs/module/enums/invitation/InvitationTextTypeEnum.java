@@ -5,9 +5,7 @@ import com.github.kop.bbs.module.ex.ExceptionEnums;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
-/**
- * 帖子正文类型 1 富文本 2 md
- */
+/** 帖子正文类型 1 富文本 2 md */
 @Getter
 @AllArgsConstructor
 public enum InvitationTextTypeEnum {
@@ -17,7 +15,6 @@ public enum InvitationTextTypeEnum {
   private final int code;
   private final String name;
 
-
   public static InvitationTextTypeEnum conv(int code) {
     for (InvitationTextTypeEnum value : values()) {
       if (value.code == code) {
@@ -25,6 +22,5 @@ public enum InvitationTextTypeEnum {
       }
     }
     throw new BizException(ExceptionEnums.CONV_ENUM_EXCEPTION);
-
   }
 }

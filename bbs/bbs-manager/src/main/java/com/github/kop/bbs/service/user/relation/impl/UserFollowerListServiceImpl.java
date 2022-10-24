@@ -15,11 +15,8 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class UserFollowerListServiceImpl implements UserFollowerListService {
 
-
-  @Autowired
-  private UserFollowerListRepository userFollowerListRepository;
-  @Autowired
-  private UserService userService;
+  @Autowired private UserFollowerListRepository userFollowerListRepository;
+  @Autowired private UserService userService;
 
   @Transactional(rollbackFor = {Exception.class})
   @Override
@@ -40,18 +37,19 @@ public class UserFollowerListServiceImpl implements UserFollowerListService {
   @Override
   public IPage<UserRelationResp> page(Long userId, Long page, Long size) {
     IPage<UserFollowerList> pageRes = this.userFollowerListRepository.page(userId, page, size);
-    return pageRes.convert(new Function<UserFollowerList, UserRelationResp>() {
-      @Override
-      public UserRelationResp apply(UserFollowerList userFollowerList) {
-        UserRelationResp userRelationResp = new UserRelationResp();
-        Long followerUserId = userFollowerList.getFollowerUserId();
-        userRelationResp.setUserId(followerUserId);
-        User user = userService.byUserId(followerUserId);
-        userRelationResp.setUserName(user.getUsername());
-        userRelationResp.setAvatar(user.getAvatar());
-        userRelationResp.setNickname(user.getNickname());
-        return userRelationResp;
-      }
-    });
+    return pageRes.convert(
+        new Function<UserFollowerList, UserRelationResp>() {
+          @Override
+          public UserRelationResp apply(UserFollowerList userFollowerList) {
+            UserRelationResp userRelationResp = new UserRelationResp();
+            Long followerUserId = userFollowerList.getFollowerUserId();
+            userRelationResp.setUserId(followerUserId);
+            User user = userService.byUserId(followerUserId);
+            userRelationResp.setUserName(user.getUsername());
+            userRelationResp.setAvatar(user.getAvatar());
+            userRelationResp.setNickname(user.getNickname());
+            return userRelationResp;
+          }
+        });
   }
 }

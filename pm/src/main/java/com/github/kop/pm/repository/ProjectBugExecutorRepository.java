@@ -6,7 +6,6 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ProjectBugExecutorRepository extends JpaRepository<ProjectBugExecutor, Integer>,
-    JpaSpecificationExecutor<ProjectBugExecutor> {
-
-}
+public interface ProjectBugExecutorRepository
+    extends JpaRepository<ProjectBugExecutor, Integer>,
+        JpaSpecificationExecutor<ProjectBugExecutor> {}

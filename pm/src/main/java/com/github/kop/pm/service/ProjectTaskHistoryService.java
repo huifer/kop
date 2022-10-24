@@ -15,8 +15,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class ProjectTaskHistoryService {
 
-  @Autowired
-  private ProjectTaskHistoryRepository projectTaskHistoryRepository;
+  @Autowired private ProjectTaskHistoryRepository projectTaskHistoryRepository;
 
   public Integer save(ProjectTaskHistoryVO vO) {
     ProjectTaskHistory bean = new ProjectTaskHistory();
@@ -51,7 +50,8 @@ public class ProjectTaskHistoryService {
   }
 
   private ProjectTaskHistory requireOne(Integer id) {
-    return projectTaskHistoryRepository.findById(id)
+    return projectTaskHistoryRepository
+        .findById(id)
         .orElseThrow(() -> new NoSuchElementException("Resource not found: " + id));
   }
 }

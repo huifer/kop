@@ -20,26 +20,22 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/tag")
 public class BlobTagController {
 
+  private final BlogTagService tagService;
 
-    private final BlogTagService tagService;
+  public BlobTagController(BlogTagService tagService) {
+    this.tagService = tagService;
+  }
 
-    public BlobTagController(BlogTagService tagService) {
-        this.tagService = tagService;
-    }
+  @ApiOperation(value = "添加标签")
+  @PostMapping("/add")
+  public RespVO<Boolean> add(@RequestBody BlogTagAddReq req) {
+    return RespVO.success(tagService.add(req) > 1);
+  }
 
-    @ApiOperation(value = "添加标签")
-    @PostMapping("/add")
-    public RespVO<Boolean> add(@RequestBody BlogTagAddReq req) {
-        return RespVO.success(tagService.add(req) > 1);
-    }
-
-
-
-    @ApiOperation(value = "我的标签列表")
-    @GetMapping("/list/{page}/{size}")
-    public RespVO<IPage<TagListRes>> list(  @PathVariable(value = "page") Long page,
-                                            @PathVariable(value = "size") Long size) {
-        return RespVO.success(tagService.listByUserId(UserInfoThread.getUserId(),page,size));
-    }
-
+  @ApiOperation(value = "我的标签列表")
+  @GetMapping("/list/{page}/{size}")
+  public RespVO<IPage<TagListRes>> list(
+      @PathVariable(value = "page") Long page, @PathVariable(value = "size") Long size) {
+    return RespVO.success(tagService.listByUserId(UserInfoThread.getUserId(), page, size));
+  }
 }

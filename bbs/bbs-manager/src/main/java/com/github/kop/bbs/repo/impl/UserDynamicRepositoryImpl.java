@@ -12,8 +12,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class UserDynamicRepositoryImpl implements UserDynamicRepository {
 
-  @Autowired
-  private UserDynamicMapper userDynamicMapper;
+  @Autowired private UserDynamicMapper userDynamicMapper;
 
   @Override
   public int create(UserDynamic userDynamic) {
@@ -23,15 +22,15 @@ public class UserDynamicRepositoryImpl implements UserDynamicRepository {
   @Override
   public IPage<UserDynamic> page(Long userId, Long page, Long size) {
     QueryWrapper<UserDynamic> queryWrapper = new QueryWrapper<>();
-    queryWrapper.lambda()
-        .eq(UserDynamic::getCreateUserId, userId);
+    queryWrapper.lambda().eq(UserDynamic::getCreateUserId, userId);
     return userDynamicMapper.selectPage(new Page<>(page, size), queryWrapper);
   }
 
   @Override
   public int delete(Long userId, Long id) {
     QueryWrapper<UserDynamic> queryWrapper = new QueryWrapper<>();
-    queryWrapper.lambda()
+    queryWrapper
+        .lambda()
         .eq(UserDynamic::getCreateUserId, userId)
         .eq(UserDynamic::getPostNewId, id);
     return userDynamicMapper.delete(queryWrapper);

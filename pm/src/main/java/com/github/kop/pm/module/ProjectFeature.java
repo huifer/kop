@@ -13,9 +13,7 @@ import lombok.Data;
 import lombok.experimental.Accessors;
 import lombok.experimental.FieldNameConstants;
 
-/**
- * 项目功能
- */
+/** 项目功能 */
 @Accessors(chain = true)
 @ApiModel("项目功能")
 @Data
@@ -32,39 +30,28 @@ public class ProjectFeature implements Serializable {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Integer id;
 
-  /**
-   * 项目id
-   */
+  /** 项目id */
   @ApiModelProperty("项目id")
   @Column(name = "project_id")
   private Integer projectId;
 
-  /**
-   * 版本id
-   */
+  /** 版本id */
   @ApiModelProperty("版本id")
   @Column(name = "project_edition_id")
   private Integer projectEditionId;
 
-  /**
-   * 功能名称
-   */
+  /** 功能名称 */
   @ApiModelProperty("功能名称")
   @Column(name = "name")
   private String name;
 
-  /**
-   * 功能描述
-   */
+  /** 功能描述 */
   @ApiModelProperty("功能描述")
-  @Column(name = "desc")
+  @Column(name = "`desc`")
   private String desc;
 
-  /**
-   * 外部链接
-   */
+  /** 外部链接 */
   @ApiModelProperty("外部链接")
   @Column(name = "link")
   private String link;
-
 }

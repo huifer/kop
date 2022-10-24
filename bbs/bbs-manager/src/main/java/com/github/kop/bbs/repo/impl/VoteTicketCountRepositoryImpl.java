@@ -5,10 +5,9 @@ import com.github.kop.bbs.module.entity.VoteTicketCount;
 import com.github.kop.bbs.module.enums.DeletedEnum;
 import com.github.kop.bbs.repo.VoteTicketCountRepository;
 import com.github.kop.bbs.repo.mapper.VoteTicketCountMapper;
-import org.springframework.stereotype.Repository;
-
-import javax.annotation.Resource;
 import java.util.List;
+import javax.annotation.Resource;
+import org.springframework.stereotype.Repository;
 
 /**
  * @auth ahxiaoqi
@@ -18,40 +17,41 @@ import java.util.List;
 @Repository
 public class VoteTicketCountRepositoryImpl implements VoteTicketCountRepository {
 
-    @Resource
-    private VoteTicketCountMapper voteTicketCountMapper;
+  @Resource private VoteTicketCountMapper voteTicketCountMapper;
 
-    @Override
-    public Long findCountByApplyId(Long applyId) {
-        QueryWrapper<VoteTicketCount> queryWrapper = new QueryWrapper<>();
-        queryWrapper.lambda()
-                .eq(VoteTicketCount::getApplyId,applyId)
-                .eq(VoteTicketCount::getDeleted, DeletedEnum.FALSE.getCode());
-        return voteTicketCountMapper.selectCount(queryWrapper);
-    }
+  @Override
+  public Long findCountByApplyId(Long applyId) {
+    QueryWrapper<VoteTicketCount> queryWrapper = new QueryWrapper<>();
+    queryWrapper
+        .lambda()
+        .eq(VoteTicketCount::getApplyId, applyId)
+        .eq(VoteTicketCount::getDeleted, DeletedEnum.FALSE.getCode());
+    return voteTicketCountMapper.selectCount(queryWrapper);
+  }
 
-    @Override
-    public int insert(VoteTicketCount build) {
-        return voteTicketCountMapper.insert(build);
-    }
+  @Override
+  public int insert(VoteTicketCount build) {
+    return voteTicketCountMapper.insert(build);
+  }
 
-    /**
-     * 投票
-     *
-     * @param applyId
-     * @return
-     */
-    @Override
-    public int addVoteTicket(Long applyId) {
-        return voteTicketCountMapper.addVoteTicket(applyId);
-    }
+  /**
+   * 投票
+   *
+   * @param applyId
+   * @return
+   */
+  @Override
+  public int addVoteTicket(Long applyId) {
+    return voteTicketCountMapper.addVoteTicket(applyId);
+  }
 
-    @Override
-    public List<VoteTicketCount> findTicketByApplyIds(List<Long> applyIdList) {
-        QueryWrapper<VoteTicketCount> queryWrapper = new QueryWrapper<>();
-        queryWrapper.lambda()
-                .in(VoteTicketCount::getApplyId,applyIdList)
-                .eq(VoteTicketCount::getDeleted, DeletedEnum.FALSE.getCode());
-        return voteTicketCountMapper.selectList(queryWrapper);
-    }
+  @Override
+  public List<VoteTicketCount> findTicketByApplyIds(List<Long> applyIdList) {
+    QueryWrapper<VoteTicketCount> queryWrapper = new QueryWrapper<>();
+    queryWrapper
+        .lambda()
+        .in(VoteTicketCount::getApplyId, applyIdList)
+        .eq(VoteTicketCount::getDeleted, DeletedEnum.FALSE.getCode());
+    return voteTicketCountMapper.selectList(queryWrapper);
+  }
 }

@@ -4,8 +4,6 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
@@ -48,7 +46,7 @@ public class ScoreRecord implements Serializable {
   @TableField(value = "create_user_id")
   private Long createUserId;
 
-  /** 周期类型  积分周期类型(周期内只能得一次分) 0 没有周期(即不限制得分)  1 天 2 周 3 月 4 年 */
+  /** 周期类型 积分周期类型(周期内只能得一次分) 0 没有周期(即不限制得分) 1 天 2 周 3 月 4 年 */
   @TableField(value = "score_cycle")
   private Integer scoreCycle;
 

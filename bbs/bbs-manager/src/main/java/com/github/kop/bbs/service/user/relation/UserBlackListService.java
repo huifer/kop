@@ -7,6 +7,7 @@ public interface UserBlackListService {
 
   /**
    * 拉黑
+   *
    * @param userId 当前登陆人
    * @param targetUserId 需要拉黑的人
    */
@@ -14,6 +15,7 @@ public interface UserBlackListService {
 
   /**
    * 拉黑
+   *
    * @param userId 当前登陆人
    * @param targetUserId 需要取消拉黑的人
    */

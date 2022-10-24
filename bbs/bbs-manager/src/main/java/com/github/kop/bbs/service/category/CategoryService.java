@@ -37,15 +37,10 @@ public interface CategoryService {
    */
   IPage<CategoryListRes> page(Long page, Long size, QueryCategoryReq req);
 
-  /**
-   * 顶层板块列表
-   */
+  /** 顶层板块列表 */
   List<CategoryListRes> topList();
 
-
-  /**
-   * 某个板块下的板块列表
-   */
+  /** 某个板块下的板块列表 */
   List<CategoryListRes> subList(Long categoryId);
 
   List<Category> findByCategoryIds(List<Long> categoryIds);

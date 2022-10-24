@@ -9,15 +9,16 @@ import com.github.kop.bbs.module.entity.UserCategoryVoteSetting;
  * @time 2022/8/23 00:10
  */
 public interface UserCategoryVoteSettingRepository {
-    UserCategoryVoteSetting findById(Long voteSettingId);
+  UserCategoryVoteSetting findById(Long voteSettingId);
 
-    UserCategoryVoteSetting findVoteStartSetting(Long categoryId);
+  UserCategoryVoteSetting findVoteStartSetting(Long categoryId);
 
-    int insert(UserCategoryVoteSetting build);
+  int insert(UserCategoryVoteSetting build);
 
-    UserCategoryVoteSetting findApplyStartSetting(Long categoryId);
+  UserCategoryVoteSetting findApplyStartSetting(Long categoryId);
 
-    void updateApplyCount(Long voteSettingId);
+  void updateApplyCount(Long voteSettingId);
 
-    IPage<UserCategoryVoteSetting> voteSettingList(Long categoryId,Integer orderType, Integer page, Integer pageSize);
+  IPage<UserCategoryVoteSetting> voteSettingList(
+      Long categoryId, Integer orderType, Integer page, Integer pageSize);
 }

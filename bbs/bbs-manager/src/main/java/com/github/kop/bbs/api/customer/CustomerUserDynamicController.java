@@ -22,17 +22,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("customer/user/dynamic")
 public class CustomerUserDynamicController {
 
-  @Autowired
-  private UserDynamicService userDynamicService;
-  @Autowired
-  private UserDynamicOperationService userDynamicOperationService;
+  @Autowired private UserDynamicService userDynamicService;
+  @Autowired private UserDynamicOperationService userDynamicOperationService;
 
   @PostMapping("/create")
   @ApiOperation("发布动态")
-  public RespVO<Boolean> create(
-      @RequestBody UserDynamicCreateReq req
-  ) {
-    return RespVO.success(userDynamicService.create(req,UserInfoThread.getUserId()));
+  public RespVO<Boolean> create(@RequestBody UserDynamicCreateReq req) {
+    return RespVO.success(userDynamicService.create(req, UserInfoThread.getUserId()));
   }
 
   @PostMapping("/page/{user_id}/{page}/{size}")
@@ -40,48 +36,37 @@ public class CustomerUserDynamicController {
   public RespVO<IPage<UserDynamicResp>> page(
       @PathVariable("user_id") Long userId,
       @PathVariable("page") Long page,
-      @PathVariable("size") Long size
-  ) {
+      @PathVariable("size") Long size) {
     return RespVO.success(userDynamicService.page(userId, page, size));
   }
 
   @DeleteMapping("/{id}")
   @ApiOperation("删除一条动态")
-  public RespVO<Boolean> delete(
-      @PathVariable("id") Long id
-  ) {
+  public RespVO<Boolean> delete(@PathVariable("id") Long id) {
     return RespVO.success(userDynamicService.delete(UserInfoThread.getUserId(), id));
   }
 
   @PostMapping("/like/{id}")
   @ApiOperation("点赞")
-  public RespVO<Boolean> like(
-      @PathVariable("id") Long id
-  ) {
+  public RespVO<Boolean> like(@PathVariable("id") Long id) {
     return RespVO.success(userDynamicOperationService.like(UserInfoThread.getUserId(), id));
   }
 
   @PostMapping("/cancel_like/{id}")
   @ApiOperation("取消点赞")
-  public RespVO<Boolean> cancelLike(
-      @PathVariable("id") Long id
-  ) {
+  public RespVO<Boolean> cancelLike(@PathVariable("id") Long id) {
     return RespVO.success(userDynamicOperationService.cancelLike(UserInfoThread.getUserId(), id));
   }
 
   @PostMapping("/dislike/{id}")
   @ApiOperation("点踩")
-  public RespVO<Boolean> dislike(
-      @PathVariable("id") Long id
-  ) {
+  public RespVO<Boolean> dislike(@PathVariable("id") Long id) {
     return RespVO.success(userDynamicOperationService.dislike(UserInfoThread.getUserId(), id));
   }
 
   @PostMapping("/cancel_dislike/{id}")
   @ApiOperation("取消点踩")
-  public RespVO<Boolean> cancelDislike(
-      @PathVariable("id") Long id
-  ) {
+  public RespVO<Boolean> cancelDislike(@PathVariable("id") Long id) {
     return RespVO.success(
         userDynamicOperationService.cancelDislike(UserInfoThread.getUserId(), id));
   }

@@ -16,14 +16,9 @@ import lombok.NoArgsConstructor;
 @Data
 public class TopicCommentUpdateBo {
 
-    /**
-     * 话题id
-     */
-    private Long topicId;
+  /** 话题id */
+  private Long topicId;
 
-    /**
-     * 投票票数
-     */
-    private Long commentCount;
-
+  /** 投票票数 */
+  private Long commentCount;
 }

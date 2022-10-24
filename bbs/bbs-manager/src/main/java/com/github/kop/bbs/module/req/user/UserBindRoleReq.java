@@ -11,7 +11,7 @@ public class UserBindRoleReq {
 
   @ApiModelProperty("角色id")
   private List<Long> roleIds;
+
   @ApiModelProperty("用户id")
   private Long userId;
-
 }

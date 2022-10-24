@@ -18,8 +18,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @Slf4j
 public class ExceptionHandlerController {
 
-  @Autowired
-  private ExceptionCodeConfiguration exceptionCodeConfiguration;
+  @Autowired private ExceptionCodeConfiguration exceptionCodeConfiguration;
 
   @ExceptionHandler(Exception.class)
   public RespVO<String> handleException(Exception e) {

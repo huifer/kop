@@ -13,9 +13,7 @@ import lombok.Data;
 import lombok.experimental.Accessors;
 import lombok.experimental.FieldNameConstants;
 
-/**
- * 项目
- */
+/** 项目 */
 @Accessors(chain = true)
 @ApiModel("项目")
 @Data
@@ -27,20 +25,15 @@ public class Project implements Serializable {
 
   private static final long serialVersionUID = 1L;
 
-  /**
-   * 主键
-   */
+  /** 主键 */
   @ApiModelProperty("主键")
   @Id
   @Column(name = "id", nullable = false)
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Integer id;
 
-  /**
-   * 项目名称
-   */
+  /** 项目名称 */
   @ApiModelProperty("项目名称")
   @Column(name = "name")
   private String name;
-
 }

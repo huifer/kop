@@ -6,7 +6,6 @@ import com.github.kop.bbs.module.req.user.UserQueryReq;
 import com.github.kop.bbs.module.res.RespVO;
 import com.github.kop.bbs.module.res.role.RoleListResp;
 import com.github.kop.bbs.module.res.user.UserQueryResp;
-import com.github.kop.bbs.service.role.RoleService;
 import com.github.kop.bbs.service.user.MidUserRoleService;
 import com.github.kop.bbs.service.user.UserService;
 import io.swagger.annotations.Api;
@@ -30,9 +29,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/user")
 public class UserController {
 
-  @Autowired
-  private UserService userService;
-
+  @Autowired private UserService userService;
 
   @ApiOperation(value = "修改用户")
   @PutMapping("/{id}")
@@ -45,21 +42,16 @@ public class UserController {
   @ApiOperation("用户分页")
   @GetMapping("/page/{page}/{size}")
   public RespVO<IPage<UserQueryResp>> page(
-      @PathVariable("page") Long page,
-      @PathVariable("size") Long size,
-      UserQueryReq req
-  ) {
+      @PathVariable("page") Long page, @PathVariable("size") Long size, UserQueryReq req) {
 
     return RespVO.success(this.userService.page(page, size, req));
   }
 
-  @Autowired
-  private MidUserRoleService midUserRoleService;
+  @Autowired private MidUserRoleService midUserRoleService;
 
   @ApiOperation("查看用户角色列表")
   @GetMapping("/role_list/{user_id}")
-  public RespVO<List<RoleListResp>> userRoleList(@PathVariable("user_id") Long userId){
+  public RespVO<List<RoleListResp>> userRoleList(@PathVariable("user_id") Long userId) {
     return RespVO.success(midUserRoleService.userRoleList(userId));
-
   }
 }

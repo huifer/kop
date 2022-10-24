@@ -59,7 +59,7 @@ public class RbacDept implements Serializable {
   private String name;
 
   /** 部门介绍 */
-  @TableField("desc")
+  @TableField("`desc`")
   private String desc;
 
   /** 排序号 */

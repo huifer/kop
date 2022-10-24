@@ -19,5 +19,4 @@ public enum ProjectTaskType {
     this.code = code;
     this.msg = msg;
   }
-
 }

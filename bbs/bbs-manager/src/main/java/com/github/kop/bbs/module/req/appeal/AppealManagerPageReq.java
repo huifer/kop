@@ -13,9 +13,9 @@ import lombok.Data;
 @Data
 public class AppealManagerPageReq {
 
-    @ApiModelProperty("申诉状态")
-    private Integer appealStatus;
+  @ApiModelProperty("申诉状态")
+  private Integer appealStatus;
 
-    @ApiModelProperty("申诉类别")
-    private Integer appealType;
+  @ApiModelProperty("申诉类别")
+  private Integer appealType;
 }

@@ -27,8 +27,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/mid_user_role")
 public class MidUserRoleController {
 
-  @Autowired
-  private RoleService roleService;
+  @Autowired private RoleService roleService;
 
   @ApiOperation("角色列表")
   @GetMapping("/role_list")
@@ -36,22 +35,17 @@ public class MidUserRoleController {
     return RespVO.success(roleService.list());
   }
 
-  @Autowired
-  private MidUserRoleService midUserRoleService;
+  @Autowired private MidUserRoleService midUserRoleService;
 
   @PostMapping("/give_role")
   @ApiOperation("赋予角色")
-  public RespVO<Boolean> giveRole(
-      @RequestBody UserBindRoleReq userBindRoleReq
-  ) {
+  public RespVO<Boolean> giveRole(@RequestBody UserBindRoleReq userBindRoleReq) {
     return RespVO.success(midUserRoleService.giveRole(UserInfoThread.getUserId(), userBindRoleReq));
   }
 
   @ApiOperation("移除角色")
   @PostMapping("/remove_role")
-  public RespVO<Boolean> removeRole(
-      @RequestBody UserBindRoleReq userBindRoleReq
-  ) {
+  public RespVO<Boolean> removeRole(@RequestBody UserBindRoleReq userBindRoleReq) {
     return RespVO.success(
         midUserRoleService.removeRole(UserInfoThread.getUserId(), userBindRoleReq));
   }

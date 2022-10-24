@@ -7,5 +7,5 @@ public interface FeedbackRecordRepository {
 
   IPage<FeedbackRecord> page(Long page, Long size);
 
-  int  create(FeedbackRecord feedbackRecord);
+  int create(FeedbackRecord feedbackRecord);
 }

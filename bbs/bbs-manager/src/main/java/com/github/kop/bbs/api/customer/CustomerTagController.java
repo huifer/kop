@@ -14,14 +14,11 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/customer/tag")
 public class CustomerTagController {
 
-
-  @Autowired
-  private TagService tagService;
+  @Autowired private TagService tagService;
 
   @ApiOperation("创建标签")
   @PostMapping("/create")
   public RespVO<Boolean> create(@RequestBody TagAddReq tagAddReq) {
     return RespVO.success(tagService.create(tagAddReq, UserInfoThread.getUserId()));
-
   }
 }

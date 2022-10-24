@@ -7,30 +7,20 @@ import com.github.kop.bbs.module.enums.AppealTypeEnum;
 import com.github.kop.bbs.module.enums.appeal.AppealStatusEnum;
 import com.github.kop.bbs.module.req.appeal.AppealManagerPageReq;
 import com.github.kop.bbs.module.req.appeal.CreateAppealReq;
-import com.github.kop.bbs.module.req.appeal.ReplyAppealReq;
-import com.github.kop.bbs.module.res.appeal.AppealReceiptResp;
 import com.github.kop.bbs.module.res.appeal.AppealResp;
 import com.github.kop.bbs.repo.AppealRepository;
 import com.github.kop.bbs.service.appeal.AppealService;
 import com.github.kop.bbs.service.user.UserService;
 import com.github.kop.bbs.utils.UserInfoThread;
-
-import java.util.List;
-import java.util.function.Function;
-
-import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class AppealServiceImpl implements AppealService {
 
-  @Autowired
-  private AppealRepository appealRepository;
+  @Autowired private AppealRepository appealRepository;
 
-  @Autowired
-  private UserService userService;
+  @Autowired private UserService userService;
 
   @Override
   public boolean create(CreateAppealReq req) {
@@ -46,17 +36,17 @@ public class AppealServiceImpl implements AppealService {
 
   @Override
   public IPage<AppealResp> page(Long page, Long size, Long userId) {
-    IPage<Appeal> pageRes = this.appealRepository.page(page, size,userId);
+    IPage<Appeal> pageRes = this.appealRepository.page(page, size, userId);
     return pageRes.convert(this::pageConvert);
   }
 
   @Override
   public IPage<AppealResp> page(Long page, Long size, AppealManagerPageReq req) {
-    IPage<Appeal> pageRes = this.appealRepository.page(page, size,req);
+    IPage<Appeal> pageRes = this.appealRepository.page(page, size, req);
     return pageRes.convert(this::pageConvert);
   }
 
-  private AppealResp pageConvert(Appeal appeal){
+  private AppealResp pageConvert(Appeal appeal) {
     AppealResp appealResp = new AppealResp();
     appealResp.setAppealId(appeal.getAppealId());
     appealResp.setAppealType(appeal.getAppealType());

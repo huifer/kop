@@ -19,17 +19,11 @@ import lombok.NoArgsConstructor;
 @ApiModel("标签列表返回对象")
 public class TagListRes {
 
-    /**
-     * 标签id
-     */
-    @ApiModelProperty(value = "标签id")
-    private Long tagId;
+  /** 标签id */
+  @ApiModelProperty(value = "标签id")
+  private Long tagId;
 
-
-    /**
-     * 标签名称
-     */
-    @ApiModelProperty(value = "标签名称")
-    private String tagName;
-
+  /** 标签名称 */
+  @ApiModelProperty(value = "标签名称")
+  private String tagName;
 }

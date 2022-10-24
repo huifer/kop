@@ -8,7 +8,7 @@ public interface UserFollowerListService {
   /**
    * 关注
    *
-   * @param userId       当前登陆人
+   * @param userId 当前登陆人
    * @param targetUserId 需要关注的人
    */
   boolean subscribe(Long userId, Long targetUserId);
@@ -16,7 +16,7 @@ public interface UserFollowerListService {
   /**
    * 取消关注
    *
-   * @param userId       当前登陆人
+   * @param userId 当前登陆人
    * @param targetUserId 需要取消关注的人
    */
   boolean unSubscribe(Long userId, Long targetUserId);

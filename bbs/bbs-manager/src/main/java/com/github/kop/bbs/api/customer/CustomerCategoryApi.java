@@ -13,7 +13,6 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import java.util.List;
 import javax.annotation.Resource;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,25 +21,19 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/customer/category")
 public class CustomerCategoryApi {
 
-  @Autowired
-  private CategoryService bbsCategoryService;
+  @Autowired private CategoryService bbsCategoryService;
 
-  @Resource
-  private MidUserCategoryVoteApplyService midUserCategoryVoteApplyService;
+  @Resource private MidUserCategoryVoteApplyService midUserCategoryVoteApplyService;
 
-  @Resource
-  private VoteTicketCountService voteTicketCountService;
+  @Resource private VoteTicketCountService voteTicketCountService;
 
-  @Resource
-  private UserCategoryVoteSettingService userCategoryVoteSettingService;
+  @Resource private UserCategoryVoteSettingService userCategoryVoteSettingService;
 
   @ApiOperation(value = "根据版块获取进行中的申请设置信息")
   @GetMapping("/apply/setting/{category_id}")
   public RespVO<CustomerUserCategoryVoteSettingRes> getApplyStartSetting(
-          @PathVariable("category_id") Long categoryId
-  ) {
+      @PathVariable("category_id") Long categoryId) {
     return RespVO.success(userCategoryVoteSettingService.getApplyStartSetting(categoryId));
-
   }
 
   @PostMapping("/apply/manager")
@@ -59,11 +52,11 @@ public class CustomerCategoryApi {
 
   @GetMapping("/get/category/vote/list/{categoryId}")
   @ApiOperation(value = "根据分类获取进行中的版主投票列表")
-  public RespVO<CategoryVoteListRes> getCategoryVoteList(@PathVariable("categoryId") Long categoryId) {
+  public RespVO<CategoryVoteListRes> getCategoryVoteList(
+      @PathVariable("categoryId") Long categoryId) {
     Long userId = UserInfoThread.getUserId();
-    return RespVO.success(midUserCategoryVoteApplyService.getCategoryVoteList(categoryId,userId));
+    return RespVO.success(midUserCategoryVoteApplyService.getCategoryVoteList(categoryId, userId));
   }
-
 
   @ApiOperation(value = "顶层板块列表")
   @GetMapping("/top_list/")
@@ -73,10 +66,7 @@ public class CustomerCategoryApi {
 
   @ApiOperation(value = "板块下属列表")
   @GetMapping("/sub_list/{category_id}")
-  public RespVO<List<CategoryListRes>> subList(
-      @PathVariable("category_id") Long categoryId
-  ) {
+  public RespVO<List<CategoryListRes>> subList(@PathVariable("category_id") Long categoryId) {
     return RespVO.success(bbsCategoryService.subList(categoryId));
-
   }
 }

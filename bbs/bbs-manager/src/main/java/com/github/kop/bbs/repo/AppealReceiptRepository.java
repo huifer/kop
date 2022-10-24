@@ -1,7 +1,6 @@
 package com.github.kop.bbs.repo;
 
 import com.github.kop.bbs.module.entity.AppealReceipt;
-
 import java.util.List;
 
 /**
@@ -10,24 +9,25 @@ import java.util.List;
  * @time 2022/9/5 22:49
  */
 public interface AppealReceiptRepository {
-    AppealReceipt findById(Long appealReceiptId);
+  AppealReceipt findById(Long appealReceiptId);
 
-    int create(AppealReceipt build);
+  int create(AppealReceipt build);
 
-    AppealReceipt findByOrderAndAppealId(int order, Long appealId);
+  AppealReceipt findByOrderAndAppealId(int order, Long appealId);
 
-    /**
-     * 获取最新的回复
-     * @param appealId
-     * @return
-     */
-    AppealReceipt getLastReply(Long appealId);
+  /**
+   * 获取最新的回复
+   *
+   * @param appealId
+   * @return
+   */
+  AppealReceipt getLastReply(Long appealId);
 
-    void updateManagerContent(Long appealReceiptId, String content);
+  void updateManagerContent(Long appealReceiptId, String content);
 
-    void updateCustomerContent(Long appealReceiptId, String content);
+  void updateCustomerContent(Long appealReceiptId, String content);
 
-    List<AppealReceipt> findByAppealId(Long appealId);
+  List<AppealReceipt> findByAppealId(Long appealId);
 
-    AppealReceipt verifyCustomer(Long appealReceiptId);
+  AppealReceipt verifyCustomer(Long appealReceiptId);
 }

@@ -15,7 +15,8 @@ public interface ScoreRecordService {
    * @param endTime 结束时间
    * @return 积分总量
    */
-  Long sumScoreByRule(Long scoreRuleId, Long userId, LocalDateTime startTime, LocalDateTime endTime);
+  Long sumScoreByRule(
+      Long scoreRuleId, Long userId, LocalDateTime startTime, LocalDateTime endTime);
 
   /**
    * 发放积分

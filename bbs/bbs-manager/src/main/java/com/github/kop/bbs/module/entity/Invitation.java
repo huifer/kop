@@ -44,7 +44,6 @@ public class Invitation implements Serializable {
   @TableField(value = "audit_pass_progress")
   private Integer auditPassProgress;
 
-
   /** 审核通过数量 */
   @TableField(value = "audit_pass_count")
   private Integer auditPassCount;

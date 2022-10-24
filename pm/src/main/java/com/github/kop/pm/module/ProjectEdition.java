@@ -14,9 +14,7 @@ import lombok.Data;
 import lombok.experimental.Accessors;
 import lombok.experimental.FieldNameConstants;
 
-/**
- * 项目版本
- */
+/** 项目版本 */
 @Accessors(chain = true)
 @ApiModel("项目版本")
 @Data
@@ -33,31 +31,22 @@ public class ProjectEdition implements Serializable {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Integer id;
 
-  /**
-   * 版本
-   */
+  /** 版本 */
   @ApiModelProperty("版本")
   @Column(name = "edition")
   private String edition;
-  /**
-   * 项目id
-   */
+  /** 项目id */
   @ApiModelProperty("项目id")
   @Column(name = "project_id")
   private Integer projectId;
 
-  /**
-   * 开始时间
-   */
+  /** 开始时间 */
   @ApiModelProperty("开始时间")
   @Column(name = "start_time")
   private LocalDate startTime;
 
-  /**
-   * 结束时间
-   */
+  /** 结束时间 */
   @ApiModelProperty("结束时间")
   @Column(name = "end_time")
   private LocalDate endTime;
-
 }

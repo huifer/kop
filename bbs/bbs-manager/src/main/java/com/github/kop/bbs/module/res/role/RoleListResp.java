@@ -16,6 +16,4 @@ public class RoleListResp {
 
   @ApiModelProperty("角色编码")
   private String roleCode;
-
-
 }

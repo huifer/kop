@@ -21,7 +21,7 @@ public class ScoreRole implements Serializable {
   private Long scoreRoleId;
 
   /**
-   * 积分类型  2 发帖积分 3 评论积分 4 惩罚积分
+   * 积分类型 2 发帖积分 3 评论积分 4 惩罚积分
    *
    * <p>{@link ScoreTypeEnum}
    */

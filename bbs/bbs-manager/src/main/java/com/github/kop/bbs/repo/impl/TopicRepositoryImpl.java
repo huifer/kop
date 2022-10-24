@@ -20,8 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional(rollbackFor = {Exception.class})
 public class TopicRepositoryImpl implements TopicRepository {
 
-  @Autowired
-  private TopicMapper topicMapper;
+  @Autowired private TopicMapper topicMapper;
 
   @Transactional(rollbackFor = {Exception.class})
   @Override
@@ -32,32 +31,34 @@ public class TopicRepositoryImpl implements TopicRepository {
   @Override
   public IPage<Topic> page(Long page, Long size, TopicQueryReq req) {
     QueryWrapper<Topic> queryWrapper = new QueryWrapper<>();
-    queryWrapper.lambda()
-        .like(StringUtils.isNotBlank(req.getTopicTitle()), Topic::getTopicTitle,
-            req.getTopicTitle())
-        .like(StringUtils.isNotBlank(req.getTopicContent()), Topic::getTopicContent,
+    queryWrapper
+        .lambda()
+        .like(
+            StringUtils.isNotBlank(req.getTopicTitle()), Topic::getTopicTitle, req.getTopicTitle())
+        .like(
+            StringUtils.isNotBlank(req.getTopicContent()),
+            Topic::getTopicContent,
             req.getTopicContent())
         .eq(Topic::getTopicStatus, req.getAuditStatusEnum().getCode());
 
     return this.topicMapper.selectPage(new Page<>(page, size), queryWrapper);
-
   }
 
   @Override
   public IPage<Topic> pagePass(Long page, Long size, String topicTitle, Integer topicSortType) {
 
     // 热度排序
-    if(TopicSortTypeEnum.HOT.getCode().equals(topicSortType)){
-     return topicMapper.selectOrderByHot(page,size,topicTitle);
+    if (TopicSortTypeEnum.HOT.getCode().equals(topicSortType)) {
+      return topicMapper.selectOrderByHot(page, size, topicTitle);
     }
     // 创建时间排序
     QueryWrapper<Topic> queryWrapper = new QueryWrapper<>();
-    LambdaQueryWrapper<Topic> lambdaQueryWrapper = queryWrapper.lambda()
-            .eq(Topic::getTopicStatus, AuditStatusEnum.PASS.getCode());
-    if(ObjectUtils.isNotEmpty(topicTitle)){
-      lambdaQueryWrapper.like(Topic::getTopicTitle,topicTitle);
+    LambdaQueryWrapper<Topic> lambdaQueryWrapper =
+        queryWrapper.lambda().eq(Topic::getTopicStatus, AuditStatusEnum.PASS.getCode());
+    if (ObjectUtils.isNotEmpty(topicTitle)) {
+      lambdaQueryWrapper.like(Topic::getTopicTitle, topicTitle);
     }
-    if(TopicSortTypeEnum.CREATE_TIME.getCode().equals(topicSortType)){
+    if (TopicSortTypeEnum.CREATE_TIME.getCode().equals(topicSortType)) {
       lambdaQueryWrapper.orderByDesc(Topic::getCreateTime);
     }
     return this.topicMapper.selectPage(new Page<>(page, size), queryWrapper);

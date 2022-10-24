@@ -101,7 +101,6 @@ public class CategoryServiceImpl implements CategoryService {
     return res;
   }
 
-
   private CategoryListRes conv(Category category) {
     CategoryListRes res = new CategoryListRes();
     res.setCategoryIcon(category.getCategoryIcon());
@@ -110,7 +109,6 @@ public class CategoryServiceImpl implements CategoryService {
     Category parentCategory = this.categoryRepository.byId(parentId);
     if (parentCategory != null) {
       res.setParentName(parentCategory.getCategoryName());
-
     }
 
     res.setViewPermissions(

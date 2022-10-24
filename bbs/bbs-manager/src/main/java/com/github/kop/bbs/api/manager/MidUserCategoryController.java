@@ -26,8 +26,7 @@ public class MidUserCategoryController {
 
   @Resource private MidUserCategoryService midUserCategoryService;
 
-  @Resource
-  private UserCategoryVoteSettingService userCategoryVoteSettingService;
+  @Resource private UserCategoryVoteSettingService userCategoryVoteSettingService;
 
   @ApiOperation(value = "添加版主")
   @PostMapping("/create")
@@ -50,10 +49,10 @@ public class MidUserCategoryController {
   @ApiOperation("获取投票设置列表")
   @PostMapping("/vote_setting/list/{page}/{page_size}")
   public RespVO<IPage<VoteSettingListRes>> voteSettingList(
-                                                           @PathVariable("page") Integer page,
-                                                           @PathVariable("page_size") Integer pageSize,
-                                                           @RequestBody voteSettingListReq req ) {
-    return RespVO.success(userCategoryVoteSettingService.voteSettingList(req,page,pageSize));
+      @PathVariable("page") Integer page,
+      @PathVariable("page_size") Integer pageSize,
+      @RequestBody voteSettingListReq req) {
+    return RespVO.success(userCategoryVoteSettingService.voteSettingList(req, page, pageSize));
   }
 
   // TODO: 2022/9/4 投票结束后设置版主信息

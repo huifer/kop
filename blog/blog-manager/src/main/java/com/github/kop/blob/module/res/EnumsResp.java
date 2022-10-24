@@ -9,5 +9,4 @@ public class EnumsResp {
 
   private String msg;
   private int code;
-
 }

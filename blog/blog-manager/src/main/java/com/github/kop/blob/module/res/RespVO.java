@@ -1,7 +1,6 @@
 package com.github.kop.blob.module.res;
 
 import com.github.kop.blob.module.enums.AppHttpCodeEnum;
-import com.github.kop.blob.module.enums.AppHttpCodeEnum;
 import io.swagger.annotations.ApiModel;
 import lombok.Data;
 

@@ -6,8 +6,6 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ProjectTaskCollaboratorRepository extends
-    JpaRepository<ProjectTaskCollaborator, Integer>,
-    JpaSpecificationExecutor<ProjectTaskCollaborator> {
-
-}
+public interface ProjectTaskCollaboratorRepository
+    extends JpaRepository<ProjectTaskCollaborator, Integer>,
+        JpaSpecificationExecutor<ProjectTaskCollaborator> {}

@@ -11,9 +11,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class RoleRepositoryImpl implements RoleRepository {
 
-  @Autowired
-  private RoleMapper roleMapper;
-
+  @Autowired private RoleMapper roleMapper;
 
   @Override
   public Role byCode(String roleCode) {
@@ -30,8 +28,7 @@ public class RoleRepositoryImpl implements RoleRepository {
   @Override
   public List<Role> byCodeAndRoleId(List<Long> roleIds, List<String> roleCode) {
     QueryWrapper<Role> queryWrapper = new QueryWrapper<>();
-    queryWrapper.lambda().in(Role::getRoleId, roleIds)
-        .in(Role::getRoleCode, roleCode);
+    queryWrapper.lambda().in(Role::getRoleId, roleIds).in(Role::getRoleCode, roleCode);
     return roleMapper.selectList(queryWrapper);
   }
 

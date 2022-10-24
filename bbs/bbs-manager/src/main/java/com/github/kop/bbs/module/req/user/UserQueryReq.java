@@ -17,8 +17,7 @@ public class UserQueryReq {
 
   @ApiModelProperty("注册开始时间")
   private LocalDateTime registerStartTime;
+
   @ApiModelProperty("注册结束时间")
   private LocalDateTime registerEndTime;
-
-
 }

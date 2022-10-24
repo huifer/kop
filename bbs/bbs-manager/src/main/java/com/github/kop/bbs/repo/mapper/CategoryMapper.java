@@ -27,5 +27,4 @@ public interface CategoryMapper extends BaseMapper<Category> {
   List<Category> topList();
 
   List<Category> subList(@Param("categoryId") Long categoryId);
-
 }

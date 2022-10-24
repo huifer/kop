@@ -21,16 +21,15 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/customer/user/operation")
 public class CustomerUserOperationController {
 
-  @Autowired
-  private UserFollowerListService userFollowerListService;
-  @Autowired
-  private UserBlackListService userBlackListService;
-
+  @Autowired private UserFollowerListService userFollowerListService;
+  @Autowired private UserBlackListService userBlackListService;
 
   @ApiOperation("关注")
   @PostMapping("/subscribe/{user_id}")
   public RespVO<Boolean> subscribe(
-      @ApiParam(name = "bisKey", value = "被操作的用户id", required = true) @PathVariable(value = "user_id") Long targetUserId) {
+      @ApiParam(name = "bisKey", value = "被操作的用户id", required = true)
+          @PathVariable(value = "user_id")
+          Long targetUserId) {
     return RespVO.success(
         userFollowerListService.subscribe(UserInfoThread.getUserId(), targetUserId));
   }
@@ -38,12 +37,9 @@ public class CustomerUserOperationController {
   @ApiOperation("关注列表")
   @GetMapping("/subscribe/list/{page}/{size}")
   public RespVO<IPage<UserRelationResp>> subscribeList(
-      @PathVariable("page") Long page,
-      @PathVariable("size") Long size
-  ) {
+      @PathVariable("page") Long page, @PathVariable("size") Long size) {
     return RespVO.success(userFollowerListService.page(UserInfoThread.getUserId(), page, size));
   }
-
 
   @ApiOperation("取消关注")
   @PostMapping("/un_subscribe/{user_id}")
@@ -61,9 +57,7 @@ public class CustomerUserOperationController {
   @ApiOperation("拉黑列表")
   @GetMapping("/black/list/{page}/{size}")
   public RespVO<IPage<UserRelationResp>> blackList(
-      @PathVariable("page") Long page,
-      @PathVariable("size") Long size
-  ) {
+      @PathVariable("page") Long page, @PathVariable("size") Long size) {
     return RespVO.success(userBlackListService.page(UserInfoThread.getUserId(), page, size));
   }
 

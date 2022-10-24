@@ -15,6 +15,7 @@ public interface InvitationService {
 
   /**
    * 审核
+   *
    * @param userId 审核人
    * @param req 审核参数
    */
@@ -22,6 +23,7 @@ public interface InvitationService {
 
   /**
    * 审核帖子列表
+   *
    * @param categoryId
    * @param page
    * @param pageSize
@@ -29,7 +31,7 @@ public interface InvitationService {
    */
   IPage<InvitationAuditRes> auditList(Long categoryId, Long page, Long pageSize);
 
-    int updateAuditStatus(int auditUserCount, Integer auditThreshold, Long invitationId);
+  int updateAuditStatus(int auditUserCount, Integer auditThreshold, Long invitationId);
 
   Invitation findByIdAndAuditStatus(Long sid, Integer auditStatus);
 }

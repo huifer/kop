@@ -24,5 +24,4 @@ public class MessageResp {
 
   @ApiModelProperty(value = "详细内容")
   private String content;
-
 }

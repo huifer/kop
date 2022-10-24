@@ -8,10 +8,9 @@ public interface AppealRepository {
 
   int create(Appeal appeal);
 
-  IPage<Appeal> page(Long page, Long size,Long userId);
-
+  IPage<Appeal> page(Long page, Long size, Long userId);
 
   IPage<Appeal> page(Long page, Long size, AppealManagerPageReq req);
 
-    Appeal findById(Long appealId);
+  Appeal findById(Long appealId);
 }

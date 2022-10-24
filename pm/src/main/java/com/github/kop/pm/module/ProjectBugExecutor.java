@@ -13,9 +13,7 @@ import lombok.Data;
 import lombok.experimental.Accessors;
 import lombok.experimental.FieldNameConstants;
 
-/**
- * 项目bug处理人
- */
+/** 项目bug处理人 */
 @Accessors(chain = true)
 @ApiModel("项目bug处理人")
 @Data
@@ -32,32 +30,23 @@ public class ProjectBugExecutor implements Serializable {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Integer id;
 
-  /**
-   * 项目id
-   */
+  /** 项目id */
   @ApiModelProperty("项目id")
   @Column(name = "project_id")
   private Integer projectId;
 
-  /**
-   * 版本id
-   */
+  /** 版本id */
   @ApiModelProperty("版本id")
   @Column(name = "project_edition_id")
   private Integer projectEditionId;
 
-  /**
-   * 项目bug_id
-   */
+  /** 项目bug_id */
   @ApiModelProperty("项目bug_id")
   @Column(name = "project_bug_id")
   private Integer projectBugId;
 
-  /**
-   * 用户
-   */
+  /** 用户 */
   @ApiModelProperty("用户")
   @Column(name = "user_id")
   private Integer userId;
-
 }

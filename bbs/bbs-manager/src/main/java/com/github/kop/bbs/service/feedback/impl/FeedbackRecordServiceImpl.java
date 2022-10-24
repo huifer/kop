@@ -15,10 +15,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class FeedbackRecordServiceImpl implements FeedbackRecordService {
 
-  @Autowired
-  private FeedbackRecordRepository feedbackRecordRepository;
-  @Autowired
-  private UserService userService;
+  @Autowired private FeedbackRecordRepository feedbackRecordRepository;
+  @Autowired private UserService userService;
 
   @Override
   public boolean create(FeedBackReq req) {
@@ -29,20 +27,21 @@ public class FeedbackRecordServiceImpl implements FeedbackRecordService {
   @Override
   public IPage<FeedBackResp> page(Long page, Long size) {
     IPage<FeedbackRecord> pageRes = this.feedbackRecordRepository.page(page, size);
-    return pageRes.convert(new Function<FeedbackRecord, FeedBackResp>() {
-      @Override
-      public FeedBackResp apply(FeedbackRecord feedbackRecord) {
-        FeedBackResp feedBackResp = new FeedBackResp();
-        feedBackResp.setFeedbackText(feedbackRecord.getFeedbackText());
-        Long createUserId = feedbackRecord.getCreateUserId();
-        User user = userService.byUserId(createUserId);
+    return pageRes.convert(
+        new Function<FeedbackRecord, FeedBackResp>() {
+          @Override
+          public FeedBackResp apply(FeedbackRecord feedbackRecord) {
+            FeedBackResp feedBackResp = new FeedBackResp();
+            feedBackResp.setFeedbackText(feedbackRecord.getFeedbackText());
+            Long createUserId = feedbackRecord.getCreateUserId();
+            User user = userService.byUserId(createUserId);
 
-        feedBackResp.setUserId(user.getId());
-        feedBackResp.setUserName(user.getUsername());
-        feedBackResp.setNickName(user.getNickname());
+            feedBackResp.setUserId(user.getId());
+            feedBackResp.setUserName(user.getUsername());
+            feedBackResp.setNickName(user.getNickname());
 
-        return feedBackResp;
-      }
-    });
+            return feedBackResp;
+          }
+        });
   }
 }

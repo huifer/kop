@@ -14,8 +14,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class AppealRepositoryImpl implements AppealRepository {
 
-  @Autowired
-  private AppealMapper appealMapper;
+  @Autowired private AppealMapper appealMapper;
 
   @Override
   public int create(Appeal appeal) {
@@ -23,18 +22,22 @@ public class AppealRepositoryImpl implements AppealRepository {
   }
 
   @Override
-  public IPage<Appeal> page(Long page, Long size,Long userId) {
+  public IPage<Appeal> page(Long page, Long size, Long userId) {
     QueryWrapper<Appeal> queryWrapper = new QueryWrapper<>();
-    queryWrapper.lambda().eq(ObjectUtils.isNotEmpty(userId),Appeal::getAppealUserId,userId);
+    queryWrapper.lambda().eq(ObjectUtils.isNotEmpty(userId), Appeal::getAppealUserId, userId);
     return appealMapper.selectPage(new Page<>(page, size), queryWrapper);
   }
 
   @Override
   public IPage<Appeal> page(Long page, Long size, AppealManagerPageReq req) {
     QueryWrapper<Appeal> queryWrapper = new QueryWrapper<>();
-    queryWrapper.lambda()
-            .eq(ObjectUtils.isNotEmpty(req.getAppealType()),Appeal::getAppealType,req.getAppealType())
-            .eq(ObjectUtils.isNotEmpty(req.getAppealStatus()),Appeal::getAppealStatus,req.getAppealStatus());
+    queryWrapper
+        .lambda()
+        .eq(ObjectUtils.isNotEmpty(req.getAppealType()), Appeal::getAppealType, req.getAppealType())
+        .eq(
+            ObjectUtils.isNotEmpty(req.getAppealStatus()),
+            Appeal::getAppealStatus,
+            req.getAppealStatus());
     return appealMapper.selectPage(new Page<>(page, size), queryWrapper);
   }
 

@@ -1,6 +1,5 @@
 package com.github.kop.bbs.module.req.category;
 
-import com.baomidou.mybatisplus.annotation.TableField;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;

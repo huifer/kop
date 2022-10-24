@@ -39,16 +39,12 @@ public class UserServiceImpl implements UserService {
   protected final UserCreateAndUpdateValidate userCreateAndUpdateValidate =
       new UserCreateAndUpdateValidate();
 
-  @Resource
-  private JwtTokenUtil jwtTokenUtil;
+  @Resource private JwtTokenUtil jwtTokenUtil;
 
-  @Resource
-  private UserRepository userRepository;
+  @Resource private UserRepository userRepository;
 
-  @Resource
-  private MidUserRoleService midUserRoleService;
-  @Autowired
-  private RoleService roleService;
+  @Resource private MidUserRoleService midUserRoleService;
+  @Autowired private RoleService roleService;
 
   @Override
   @Transactional(rollbackFor = Exception.class)
@@ -173,25 +169,25 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void updateValidate(UpdateUserReq updateUserReq) throws ValidateException {
-    }
+    public void updateValidate(UpdateUserReq updateUserReq) throws ValidateException {}
   }
 
   @Override
   public IPage<UserQueryResp> page(Long page, Long size, UserQueryReq req) {
     IPage<User> userIPage = this.userRepository.page(page, size, req);
-    return userIPage.convert(new Function<User, UserQueryResp>() {
-      @Override
-      public UserQueryResp apply(User user) {
-        UserQueryResp userQueryResp = new UserQueryResp();
-        userQueryResp.setId(user.getId());
-        userQueryResp.setUsername(user.getUsername());
-        userQueryResp.setAvatar(user.getAvatar());
-        userQueryResp.setNickname(user.getNickname());
-        userQueryResp.setRegisterTime(user.getRegisterTime());
-        return userQueryResp;
-      }
-    });
+    return userIPage.convert(
+        new Function<User, UserQueryResp>() {
+          @Override
+          public UserQueryResp apply(User user) {
+            UserQueryResp userQueryResp = new UserQueryResp();
+            userQueryResp.setId(user.getId());
+            userQueryResp.setUsername(user.getUsername());
+            userQueryResp.setAvatar(user.getAvatar());
+            userQueryResp.setNickname(user.getNickname());
+            userQueryResp.setRegisterTime(user.getRegisterTime());
+            return userQueryResp;
+          }
+        });
   }
 
   @Override

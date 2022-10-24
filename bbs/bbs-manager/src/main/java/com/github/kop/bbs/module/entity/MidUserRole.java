@@ -45,4 +45,3 @@ public class MidUserRole implements Serializable {
   @TableField(value = "create_user_id")
   private Long createUserId;
 }
-

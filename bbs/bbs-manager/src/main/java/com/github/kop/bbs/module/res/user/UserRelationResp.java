@@ -10,11 +10,13 @@ public class UserRelationResp {
 
   @ApiModelProperty("用户id")
   private Long userId;
+
   @ApiModelProperty("用户名")
   private String userName;
+
   @ApiModelProperty("头像")
   private String avatar;
+
   @ApiModelProperty("昵称")
   private String nickname;
-
 }

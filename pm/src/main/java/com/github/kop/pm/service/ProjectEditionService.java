@@ -15,8 +15,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class ProjectEditionService {
 
-  @Autowired
-  private ProjectEditionRepository projectEditionRepository;
+  @Autowired private ProjectEditionRepository projectEditionRepository;
 
   public Integer save(ProjectEditionVO vO) {
     ProjectEdition bean = new ProjectEdition();
@@ -51,7 +50,8 @@ public class ProjectEditionService {
   }
 
   private ProjectEdition requireOne(Integer id) {
-    return projectEditionRepository.findById(id)
+    return projectEditionRepository
+        .findById(id)
         .orElseThrow(() -> new NoSuchElementException("Resource not found: " + id));
   }
 }

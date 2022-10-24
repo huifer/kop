@@ -6,7 +6,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 public interface BlogSpecialColumnMapper extends BaseMapper<BlogSpecialColumn> {
-    int updateBatchSelective(List<BlogSpecialColumn> list);
+  int updateBatchSelective(List<BlogSpecialColumn> list);
 
-    int batchInsert(@Param("list") List<BlogSpecialColumn> list);
+  int batchInsert(@Param("list") List<BlogSpecialColumn> list);
 }

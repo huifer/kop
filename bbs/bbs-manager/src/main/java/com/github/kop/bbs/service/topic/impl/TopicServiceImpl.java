@@ -5,7 +5,6 @@ import com.github.kop.bbs.event.topic.TopicCreatedEvent;
 import com.github.kop.bbs.module.entity.Topic;
 import com.github.kop.bbs.module.enums.AuditStatusEnum;
 import com.github.kop.bbs.module.enums.AuditTypeEnum;
-import com.github.kop.bbs.module.enums.topic.TopicSortTypeEnum;
 import com.github.kop.bbs.module.req.topic.TopicAuditReq;
 import com.github.kop.bbs.module.req.topic.TopicCreateReq;
 import com.github.kop.bbs.module.req.topic.TopicCustomerQueryReq;
@@ -15,8 +14,6 @@ import com.github.kop.bbs.repo.TopicRepository;
 import com.github.kop.bbs.service.audit.AuditServiceFactory;
 import com.github.kop.bbs.service.topic.TopicService;
 import java.util.function.Function;
-
-import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
@@ -25,13 +22,10 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class TopicServiceImpl implements TopicService {
 
-  @Autowired
-  private TopicRepository repository;
+  @Autowired private TopicRepository repository;
 
-  @Autowired
-  private ApplicationEventPublisher eventPublisher;
-  @Autowired
-  private AuditServiceFactory auditServiceFactory;
+  @Autowired private ApplicationEventPublisher eventPublisher;
+  @Autowired private AuditServiceFactory auditServiceFactory;
 
   @Transactional(rollbackFor = {Exception.class})
   @Override
@@ -52,37 +46,46 @@ public class TopicServiceImpl implements TopicService {
   public IPage<TopicQueryResp> page(Long page, Long size, TopicQueryReq req) {
     IPage<Topic> topicIPage = this.repository.page(page, size, req);
 
-    return topicIPage.convert(new Function<Topic, TopicQueryResp>() {
-      @Override
-      public TopicQueryResp apply(Topic topic) {
-        TopicQueryResp topicQueryResp = new TopicQueryResp();
-        topicQueryResp.setTopicId(topic.getTopicId());
-        topicQueryResp.setTopicTitle(topic.getTopicTitle());
-        topicQueryResp.setTopicContent(topic.getTopicContent());
-        return topicQueryResp;
-      }
-    });
+    return topicIPage.convert(
+        new Function<Topic, TopicQueryResp>() {
+          @Override
+          public TopicQueryResp apply(Topic topic) {
+            TopicQueryResp topicQueryResp = new TopicQueryResp();
+            topicQueryResp.setTopicId(topic.getTopicId());
+            topicQueryResp.setTopicTitle(topic.getTopicTitle());
+            topicQueryResp.setTopicContent(topic.getTopicContent());
+            return topicQueryResp;
+          }
+        });
   }
 
   @Override
   public boolean audit(Long userId, TopicAuditReq req) {
-    return auditServiceFactory.factory(AuditTypeEnum.TOPIC)
+    return auditServiceFactory
+        .factory(AuditTypeEnum.TOPIC)
         .audit(userId, req.getTopicId(), AuditStatusEnum.conv(req.isPass()), req.getContext());
   }
 
   @Override
-  public IPage<TopicQueryResp> pagePass(Long page, Long size, TopicCustomerQueryReq topicCustomerQueryReq) {
-    IPage<Topic> topicIPage = this.repository.pagePass(page, size,topicCustomerQueryReq.getTopicTitle(),topicCustomerQueryReq.getTopicSortType());
+  public IPage<TopicQueryResp> pagePass(
+      Long page, Long size, TopicCustomerQueryReq topicCustomerQueryReq) {
+    IPage<Topic> topicIPage =
+        this.repository.pagePass(
+            page,
+            size,
+            topicCustomerQueryReq.getTopicTitle(),
+            topicCustomerQueryReq.getTopicSortType());
 
-    return topicIPage.convert(new Function<Topic, TopicQueryResp>() {
-      @Override
-      public TopicQueryResp apply(Topic topic) {
-        TopicQueryResp topicQueryResp = new TopicQueryResp();
-        topicQueryResp.setTopicId(topic.getTopicId());
-        topicQueryResp.setTopicTitle(topic.getTopicTitle());
-        topicQueryResp.setTopicContent(topic.getTopicContent());
-        return topicQueryResp;
-      }
-    });
+    return topicIPage.convert(
+        new Function<Topic, TopicQueryResp>() {
+          @Override
+          public TopicQueryResp apply(Topic topic) {
+            TopicQueryResp topicQueryResp = new TopicQueryResp();
+            topicQueryResp.setTopicId(topic.getTopicId());
+            topicQueryResp.setTopicTitle(topic.getTopicTitle());
+            topicQueryResp.setTopicContent(topic.getTopicContent());
+            return topicQueryResp;
+          }
+        });
   }
 }

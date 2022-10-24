@@ -3,9 +3,8 @@ package com.github.kop.bbs.repo.impl;
 import com.github.kop.bbs.module.entity.InvitationComment;
 import com.github.kop.bbs.repo.InvitationCommentRepository;
 import com.github.kop.bbs.repo.mapper.InvitationCommentMapper;
-import org.springframework.stereotype.Repository;
-
 import javax.annotation.Resource;
+import org.springframework.stereotype.Repository;
 
 /**
  * @auth ahxiaoqi
@@ -15,11 +14,10 @@ import javax.annotation.Resource;
 @Repository
 public class InvitationCommentRepositoryImpl implements InvitationCommentRepository {
 
-    @Resource
-    private InvitationCommentMapper invitationCommentMapper;
+  @Resource private InvitationCommentMapper invitationCommentMapper;
 
-    @Override
-    public int insert(InvitationComment build) {
-        return invitationCommentMapper.insert(build);
-    }
+  @Override
+  public int insert(InvitationComment build) {
+    return invitationCommentMapper.insert(build);
+  }
 }

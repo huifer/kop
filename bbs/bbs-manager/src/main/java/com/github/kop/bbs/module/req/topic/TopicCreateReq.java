@@ -1,6 +1,5 @@
 package com.github.kop.bbs.module.req.topic;
 
-import com.github.kop.bbs.module.enums.AuditStatusEnum;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -14,6 +13,4 @@ public class TopicCreateReq {
 
   @ApiModelProperty("话题内容")
   private String topicContent;
-
-
 }

@@ -6,7 +6,6 @@ import java.io.Serializable;
 import javax.validation.constraints.NotNull;
 import lombok.Data;
 
-
 @Data
 @ApiModel("保存 项目文件")
 public class ProjectFileVO implements Serializable {
@@ -17,32 +16,19 @@ public class ProjectFileVO implements Serializable {
   @NotNull(message = "id can not null")
   private Integer id;
 
-
-  /**
-   * 文件名称
-   */
+  /** 文件名称 */
   @ApiModelProperty("文件名称")
   private String name;
 
-
-  /**
-   * 文件地址
-   */
+  /** 文件地址 */
   @ApiModelProperty("文件地址")
   private String path;
 
-
-  /**
-   * 文件描述
-   */
+  /** 文件描述 */
   @ApiModelProperty("文件描述")
   private String desc;
 
-
-  /**
-   * 项目id
-   */
+  /** 项目id */
   @ApiModelProperty("项目id")
   private Integer projectId;
-
 }

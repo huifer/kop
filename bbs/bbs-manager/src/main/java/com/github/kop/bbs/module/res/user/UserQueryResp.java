@@ -23,5 +23,4 @@ public class UserQueryResp {
 
   @ApiModelProperty("注册时间")
   private LocalDateTime registerTime;
-
 }

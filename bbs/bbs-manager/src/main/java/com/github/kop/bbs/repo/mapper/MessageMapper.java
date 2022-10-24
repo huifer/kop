@@ -14,6 +14,7 @@ public interface MessageMapper extends BaseMapper<Message> {
 
   int batchInsert(@Param("list") List<Message> list);
 
-  @Update("update bbs_message set tips_status = #{read} where 1=1 and receiver_user_id = #{userId} ")
+  @Update(
+      "update bbs_message set tips_status = #{read} where 1=1 and receiver_user_id = #{userId} ")
   boolean updateToRead(@Param("userId") Long userId, @Param("read") MessageStatusEnum read);
 }

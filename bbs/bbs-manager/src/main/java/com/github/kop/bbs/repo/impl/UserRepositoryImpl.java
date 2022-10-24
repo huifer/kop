@@ -7,12 +7,11 @@ import com.github.kop.bbs.module.entity.User;
 import com.github.kop.bbs.module.req.user.UserQueryReq;
 import com.github.kop.bbs.repo.UserRepository;
 import com.github.kop.bbs.repo.mapper.UserMapper;
+import java.util.List;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
 
 @Repository
 public class UserRepositoryImpl implements UserRepository {
@@ -69,23 +68,22 @@ public class UserRepositoryImpl implements UserRepository {
   @Override
   public IPage<User> page(Long page, Long size, UserQueryReq req) {
     QueryWrapper<User> queryWrapper = new QueryWrapper<>();
-    queryWrapper.lambda()
+    queryWrapper
+        .lambda()
         .like(StringUtils.isNotBlank(req.getUsername()), User::getUsername, req.getUsername())
         .like(StringUtils.isNotBlank(req.getNickname()), User::getNickname, req.getNickname())
         .between(
             req.getRegisterStartTime() != null && req.getRegisterEndTime() != null,
             User::getRegisterTime,
-            req.getRegisterStartTime(), req.getRegisterEndTime()
-        )
-    ;
+            req.getRegisterStartTime(),
+            req.getRegisterEndTime());
     return this.userMapper.selectPage(new Page<>(page, size), queryWrapper);
   }
 
   @Override
   public List<User> findByUserIds(List<Long> userIdList) {
     QueryWrapper<User> queryWrapper = new QueryWrapper<>();
-    queryWrapper.lambda()
-            .in(User::getId, userIdList);
+    queryWrapper.lambda().in(User::getId, userIdList);
     return userMapper.selectList(queryWrapper);
   }
 }
