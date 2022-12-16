@@ -1,6 +1,7 @@
 package handler
 
 import (
+	"fmt"
 	"github.com/gin-gonic/gin"
 	"rbac/db"
 	"rbac/entity"
@@ -10,8 +11,9 @@ import (
 
 // 创建
 func CreateCompany(c *gin.Context) {
+	// 获取json
 	req := request.CompanyCreateRequest{}
-	err := c.BindJSON(req)
+	err := c.BindJSON(&req)
 	if err != nil {
 		company := entity.Company{Name: req.Name}
 
@@ -26,6 +28,17 @@ func CreateCompany(c *gin.Context) {
 
 // 查询
 func QueryCompany(c *gin.Context) {
+	// 获取请求参数
+	query := request.CompanyQuery{}
+	c.ShouldBindQuery(&query)
+
+	pageindex := 1
+	pagesize := 5
+
+	compList := make([]entity.Company, 0)
+
+	db.GetDB().Where("name like ?", "%"+query.Name+"%").Offset((pageindex - 1) * pagesize).Limit(pagesize).Find(&compList)
+	fmt.Printf("", query)
 
 }
 
