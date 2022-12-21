@@ -30,7 +30,10 @@ func CreateCompany(c *gin.Context) {
 func QueryCompany(c *gin.Context) {
 	// 获取请求参数
 	query := request.CompanyQuery{}
-	c.ShouldBindQuery(&query)
+	err := c.ShouldBindQuery(&query)
+	if err != nil {
+		return
+	}
 
 	pageindex := 1
 	pagesize := 5
